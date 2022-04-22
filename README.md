@@ -1,6 +1,6 @@
 # Safelinkify
 
-[![Safelink](https://github.com/dimaslanjaka/dimaslanjaka.github.io/actions/workflows/safelink.yml/badge.svg)](https://github.com/dimaslanjaka/dimaslanjaka.github.io/actions/workflows/safelink.yml)
+[![Safelink](https://github.com/dimaslanjaka/safelink/actions/workflows/safelink.yml/badge.svg)](https://github.com/dimaslanjaka/safelink/actions/workflows/safelink.yml) [![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink?style=flat-square)](https://github.com/dimaslanjaka/safelink/network) [![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink?style=flat-square)](https://github.com/dimaslanjaka/safelink/stargazers)
 
 transform all hyperlinks to outbound pages. Useful for SEO.
 

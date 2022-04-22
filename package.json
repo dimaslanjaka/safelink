@@ -27,9 +27,9 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dimaslanjaka/dimaslanjaka.github.io/issues"
+    "url": "https://github.com/dimaslanjaka/safelink/issues"
   },
-  "homepage": "https://github.com/dimaslanjaka/dimaslanjaka.github.io/tree/safelink#readme",
+  "homepage": "https://dimaslanjaka.github.io/safelink",
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
     "@types/cross-spawn": "^6.0.2",
