@@ -3,12 +3,10 @@ name: Safelink
 on:
   pull_request:
     branches:
-      - safelink
-      - compiler
+      - main
   push:
     branches:
-      - safelink
-      - compiler
+      - main
 
 concurrency:
   group: safelink-${{ github.head_ref }}
