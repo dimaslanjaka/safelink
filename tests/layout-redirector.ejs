@@ -25,9 +25,31 @@
   <body>
     <main class="container-fluid">
       <div class="row">
+        <div class="col-12 mb-2">
+          <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand"><%- page.title.substring(10) %></a>
+              <form class="d-flex" action="https://dimaslanjaka.github.io/p/search.html">
+                <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" />
+                <button class="btn btn-outline-success" type="submit">Search</button>
+              </form>
+            </div>
+          </nav>
+        </div>
         <div class="col-12"><%- page.content %></div>
       </div>
     </main>
     <script src="/safelink/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/safelink/dist/bundle.js"></script>
+    <script>
+      const sf = new safelink({
+        exclude: [/https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/],
+        redirect: 'http://dimaslanjaka.github.io/page/safelink.html?url=',
+        verbose: false,
+        type: 'base64',
+        password: 'root',
+      });
+      sf.parse(document.querySelector('body'));
+    </script>
   </body>
 </html>

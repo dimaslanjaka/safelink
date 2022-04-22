@@ -11,7 +11,7 @@ interface Options {
   type: 'base64' | 'aes';
 }
 interface ResultParse extends ReturnType<typeof encryptionURL> {
-  href: string;
+  url: string;
 }
 
 export default class safelink {
@@ -55,12 +55,17 @@ export default class safelink {
           const links = Array.from(content.querySelectorAll('a'));
           for (let i = 0; i < links.length; i++) {
             const a = links[i];
+            if (!a.href) continue;
             const href = toURL(a.href);
+            if (!href) {
+              console.log(a.href, null);
+              continue;
+            }
             const encryption = encryptionURL(href, self.options.password, self.options.verbose);
             const excluded = self.isExcluded(href);
             result.push(
               Object.assign(encryption, {
-                href: href.href,
+                url: href.href,
                 isExcluded: excluded,
               })
             );

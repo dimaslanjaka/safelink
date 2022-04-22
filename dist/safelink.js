@@ -47,11 +47,17 @@ var safelink = /** @class */ (function () {
                     var links = Array.from(content.querySelectorAll('a'));
                     for (var i = 0; i < links.length; i++) {
                         var a = links[i];
+                        if (!a.href)
+                            continue;
                         var href = toURL(a.href);
+                        if (!href) {
+                            console.log(a.href, null);
+                            continue;
+                        }
                         var encryption = encryptionURL(href, self.options.password, self.options.verbose);
                         var excluded = self.isExcluded(href);
                         result.push(Object.assign(encryption, {
-                            href: href.href,
+                            url: href.href,
                             isExcluded: excluded,
                         }));
                         if (!excluded) {

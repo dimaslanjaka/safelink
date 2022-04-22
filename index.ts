@@ -9,7 +9,7 @@ import spawn from 'cross-spawn';
 const deploy_dir = join(__dirname, 'gh-pages');
 if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
 
-const indicators: { [k: string]: any } = {};
+const indicators: { [k: string]: any } = { privateScript: false };
 const PORT = parseInt(process.env.PORT || '5000');
 const baseUrl = 'http://localhost' + PORT;
 const app = browserSync.create();
@@ -21,7 +21,7 @@ app.init({
     ignoreInitial: true,
     ignored: '*.txt',
   },
-  files: [join(__dirname, 'tests'), join(__dirname, 'dist/**/*.js'), deploy_dir],
+  files: [join(__dirname, 'tests'), join(__dirname, 'dist/**/*.js')],
   excludeFileTypes: ['.ts'],
   server: {
     baseDir: './',
@@ -76,19 +76,22 @@ app.init({
       (req, res, next) => {
         const url = new URL(baseUrl + req.url);
         const article = join(deploy_dir, url.pathname);
-        if (existsSync(article)) {
-          res.end(readFileSync(article).toString());
-        }
-        const privateScript = join(__dirname, 'article-generator/index.ts');
-        console.log(existsSync(privateScript), privateScript);
+
+        const privateScript = join(__dirname, 'tests/article-generator/index.ts');
+        //console.log(existsSync(privateScript), indicators.privateScript);
         if (existsSync(privateScript)) {
           if (!indicators.privateScript) {
             indicators.privateScript = true;
             const summon = spawn('ts-node', [privateScript], { cwd: __dirname, stdio: 'inherit' });
+            summon.on('message', console.log);
+            summon.on('error', console.log);
             summon.on('close', () => {
               indicators.privateScript = false;
             });
           }
+        }
+        if (existsSync(article)) {
+          res.end(readFileSync(article).toString());
         }
         next();
       },
