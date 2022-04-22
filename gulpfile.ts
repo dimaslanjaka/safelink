@@ -3,21 +3,18 @@
  */
 
 import spawn from 'cross-spawn';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, writeFile } from 'fs';
 import * as gulp from 'gulp';
 import moment from 'moment-timezone';
 import { TaskCallback } from 'undertaker';
 import { join, resolve } from 'upath';
 import bluebird from 'bluebird';
 
-gulp.task('copy', () => {
-  return bluebird
-    .all([gulp.src(join(__dirname, 'dist', '**/*')), gulp.src(join(__dirname, 'package.json'))])
-    .spread((stream, stream1) => {
-      return stream.pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist'))).on('end', () => {
-        stream1.pipe(gulp.dest(join(__dirname, 'gh-pages')));
-      });
-    });
+gulp.task('copy', (done?: TaskCallback) => {
+  writeFile(join(__dirname, 'gh-pages', 'CNAME'), 'www.webmanajemen.com', () => {});
+  writeFile(join(__dirname, 'gh-pages', '.nojekyll'), '', () => {});
+  gulp.src(join(__dirname, 'dist', '**/*')).pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist')));
+  return gulp.src(join(__dirname, '{package.json,README.md}')).pipe(gulp.dest(join(__dirname, 'gh-pages')));
 });
 
 const deployDir = resolve(join(__dirname, 'gh-pages'));
