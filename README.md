@@ -28,10 +28,15 @@ read more [http://dimaslanjaka.github.io/safelink](http://dimaslanjaka.github.io
 <script src="dist/bundle.min.js"></script>
 <script>
   const sf = new safelink({
-    exclude: ['domain.com', /another.domain.com/],
+    // example patterns
+    exclude: ['domain.com', /another.domain.com/, /https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/],
+    // url redirector
     redirect: 'http://domain.com/page/redirect.html?url=',
+    // debug
     verbose: false,
+    // encryption type = 'base64' | 'aes'
     type: 'base64',
+    // password aes
     password: 'root'
   });
   // automated safelinkify all hyperlinks in body

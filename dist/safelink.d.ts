@@ -8,7 +8,7 @@ interface Options {
     type: 'base64' | 'aes';
 }
 interface ResultParse extends ReturnType<typeof encryptionURL> {
-    href: string;
+    url: string;
 }
 export default class safelink {
     options: Partial<Options>;
