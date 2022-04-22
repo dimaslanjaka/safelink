@@ -21,6 +21,8 @@ tsc
 webpack
 ```
 ## Usages
+script location : `node_modules/safelinkify/dist/bundle.min.js`.
+
 read more [http://dimaslanjaka.github.io/safelink](http://dimaslanjaka.github.io/safelink)
 ```html
 <script src="dist/bundle.min.js"></script>
