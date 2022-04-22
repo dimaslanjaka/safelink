@@ -5,7 +5,7 @@ import { minify } from 'html-minifier-terser';
 import EJSHelper from './tests/article-generator/EJSHelper';
 
 /** Deployer for http://dimaslanjaka.github.io/safelink */
-const deploy_dir = join(__dirname, '.deploy_git/safelink');
+const deploy_dir = join(__dirname, 'gh-pages');
 if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
 
 const PORT = parseInt(process.env.PORT || '5000');
@@ -26,7 +26,7 @@ app.init({
       '/node_modules': './node_modules',
       '/js': './tests/js',
       '/css': './tests/css',
-      '/safelink': '/.deploy_git/safelink',
+      '/safelink': '/gh-pages',
     },
     middleware: [
       {

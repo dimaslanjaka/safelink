@@ -10,10 +10,10 @@ import { TaskCallback } from 'undertaker';
 import { join, resolve } from 'upath';
 
 gulp.task('copy', () => {
-  return gulp.src(join(__dirname, 'dist', '**/*')).pipe(gulp.dest(join(__dirname, '.deploy_git', 'safelink', 'dist')));
+  return gulp.src(join(__dirname, 'dist', '**/*')).pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist')));
 });
 
-const deployDir = resolve(join(__dirname, '.deploy_git'));
+const deployDir = resolve(join(__dirname, 'gh-pages'));
 
 function git(...args: string[]) {
   return new Promise(
