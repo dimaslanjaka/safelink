@@ -34,6 +34,3 @@ jobs:
       - run: yarn build
         name: build package
       - run: gulp copy
-      - if: matrix.os == 'ubuntu-latest'
-        run: |
-          cd gh-pages && git init && git remote add origin https://github.com/dimaslanjaka/safelink && git remote set-url origin https://github.com/dimaslanjaka/safelink && git --set-upstream origin gh-pages && git fetch && git pull
