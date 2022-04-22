@@ -25,13 +25,15 @@ jobs:
         with:
           node-version: 16.x
           cache: yarn
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          submodules: recursive
       - run: npm i -g gulp-cli ts-node typescript npm
         name: install global packages
       - run: yarn install
         name: clean install
       - run: yarn build
         name: build package
+      - run: gulp copy
       - if: matrix.os == 'ubuntu-latest'
         run: |
           cd gh-pages && git init && git remote add origin https://github.com/dimaslanjaka/safelink && git remote set-url origin https://github.com/dimaslanjaka/safelink && git --set-upstream-to=origin/gh-pages && git fetch && git pull
