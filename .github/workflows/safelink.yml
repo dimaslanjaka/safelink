@@ -1,0 +1,39 @@
+name: Safelink
+
+on:
+  pull_request:
+    branches:
+      - safelink
+      - compiler
+  push:
+    branches:
+      - safelink
+      - compiler
+
+concurrency:
+  group: safelink-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Node 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: yarn
+          token: ${{ secrets.TOKEN }}
+      - run: npm i -g gulp-cli ts-node typescript npm
+        name: install global packages
+      - run: yarn install
+        name: clean install
+      - run: yarn build
+        name: build package
+      - if: matrix.os == 'ubuntu-latest'
+        run: |
+          mkdir -p .deploy_git && cd .deploy_git && git init && git remote add origin https://github.com/dimaslanjaka/dimaslanjaka.github.io && git remote set-url origin https://github.com/dimaslanjaka/dimaslanjaka.github.io
