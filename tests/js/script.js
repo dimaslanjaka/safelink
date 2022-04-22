@@ -3,7 +3,7 @@ table.querySelector('#resolveQueryUrl').innerHTML = typeof resolveQueryUrl;
 table.querySelector('#parseQuery').innerHTML = typeof parseQuery;
 
 const currentQuery = JSON.stringify(resolveQueryUrl(location.search), null, 2);
-table.innerHTML += `<tr><td>Current Query</td><td><pre><code class="language-json">${currentQuery}</code></pre></td></tr>`;
+table.innerHTML += `<tr><td>Current Query <a href="#query-url">Change</a></td><td><pre><code class="language-json">${currentQuery}</code></pre></td></tr>`;
 
 function isClass(f) {
   return (

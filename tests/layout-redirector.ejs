@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%- page.title %></title>
+    <link rel="shortcut icon" href="<%- page.image %>" type="image/x-icon" />
+    <meta name="description" content="<%- page.description||page.title %>" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="<%- page.title %>" />
+    <meta property="og:description" content="<%- page.description||page.title %>" />
+    <meta property="og:url" content="<%- page.url %>" />
+    <meta property="og:site_name" content="Safelink: Anonymize External Links" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="<%- page.title %>" />
+    <meta name="twitter:description" content="<%- page.description||page.title %>" />
+    <meta name="twitter:image" content="<%- page.image %>" />
+    <meta name="theme-color" content="#ee5b3e" />
+    <link rel="stylesheet" href="/safelink/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <main class="container-fluid">
+      <div class="row">
+        <div class="col-12"><%- page.content %></div>
+      </div>
+    </main>
+    <script src="/safelink/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
