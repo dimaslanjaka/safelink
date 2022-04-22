@@ -1,12 +1,17 @@
 {
   "name": "safelinkify",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Anonymize external links to outbound page redirector",
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "package.json"
+  ],
   "scripts": {
     "start": "ts-node index.ts",
-    "build": "tsc && webpack && gulp -r ts-node/register",
+    "build": "tsc && webpack && gulp",
     "dev": "nodemon",
     "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile"
   },
