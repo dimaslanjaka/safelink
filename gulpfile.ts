@@ -8,9 +8,16 @@ import * as gulp from 'gulp';
 import moment from 'moment-timezone';
 import { TaskCallback } from 'undertaker';
 import { join, resolve } from 'upath';
+import bluebird from 'bluebird';
 
 gulp.task('copy', () => {
-  return gulp.src(join(__dirname, 'dist', '**/*')).pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist')));
+  return bluebird
+    .all([gulp.src(join(__dirname, 'dist', '**/*')), gulp.src(join(__dirname, 'package.json'))])
+    .spread((stream, stream1) => {
+      return stream.pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist'))).on('end', () => {
+        stream1.pipe(gulp.dest(join(__dirname, 'gh-pages')));
+      });
+    });
 });
 
 const deployDir = resolve(join(__dirname, 'gh-pages'));
@@ -44,8 +51,8 @@ function git(...args: string[]) {
 const configDeploy = {
   name: 'dimaslanjaka',
   email: 'dimaslanjaka@gmail.com',
-  repo: 'https://github.com/dimaslanjaka/dimaslanjaka.github.io',
-  branch: 'master',
+  repo: 'https://github.com/dimaslanjaka/safelink',
+  branch: 'gh-pages',
   force: false,
   base: deployDir,
 };
