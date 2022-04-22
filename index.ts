@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { join } from 'upath';
 import browserSync from 'browser-sync';
 import { minify } from 'html-minifier-terser';
-import EJSHelper from './tests/article-generator/EJSHelper';
+import EJSHelper from './tests/EJSHelper';
 
 /** Deployer for http://dimaslanjaka.github.io/safelink */
 const deploy_dir = join(__dirname, 'gh-pages');
