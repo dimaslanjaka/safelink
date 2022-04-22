@@ -1,7 +1,0 @@
-{
-  "$schema": "http://json.schemastore.org/nodemon",
-  "exec": "yarn build",
-  "watch": ["./src", "./index.ts", "./webpack.*.js", "./tsconfig.json", "./package.json"],
-  "delay": 3000,
-  "ext": "ts,js"
-}
