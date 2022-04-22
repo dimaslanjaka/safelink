@@ -3,7 +3,7 @@ webpack
 </code></pre><h2 id="usages" tabindex="-1"><a class="header-anchor" href="#usages">Usages</a></h2><p>script location : <code>node_modules/safelinkify/dist/bundle.min.js</code>.</p><p>read more <a href="http://dimaslanjaka.github.io/safelink">http://dimaslanjaka.github.io/safelink</a></p><pre><code class="language-html">&lt;script src=&quot;dist/bundle.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
   const sf = new safelink({
-    exclude: ['domain.com', /domain.com/],
+    exclude: ['domain.com', /another.domain.com/],
     redirect: 'http://domain.com/page/redirect.html?url=',
     verbose: false,
     type: 'base64',

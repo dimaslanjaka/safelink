@@ -28,7 +28,7 @@ read more [http://dimaslanjaka.github.io/safelink](http://dimaslanjaka.github.io
 <script src="dist/bundle.min.js"></script>
 <script>
   const sf = new safelink({
-    exclude: ['domain.com', /domain.com/],
+    exclude: ['domain.com', /another.domain.com/],
     redirect: 'http://domain.com/page/redirect.html?url=',
     verbose: false,
     type: 'base64',
