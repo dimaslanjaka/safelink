@@ -31,7 +31,7 @@ npm install
 ## Usages
 script location : `node_modules/safelinkify/dist/bundle.min.js`.
 
-read more [http://dimaslanjaka.github.io/safelink](http://webmanajemen.com/safelink/index.html)
+read more [https://www.webmanajemen.com/safelink/](https://www.webmanajemen.com/safelink/index.html)
 ```html
 <script src="dist/bundle.min.js"></script>
 <script>
