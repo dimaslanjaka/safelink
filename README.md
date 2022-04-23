@@ -21,6 +21,7 @@ yarn install
 # or
 npm install
 ```
+
 | command | description           |
 |--------------------|-----------------------------------------|
 | `nodemon` | watch src and compile tsc webpack |

@@ -8,7 +8,6 @@ import * as gulp from 'gulp';
 import moment from 'moment-timezone';
 import { TaskCallback } from 'undertaker';
 import { join, resolve } from 'upath';
-import bluebird from 'bluebird';
 
 gulp.task('copy', (done?: TaskCallback) => {
   //writeFile(join(__dirname, 'gh-pages', 'CNAME'), 'www.webmanajemen.com', () => {});

@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs';
 import { join } from 'upath';
 import browserSync from 'browser-sync';
 import { minify } from 'html-minifier-terser';
@@ -95,7 +95,7 @@ app.init({
           }
         }
         if (existsSync(article)) {
-          res.end(readFileSync(article).toString());
+          if (statSync(article).isFile()) return res.end(readFileSync(article).toString());
         }
         next();
       },
