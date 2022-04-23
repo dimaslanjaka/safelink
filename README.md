@@ -23,7 +23,7 @@ webpack
 ## Usages
 script location : `node_modules/safelinkify/dist/bundle.min.js`.
 
-read more [http://dimaslanjaka.github.io/safelink](http://dimaslanjaka.github.io/safelink)
+read more [https://www.webmanajemen.com/safelink](https://www.webmanajemen.com/safelink)
 ```html
 <script src="dist/bundle.min.js"></script>
 <script>
