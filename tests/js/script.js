@@ -32,12 +32,12 @@ if (isSafelinkClass) {
 }
 
 Array.from(document.links).forEach((el) => {
-  if (!el.innerHTML.length) el.textContent = el.getAttribute('href');
-  el.addEventListener('click', (e) => {
-    if (!el.hasAttribute('target')) {
+  if (!el.innerHTML.length) {
+    el.textContent = el.getAttribute('href');
+    el.addEventListener('click', (e) => {
       e.preventDefault();
       location.assign(el.href);
-      if (el.href.match(new RegExp('^#(o|url)='))) location.reload();
-    }
-  });
+      if (el.href.match(/#(o|url)=/)) location.reload();
+    });
+  }
 });
