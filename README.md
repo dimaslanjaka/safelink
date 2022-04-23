@@ -8,22 +8,35 @@ customized safelink url redirector.
 
 useful for seo external links and ads.
 
-## Build
-### dev
+## Installation
 
-`nodemon`: watch src and compile tsc webpack
-
-`yarn start`: watch tests and start server
-
-### prod
 ```bash
-tsc
-webpack
+npm install --production
+# or
+yarn install --production=true
 ```
+
+## Development
+
+```bash
+yarn install
+# or
+npm install
+```
+
+| command      | description                       |
+| ------------ | --------------------------------- |
+| `nodemon`    | watch src and compile tsc webpack |
+| `yarn start` | watch tests and start server      |
+| `tsc`        | build definition files            |
+| `webpack`    | build safelink script             |
+
 ## Usages
+
 script location : `node_modules/safelinkify/dist/bundle.min.js`.
 
-read more [https://www.webmanajemen.com/safelink](https://www.webmanajemen.com/safelink)
+read more [https://www.webmanajemen.com/safelink/](https://www.webmanajemen.com/safelink/index.html)
+
 ```html
 <script src="dist/bundle.min.js"></script>
 <script>
