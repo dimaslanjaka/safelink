@@ -1,3 +1,5 @@
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import encryptionURL from './encryptionURL';
 import { Nullable } from './resolveQueryUrl';
 import toURL from './toURL';
@@ -9,9 +11,6 @@ interface Options {
   password: string;
   verbose?: boolean;
   type: 'base64' | 'aes';
-}
-interface ResultParse extends ReturnType<typeof encryptionURL> {
-  url: string;
 }
 
 export default class safelink {
@@ -49,7 +48,7 @@ export default class safelink {
       const content = str;
       let result: string;
       if (typeof content == 'string') {
-        const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gm;
+        const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
         Array.from(content.matchAll(regex)).forEach((m) => {
           const href = m[2];
           const excluded = self.isExcluded(href);
@@ -57,10 +56,12 @@ export default class safelink {
           if (!excluded) {
             const encryption = encryptionURL(href, self.options.password, self.options.verbose);
             const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-            const newhref = self.options.redirect + enc;
+            const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+            const newhref = randRedir + enc;
             result = content.replace(href, newhref);
             if (href.includes('diet')) {
-              console.log(excluded, href);
+              //console.log(excluded, href, newhref);
+              writeFileSync(join(__dirname, 'tmp/replace.html'), result);
             }
           }
         });
@@ -88,7 +89,8 @@ export default class safelink {
             }
             if (!excluded) {
               const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-              a.href = self.options.redirect + enc;
+              const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+              a.href = randRedir + enc;
               a.target = '_blank';
               a.rel = 'nofollow noopener noreferer';
             }

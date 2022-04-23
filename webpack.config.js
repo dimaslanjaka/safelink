@@ -22,6 +22,11 @@ function gen(fn) {
     resolve: {
       extensions: ['.ts', '.js'],
       plugins: [new ResolveTypeScriptPlugin()],
+      fallback: {
+        crypto: require.resolve('crypto-browserify'),
+        path: require.resolve('path-browserify'),
+        fs: false,
+      },
     },
     output: {
       filename: fn + '.js',

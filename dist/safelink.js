@@ -1,3 +1,5 @@
+import { writeFileSync } from 'fs';
+import { join } from 'path';
 import encryptionURL from './encryptionURL';
 import toURL from './toURL';
 var _global_safelink = (typeof window !== 'undefined' ? window : global);
@@ -40,17 +42,19 @@ var safelink = /** @class */ (function () {
             var content = str;
             var result;
             if (typeof content == 'string') {
-                var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gm;
+                var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
                 Array.from(content.matchAll(regex)).forEach(function (m) {
                     var href = m[2];
                     var excluded = self.isExcluded(href);
                     if (!excluded) {
                         var encryption = encryptionURL(href, self.options.password, self.options.verbose);
                         var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-                        var newhref = self.options.redirect + enc;
+                        var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+                        var newhref = randRedir + enc;
                         result = content.replace(href, newhref);
                         if (href.includes('diet')) {
-                            console.log(excluded, href);
+                            //console.log(excluded, href, newhref);
+                            writeFileSync(join(__dirname, 'tmp/replace.html'), result);
                         }
                     }
                 });
@@ -78,7 +82,8 @@ var safelink = /** @class */ (function () {
                         }
                         if (!excluded) {
                             var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-                            a.href = self.options.redirect + enc;
+                            var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+                            a.href = randRedir + enc;
                             a.target = '_blank';
                             a.rel = 'nofollow noopener noreferer';
                         }
