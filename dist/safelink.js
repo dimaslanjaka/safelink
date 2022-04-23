@@ -1,6 +1,6 @@
 import encryptionURL from './encryptionURL';
 import toURL from './toURL';
-var _global_safelink = (window /* browser */ || global) /* node */;
+var _global_safelink = (typeof window !== 'undefined' ? window : global);
 var safelink = /** @class */ (function () {
     function safelink(opt) {
         this.options = {
@@ -33,13 +33,17 @@ var safelink = /** @class */ (function () {
         return false;
     };
     safelink.prototype.parse = function (str) {
-        var _this = this;
+        var self = this;
         return new Promise(function (resolve) {
             var content = str;
-            var self = _this;
             var result = [];
             if (typeof content == 'string') {
                 var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gm;
+                Array.from(content.matchAll(regex)).forEach(function (m) {
+                    var href = m[2];
+                    var excluded = self.isExcluded(href);
+                    console.log(excluded, href);
+                });
             }
             else if (content instanceof HTMLElement) {
                 var tagname = content.tagName.toLowerCase();

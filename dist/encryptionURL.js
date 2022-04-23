@@ -1,7 +1,6 @@
 import b64 from './b64';
 import aes from './aes';
-var _global_encryptionURL = (window /* browser */ ||
-    global) /* node */;
+var _global_encryptionURL = (typeof window !== 'undefined' ? window : global);
 /**
  * resolve url encryption
  * @param url
