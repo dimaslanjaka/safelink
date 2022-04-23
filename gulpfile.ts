@@ -12,7 +12,9 @@ import { join, resolve } from 'upath';
 gulp.task('copy', (done?: TaskCallback) => {
   //writeFile(join(__dirname, 'gh-pages', 'CNAME'), 'www.webmanajemen.com', () => {});
   writeFile(join(__dirname, 'gh-pages', '.nojekyll'), '', () => {});
-  gulp.src(join(__dirname, 'dist', '**/*')).pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist')));
+  gulp
+    .src(['**/*', '!**/*.d.ts'], { cwd: join(__dirname, 'dist') })
+    .pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist')));
   return gulp.src(join(__dirname, '{package.json,README.md}')).pipe(gulp.dest(join(__dirname, 'gh-pages')));
 });
 
