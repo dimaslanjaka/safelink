@@ -8,6 +8,13 @@ customized safelink url redirector.
 
 useful for seo external links and ads.
 
+## Installation
+```bash
+npm install --production
+# or
+yarn install --production=true
+```
+
 ## Build
 ### dev
 
