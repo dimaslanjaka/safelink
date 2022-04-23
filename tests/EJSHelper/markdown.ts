@@ -47,5 +47,5 @@ function mdNew() {
 }
 
 export default function renderMarkdown(str: string) {
-  return mdNew().render(str);
+  return mdold().render(str);
 }

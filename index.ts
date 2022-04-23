@@ -21,15 +21,15 @@ app.init({
     ignoreInitial: true,
     ignored: '*.txt',
   },
-  files: [join(__dirname, 'tests'), join(__dirname, 'dist/**/*.js')],
-  excludeFileTypes: ['.ts'],
+  reloadDelay: 3000,
+  files: [join(__dirname, 'tests/**/*.{ts,js,ejs}'), join(__dirname, 'dist/**/*.js')],
   server: {
     baseDir: './',
     routes: {
       '/node_modules': './node_modules',
       '/js': './tests/js',
       '/css': './tests/css',
-      '/safelink': '/gh-pages',
+      '/safelink': './gh-pages',
     },
     middleware: [
       {
@@ -87,16 +87,16 @@ app.init({
           if (!indicators.privateScript) {
             indicators.privateScript = true;
             const summon = spawn('ts-node', [privateScript], { cwd: __dirname, stdio: 'inherit' });
-            summon.on('message', console.log);
-            summon.on('error', console.log);
             summon.on('close', () => {
               indicators.privateScript = false;
             });
+            process.on('SIGINT', () => summon.kill('SIGINT'));
           }
         }
         if (existsSync(article)) {
           if (statSync(article).isFile()) return res.end(readFileSync(article).toString());
         }
+        //console.log(article);
         next();
       },
     ],
