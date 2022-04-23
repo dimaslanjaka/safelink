@@ -15,18 +15,19 @@ npm install --production
 yarn install --production=true
 ```
 
-## Build
-### dev
-
-`nodemon`: watch src and compile tsc webpack
-
-`yarn start`: watch tests and start server
-
-### prod
+## Development
 ```bash
-tsc
-webpack
+yarn install
+# or
+npm install
 ```
+| command | description           |
+|--------------------|-----------------------------------------|
+| `nodemon` | watch src and compile tsc webpack |
+| `yarn start` | watch tests and start server |
+| `tsc` | build definition files |
+| `webpack` | build safelink script |
+
 ## Usages
 script location : `node_modules/safelinkify/dist/bundle.min.js`.
 
