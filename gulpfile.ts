@@ -11,7 +11,7 @@ import { join, resolve } from 'upath';
 import bluebird from 'bluebird';
 
 gulp.task('copy', (done?: TaskCallback) => {
-  writeFile(join(__dirname, 'gh-pages', 'CNAME'), 'www.webmanajemen.com', () => {});
+  //writeFile(join(__dirname, 'gh-pages', 'CNAME'), 'www.webmanajemen.com', () => {});
   writeFile(join(__dirname, 'gh-pages', '.nojekyll'), '', () => {});
   gulp.src(join(__dirname, 'dist', '**/*')).pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist')));
   return gulp.src(join(__dirname, '{package.json,README.md}')).pipe(gulp.dest(join(__dirname, 'gh-pages')));
