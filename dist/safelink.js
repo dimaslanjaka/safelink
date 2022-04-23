@@ -38,9 +38,9 @@ var safelink = /** @class */ (function () {
         var self = this;
         var content = str;
         var result;
-        if (typeof content == 'string') {
+        if (typeof content === 'string') {
             var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-            var processStr = function (href) {
+            var processStr_1 = function (content, href) {
                 var excluded = self.isExcluded(href);
                 if (!excluded) {
                     var encryption = encryptionURL(href, self.options.password, self.options.verbose);
@@ -54,12 +54,19 @@ var safelink = /** @class */ (function () {
             for (var i = 0; i < matches.length; i++) {
                 var m = matches[i];
                 var href = m[2];
-                result = processStr(href);
+                if (typeof href == 'string' && href.length > 0) {
+                    var wholeContents = typeof result == 'string' ? result : content;
+                    var processedContent = processStr_1(wholeContents, href);
+                    if (processedContent)
+                        result = processedContent;
+                }
             }
             if (typeof result == 'string')
-                return result.replace(regex, function (all, m1, m2) {
-                    console.log(m2);
-                    return all;
+                return result.replace(regex, function (wholeContents, m1, m2) {
+                    var processedContent = processStr_1(wholeContents, m2);
+                    if (processedContent)
+                        return processedContent;
+                    return wholeContents;
                 });
         }
         else if (content instanceof HTMLElement) {

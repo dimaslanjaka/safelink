@@ -44,9 +44,9 @@ export default class safelink {
     const self = this;
     const content = str;
     let result: string;
-    if (typeof content == 'string') {
+    if (typeof content === 'string') {
       const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-      const processStr = (href: string) => {
+      const processStr = (content: string, href: string) => {
         const excluded = self.isExcluded(href);
 
         if (!excluded) {
@@ -61,12 +61,18 @@ export default class safelink {
       for (let i = 0; i < matches.length; i++) {
         const m = matches[i];
         const href = m[2];
-        result = processStr(href);
+        if (typeof href == 'string' && href.length > 0) {
+          let wholeContents = typeof result == 'string' ? result : content;
+          const processedContent = processStr(wholeContents, href);
+          if (processedContent) result = processedContent;
+        }
       }
+
       if (typeof result == 'string')
-        return result.replace(regex, (all, m1, m2) => {
-          console.log(m2);
-          return all;
+        return result.replace(regex, (wholeContents, m1, m2) => {
+          const processedContent = processStr(wholeContents, m2);
+          if (processedContent) return processedContent;
+          return wholeContents;
         });
     } else if (content instanceof HTMLElement) {
       const tagname = content.tagName.toLowerCase();
