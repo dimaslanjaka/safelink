@@ -1,4 +1,5 @@
 import { writeFileSync } from 'fs';
+import { EOL } from 'os';
 import { join } from 'path';
 import encryptionURL from './encryptionURL';
 import { Nullable } from './resolveQueryUrl';
@@ -49,6 +50,7 @@ export default class safelink {
       let result: string;
       if (typeof content == 'string') {
         const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
+        let dump = false;
         Array.from(content.matchAll(regex)).forEach((m) => {
           const href = m[2];
           const excluded = self.isExcluded(href);
@@ -60,11 +62,16 @@ export default class safelink {
             const newhref = randRedir + enc;
             result = content.replace(href, newhref);
             if (href.includes('diet')) {
-              //console.log(excluded, href, newhref);
-              writeFileSync(join(__dirname, 'tmp/replace.html'), result);
+              dump = true;
+              writeFileSync(
+                join(__dirname, 'tmp/diet.html'),
+                JSON.stringify({ excluded, href, newhref }) + EOL.repeat(2) + result
+              );
             }
           }
         });
+        if (dump) writeFileSync(join(__dirname, 'tmp/replace.html'), result);
+        return resolve(result);
       } else if (content instanceof HTMLElement) {
         const tagname = content.tagName.toLowerCase();
         if (tagname != 'a') {

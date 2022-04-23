@@ -1,4 +1,5 @@
 import { writeFileSync } from 'fs';
+import { EOL } from 'os';
 import { join } from 'path';
 import encryptionURL from './encryptionURL';
 import toURL from './toURL';
@@ -43,6 +44,7 @@ var safelink = /** @class */ (function () {
             var result;
             if (typeof content == 'string') {
                 var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
+                var dump_1 = false;
                 Array.from(content.matchAll(regex)).forEach(function (m) {
                     var href = m[2];
                     var excluded = self.isExcluded(href);
@@ -53,11 +55,14 @@ var safelink = /** @class */ (function () {
                         var newhref = randRedir + enc;
                         result = content.replace(href, newhref);
                         if (href.includes('diet')) {
-                            //console.log(excluded, href, newhref);
-                            writeFileSync(join(__dirname, 'tmp/replace.html'), result);
+                            dump_1 = true;
+                            writeFileSync(join(__dirname, 'tmp/diet.html'), JSON.stringify({ excluded: excluded, href: href, newhref: newhref }) + EOL.repeat(2) + result);
                         }
                     }
                 });
+                if (dump_1)
+                    writeFileSync(join(__dirname, 'tmp/replace.html'), result);
+                return resolve(result);
             }
             else if (content instanceof HTMLElement) {
                 var tagname = content.tagName.toLowerCase();
