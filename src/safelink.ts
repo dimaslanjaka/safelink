@@ -17,7 +17,7 @@ interface ResultParse extends ReturnType<typeof encryptionURL> {
 export default class safelink {
   options: Partial<Options> = {
     exclude: [],
-    redirect: 'https://dimaslanjaka.github.io/page/safelink.html?url=',
+    redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
     password: 'root',
     verbose: false,
     type: 'base64',

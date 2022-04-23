@@ -5,7 +5,7 @@ import { minify } from 'html-minifier-terser';
 import EJSHelper from './tests/EJSHelper';
 import spawn from 'cross-spawn';
 
-/** Deployer for http://dimaslanjaka.github.io/safelink */
+/** Deployer for https://www.webmanajemen.com/safelink */
 const deploy_dir = join(__dirname, 'gh-pages');
 if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
 
@@ -44,7 +44,7 @@ app.init({
 
           const view = join(__dirname, 'tests');
           const view_ejs = join(view, path + '.ejs');
-          let title = 'Browser Test';
+          const title = 'Browser Test';
           if (existsSync(view_ejs)) {
             const helpers = new EJSHelper({
               root: join(view, 'layout.ejs'),

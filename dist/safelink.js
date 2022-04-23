@@ -5,7 +5,7 @@ var safelink = /** @class */ (function () {
     function safelink(opt) {
         this.options = {
             exclude: [],
-            redirect: 'https://dimaslanjaka.github.io/page/safelink.html?url=',
+            redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
             password: 'root',
             verbose: false,
             type: 'base64',

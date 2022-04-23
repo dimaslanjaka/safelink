@@ -442,7 +442,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _encryptionURL__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./encryptionURL */ \"./src/encryptionURL.ts\");\n/* harmony import */ var _toURL__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toURL */ \"./src/toURL.ts\");\n\n\nvar _global_safelink = (window /* browser */ || __webpack_require__.g) /* node */;\nvar safelink = /** @class */ (function () {\n    function safelink(opt) {\n        this.options = {\n            exclude: [],\n            redirect: 'https://dimaslanjaka.github.io/page/safelink.html?url=',\n            password: 'root',\n            verbose: false,\n            type: 'base64',\n        };\n        this.options = Object.assign(this.options, opt);\n    }\n    safelink.prototype.isExcluded = function (url) {\n        var excludes = this.options.exclude;\n        var value = String(url);\n        var parsed = url instanceof URL ? url : (0,_toURL__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(value);\n        for (var i = 0; i < excludes.length; i++) {\n            var pattern = excludes[i];\n            if (typeof pattern == 'string') {\n                if (value.match(/^https?:\\/\\//)) {\n                    // only validate full url\n                    if (parsed.host.includes(pattern))\n                        return true;\n                }\n            }\n            else if (pattern instanceof RegExp) {\n                if (value.match(pattern))\n                    return true;\n            }\n        }\n        return false;\n    };\n    safelink.prototype.parse = function (str) {\n        var _this = this;\n        return new Promise(function (resolve) {\n            var content = str;\n            var self = _this;\n            var result = [];\n            if (typeof content == 'string') {\n                var regex = /<a\\s+(?:[^>]*?\\s+)?href=([\"'])(.*?)\\1/gm;\n            }\n            else if (content instanceof HTMLElement) {\n                var tagname = content.tagName.toLowerCase();\n                if (tagname != 'a') {\n                    var links = Array.from(content.querySelectorAll('a'));\n                    for (var i = 0; i < links.length; i++) {\n                        var a = links[i];\n                        if (!a.href)\n                            continue;\n                        var href = (0,_toURL__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(a.href);\n                        if (!href) {\n                            console.log(a.href, null);\n                            continue;\n                        }\n                        var encryption = (0,_encryptionURL__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(href, self.options.password, self.options.verbose);\n                        var excluded = self.isExcluded(href);\n                        result.push(Object.assign(encryption, {\n                            url: href.href,\n                            isExcluded: excluded,\n                        }));\n                        if (!excluded) {\n                            var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;\n                            a.href = self.options.redirect + enc;\n                            a.target = '_blank';\n                            a.rel = 'nofollow noopener noreferer';\n                        }\n                    }\n                }\n            }\n            return resolve(result);\n        });\n    };\n    return safelink;\n}());\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (safelink);\n_global_safelink.safelink = safelink;\n\n\n//# sourceURL=webpack://safelinkify/./src/safelink.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _encryptionURL__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./encryptionURL */ \"./src/encryptionURL.ts\");\n/* harmony import */ var _toURL__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./toURL */ \"./src/toURL.ts\");\n\n\nvar _global_safelink = (window /* browser */ || __webpack_require__.g) /* node */;\nvar safelink = /** @class */ (function () {\n    function safelink(opt) {\n        this.options = {\n            exclude: [],\n            redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',\n            password: 'root',\n            verbose: false,\n            type: 'base64',\n        };\n        this.options = Object.assign(this.options, opt);\n    }\n    safelink.prototype.isExcluded = function (url) {\n        var excludes = this.options.exclude;\n        var value = String(url);\n        var parsed = url instanceof URL ? url : (0,_toURL__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(value);\n        for (var i = 0; i < excludes.length; i++) {\n            var pattern = excludes[i];\n            if (typeof pattern == 'string') {\n                if (value.match(/^https?:\\/\\//)) {\n                    // only validate full url\n                    if (parsed.host.includes(pattern))\n                        return true;\n                }\n            }\n            else if (pattern instanceof RegExp) {\n                if (value.match(pattern))\n                    return true;\n            }\n        }\n        return false;\n    };\n    safelink.prototype.parse = function (str) {\n        var _this = this;\n        return new Promise(function (resolve) {\n            var content = str;\n            var self = _this;\n            var result = [];\n            if (typeof content == 'string') {\n                var regex = /<a\\s+(?:[^>]*?\\s+)?href=([\"'])(.*?)\\1/gm;\n            }\n            else if (content instanceof HTMLElement) {\n                var tagname = content.tagName.toLowerCase();\n                if (tagname != 'a') {\n                    var links = Array.from(content.querySelectorAll('a'));\n                    for (var i = 0; i < links.length; i++) {\n                        var a = links[i];\n                        if (!a.href)\n                            continue;\n                        var href = (0,_toURL__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(a.href);\n                        if (!href) {\n                            console.log(a.href, null);\n                            continue;\n                        }\n                        var encryption = (0,_encryptionURL__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(href, self.options.password, self.options.verbose);\n                        var excluded = self.isExcluded(href);\n                        result.push(Object.assign(encryption, {\n                            url: href.href,\n                            isExcluded: excluded,\n                        }));\n                        if (!excluded) {\n                            var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;\n                            a.href = self.options.redirect + enc;\n                            a.target = '_blank';\n                            a.rel = 'nofollow noopener noreferer';\n                        }\n                    }\n                }\n            }\n            return resolve(result);\n        });\n    };\n    return safelink;\n}());\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (safelink);\n_global_safelink.safelink = safelink;\n\n\n//# sourceURL=webpack://safelinkify/./src/safelink.ts?");
 
 /***/ }),
 
@@ -471,7 +471,7 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://safelinkify/crypto_(ignored)?")
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -485,17 +485,17 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://safelinkify/crypto_(ignored)?")
 /******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
@@ -508,7 +508,7 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://safelinkify/crypto_(ignored)?")
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -520,7 +520,7 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://safelinkify/crypto_(ignored)?")
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -532,7 +532,7 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://safelinkify/crypto_(ignored)?")
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/harmony module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.hmd = (module) => {
@@ -547,12 +547,12 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://safelinkify/crypto_(ignored)?")
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -563,14 +563,14 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://safelinkify/crypto_(ignored)?")
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
 /******/ 	var __webpack_exports__ = __webpack_require__("./src/index.ts");
-/******/ 	
+/******/
 /******/ 	return __webpack_exports__;
 /******/ })()
 ;
