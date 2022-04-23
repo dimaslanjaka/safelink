@@ -38,20 +38,36 @@ var safelink = /** @class */ (function () {
         var self = this;
         var content = str;
         var result;
-        if (typeof content == 'string') {
+        if (typeof content === 'string') {
             var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-            Array.from(content.matchAll(regex)).forEach(function (m) {
-                var href = m[2];
+            var processStr_1 = function (content, href) {
                 var excluded = self.isExcluded(href);
                 if (!excluded) {
                     var encryption = encryptionURL(href, self.options.password, self.options.verbose);
                     var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
                     var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
                     var newhref = randRedir + enc;
-                    result = content.replace(href, newhref);
+                    return content.replace(href, newhref);
                 }
-            });
-            return result;
+            };
+            var matches = Array.from(content.matchAll(regex));
+            for (var i = 0; i < matches.length; i++) {
+                var m = matches[i];
+                var href = m[2];
+                if (typeof href == 'string' && href.length > 0) {
+                    var wholeContents = typeof result == 'string' ? result : content;
+                    var processedContent = processStr_1(wholeContents, href);
+                    if (processedContent)
+                        result = processedContent;
+                }
+            }
+            if (typeof result == 'string')
+                return result.replace(regex, function (wholeContents, m1, m2) {
+                    var processedContent = processStr_1(wholeContents, m2);
+                    if (processedContent)
+                        return processedContent;
+                    return wholeContents;
+                });
         }
         else if (content instanceof HTMLElement) {
             var tagname = content.tagName.toLowerCase();
