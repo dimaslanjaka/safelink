@@ -10,6 +10,6 @@ export default class safelink {
     options: Partial<Options>;
     constructor(opt: Partial<Options>);
     private isExcluded;
-    parse(str: Nullable<string> | HTMLElement): Promise<string>;
+    parse(str: Nullable<string> | HTMLElement): string;
 }
 export {};

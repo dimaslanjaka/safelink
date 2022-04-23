@@ -1,6 +1,3 @@
-import { writeFileSync } from 'fs';
-import { EOL } from 'os';
-import { join } from 'path';
 import encryptionURL from './encryptionURL';
 import { Nullable } from './resolveQueryUrl';
 import toURL from './toURL';
@@ -43,70 +40,58 @@ export default class safelink {
     }
     return false;
   }
-  parse(str: Nullable<string> | HTMLElement): Promise<string> {
+  parse(str: Nullable<string> | HTMLElement) {
     const self = this;
-    return new Promise((resolve) => {
-      const content = str;
-      let result: string;
-      if (typeof content == 'string') {
-        const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-        let dump = false;
-        Array.from(content.matchAll(regex)).forEach((m) => {
-          const href = m[2];
-          const excluded = self.isExcluded(href);
+    const content = str;
+    let result: string;
+    if (typeof content == 'string') {
+      const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
+      Array.from(content.matchAll(regex)).forEach((m) => {
+        const href = m[2];
+        const excluded = self.isExcluded(href);
 
+        if (!excluded) {
+          const encryption = encryptionURL(href, self.options.password, self.options.verbose);
+          const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+          const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+          const newhref = randRedir + enc;
+          result = content.replace(href, newhref);
+        }
+      });
+      return result;
+    } else if (content instanceof HTMLElement) {
+      const tagname = content.tagName.toLowerCase();
+      if (tagname != 'a') {
+        const links = Array.from(content.querySelectorAll('a'));
+        for (let i = 0; i < links.length; i++) {
+          const a = links[i];
+          if (!a.href) continue;
+          const href = toURL(a.href);
+          if (!href) {
+            console.log(a.href, null);
+            continue;
+          }
+          const encryption = encryptionURL(href, self.options.password, self.options.verbose);
+          const excluded = self.isExcluded(href);
+          if (self.options.verbose) {
+            console.log(
+              Object.assign(encryption, {
+                url: href.href,
+                isExcluded: excluded,
+              })
+            );
+          }
           if (!excluded) {
-            const encryption = encryptionURL(href, self.options.password, self.options.verbose);
             const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
             const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
-            const newhref = randRedir + enc;
-            result = content.replace(href, newhref);
-            if (href.includes('diet')) {
-              dump = true;
-              writeFileSync(
-                join(__dirname, 'tmp/diet.html'),
-                JSON.stringify({ excluded, href, newhref }) + EOL.repeat(2) + result
-              );
-            }
+            a.href = randRedir + enc;
+            a.target = '_blank';
+            a.rel = 'nofollow noopener noreferer';
           }
-        });
-        if (dump) writeFileSync(join(__dirname, 'tmp/replace.html'), result);
-        return resolve(result);
-      } else if (content instanceof HTMLElement) {
-        const tagname = content.tagName.toLowerCase();
-        if (tagname != 'a') {
-          const links = Array.from(content.querySelectorAll('a'));
-          for (let i = 0; i < links.length; i++) {
-            const a = links[i];
-            if (!a.href) continue;
-            const href = toURL(a.href);
-            if (!href) {
-              console.log(a.href, null);
-              continue;
-            }
-            const encryption = encryptionURL(href, self.options.password, self.options.verbose);
-            const excluded = self.isExcluded(href);
-            if (self.options.verbose) {
-              console.log(
-                Object.assign(encryption, {
-                  url: href.href,
-                  isExcluded: excluded,
-                })
-              );
-            }
-            if (!excluded) {
-              const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-              const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
-              a.href = randRedir + enc;
-              a.target = '_blank';
-              a.rel = 'nofollow noopener noreferer';
-            }
-          }
-          result = content.outerHTML;
         }
+        result = content.outerHTML;
       }
-      return resolve(result);
-    });
+    }
   }
 }
 _global_safelink.safelink = safelink;
