@@ -23,7 +23,7 @@ npm install
 ```
 | command | description           |
 |--------------------|-----------------------------------------|
-| `nodemon`https://www.webmanajemen.com/ebpack |https://www.webmanajemen.com/
+| `nodemon` | watch src and compile tsc webpack |
 | `yarn start` | watch tests and start server |
 | `tsc` | build definition files |
 | `webpack` | build safelink script |
