@@ -38,6 +38,8 @@ Call Core Script:
 <script src="dist/bundle.min.js"></script>
 <!--or using rawgit-->
 <script src="https://raw.githack.com/dimaslanjaka/safelink/main/dist/bundle.min.js"></script>
+<!--or using statically-->
+<script src="https://cdn.statically.io/gh/dimaslanjaka/safelink/main/dist/bundle.min.js"></script>
 ```
 Execute functions:
 ```html
