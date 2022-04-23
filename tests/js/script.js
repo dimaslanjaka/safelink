@@ -36,6 +36,6 @@ Array.from(document.links).forEach((el) => {
   el.addEventListener('click', (e) => {
     e.preventDefault();
     location.assign(el.href);
-    if (el.href.includes('#')) location.reload();
+    if (el.href.match(new RegExp('^#(o|url)='))) location.reload();
   });
 });
