@@ -10,7 +10,7 @@ const deploy_dir = join(__dirname, 'gh-pages');
 if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
 
 const indicators: { [k: string]: any } = { privateScript: false };
-const PORT = parseInt(process.env.PORT || '5000');
+const PORT = parseInt(process.env.PORT || '4000');
 const baseUrl = 'http://localhost' + PORT;
 const app = browserSync.create();
 app.init({

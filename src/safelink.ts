@@ -5,7 +5,7 @@ import toURL from './toURL';
 const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
 interface Options {
   exclude: string[] | RegExp[];
-  redirect?: string;
+  redirect?: string[];
   password: string;
   verbose?: boolean;
   type: 'base64' | 'aes';
@@ -17,12 +17,13 @@ interface ResultParse extends ReturnType<typeof encryptionURL> {
 export default class safelink {
   options: Partial<Options> = {
     exclude: [],
-    redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
+    redirect: ['https://www.webmanajemen.com/page/safelink.html?url='],
     password: 'root',
     verbose: false,
     type: 'base64',
   };
   constructor(opt: Partial<Options>) {
+    if (typeof opt.redirect == 'string') opt.redirect = [opt.redirect];
     this.options = Object.assign(this.options, opt);
   }
   private isExcluded(url: string | URL) {
@@ -42,15 +43,26 @@ export default class safelink {
     }
     return false;
   }
-  parse(str: Nullable<string> | HTMLElement): Promise<ResultParse[]> {
+  parse(str: Nullable<string> | HTMLElement): Promise<string> {
+    const self = this;
     return new Promise((resolve) => {
       const content = str;
-      const self = this;
-      const result: ResultParse[] = [];
+      let result: string;
       if (typeof content == 'string') {
         const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gm;
         Array.from(content.matchAll(regex)).forEach((m) => {
-          console.log(m[1]);
+          const href = m[2];
+          const excluded = self.isExcluded(href);
+
+          if (!excluded) {
+            const encryption = encryptionURL(href, self.options.password, self.options.verbose);
+            const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+            const newhref = self.options.redirect + enc;
+            result = content.replace(href, newhref);
+            if (href.includes('diet')) {
+              console.log(excluded, href);
+            }
+          }
         });
       } else if (content instanceof HTMLElement) {
         const tagname = content.tagName.toLowerCase();
@@ -66,12 +78,14 @@ export default class safelink {
             }
             const encryption = encryptionURL(href, self.options.password, self.options.verbose);
             const excluded = self.isExcluded(href);
-            result.push(
-              Object.assign(encryption, {
-                url: href.href,
-                isExcluded: excluded,
-              })
-            );
+            if (self.options.verbose) {
+              console.log(
+                Object.assign(encryption, {
+                  url: href.href,
+                  isExcluded: excluded,
+                })
+              );
+            }
             if (!excluded) {
               const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
               a.href = self.options.redirect + enc;
@@ -79,6 +93,7 @@ export default class safelink {
               a.rel = 'nofollow noopener noreferer';
             }
           }
+          result = content.outerHTML;
         }
       }
       return resolve(result);
