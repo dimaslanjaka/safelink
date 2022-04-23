@@ -5,11 +5,13 @@ var safelink = /** @class */ (function () {
     function safelink(opt) {
         this.options = {
             exclude: [],
-            redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
+            redirect: ['https://www.webmanajemen.com/page/safelink.html?url='],
             password: 'root',
             verbose: false,
             type: 'base64',
         };
+        if (typeof opt.redirect == 'string')
+            opt.redirect = [opt.redirect];
         this.options = Object.assign(this.options, opt);
     }
     safelink.prototype.isExcluded = function (url) {
@@ -36,13 +38,18 @@ var safelink = /** @class */ (function () {
         var self = this;
         return new Promise(function (resolve) {
             var content = str;
-            var result = [];
+            var result;
             if (typeof content == 'string') {
                 var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gm;
                 Array.from(content.matchAll(regex)).forEach(function (m) {
                     var href = m[2];
                     var excluded = self.isExcluded(href);
-                    console.log(excluded, href);
+                    if (!excluded) {
+                        var encryption = encryptionURL(href, self.options.password, self.options.verbose);
+                        var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+                        var newhref = self.options.redirect + enc;
+                        result = content.replace(href, newhref);
+                    }
                 });
             }
             else if (content instanceof HTMLElement) {
@@ -60,10 +67,12 @@ var safelink = /** @class */ (function () {
                         }
                         var encryption = encryptionURL(href, self.options.password, self.options.verbose);
                         var excluded = self.isExcluded(href);
-                        result.push(Object.assign(encryption, {
-                            url: href.href,
-                            isExcluded: excluded,
-                        }));
+                        if (self.options.verbose) {
+                            console.log(Object.assign(encryption, {
+                                url: href.href,
+                                isExcluded: excluded,
+                            }));
+                        }
                         if (!excluded) {
                             var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
                             a.href = self.options.redirect + enc;
@@ -71,6 +80,7 @@ var safelink = /** @class */ (function () {
                             a.rel = 'nofollow noopener noreferer';
                         }
                     }
+                    result = content.outerHTML;
                 }
             }
             return resolve(result);
