@@ -34,8 +34,10 @@ if (isSafelinkClass) {
 Array.from(document.links).forEach((el) => {
   if (!el.innerHTML.length) el.textContent = el.getAttribute('href');
   el.addEventListener('click', (e) => {
-    e.preventDefault();
-    location.assign(el.href);
-    if (el.href.match(new RegExp('^#(o|url)='))) location.reload();
+    if (!el.hasAttribute('target')) {
+      e.preventDefault();
+      location.assign(el.href);
+      if (el.href.match(new RegExp('^#(o|url)='))) location.reload();
+    }
   });
 });

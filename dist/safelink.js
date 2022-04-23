@@ -40,18 +40,27 @@ var safelink = /** @class */ (function () {
         var result;
         if (typeof content == 'string') {
             var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-            Array.from(content.matchAll(regex)).forEach(function (m) {
-                var href = m[2];
+            var processStr = function (href) {
                 var excluded = self.isExcluded(href);
                 if (!excluded) {
                     var encryption = encryptionURL(href, self.options.password, self.options.verbose);
                     var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
                     var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
                     var newhref = randRedir + enc;
-                    result = content.replace(href, newhref);
+                    return content.replace(href, newhref);
                 }
-            });
-            return result;
+            };
+            var matches = Array.from(content.matchAll(regex));
+            for (var i = 0; i < matches.length; i++) {
+                var m = matches[i];
+                var href = m[2];
+                result = processStr(href);
+            }
+            if (typeof result == 'string')
+                return result.replace(regex, function (all, m1, m2) {
+                    console.log(m2);
+                    return all;
+                });
         }
         else if (content instanceof HTMLElement) {
             var tagname = content.tagName.toLowerCase();

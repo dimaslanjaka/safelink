@@ -46,8 +46,7 @@ export default class safelink {
     let result: string;
     if (typeof content == 'string') {
       const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-      Array.from(content.matchAll(regex)).forEach((m) => {
-        const href = m[2];
+      const processStr = (href: string) => {
         const excluded = self.isExcluded(href);
 
         if (!excluded) {
@@ -55,10 +54,20 @@ export default class safelink {
           const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
           const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
           const newhref = randRedir + enc;
-          result = content.replace(href, newhref);
+          return content.replace(href, newhref);
         }
-      });
-      return result;
+      };
+      const matches = Array.from(content.matchAll(regex));
+      for (let i = 0; i < matches.length; i++) {
+        const m = matches[i];
+        const href = m[2];
+        result = processStr(href);
+      }
+      if (typeof result == 'string')
+        return result.replace(regex, (all, m1, m2) => {
+          console.log(m2);
+          return all;
+        });
     } else if (content instanceof HTMLElement) {
       const tagname = content.tagName.toLowerCase();
       if (tagname != 'a') {

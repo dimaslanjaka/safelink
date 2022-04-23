@@ -81,18 +81,7 @@ app.init({
         const url = new URL(baseUrl + req.url);
         const article = join(deploy_dir, url.pathname);
 
-        const privateScript = join(__dirname, 'tests/article-generator/index.ts');
-        //console.log(existsSync(privateScript), indicators.privateScript);
-        if (existsSync(privateScript) && url.pathname.endsWith('.html')) {
-          if (!indicators.privateScript) {
-            indicators.privateScript = true;
-            const summon = spawn('ts-node', [privateScript], { cwd: __dirname, stdio: 'inherit' });
-            summon.on('close', () => {
-              indicators.privateScript = false;
-            });
-            process.on('SIGINT', () => summon.kill('SIGINT'));
-          }
-        }
+        if (url.pathname.endsWith('.html')) runPrivateScript();
         if (existsSync(article)) {
           if (statSync(article).isFile()) return res.end(readFileSync(article).toString());
         }
@@ -103,4 +92,17 @@ app.init({
   },
 });
 
-console.log('server: http://localhost:3000');
+function runPrivateScript() {
+  const privateScript = join(__dirname, 'tests/article-generator/index.ts');
+  //console.log(existsSync(privateScript), indicators.privateScript);
+  if (existsSync(privateScript)) {
+    if (!indicators.privateScript) {
+      indicators.privateScript = true;
+      const summon = spawn('ts-node', [privateScript], { cwd: __dirname, stdio: 'inherit' });
+      summon.on('close', () => {
+        indicators.privateScript = false;
+      });
+      process.on('SIGINT', () => summon.kill('SIGINT'));
+    }
+  }
+}
