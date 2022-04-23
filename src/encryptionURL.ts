@@ -15,8 +15,7 @@ interface encryptionURLResult {
   };
 }
 
-const _global_encryptionURL = (window /* browser */ ||
-  global) /* node */ as any;
+const _global_encryptionURL = (typeof window !== 'undefined' ? window : global) as any;
 
 /**
  * resolve url encryption
@@ -24,11 +23,7 @@ const _global_encryptionURL = (window /* browser */ ||
  * @param passphrase
  * @returns
  */
-export default function encryptionURL(
-  url: Nullable<string | URL>,
-  passphrase: string = 'root',
-  debug = false
-) {
+export default function encryptionURL(url: Nullable<string | URL>, passphrase: string = 'root', debug = false) {
   /** Default Return Value */
   const defaultRet: encryptionURLResult = {
     value: null,

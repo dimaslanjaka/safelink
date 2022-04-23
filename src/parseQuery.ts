@@ -1,6 +1,6 @@
 import { Nullable } from './resolveQueryUrl';
 
-const _global_parseQuery = (window /* browser */ || global) /* node */ as any;
+const _global_parseQuery = (typeof window !== 'undefined' ? window : global) as any;
 
 /**
  * Parse Query URL and Hash

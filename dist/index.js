@@ -1,7 +1,7 @@
 import { default as _parseQuery } from './parseQuery';
 import { default as _resolveQueryUrl } from './resolveQueryUrl';
 import { default as _safelink } from './safelink';
-var _global_safelinkify = (window /* browser */ || global) /* node */;
+var _global_safelinkify = (typeof window !== 'undefined' ? window : global);
 var safelinkify;
 (function (safelinkify) {
     safelinkify.resolveQueryUrl = _resolveQueryUrl;

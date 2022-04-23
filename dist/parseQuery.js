@@ -1,4 +1,4 @@
-var _global_parseQuery = (window /* browser */ || global) /* node */;
+var _global_parseQuery = (typeof window !== 'undefined' ? window : global);
 /**
  * Parse Query URL and Hash
  * @param  query query key, null = return all objects

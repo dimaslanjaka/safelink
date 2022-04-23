@@ -7,8 +7,7 @@ interface resolveQueryResult {
   [key: string]: any;
 }
 
-const _global_resolveQueryUrl = (window /* browser */ ||
-  global) /* node */ as any;
+const _global_resolveQueryUrl = (typeof window !== 'undefined' ? window : global) as any;
 
 /**
  * Auto resolve url
@@ -17,10 +16,7 @@ const _global_resolveQueryUrl = (window /* browser */ ||
  * @param passphrase aes password
  * @returns
  */
-export function resolveQueryUrl(
-  url?: string | URL,
-  passphrase = 'root'
-): Nullable<resolveQueryResult> {
+export function resolveQueryUrl(url?: string | URL, passphrase = 'root'): Nullable<resolveQueryResult> {
   const result: resolveQueryResult = {};
   let search: Nullable<string> = null;
   if (url instanceof URL) {
@@ -28,10 +24,7 @@ export function resolveQueryUrl(
   } else if (typeof url == 'string') {
     const parse = toURL(url);
     if (parse != null) search = parse.search;
-  } else if (
-    typeof location == 'object' &&
-    typeof location.search == 'string'
-  ) {
+  } else if (typeof location == 'object' && typeof location.search == 'string') {
     search = location.search;
   }
 

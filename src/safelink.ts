@@ -2,7 +2,7 @@ import encryptionURL from './encryptionURL';
 import { Nullable } from './resolveQueryUrl';
 import toURL from './toURL';
 
-const _global_safelink = (window /* browser */ || global) /* node */ as any;
+const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
 interface Options {
   exclude: string[] | RegExp[];
   redirect?: string;
@@ -49,6 +49,9 @@ export default class safelink {
       const result: ResultParse[] = [];
       if (typeof content == 'string') {
         const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gm;
+        Array.from(content.matchAll(regex)).forEach((m) => {
+          console.log(m[1]);
+        });
       } else if (content instanceof HTMLElement) {
         const tagname = content.tagName.toLowerCase();
         if (tagname != 'a') {

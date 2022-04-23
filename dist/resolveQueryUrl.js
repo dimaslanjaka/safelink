@@ -1,8 +1,7 @@
 import encryptionURL from './encryptionURL';
 import { parseQuery } from './parseQuery';
 import toURL from './toURL';
-var _global_resolveQueryUrl = (window /* browser */ ||
-    global) /* node */;
+var _global_resolveQueryUrl = (typeof window !== 'undefined' ? window : global);
 /**
  * Auto resolve url
  * * parse base64, aes
@@ -22,8 +21,7 @@ export function resolveQueryUrl(url, passphrase) {
         if (parse != null)
             search = parse.search;
     }
-    else if (typeof location == 'object' &&
-        typeof location.search == 'string') {
+    else if (typeof location == 'object' && typeof location.search == 'string') {
         search = location.search;
     }
     if (!search)
