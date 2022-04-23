@@ -36,55 +36,55 @@ var safelink = /** @class */ (function () {
     };
     safelink.prototype.parse = function (str) {
         var self = this;
-        return new Promise(function (resolve) {
-            var content = str;
-            var result;
-            if (typeof content == 'string') {
-                var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gm;
-                Array.from(content.matchAll(regex)).forEach(function (m) {
-                    var href = m[2];
-                    var excluded = self.isExcluded(href);
-                    if (!excluded) {
-                        var encryption = encryptionURL(href, self.options.password, self.options.verbose);
-                        var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-                        var newhref = self.options.redirect + enc;
-                        result = content.replace(href, newhref);
-                    }
-                });
-            }
-            else if (content instanceof HTMLElement) {
-                var tagname = content.tagName.toLowerCase();
-                if (tagname != 'a') {
-                    var links = Array.from(content.querySelectorAll('a'));
-                    for (var i = 0; i < links.length; i++) {
-                        var a = links[i];
-                        if (!a.href)
-                            continue;
-                        var href = toURL(a.href);
-                        if (!href) {
-                            console.log(a.href, null);
-                            continue;
-                        }
-                        var encryption = encryptionURL(href, self.options.password, self.options.verbose);
-                        var excluded = self.isExcluded(href);
-                        if (self.options.verbose) {
-                            console.log(Object.assign(encryption, {
-                                url: href.href,
-                                isExcluded: excluded,
-                            }));
-                        }
-                        if (!excluded) {
-                            var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-                            a.href = self.options.redirect + enc;
-                            a.target = '_blank';
-                            a.rel = 'nofollow noopener noreferer';
-                        }
-                    }
-                    result = content.outerHTML;
+        var content = str;
+        var result;
+        if (typeof content == 'string') {
+            var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
+            Array.from(content.matchAll(regex)).forEach(function (m) {
+                var href = m[2];
+                var excluded = self.isExcluded(href);
+                if (!excluded) {
+                    var encryption = encryptionURL(href, self.options.password, self.options.verbose);
+                    var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+                    var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+                    var newhref = randRedir + enc;
+                    result = content.replace(href, newhref);
                 }
+            });
+            return result;
+        }
+        else if (content instanceof HTMLElement) {
+            var tagname = content.tagName.toLowerCase();
+            if (tagname != 'a') {
+                var links = Array.from(content.querySelectorAll('a'));
+                for (var i = 0; i < links.length; i++) {
+                    var a = links[i];
+                    if (!a.href)
+                        continue;
+                    var href = toURL(a.href);
+                    if (!href) {
+                        console.log(a.href, null);
+                        continue;
+                    }
+                    var encryption = encryptionURL(href, self.options.password, self.options.verbose);
+                    var excluded = self.isExcluded(href);
+                    if (self.options.verbose) {
+                        console.log(Object.assign(encryption, {
+                            url: href.href,
+                            isExcluded: excluded,
+                        }));
+                    }
+                    if (!excluded) {
+                        var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+                        var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+                        a.href = randRedir + enc;
+                        a.target = '_blank';
+                        a.rel = 'nofollow noopener noreferer';
+                    }
+                }
+                result = content.outerHTML;
             }
-            return resolve(result);
-        });
+        }
     };
     return safelink;
 }());
