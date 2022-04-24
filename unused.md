@@ -1,0 +1,11 @@
+Unused dependencies
+* @popperjs/core
+* bootstrap
+* highlight.js
+* moment
+Unused devDependencies
+* @tsconfig/node16
+* @types/prettier
+* express
+* prettier
+* webpack-cli

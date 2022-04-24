@@ -2,13 +2,17 @@
  * [DEV] SCRIPT COMPILER
  */
 
-import { existsSync } from 'fs';
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import { join } from 'upath';
 import browserSync from 'browser-sync';
 import { minify } from 'html-minifier-terser';
 import EJSHelper from './tests/EJSHelper';
 import gulp from 'gulp';
 import spawn from 'cross-spawn';
+
+/** Deployer for https://www.webmanajemen.com/safelink */
+const deploy_dir = join(__dirname, 'gh-pages');
+if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
 
 const PORT = parseInt(process.env.PORT || '4000');
 let baseUrl = 'http://localhost' + PORT;
@@ -63,6 +67,10 @@ app.init({
             } catch (error) {
               result = renderLayout;
             }
+
+            /** Location deploy page */
+            const saveTo = join(deploy_dir, 'index.html');
+            writeFileSync(saveTo, result);
 
             res.end(result);
           }
