@@ -33,8 +33,16 @@ script location : `node_modules/safelinkify/dist/bundle.min.js`.
 
 read more [https://www.webmanajemen.com/safelink/](https://www.webmanajemen.com/safelink/index.html)
 
+Call Core Script:
 ```html
 <script src="dist/bundle.min.js"></script>
+<!--or using rawgit-->
+<script src="https://raw.githack.com/dimaslanjaka/safelink/main/dist/bundle.min.js"></script>
+<!--or using statically-->
+<script src="https://cdn.statically.io/gh/dimaslanjaka/safelink/main/dist/bundle.min.js"></script>
+```
+Execute functions:
+```html
 <script>
   const sf = new safelink({
     // example patterns
