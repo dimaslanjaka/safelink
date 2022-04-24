@@ -21,6 +21,6 @@ export const b64 = {
       //console.log('Error Base64 decode: ' + String(error));
       return null;
     }
-  },
+  }
 };
 export default b64;
