@@ -4,13 +4,6 @@ import * as gulp from 'gulp';
 import moment from 'moment-timezone';
 import { TaskCallback } from 'undertaker';
 import { join, resolve } from 'upath';
-/**
- * BUILD SCRIPT START
- */
-import '.';
-/**
- * BUILD SCRIPT END
- */
 
 /**
  *  BELOW SCRIPT TO DEPLOY OUR GITHUB PAGES

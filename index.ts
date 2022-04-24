@@ -1,3 +1,7 @@
+/**
+ * [DEV] SCRIPT COMPILER
+ */
+
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'fs';
 import { join } from 'upath';
 import browserSync from 'browser-sync';
@@ -122,7 +126,7 @@ gulp.watch(
       if (!err) {
         console.log(`[webpack][${stats.toJson().hash}] compiled successful`);
       } else if (err || stats.hasErrors()) {
-        // [Handle errors here](#error-handling)
+        // [Handle errors here](https://webpack.js.org/api/node#error-handling)
       }
       compiler.close((closeErr) => {
         // ...
