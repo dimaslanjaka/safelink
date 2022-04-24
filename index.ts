@@ -117,17 +117,13 @@ gulp.watch(
     /*summon('webpack && tsc', { cwd: __dirname }, (child) => {
       child.on('close', app.reload);
     });*/
-    const compiler = webpack(webpackConf, (err, stats) => {
-      // [Stats Object](#stats-object)
-      if (err || stats.hasErrors()) {
+    const compiler = webpack(webpackConf);
+    compiler.run((err, stats) => {
+      if (!err) {
+        console.log(`[webpack][${stats.toJson().hash}] compiled successful`);
+      } else if (err || stats.hasErrors()) {
         // [Handle errors here](#error-handling)
       }
-      // Done processing
-    });
-    compiler.run((err, stats) => {
-      // [Stats Object](#stats-object)
-      // ...
-
       compiler.close((closeErr) => {
         // ...
       });
