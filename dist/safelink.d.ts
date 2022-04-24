@@ -11,6 +11,6 @@ export default class safelink {
     constructor(opt: Partial<Options>);
     private isExcluded;
     parse(str: Nullable<string> | HTMLElement): string;
-    resolveQueryUrl(search?: string): void;
+    resolveQueryUrl(search?: string): import("./resolveQueryUrl").resolveQueryResult;
 }
 export {};

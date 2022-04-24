@@ -1,5 +1,5 @@
 export declare type Nullable<T> = T | null;
-interface resolveQueryResult {
+export interface resolveQueryResult {
     [key: string]: any;
 }
 /**
@@ -10,4 +10,3 @@ interface resolveQueryResult {
  * @returns
  */
 export default function resolveQueryUrl(url?: string | URL, passphrase?: string, debug?: boolean): Nullable<resolveQueryResult>;
-export {};

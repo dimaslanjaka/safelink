@@ -3,7 +3,7 @@ import { parseQuery } from './parseQuery';
 import toURL from './toURL';
 
 export type Nullable<T> = T | null;
-interface resolveQueryResult {
+export interface resolveQueryResult {
   [key: string]: any;
 }
 

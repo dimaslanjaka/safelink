@@ -1,5 +1,5 @@
 import encryptionURL from './encryptionURL';
-import resolveQueryUrl, { Nullable } from './resolveQueryUrl';
+import { default as _resolveQueryUrl, Nullable } from './resolveQueryUrl';
 import toURL from './toURL';
 
 const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
@@ -114,7 +114,7 @@ export default class safelink {
     }
   }
   resolveQueryUrl(search?: string) {
-    resolveQueryUrl(
+    return _resolveQueryUrl(
       typeof search == 'string'
         ? search
         : typeof location == 'object' && typeof location.search == 'string'

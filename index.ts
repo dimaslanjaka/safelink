@@ -12,8 +12,6 @@ import gulp from 'gulp';
 import spawn from 'cross-spawn';
 import webpack from 'webpack';
 import webpackConf from './webpack.config';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
 
 const tmp = (...path: string[]) => {
   const loc = join(__dirname, 'tmp', ...path);
@@ -110,10 +108,6 @@ app.init({
         //console.log(article);
         next();
       },
-      webpackDevMiddleware(bundler, {
-        /* options */
-      }),
-      webpackHotMiddleware(bundler),
     ],
   },
 });
@@ -121,6 +115,18 @@ app.init({
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
 gulp.watch(['**/*.{js,ejs,ts}', '!**/*.json'], { cwd: join(__dirname, 'tests') }, app.reload);
 gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, app.reload);
+gulp.watch(
+  ['src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md', '!tests', '!tmp', '!dist'],
+  { cwd: __dirname },
+  (done) => {
+    summon('webpack', { cwd: __dirname }, (child) => {
+      child.on('close', () => {
+        app.reload();
+        done();
+      });
+    });
+  }
+);
 
 /**
  * Dimas Lanjaka Private Script
