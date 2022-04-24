@@ -10,6 +10,13 @@ function gen(fn) {
   /** @type {webpack.Configuration} */
   const config = {
     entry: './src/index.ts',
+    watchOptions: {
+      aggregateTimeout: 10000,
+      poll: 1000,
+      followSymlinks: true,
+      ignored: /node_modules|tmp|tests|typings|dist/,
+    },
+    plugins: [new webpack.HotModuleReplacementPlugin()],
     module: {
       rules: [
         {

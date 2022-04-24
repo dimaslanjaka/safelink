@@ -12,6 +12,8 @@ import gulp from 'gulp';
 import spawn from 'cross-spawn';
 import webpack from 'webpack';
 import webpackConf from './webpack.config';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
 
 const tmp = (...path: string[]) => {
   const loc = join(__dirname, 'tmp', ...path);
@@ -27,6 +29,7 @@ const indicators: { [k: string]: any } = { privateScript: false };
 const PORT = parseInt(process.env.PORT || '4000');
 const baseUrl = 'http://localhost' + PORT;
 const app = browserSync.create();
+const bundler = webpack(webpackConf);
 
 app.init({
   port: PORT,
@@ -107,43 +110,17 @@ app.init({
         //console.log(article);
         next();
       },
+      webpackDevMiddleware(bundler, {
+        /* options */
+      }),
+      webpackHotMiddleware(bundler),
     ],
   },
 });
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
-const compiler = webpack(
-  webpackConf.map((config) => {
-    config.watch = true;
-    config.watchOptions = {
-      aggregateTimeout: 600,
-      poll: 1000,
-      ignored: /node_modules|tmp|tests|typings/,
-      followSymlinks: true,
-    };
-    return config;
-  })
-);
-compiler.watch(
-  {
-    aggregateTimeout: 600,
-    poll: 1000,
-    ignored: /node_modules|tmp|tests|typings|dist/,
-    followSymlinks: true,
-  },
-  (err, stats) => {
-    if (!err) {
-      console.log(`[webpack][${stats.toJson().hash}] compiled successful`);
-    } else if (err || stats.hasErrors()) {
-      // [Handle errors here](https://webpack.js.org/api/node#error-handling)
-    }
-    compiler.close((_closeErr) => {
-      app.reload();
-    });
-  }
-);
-//gulp.watch(['**/*.{js,ejs,ts}', '!**/*.json'], { cwd: join(__dirname, 'tests') }, app.reload);
-//gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, app.reload);
+gulp.watch(['**/*.{js,ejs,ts}', '!**/*.json'], { cwd: join(__dirname, 'tests') }, app.reload);
+gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, app.reload);
 
 /**
  * Dimas Lanjaka Private Script
