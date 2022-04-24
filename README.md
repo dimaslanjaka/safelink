@@ -68,4 +68,5 @@ Execute functions:
 import safelinkify from 'safelinkify';
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse('<a href="http://external.domain.com>external</a>');
+console.log(processedExternalLinks);
 ```
