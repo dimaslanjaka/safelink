@@ -1,6 +1,7 @@
+import { encryptionURLResult } from './encryptionURL';
 export declare type Nullable<T> = T | null;
 export interface resolveQueryResult {
-    [key: string]: any;
+    [key: string]: encryptionURLResult;
 }
 /**
  * Auto resolve url
@@ -9,4 +10,4 @@ export interface resolveQueryResult {
  * @param passphrase aes password
  * @returns
  */
-export default function resolveQueryUrl(url?: string | URL, passphrase?: string, debug?: boolean): Nullable<resolveQueryResult>;
+export default function resolveQueryUrl(url?: string | URL, passphrase?: string, debug?: boolean): Partial<resolveQueryResult>;

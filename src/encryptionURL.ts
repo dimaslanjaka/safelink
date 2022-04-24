@@ -2,17 +2,19 @@ import b64 from './b64';
 import aes from './aes';
 import { Nullable } from './resolveQueryUrl';
 
-interface encryptionURLResult {
-  value: Nullable<string>;
-  base64: {
-    encode: Nullable<string>;
-    decode: Nullable<string>;
-  };
+export interface encryptionURLResult {
   aes: {
     encode: Nullable<string>;
+    encode_redirector: Nullable<string>;
     decode: Nullable<string>;
     passphrase: string;
   };
+  base64: {
+    encode_redirector: Nullable<string>;
+    encode: Nullable<string>;
+    decode: Nullable<string>;
+  };
+  value: Nullable<string>;
 }
 
 const _global_encryptionURL = (typeof window !== 'undefined' ? window : global) as any;
@@ -28,14 +30,16 @@ export default function encryptionURL(url: Nullable<string | URL>, passphrase: s
   const defaultRet: encryptionURLResult = {
     value: null,
     base64: {
+      encode_redirector: null,
       encode: null,
-      decode: null,
+      decode: null
     },
     aes: {
       encode: null,
       decode: null,
-      passphrase,
-    },
+      encode_redirector: null,
+      passphrase
+    }
   };
   if (!url) return defaultRet;
   const value = url instanceof URL ? url.href : url;
@@ -51,13 +55,13 @@ export default function encryptionURL(url: Nullable<string | URL>, passphrase: s
     value,
     base64: {
       encode: b64d ? null : b64e,
-      decode: b64d,
+      decode: b64d
     },
     aes: {
       encode: aesd ? null : aese,
       decode: aesd,
-      passphrase,
-    },
+      passphrase
+    }
   });
 }
 

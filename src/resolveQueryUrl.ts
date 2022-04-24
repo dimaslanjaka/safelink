@@ -1,10 +1,10 @@
-import encryptionURL from './encryptionURL';
+import encryptionURL, { encryptionURLResult } from './encryptionURL';
 import { parseQuery } from './parseQuery';
 import toURL from './toURL';
 
 export type Nullable<T> = T | null;
 export interface resolveQueryResult {
-  [key: string]: any;
+  [key: string]: encryptionURLResult;
 }
 
 const _global_resolveQueryUrl = (typeof window !== 'undefined' ? window : global) as any;
@@ -16,12 +16,8 @@ const _global_resolveQueryUrl = (typeof window !== 'undefined' ? window : global
  * @param passphrase aes password
  * @returns
  */
-export default function resolveQueryUrl(
-  url?: string | URL,
-  passphrase = 'root',
-  debug = false
-): Nullable<resolveQueryResult> {
-  const result: resolveQueryResult = {};
+export default function resolveQueryUrl(url?: string | URL, passphrase = 'root', debug = false) {
+  const result: Nullable<Partial<resolveQueryResult>> = {};
   let search: Nullable<string> = null;
   if (url instanceof URL) {
     search = url.search;
@@ -41,6 +37,7 @@ export default function resolveQueryUrl(
       result[key] = encryptionURL(value, passphrase, debug);
     });
   }
+
   return result;
 }
 _global_resolveQueryUrl.resolveQueryUrl = resolveQueryUrl;

@@ -1,15 +1,17 @@
 import { Nullable } from './resolveQueryUrl';
-interface encryptionURLResult {
-    value: Nullable<string>;
-    base64: {
-        encode: Nullable<string>;
-        decode: Nullable<string>;
-    };
+export interface encryptionURLResult {
     aes: {
         encode: Nullable<string>;
+        encode_redirector: Nullable<string>;
         decode: Nullable<string>;
         passphrase: string;
     };
+    base64: {
+        encode_redirector: Nullable<string>;
+        encode: Nullable<string>;
+        decode: Nullable<string>;
+    };
+    value: Nullable<string>;
 }
 /**
  * resolve url encryption
@@ -18,4 +20,3 @@ interface encryptionURLResult {
  * @returns
  */
 export default function encryptionURL(url: Nullable<string | URL>, passphrase?: string, debug?: boolean): encryptionURLResult;
-export {};

@@ -16,24 +16,36 @@
 <hr />
 
 <div class="mb-4">
-  <h2>Examples</h2>
+  <h2>Result Above Examples</h2>
   <div class="mb-2">
-    <h3 id="query-url">Query URL Resolver Samples</h3>
-    <ul>
-      <li><a href="?url=https://webmanajemen.com"></a></li>
-      <li>
-        <a href="?url=https://webmanajemen.com#o=https://webmanajemen.com"></a>
-      </li>
-      <li><a href="?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t"></a></li>
-      <li>
-        <a href="?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="></a>
-      </li>
-      <li><a href="#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="></a></li>
-    </ul>
+    <b id="query-url">Query URL Resolver Samples</b>
+    <table class="table">
+      <tr>
+        <td>To Encode</td>
+        <td><a href="?url=https://webmanajemen.com"></a></td>
+      </tr>
+      <tr>
+        <td>Decode base64</td>
+        <td><a href="?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t"></a></td>
+      </tr>
+      <tr>
+        <td>Decode AES</td>
+        <td><a href="?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="></a></td>
+      </tr>
+      <tr>
+        <td>Decode AES using hash</td>
+        <td><a href="#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="></a></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button class="btn btn-sm btn-primary" onclick="location.href=location.pathname">Remove URL Queries</button>
+        </td>
+      </tr>
+    </table>
   </div>
 
   <div class="mb-2" id="external">
-    <b>External Link Samples</b>
+    <b>External Link Samples (Hover)</b>
     <div>
       <a href="http://example.com">example</a> <a href="http://google.com">google</a>
       <a href="https://facebook.com">facebook</a>
@@ -41,7 +53,7 @@
   </div>
 
   <div class="mb-2" id="internal">
-    <b>Internal Link Samples</b>
+    <b>Internal Link Samples (Hover)</b>
     <div>
       <a href="http://webmanajemen.com">Homepage</a>
       <a href="https://webmanajemen.com/p/search.html">Search</a>

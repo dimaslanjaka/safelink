@@ -17,7 +17,7 @@ export default class safelink {
     redirect: ['https://www.webmanajemen.com/page/safelink.html?url='],
     password: 'root',
     verbose: false,
-    type: 'base64',
+    type: 'base64'
   };
   constructor(opt: Partial<Options>) {
     if (typeof opt.redirect == 'string') opt.redirect = [opt.redirect];
@@ -96,7 +96,7 @@ export default class safelink {
             console.log(
               Object.assign(encryption, {
                 url: href.href,
-                isExcluded: excluded,
+                isExcluded: excluded
               })
             );
           }
@@ -114,7 +114,8 @@ export default class safelink {
     }
   }
   resolveQueryUrl(search?: string) {
-    return _resolveQueryUrl(
+    const self = this;
+    const obj = _resolveQueryUrl(
       typeof search == 'string'
         ? search
         : typeof location == 'object' && typeof location.search == 'string'
@@ -123,6 +124,18 @@ export default class safelink {
       this.options.password,
       this.options.verbose
     );
+    if (obj !== null && typeof obj === 'object') {
+      Object.keys(obj).forEach((key) => {
+        const encryptions = obj[key];
+        if (encryptions.aes.encode) {
+          encryptions.aes.encode_redirector = self.options.redirect + encryptions.aes.encode;
+        }
+        if (encryptions.base64.encode) {
+          encryptions.base64.encode_redirector = self.options.redirect + encryptions.base64.encode;
+        }
+      });
+    }
+    return obj;
   }
 }
 _global_safelink.safelink = safelink;
