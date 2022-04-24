@@ -1,6 +1,6 @@
 {
   "name": "safelinkify",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Anonymize external links to outbound page redirector",
   "main": "dist/bundle.js",
   "types": "dist/index.d.ts",
