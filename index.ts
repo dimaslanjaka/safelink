@@ -10,8 +10,6 @@ import EJSHelper from './tests/EJSHelper';
 import { dirname } from 'path';
 import gulp from 'gulp';
 import spawn from 'cross-spawn';
-import webpack from 'webpack';
-import webpackConf from './webpack.config';
 
 const tmp = (...path: string[]) => {
   const loc = join(__dirname, 'tmp', ...path);
@@ -27,7 +25,6 @@ const indicators: { [k: string]: any } = { privateScript: false };
 const PORT = parseInt(process.env.PORT || '4000');
 const baseUrl = 'http://localhost' + PORT;
 const app = browserSync.create();
-const bundler = webpack(webpackConf);
 
 app.init({
   port: PORT,
@@ -119,7 +116,7 @@ gulp.watch(
   ['src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md', '!tests', '!tmp', '!dist'],
   { cwd: __dirname },
   (done) => {
-    summon('webpack', { cwd: __dirname }, (child) => {
+    summon('webpack && gulp', { cwd: __dirname }, (child) => {
       child.on('close', () => {
         app.reload();
         done();
