@@ -1,4 +1,6 @@
-/* Browser specific (not valid) styles to make preformatted text wrap */
+* {
+  word-wrap: break-word;
+}
 
 pre {
   white-space: pre-wrap; /* css-3 */

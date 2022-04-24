@@ -3,10 +3,9 @@ required config:
 {
   page: [
     'url',         'title',
-    'description',
+    'description', 'published',
     'image',       'content',
-    'author',
-    'published',
+    'author'
   ]
 }
 ```
