@@ -7,7 +7,7 @@ import { join, resolve } from 'upath';
 /**
  * BUILD SCRIPT START
  */
-import './gulpfile.dev';
+import '.';
 /**
  * BUILD SCRIPT END
  */
@@ -16,7 +16,7 @@ import './gulpfile.dev';
  *  BELOW SCRIPT TO DEPLOY OUR GITHUB PAGES
  */
 
-gulp.task('copy', (done?: TaskCallback) => {
+gulp.task('copy', () => {
   //writeFile(join(__dirname, 'gh-pages', 'CNAME'), 'www.webmanajemen.com', () => {});
   writeFile(join(__dirname, 'gh-pages', '.nojekyll'), '', () => {});
   gulp

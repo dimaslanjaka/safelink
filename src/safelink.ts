@@ -100,6 +100,7 @@ export default class safelink {
               })
             );
           }
+
           if (!excluded) {
             const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
             const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
