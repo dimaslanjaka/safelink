@@ -1,11 +1,12 @@
 # Safelinkify
 
-![npm version](https://img.shields.io/npm/v/safelinkify?label=safelinkify&style=flat-square)
-![www.webmanajemen.com](https://img.shields.io/website?down_color=red&down_message=down&label=www.webmanajemen.com&logo=www.webmanajemen.com&style=flat-square&up_color=green&up_message=up&url=https%3A%2F%2Fwww.webmanajemen.com)
-![LICENSE](https://img.shields.io/npm/l/safelinkify?style=flat-square)
+![npm version](https://img.shields.io/npm/v/safelinkify?label=safelinkify&style=flat)
+![www.webmanajemen.com](https://img.shields.io/website?down_color=red&down_message=down&label=www.webmanajemen.com&logo=www.webmanajemen.com&style=flat&up_color=green&up_message=up&url=https%3A%2F%2Fwww.webmanajemen.com)
+![LICENSE](https://img.shields.io/npm/l/safelinkify)
+![GitHub language count](https://img.shields.io/github/languages/count/dimaslanjaka/safelink)
 [![Github Workflow](https://github.com/dimaslanjaka/safelink/actions/workflows/safelink.yml/badge.svg)](https://github.com/dimaslanjaka/safelink/actions/workflows/safelink.yml)
-[![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink?style=flat-square)](https://github.com/dimaslanjaka/safelink/network)
-[![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink?style=flat-square)](https://github.com/dimaslanjaka/safelink/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink)](https://github.com/dimaslanjaka/safelink/network)
+[![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink)](https://github.com/dimaslanjaka/safelink/stargazers)
 
 Customized safelink url redirector. Transform all hyperlinks to outbound pages. Useful for SEO external links and ADS. [FULL DOCUMENTATION](https://www.webmanajemen.com/safelink/index.html)
 
@@ -66,6 +67,8 @@ Execute functions:
   const sf = new safelink(options);
   // automated safelinkify all hyperlinks in body
   sf.parse(document.querySelector('body'));
+  // in redirector
+  sf.resolveQueryUrl(window.location.search);
 </script>
 ```
 ### NodeJS
