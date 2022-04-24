@@ -3,9 +3,9 @@ import { join } from 'upath';
 import browserSync from 'browser-sync';
 import { minify } from 'html-minifier-terser';
 import EJSHelper from './tests/EJSHelper';
-import spawn from 'cross-spawn';
 import { dirname } from 'path';
 import gulp from 'gulp';
+import spawn from 'cross-spawn';
 
 const tmp = (...path: string[]) => {
   const loc = join(__dirname, 'tmp', ...path);
@@ -104,12 +104,16 @@ app.init({
 });
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
-gulp.watch(['**/*', '!**/*.{json}'], { cwd: join(__dirname, 'tests') }, app.reload);
+gulp.watch(['**/*.{js,ejs,ts}', '!**/*.json'], { cwd: join(__dirname, 'tests') }, app.reload);
 gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, app.reload);
-gulp.watch(['./src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md'], { cwd: __dirname }, () => {
-  const child = summon('yarn build', { cwd: __dirname });
-  child.on('close', app.reload);
-});
+gulp.watch(
+  ['src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md', '!tests', '!tmp', '!dist'],
+  { cwd: __dirname },
+  () => {
+    const child = summon('yarn build', { cwd: __dirname });
+    child.on('close', app.reload);
+  }
+);
 
 /**
  * Dimas Lanjaka Private Script
@@ -139,7 +143,8 @@ function summon(cmd: string, opt: Parameters<typeof spawn>[2]) {
   const split = cmd.split(' ');
   const bin = split[0];
   split.shift();
-  const child = spawn(bin, split, Object.assign({ stdio: 'inherit' }, opt));
-  process.on('SIGINT', () => child.kill('SIGINT'));
+  const child = spawn(bin, split, Object.assign({ shell: true, stdio: 'inherit' }, opt));
+  process.on('SIGINT', () => (!child.killed ? child.kill('SIGINT') : null));
+  process.on('SIGKILL', () => (!child.killed ? child.kill('SIGKILL') : null));
   return child;
 }
