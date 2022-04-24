@@ -18,18 +18,19 @@ var safelink = /** @class */ (function () {
         var excludes = this.options.exclude;
         var value = String(url);
         var parsed = url instanceof URL ? url : toURL(value);
-        for (var i = 0; i < excludes.length; i++) {
-            var pattern = excludes[i];
-            if (typeof pattern == 'string') {
-                if (value.match(/^https?:\/\//)) {
+        // only process url with protocol
+        if (value.match(/^(?:(ht|f)tp(s?)\:\/\/)?/)) {
+            for (var i = 0; i < excludes.length; i++) {
+                var pattern = excludes[i];
+                if (typeof pattern == 'string') {
                     // only validate full url
                     if (parsed.host.includes(pattern))
                         return true;
                 }
-            }
-            else if (pattern instanceof RegExp) {
-                if (value.match(pattern))
-                    return true;
+                else if (pattern instanceof RegExp) {
+                    if (value.match(pattern))
+                        return true;
+                }
             }
         }
         return false;
@@ -40,7 +41,7 @@ var safelink = /** @class */ (function () {
         var result;
         if (typeof content === 'string') {
             var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-            var processStr_1 = function (content, href) {
+            var processStr = function (content, href) {
                 var excluded = self.isExcluded(href);
                 if (!excluded) {
                     var encryption = encryptionURL(href, self.options.password, self.options.verbose);
@@ -56,18 +57,18 @@ var safelink = /** @class */ (function () {
                 var href = m[2];
                 if (typeof href == 'string' && href.length > 0) {
                     var wholeContents = typeof result == 'string' ? result : content;
-                    var processedContent = processStr_1(wholeContents, href);
+                    var processedContent = processStr(wholeContents, href);
                     if (processedContent)
                         result = processedContent;
                 }
             }
             if (typeof result == 'string') {
-                return result.replace(regex, function (wholeContents, m1, m2) {
-                    var processedContent = processStr_1(wholeContents, m2);
-                    if (processedContent)
-                        return processedContent;
-                    return wholeContents;
-                });
+                /*return result.replace(regex, (wholeContents, m1, m2) => {
+                  const processedContent = processStr(wholeContents, m2);
+                  if (processedContent) return processedContent;
+                  return wholeContents;
+                });*/
+                return result;
             }
         }
         else if (content instanceof HTMLElement) {
