@@ -27,9 +27,11 @@ export default class safelink {
     const excludes = this.options.exclude;
     const value = String(url);
     const parsed = url instanceof URL ? url : toURL(value);
-    for (let i = 0; i < excludes.length; i++) {
-      const pattern = excludes[i];
-      if (value.match(/^https?:\/\//)) {
+    // only process url with protocol
+    if (value.match(/^(?:(ht|f)tp(s?)\:\/\/)?/)) {
+      for (let i = 0; i < excludes.length; i++) {
+        const pattern = excludes[i];
+
         if (typeof pattern == 'string') {
           // only validate full url
           if (parsed.host.includes(pattern)) return true;
