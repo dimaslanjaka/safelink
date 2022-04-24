@@ -112,28 +112,38 @@ app.init({
 });
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
-gulp.watch(['**/*.{js,ejs,ts}', '!**/*.json'], { cwd: join(__dirname, 'tests') }, app.reload);
-gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, app.reload);
-gulp.watch(
-  ['src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md', '!tests', '!tmp', '!dist'],
-  { cwd: __dirname },
-  () => {
-    /*summon('webpack && tsc', { cwd: __dirname }, (child) => {
-      child.on('close', app.reload);
-    });*/
-    const compiler = webpack(webpackConf);
-    compiler.run((err, stats) => {
-      if (!err) {
-        console.log(`[webpack][${stats.toJson().hash}] compiled successful`);
-      } else if (err || stats.hasErrors()) {
-        // [Handle errors here](https://webpack.js.org/api/node#error-handling)
-      }
-      compiler.close((closeErr) => {
-        // ...
-      });
+const compiler = webpack(
+  webpackConf.map((config) => {
+    config.watch = true;
+    config.watchOptions = {
+      aggregateTimeout: 600,
+      poll: 1000,
+      ignored: /node_modules|tmp|tests|typings/,
+      followSymlinks: true,
+    };
+    return config;
+  })
+);
+compiler.watch(
+  {
+    aggregateTimeout: 600,
+    poll: 1000,
+    ignored: /node_modules|tmp|tests|typings|dist/,
+    followSymlinks: true,
+  },
+  (err, stats) => {
+    if (!err) {
+      console.log(`[webpack][${stats.toJson().hash}] compiled successful`);
+    } else if (err || stats.hasErrors()) {
+      // [Handle errors here](https://webpack.js.org/api/node#error-handling)
+    }
+    compiler.close((_closeErr) => {
+      app.reload();
     });
   }
 );
+//gulp.watch(['**/*.{js,ejs,ts}', '!**/*.json'], { cwd: join(__dirname, 'tests') }, app.reload);
+//gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, app.reload);
 
 /**
  * Dimas Lanjaka Private Script

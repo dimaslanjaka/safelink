@@ -16,7 +16,11 @@ const _global_resolveQueryUrl = (typeof window !== 'undefined' ? window : global
  * @param passphrase aes password
  * @returns
  */
-export function resolveQueryUrl(url?: string | URL, passphrase = 'root'): Nullable<resolveQueryResult> {
+export default function resolveQueryUrl(
+  url?: string | URL,
+  passphrase = 'root',
+  debug = false
+): Nullable<resolveQueryResult> {
   const result: resolveQueryResult = {};
   let search: Nullable<string> = null;
   if (url instanceof URL) {
@@ -34,10 +38,9 @@ export function resolveQueryUrl(url?: string | URL, passphrase = 'root'): Nullab
   if (typeof parse_query_url == 'object') {
     Object.keys(parse_query_url).forEach((key) => {
       const value = parse_query_url[key];
-      result[key] = encryptionURL(value);
+      result[key] = encryptionURL(value, passphrase, debug);
     });
   }
   return result;
 }
 _global_resolveQueryUrl.resolveQueryUrl = resolveQueryUrl;
-export default resolveQueryUrl;

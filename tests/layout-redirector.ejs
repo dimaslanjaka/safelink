@@ -55,7 +55,7 @@
       sf.parse(document.querySelector('body'));
     </script>-->
     <script>
-      const resolved = resolveQueryUrl(location.search);
+      const resolved = resolveQueryUrl(location.search, 'root');
       const eldump = document.getElementById('dump');
       if (eldump) {
         eldump.innerHTML += 'YOU CAN REMOVE THIS DUMP ELEMENT<br/>';

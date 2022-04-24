@@ -9,5 +9,5 @@ interface resolveQueryResult {
  * @param passphrase aes password
  * @returns
  */
-export declare function resolveQueryUrl(url?: string | URL, passphrase?: string): Nullable<resolveQueryResult>;
-export default resolveQueryUrl;
+export default function resolveQueryUrl(url?: string | URL, passphrase?: string, debug?: boolean): Nullable<resolveQueryResult>;
+export {};

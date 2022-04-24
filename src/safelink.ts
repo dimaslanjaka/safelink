@@ -1,5 +1,5 @@
 import encryptionURL from './encryptionURL';
-import { Nullable } from './resolveQueryUrl';
+import resolveQueryUrl, { Nullable } from './resolveQueryUrl';
 import toURL from './toURL';
 
 const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
@@ -112,6 +112,17 @@ export default class safelink {
         result = content.outerHTML;
       }
     }
+  }
+  resolveQueryUrl(search?: string) {
+    resolveQueryUrl(
+      typeof search == 'string'
+        ? search
+        : typeof location == 'object' && typeof location.search == 'string'
+        ? location.search
+        : null,
+      this.options.password,
+      this.options.verbose
+    );
   }
 }
 _global_safelink.safelink = safelink;
