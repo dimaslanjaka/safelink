@@ -24,20 +24,18 @@
     <link rel="stylesheet" href="/safelink/node_modules/bootstrap/dist/css/bootstrap.min.css" />
   </head>
   <body>
+    <nav class="navbar navbar-light bg-light mb-4">
+      <div class="container-fluid">
+        <a class="navbar-brand"><%- page.title.substring(0,10) %></a>
+        <form class="d-flex" action="https://www.webmanajemen.com/p/search.html">
+          <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
     <main class="container-fluid">
       <div class="row">
-        <div class="col-12 mb-2">
-          <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
-              <a class="navbar-brand"><%- page.title.substring(0,10) %></a>
-              <form class="d-flex" action="https://www.webmanajemen.com/p/search.html">
-                <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-            </div>
-          </nav>
-        </div>
-        <div class="col-12"><%- page.content %></div>
+        <div class="col-12" id="main-contents"><%- page.content %></div>
       </div>
     </main>
     <script src="/safelink/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

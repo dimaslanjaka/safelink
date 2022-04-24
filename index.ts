@@ -4,6 +4,14 @@ import browserSync from 'browser-sync';
 import { minify } from 'html-minifier-terser';
 import EJSHelper from './tests/EJSHelper';
 import spawn from 'cross-spawn';
+import { dirname } from 'path';
+import gulp from 'gulp';
+
+const tmp = (...path: string[]) => {
+  const loc = join(__dirname, 'tmp', ...path);
+  if (!existsSync(dirname(loc))) mkdirSync(dirname(loc), { recursive: true });
+  return loc;
+};
 
 /** Deployer for https://www.webmanajemen.com/safelink */
 const deploy_dir = join(__dirname, 'gh-pages');
@@ -16,13 +24,7 @@ const app = browserSync.create();
 app.init({
   port: PORT,
   open: false,
-  ignore: ['**/node_modules/**', '**/.idea/**', '**/.git*'],
-  watchOptions: {
-    ignoreInitial: true,
-    ignored: '*.txt',
-  },
-  reloadDelay: 3000,
-  files: [join(__dirname, 'tests/**/*.{ts,js,ejs}'), join(__dirname, 'dist/**/*.js')],
+  cors: true,
   server: {
     baseDir: './',
     routes: {
@@ -75,7 +77,16 @@ app.init({
       },
       {
         route: '/safelinkify/api',
-        handle: (req, res, next) => {},
+        handle: (req, res, next) => {
+          let data = '';
+          req.on('data', function (chunk) {
+            data = chunk.toString();
+            writeFileSync(join(tmp('data.json')), data);
+          });
+          res.setHeader('content-type', 'application/json');
+          res.end(JSON.stringify({ message: 'html received' }));
+          next();
+        },
       },
       (req, res, next) => {
         const url = new URL(baseUrl + req.url);
@@ -92,17 +103,41 @@ app.init({
   },
 });
 
+// since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
+gulp.watch(['**/*', '!**/*.{txt,json,html}'], { cwd: join(__dirname, 'tests') }, () => app.reload());
+gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, () => app.reload());
+gulp.watch(['./src/*.ts', './webpack.*.js', './tsconfig.json', './package.json'], { cwd: __dirname }, () =>
+  summon('yarn build', { cwd: __dirname })
+);
+
+/**
+ * Dimas Lanjaka Private Script
+ */
 function runPrivateScript() {
   const privateScript = join(__dirname, 'tests/article-generator/index.ts');
   //console.log(existsSync(privateScript), indicators.privateScript);
   if (existsSync(privateScript)) {
     if (!indicators.privateScript) {
       indicators.privateScript = true;
-      const summon = spawn('ts-node', [privateScript], { cwd: __dirname, stdio: 'inherit' });
-      summon.on('close', () => {
+      const child = summon('ts-node ' + privateScript, { cwd: __dirname, stdio: 'inherit' });
+      child.on('close', () => {
         indicators.privateScript = false;
       });
-      process.on('SIGINT', () => summon.kill('SIGINT'));
     }
   }
+}
+
+/**
+ * Smart Summoner
+ * @param cmd
+ * @param opt
+ * @returns
+ */
+function summon(cmd: string, opt: Parameters<typeof spawn>[2]) {
+  const split = cmd.split(' ');
+  const bin = split[0];
+  split.shift();
+  const child = spawn(bin, split, Object.assign({ stdio: 'inherit' }, opt));
+  process.on('SIGINT', () => child.kill('SIGINT'));
+  return child;
 }

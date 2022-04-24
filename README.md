@@ -22,8 +22,8 @@ npm install
 
 | command      | description                       |
 | ------------ | --------------------------------- |
-| `nodemon`    | watch src and compile tsc webpack |
 | `yarn start` | watch tests and start server      |
+| ^ | watch src and compile tsc webpack |
 | `tsc`        | build definition files            |
 | `webpack`    | build safelink script             |
 
