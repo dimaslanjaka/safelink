@@ -61,13 +61,14 @@ var safelink = /** @class */ (function () {
                         result = processedContent;
                 }
             }
-            if (typeof result == 'string')
+            if (typeof result == 'string') {
                 return result.replace(regex, function (wholeContents, m1, m2) {
                     var processedContent = processStr_1(wholeContents, m2);
                     if (processedContent)
                         return processedContent;
                     return wholeContents;
                 });
+            }
         }
         else if (content instanceof HTMLElement) {
             var tagname = content.tagName.toLowerCase();

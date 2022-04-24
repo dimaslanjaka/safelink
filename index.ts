@@ -81,6 +81,7 @@ app.init({
           let data = '';
           req.on('data', function (chunk) {
             data = chunk.toString();
+            const json = JSON.parse(data);
             writeFileSync(join(tmp('data.json')), data);
           });
           res.setHeader('content-type', 'application/json');

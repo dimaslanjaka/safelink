@@ -29,13 +29,13 @@ export default class safelink {
     const parsed = url instanceof URL ? url : toURL(value);
     for (let i = 0; i < excludes.length; i++) {
       const pattern = excludes[i];
-      if (typeof pattern == 'string') {
-        if (value.match(/^https?:\/\//)) {
+      if (value.match(/^https?:\/\//)) {
+        if (typeof pattern == 'string') {
           // only validate full url
           if (parsed.host.includes(pattern)) return true;
+        } else if (pattern instanceof RegExp) {
+          if (value.match(pattern)) return true;
         }
-      } else if (pattern instanceof RegExp) {
-        if (value.match(pattern)) return true;
       }
     }
     return false;
@@ -68,12 +68,14 @@ export default class safelink {
         }
       }
 
-      if (typeof result == 'string')
-        return result.replace(regex, (wholeContents, m1, m2) => {
+      if (typeof result == 'string') {
+        /*return result.replace(regex, (wholeContents, m1, m2) => {
           const processedContent = processStr(wholeContents, m2);
           if (processedContent) return processedContent;
           return wholeContents;
-        });
+        });*/
+        return result;
+      }
     } else if (content instanceof HTMLElement) {
       const tagname = content.tagName.toLowerCase();
       if (tagname != 'a') {
