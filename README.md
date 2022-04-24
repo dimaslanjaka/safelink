@@ -67,7 +67,7 @@ Execute functions:
   const sf = new safelink(options);
   // automated safelinkify all hyperlinks in body
   sf.parse(document.querySelector('body'));
-  // in redirector
+  // in page redirector
   sf.resolveQueryUrl(window.location.search);
 </script>
 ```
