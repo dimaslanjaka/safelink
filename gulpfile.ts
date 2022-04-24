@@ -18,7 +18,7 @@ gulp.task('copy', () => {
   return gulp.src(join(__dirname, '{package.json,README.md}')).pipe(gulp.dest(join(__dirname, 'gh-pages')));
 });
 
-const deployDir = resolve(join(__dirname, 'gh-pages'));
+const deployDir = join(__dirname, 'gh-pages');
 
 function git(...args: string[]) {
   return new Promise(
