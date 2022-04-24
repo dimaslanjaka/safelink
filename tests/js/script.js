@@ -39,12 +39,10 @@
     const currentQuery = JSON.stringify(instance.resolveQueryUrl(location.search), null, 2);
     table.innerHTML += `<tr id="current-queries"><td>Redirector Resolver Using <code>sf.resolveQueryUrl(location.search)</code> <a href="#query-url">Change</a></td><td><pre><code class="language-json">${currentQuery}</code></pre></td></tr>`;
 
-    setTimeout(() => {
-      const param = new URLSearchParams(location.search);
-      if (param.has('o') || param.has('url') || location.href.match(/#(o|url)=/)) {
-        document.getElementById('current-queries').scrollIntoView();
-      }
-    }, 1000);
+    const param = new URLSearchParams(location.search);
+    if (param.has('o') || param.has('url') || location.href.match(/#(o|url)=/)) {
+      document.getElementById('current-queries').scrollIntoView();
+    }
   }
 
   Array.from(document.links).forEach((el) => {
