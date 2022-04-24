@@ -104,9 +104,9 @@ app.init({
 });
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
-gulp.watch(['**/*', '!**/*.{txt,json,html}'], { cwd: join(__dirname, 'tests') }, () => app.reload());
+gulp.watch(['**/*', '!**/*.{json}'], { cwd: join(__dirname, 'tests') }, () => app.reload());
 gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, () => app.reload());
-gulp.watch(['./src/*.ts', './webpack.*.js', './tsconfig.json', './package.json'], { cwd: __dirname }, () =>
+gulp.watch(['./src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md'], { cwd: __dirname }, () =>
   summon('yarn build', { cwd: __dirname })
 );
 
@@ -134,6 +134,7 @@ function runPrivateScript() {
  * @returns
  */
 function summon(cmd: string, opt: Parameters<typeof spawn>[2]) {
+  console.log(cmd);
   const split = cmd.split(' ');
   const bin = split[0];
   split.shift();
