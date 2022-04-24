@@ -31,8 +31,8 @@ npm install
 Setup options:
 ```js
 const options = {
-  // example patterns
-  exclude: ['domain.com', /another.domain.com/, /https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/],
+  // exclude patterns (dont anonymize these patterns)
+  exclude: ['domain.com', /another.domain.com/, /https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/, /([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
   // url redirector
   redirect: 'http://domain.com/page/redirect.html?url=',
   // debug
@@ -68,5 +68,5 @@ Execute functions:
 import safelinkify from 'safelinkify';
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse('<a href="http://external.domain.com>external</a>');
-console.log(processedExternalLinks);
+console.log(processedExternalLinks); // <a href="http://domain.com/page/redirect.html?url=ENCRYPTED_URL">external</a>
 ```
