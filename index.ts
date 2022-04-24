@@ -133,6 +133,7 @@ function runPrivateScript() {
   }
 }
 
+let child: ReturnType<typeof spawn>;
 /**
  * Smart Summoner
  * @param cmd
@@ -144,8 +145,9 @@ function summon(cmd: string, opt: Parameters<typeof spawn>[2]) {
   const split = cmd.split(' ');
   const bin = split[0];
   split.shift();
-  const child = spawn(bin, split, Object.assign({ shell: true, stdio: 'inherit' }, opt));
-  process.on('SIGINT', () => (!child.killed ? child.kill('SIGINT') : null));
-  process.on('SIGKILL', () => (!child.killed ? child.kill('SIGKILL') : null));
+  child = spawn(bin, split, Object.assign({ shell: true, stdio: 'inherit' }, opt));
+
   return child;
 }
+process.on('SIGINT', () => (!child.killed ? child.kill('SIGINT') : null));
+process.on('SIGKILL', () => (!child.killed ? child.kill('SIGKILL') : null));
