@@ -1,13 +1,20 @@
-/**
- *  THIS IS SCRIPT TO DEPLOY GITHUB PAGES, NOT REQUIRED ON BUILD SCRIPT.
- */
-
 import spawn from 'cross-spawn';
 import { existsSync, mkdirSync, writeFile } from 'fs';
 import * as gulp from 'gulp';
 import moment from 'moment-timezone';
 import { TaskCallback } from 'undertaker';
 import { join, resolve } from 'upath';
+/**
+ * BUILD SCRIPT START
+ */
+import './gulpfile.dev';
+/**
+ * BUILD SCRIPT END
+ */
+
+/**
+ *  BELOW SCRIPT TO DEPLOY OUR GITHUB PAGES
+ */
 
 gulp.task('copy', (done?: TaskCallback) => {
   //writeFile(join(__dirname, 'gh-pages', 'CNAME'), 'www.webmanajemen.com', () => {});

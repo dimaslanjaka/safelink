@@ -10,7 +10,7 @@
     "package.json"
   ],
   "scripts": {
-    "start": "ts-node index.ts",
+    "start": "gulp dev",
     "build": "tsc && webpack && gulp",
     "dev": "nodemon",
     "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile"
