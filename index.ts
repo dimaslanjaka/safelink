@@ -84,11 +84,15 @@ app.init({
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
 gulp.watch(['**/*.{js,ejs,ts}'], { cwd: join(__dirname, 'tests') }, app.reload);
 gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, app.reload);
+let summoner: ReturnType<typeof summon>;
 gulp.watch(
   ['src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md', '!tests', '!tmp', '!dist'],
   { cwd: __dirname },
   (done) => {
-    summon('webpack && gulp', { cwd: __dirname }, (child) => {
+    if (summoner) {
+      if (!summoner.killed) summoner.kill();
+    }
+    summoner = summon('webpack && gulp', { cwd: __dirname }, (child) => {
       child.on('close', () => {
         app.reload();
         done();
