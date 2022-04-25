@@ -9,9 +9,7 @@ export default function toURL(url: string): Nullable<URL> {
   try {
     if (url.startsWith('/') || url.startsWith('?')) {
       // url is pathname or query
-      return new URL(
-        'http://not-actually-domain.com/' + url.replace(/^\/+/, '')
-      );
+      return new URL('http://not-actually-domain.com/' + url.replace(/^\/+/, ''));
     } else if (url.match(/^https?:\/\//)) {
       // test full url with protocol://
       return new URL(url);

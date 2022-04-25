@@ -2,7 +2,7 @@ import encryptionURL, { encryptionURLResult } from './encryptionURL';
 import { parseQuery } from './parseQuery';
 import toURL from './toURL';
 
-export type Nullable<T> = T | null;
+export type Nullable<T> = T | null | undefined;
 export interface resolveQueryResult {
   [key: string]: encryptionURLResult;
 }
@@ -18,19 +18,25 @@ const _global_resolveQueryUrl = (typeof window !== 'undefined' ? window : global
  */
 export default function resolveQueryUrl(url?: string | URL, passphrase = 'root', debug = false) {
   const result: Nullable<Partial<resolveQueryResult>> = {};
-  let search: Nullable<string> = null;
+  let href: Nullable<string> = null;
   if (url instanceof URL) {
-    search = url.search;
+    href = url.href;
   } else if (typeof url == 'string') {
-    const parse = toURL(url);
-    if (parse != null) search = parse.search;
-  } else if (typeof location == 'object' && typeof location.search == 'string') {
-    search = location.search;
+    if (url.match(/^(#|\?)/)) {
+      href = 'http://not.actually.domain/' + url;
+    } else {
+      const parse = toURL(url);
+      if (parse !== null) href = parse.href;
+    }
+  } else if (typeof location == 'object' && typeof location.href == 'string') {
+    href = location.href;
   }
 
-  if (!search) return null;
+  console.log('resolveQueryUrl', href);
 
-  const parse_query_url = parseQuery(null, search);
+  if (!href) return null;
+
+  const parse_query_url = parseQuery(null, href);
   if (typeof parse_query_url == 'object') {
     Object.keys(parse_query_url).forEach((key) => {
       const value = parse_query_url[key];

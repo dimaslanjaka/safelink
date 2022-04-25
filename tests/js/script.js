@@ -36,8 +36,8 @@
     instance.parse(document.querySelector('div#external'));
     instance.parse(document.querySelector('div#internal'));
 
-    const currentQuery = JSON.stringify(instance.resolveQueryUrl(location.search), null, 2);
-    table.innerHTML += `<tr id="current-queries"><td>Redirector Resolver Using <code>sf.resolveQueryUrl(location.search)</code> <a href="#query-url">Change</a></td><td><pre><code class="language-json">${currentQuery}</code></pre></td></tr>`;
+    const currentQuery = JSON.stringify(instance.resolveQueryUrl(location.href), null, 2);
+    table.innerHTML += `<tr id="current-queries"><td>Redirector Resolver Using <code>sf.resolveQueryUrl(location.href)</code> <a href="#query-url">Change</a></td><td><pre><code class="language-json">${currentQuery}</code></pre></td></tr>`;
 
     const param = new URLSearchParams(location.search);
     if (param.has('o') || param.has('url') || location.href.match(/#(o|url)=/)) {

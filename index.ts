@@ -23,7 +23,7 @@ app.emitter.on('service:running', function (data) {
 });
 app.init({
   port: PORT,
-  open: false,
+  open: 'tunnel',
   cors: true,
   tunnel: true,
   server: {

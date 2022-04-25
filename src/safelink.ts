@@ -28,7 +28,7 @@ export default class safelink {
     const value = String(url);
     const parsed = url instanceof URL ? url : toURL(value);
     // only process url with protocol
-    if (value.match(/^(?:(ht|f)tp(s?)\:\/\/)?/)) {
+    if (value.match(/^(?:(ht|f)tp(s?):\/\/)?/)) {
       for (let i = 0; i < excludes.length; i++) {
         const pattern = excludes[i];
 
@@ -64,9 +64,11 @@ export default class safelink {
         const m = matches[i];
         const href = m[2];
         if (typeof href == 'string' && href.length > 0) {
-          let wholeContents = typeof result == 'string' ? result : content;
-          const processedContent = processStr(wholeContents, href);
-          if (processedContent) result = processedContent;
+          const wholeContents = typeof result == 'string' ? result : content;
+          if (typeof wholeContents === 'string') {
+            const processedContent = processStr(wholeContents, href);
+            if (processedContent) result = processedContent;
+          }
         }
       }
 
