@@ -32,8 +32,6 @@ export default function resolveQueryUrl(url?: string | URL, passphrase = 'root',
     href = location.href;
   }
 
-  console.log('resolveQueryUrl', href);
-
   if (!href) return null;
 
   const parse_query_url = parseQuery(null, href);
