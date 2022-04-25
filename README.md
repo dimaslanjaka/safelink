@@ -8,7 +8,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink)](https://github.com/dimaslanjaka/safelink/network)
 [![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink)](https://github.com/dimaslanjaka/safelink/stargazers)
 
-Customized safelink url redirector. Transform all hyperlinks to outbound pages. Useful for SEO external links and ADS. [FULL DOCUMENTATION](https://www.webmanajemen.com/safelink/index.html)
+Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS. [FULL DOCUMENTATION](https://www.webmanajemen.com/safelink/index.html)
 
 ## Installation
 
