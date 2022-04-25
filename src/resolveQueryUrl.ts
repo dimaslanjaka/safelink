@@ -32,7 +32,7 @@ export default function resolveQueryUrl(url?: string | URL, passphrase = 'root',
     href = location.href;
   }
 
-  if (!href) return null;
+  if (!href || !href.match(/#|\?/)) return null;
 
   const parse_query_url = parseQuery(null, href);
   if (typeof parse_query_url == 'object') {
