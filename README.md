@@ -11,11 +11,11 @@
 Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS. [FULL DOCUMENTATION](https://www.webmanajemen.com/safelink/index.html)
 
 ## Installation
-
+npm [https://www.npmjs.com/package/safelinkify](https://www.npmjs.com/package/safelinkify)
 ```bash
-npm install --production
+npm install safelinkify --production
 # or
-yarn install --production=true
+yarn install safelinkify --production=true
 ```
 
 ## Development
