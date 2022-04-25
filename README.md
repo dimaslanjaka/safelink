@@ -76,5 +76,5 @@ Execute functions:
 import safelinkify from 'safelinkify'; // const safelinkify = require('safelinkify')
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse('<a href="http://external.domain.com>external</a>');
-console.log(processedExternalLinks); // <a href="http://webmanajemen.com/page/safelink.html?url=ENCRYPTED_URL">external</a>
+console.log(processedExternalLinks); // <a href="http://your.domain.com/page/redirect.html?url=ENCRYPTED_URL">external</a>
 ```
