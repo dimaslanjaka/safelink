@@ -16,6 +16,9 @@ export default class EJSHelper {
   constructor(options: Helpers) {
     this.options = options;
   }
+  setRoot(path: string) {
+    this.options.root = path;
+  }
   htmltag(tagname: 'script' | 'style' | string, path: string) {
     let result = '';
     const root = dirname(this.options.root);
@@ -51,8 +54,9 @@ export default class EJSHelper {
     }
     return '';
   }
+
   /**
-   * add option
+   * add option/data
    * @param key object key
    * @param value object value
    * @returns

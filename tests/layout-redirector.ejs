@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/safelink/node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <%- htmltag('style','css/style.css') %>
   </head>
+
   <body>
     <nav class="navbar navbar-light bg-light mb-4">
       <div class="container-fluid">
@@ -50,7 +51,7 @@
         redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
         verbose: false,
         type: 'base64',
-        password: 'root',
+        password: 'root'
       });
       //sf.parse(document.querySelector('body'));
       const resolved = sf.resolveQueryUrl(location.search, 'root');

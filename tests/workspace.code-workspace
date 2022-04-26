@@ -1,0 +1,47 @@
+{
+	"extensions": {
+		"recommendations": [
+			"dbaeumer.vscode-eslint"
+		]
+	},
+	"folders": [
+		{
+			"path": "article-generator"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"git.enabled": false,
+		"[html]": {
+			"editor.suggest.insertMode": "replace",
+			"editor.formatOnSave": false
+		},
+		"[ejs]": {
+			"editor.suggest.insertMode": "replace",
+			"editor.formatOnSave": false
+		},
+		"eslint.validate": [
+			"typescript"
+		],
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": true // let ESLint take formating and linting
+		},
+		"files.autoSave": "onWindowChange",
+		"editor.tabSize": 2,
+		"editor.wordWrap": "on",
+		"files.exclude": {
+			"**/node_modules": true
+		},
+		"files.associations": {
+			"*.ejs": "html"
+		},
+		"editor.bracketPairColorization.enabled": true,
+		"editor.guides.bracketPairs": true,
+		"files.eol": "\n",
+		"eslint.format.enable": true,
+		"eslint.lintTask.enable": true,
+		"eslint.packageManager": "yarn"
+	}
+}
