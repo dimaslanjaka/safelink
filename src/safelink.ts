@@ -8,7 +8,7 @@ interface Options {
   redirect?: string[];
   password: string;
   verbose?: boolean;
-  type: 'base64' | 'aes';
+  type: string | 'base64' | 'aes';
 }
 
 export default class safelink {
