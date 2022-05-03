@@ -1,0 +1,8 @@
+{
+  "version": 2,
+  "projects": {
+    "collections": "packages/collections",
+    "lodash": "packages/lodash",
+    "gulp-jsdom": "packages/gulp-jsdom"
+  }
+}

@@ -1,0 +1,4 @@
+[submodule "lazyload.js"]
+	path = lazyload.js
+	url = https://github.com/dimaslanjaka/js-prototypes
+	branch = lazyload
