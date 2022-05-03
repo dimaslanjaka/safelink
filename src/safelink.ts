@@ -42,6 +42,11 @@ export default class safelink {
     }
     return false;
   }
+  /**
+   * parse html string or element to anonymize urls
+   * @param str
+   * @returns
+   */
   parse(str: Nullable<string> | HTMLElement) {
     const self = this;
     const content = str;
@@ -115,14 +120,31 @@ export default class safelink {
       }
     }
   }
+  /**
+   * anonymize url directly
+   * @param href
+   */
+  encodeURL(href: string) {
+    const self = this;
+    const encryption = encryptionURL(href, self.options.password, self.options.verbose);
+    const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+    const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+    const newhref = randRedir + enc;
+    return newhref;
+  }
+  /**
+   * Resolve query url to decrypt anonymized urls (page redirector)
+   * @param search
+   * @returns
+   */
   resolveQueryUrl(search?: string) {
     const self = this;
     const obj = _resolveQueryUrl(
       typeof search == 'string'
         ? search
         : typeof location == 'object' && typeof location.search == 'string'
-        ? location.search
-        : null,
+          ? location.search
+          : null,
       this.options.password,
       this.options.verbose
     );
