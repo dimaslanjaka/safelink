@@ -19,8 +19,10 @@ yarn install safelinkify --production=true
 ```
 
 ## Development
-
 ```bash
+git clone --single-branch --branch main https://github.com/dimaslanjaka/safelink foldername
+cd foldername
+# install dependents
 yarn install
 # or
 npm install
