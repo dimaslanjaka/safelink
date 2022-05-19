@@ -75,10 +75,10 @@ app.init({
             helpers.add('title', title);
             let renderLayout = await helpers.renderFile(join(view, 'layout.ejs'));
 
+            writeFileSync(join(__dirname, 'src/test/index.html'), renderLayout);
+
             /** Safelinkify */
             renderLayout = safelinkInstance.parse(renderLayout);
-
-            writeFileSync(join(__dirname, 'src/test/index.html'), renderLayout);
 
             let result = '';
             try {
