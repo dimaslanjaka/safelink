@@ -2,13 +2,13 @@
  * [DEV] SCRIPT COMPILER
  */
 
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
-import { join } from 'upath';
 import browserSync from 'browser-sync';
-import { minify } from 'html-minifier-terser';
-import EJSHelper from './tests/EJSHelper';
-import gulp from 'gulp';
 import spawn from 'cross-spawn';
+import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import gulp from 'gulp';
+import { minify } from 'html-minifier-terser';
+import { join } from 'upath';
+import EJSHelper from './tests/EJSHelper';
 
 /** Deployer for https://www.webmanajemen.com/safelink */
 const deploy_dir = join(__dirname, 'gh-pages');
@@ -121,4 +121,4 @@ function summon(cmd: string, opt: Parameters<typeof spawn>[2], callback?: (child
   return child;
 }
 process.on('SIGINT', () => (child !== null && !child.killed ? child.kill('SIGINT') : null));
-process.on('SIGKILL', () => (child !== null && !child.killed ? child.kill('SIGKILL') : null));
+//process.on('SIGKILL', () => (child !== null && !child.killed ? child.kill('SIGKILL') : null));
