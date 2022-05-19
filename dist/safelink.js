@@ -44,7 +44,7 @@ var safelink = /** @class */ (function () {
     safelink.prototype.parse = function (str) {
         var self = this;
         var content = str;
-        var result;
+        var result = null;
         if (typeof content === 'string' && content.trim().length > 0) {
             var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
             var processStr = function (content, href) {
@@ -57,22 +57,21 @@ var safelink = /** @class */ (function () {
                     return content.replace(href, newhref);
                 }
             };
-            var matches = Array.from(content.matchAll(regex));
-            //console.log(matches);
+            var matches = Array.from(content.matchAll(regex)).filter(function (m) { return m[2].trim().match(/^https?:\/\//); });
             for (var i = 0; i < matches.length; i++) {
                 var m = matches[i];
-                var href = m[2];
-                if (typeof href == 'string' && href.trim().length > 0 && href.trim().match(/^https?:\/\//)) {
+                var href = m[2].trim();
+                var allMatch = m[0];
+                if (typeof href == 'string' && href) {
                     var wholeContents = typeof result == 'string' ? result : content;
                     if (typeof wholeContents === 'string') {
-                        var processedContent = processStr(wholeContents, href);
-                        if (processedContent)
+                        var processedHyperlink = processStr(allMatch, href);
+                        if (processedHyperlink) {
+                            var processedContent = wholeContents.replace(allMatch, processedHyperlink);
                             result = processedContent;
+                        }
                     }
                 }
-            }
-            if (typeof result == 'string') {
-                return result;
             }
         }
         else if (content instanceof HTMLElement) {
@@ -107,6 +106,7 @@ var safelink = /** @class */ (function () {
                 result = content.outerHTML;
             }
         }
+        return result;
     };
     /**
      * anonymize url directly
