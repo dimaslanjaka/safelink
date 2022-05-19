@@ -62,7 +62,7 @@ var safelink = /** @class */ (function () {
             for (var i = 0; i < matches.length; i++) {
                 var m = matches[i];
                 var href = m[2];
-                if (typeof href == 'string' && href.length > 0) {
+                if (typeof href == 'string' && href.trim().length > 0 && href.trim().match(/^https?:\/\//)) {
                     var wholeContents = typeof result == 'string' ? result : content;
                     if (typeof wholeContents === 'string') {
                         var processedContent = processStr_1(wholeContents, href);
