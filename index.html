@@ -34,7 +34,7 @@ npm install
   // in page redirector
   sf.resolveQueryUrl(window.location.href);
 &lt;/script&gt;
-</code></pre><h3 id="nodejs" tabindex="-1"><a class="header-anchor" href="#nodejs">NodeJS</a></h3><pre><code class="language-ts">import safelinkify from 'safelinkify'; // const safelinkify = require('safelinkify')
+</code></pre><h3 id="nodejs" tabindex="-1"><a class="header-anchor" href="#nodejs">NodeJS</a></h3><p><a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYS9zYWZlbGluay9ibG9iL21haW4vc3JjL2luZGV4LnRlc3QudHM=">full sample here</a></p><pre><code class="language-ts">import safelinkify from 'safelinkify'; // const safelinkify = require('safelinkify')
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse(`
 &lt;a href=&quot;www.example.com/page.php?id=xxxx&amp;name=yyyy&quot; ....&gt;&lt;/a&gt;
