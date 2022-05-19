@@ -32,7 +32,7 @@ export default class safelink {
       for (let i = 0; i < excludes.length; i++) {
         const pattern = excludes[i];
 
-        if (typeof pattern == 'string') {
+        if (typeof pattern == 'string' && typeof parsed === 'object') {
           // only validate full url
           if (parsed.host.includes(pattern)) return true;
         } else if (pattern instanceof RegExp) {
@@ -42,6 +42,7 @@ export default class safelink {
     }
     return false;
   }
+
   /**
    * parse html string or element to anonymize urls
    * @param str
@@ -65,6 +66,7 @@ export default class safelink {
         }
       };
       const matches = Array.from(content.matchAll(regex));
+      //console.log(matches);
       for (let i = 0; i < matches.length; i++) {
         const m = matches[i];
         const href = m[2];
@@ -78,11 +80,12 @@ export default class safelink {
       }
 
       if (typeof result == 'string') {
-        /*return result.replace(regex, (wholeContents, m1, m2) => {
+        const retest = result.replace(regex, (wholeContents, m1, m2) => {
           const processedContent = processStr(wholeContents, m2);
           if (processedContent) return processedContent;
           return wholeContents;
-        });*/
+        });
+        if (retest !== result) return retest;
         return result;
       }
     } else if (content instanceof HTMLElement) {

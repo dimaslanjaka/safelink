@@ -23,7 +23,7 @@ var safelink = /** @class */ (function () {
         if (value.match(/^(?:(ht|f)tp(s?):\/\/)?/)) {
             for (var i = 0; i < excludes.length; i++) {
                 var pattern = excludes[i];
-                if (typeof pattern == 'string') {
+                if (typeof pattern == 'string' && typeof parsed === 'object') {
                     // only validate full url
                     if (parsed.host.includes(pattern))
                         return true;
@@ -47,7 +47,7 @@ var safelink = /** @class */ (function () {
         var result;
         if (typeof content === 'string') {
             var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-            var processStr = function (content, href) {
+            var processStr_1 = function (content, href) {
                 var excluded = self.isExcluded(href);
                 if (!excluded) {
                     var encryption = encryptionURL(href, self.options.password, self.options.verbose);
@@ -58,24 +58,28 @@ var safelink = /** @class */ (function () {
                 }
             };
             var matches = Array.from(content.matchAll(regex));
+            //console.log(matches);
             for (var i = 0; i < matches.length; i++) {
                 var m = matches[i];
                 var href = m[2];
                 if (typeof href == 'string' && href.length > 0) {
                     var wholeContents = typeof result == 'string' ? result : content;
                     if (typeof wholeContents === 'string') {
-                        var processedContent = processStr(wholeContents, href);
+                        var processedContent = processStr_1(wholeContents, href);
                         if (processedContent)
                             result = processedContent;
                     }
                 }
             }
             if (typeof result == 'string') {
-                /*return result.replace(regex, (wholeContents, m1, m2) => {
-                  const processedContent = processStr(wholeContents, m2);
-                  if (processedContent) return processedContent;
-                  return wholeContents;
-                });*/
+                var retest = result.replace(regex, function (wholeContents, m1, m2) {
+                    var processedContent = processStr_1(wholeContents, m2);
+                    if (processedContent)
+                        return processedContent;
+                    return wholeContents;
+                });
+                if (retest !== result)
+                    return retest;
                 return result;
             }
         }
