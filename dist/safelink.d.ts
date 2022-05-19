@@ -15,7 +15,7 @@ export default class safelink {
      * @param str
      * @returns
      */
-    parse(str: Nullable<string> | HTMLElement): string;
+    parse(str: Nullable<string> | HTMLElement): Nullable<string>;
     /**
      * anonymize url directly
      * @param href

@@ -28,3 +28,6 @@
 
 **1.1.1**
 - fix process on nodejs read from file
+
+**1.1.2**
+- fix same link when included as other element (non-hyperlink)

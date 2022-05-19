@@ -48,10 +48,10 @@ export default class safelink {
    * @param str
    * @returns
    */
-  parse(str: Nullable<string> | HTMLElement) {
+  parse(str: Nullable<string> | HTMLElement): Nullable<string> {
     const self = this;
     const content = str;
-    let result: string;
+    let result: string = null;
     if (typeof content === 'string' && content.trim().length > 0) {
       const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
       const processStr = (content: string, href: string) => {
@@ -65,22 +65,23 @@ export default class safelink {
           return content.replace(href, newhref);
         }
       };
-      const matches = Array.from(content.matchAll(regex));
-      //console.log(matches);
+
+      const matches = Array.from(content.matchAll(regex)).filter((m) => m[2].trim().match(/^https?:\/\//));
       for (let i = 0; i < matches.length; i++) {
         const m = matches[i];
-        const href = m[2];
-        if (typeof href == 'string' && href.trim().length > 0 && href.trim().match(/^https?:\/\//)) {
+        const href = m[2].trim();
+        const allMatch = m[0];
+
+        if (typeof href == 'string' && href) {
           const wholeContents = typeof result == 'string' ? result : content;
           if (typeof wholeContents === 'string') {
-            const processedContent = processStr(wholeContents, href);
-            if (processedContent) result = processedContent;
+            const processedHyperlink = processStr(allMatch, href);
+            if (processedHyperlink) {
+              const processedContent = wholeContents.replace(allMatch, processedHyperlink);
+              result = processedContent;
+            }
           }
         }
-      }
-
-      if (typeof result == 'string') {
-        return result;
       }
     } else if (content instanceof HTMLElement) {
       const tagname = content.tagName.toLowerCase();
@@ -116,7 +117,9 @@ export default class safelink {
         result = content.outerHTML;
       }
     }
+    return result;
   }
+
   /**
    * anonymize url directly
    * @param href
