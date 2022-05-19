@@ -1,4 +1,5 @@
-import sf from '.';
+import safelinkify from '.';
+console.clear();
 var options = {
     // exclude patterns (dont anonymize these patterns)
     exclude: [
@@ -16,4 +17,6 @@ var options = {
     // password aes, default = root
     password: 'unique-password'
 };
-var safelink = new sf.safelink(options);
+var sf = new safelinkify.safelink(options);
+var processedExternalLinks = sf.parse("\n<a href=\"www.example.com/page.php?id=xxxx&name=yyyy\" ....></a>\n<a href=\"http://www.example.com/page.php?id=xxxx&name=yyyy\" ....></a>\n<a href=\"https://www.example.com/page.php?id=xxxx&name=yyyy\" ....></a>\n<a href=\"www.example.com/page.php/404\" ....></a>\n<a href=\"http://external.domain.com>external</a>\n");
+//console.log(processedExternalLinks);
