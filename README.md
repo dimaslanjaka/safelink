@@ -4,14 +4,16 @@
 ![www.webmanajemen.com](https://img.shields.io/website?down_color=red&down_message=down&label=www.webmanajemen.com&logo=www.webmanajemen.com&style=flat&up_color=green&up_message=up&url=https%3A%2F%2Fwww.webmanajemen.com)
 ![LICENSE](https://img.shields.io/npm/l/safelinkify)
 ![GitHub language count](https://img.shields.io/github/languages/count/dimaslanjaka/safelink)
-[![Github Workflow](https://github.com/dimaslanjaka/safelink/actions/workflows/safelink.yml/badge.svg)](https://github.com/dimaslanjaka/safelink/actions/workflows/safelink.yml)
-[![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink)](https://github.com/dimaslanjaka/safelink/network)
-[![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink)](https://github.com/dimaslanjaka/safelink/stargazers)
+![Github Workflow](https://github.com/dimaslanjaka/safelink/actions/workflows/safelink.yml/badge.svg)
+![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink)
+![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink)
 
 Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS. [FULL DOCUMENTATION](https://www.webmanajemen.com/safelink/index.html)
 
 ## Installation
 npm [https://www.npmjs.com/package/safelinkify](https://www.npmjs.com/package/safelinkify)
+github [https://github.com/dimaslanjaka/safelink](https://github.com/dimaslanjaka/safelink)
+
 ```bash
 npm install safelinkify --production
 # or
