@@ -1,22 +1,43 @@
+import toURL from './toURL';
 var _global_parseQuery = (typeof window !== 'undefined' ? window : global);
 /**
  * Parse Query URL and Hash
  * @param  query query key, null = return all objects
- * @param  url target query, ex: {@link location.search}
+ * @param  url target query, ex: {@link location.href} or {@link location.search}
  */
 export function parseQuery(query, url) {
+    // skip null, undefined
     if (typeof url !== 'string')
         return;
-    var urlParams = new URLSearchParams(url);
-    var urlp = Object.fromEntries(urlParams);
-    var hash = window.location.hash.substring(1);
-    var urlParams = new URLSearchParams(hash);
-    var urlh = Object.fromEntries(urlParams);
-    var urlO = Object.assign(urlh, urlp);
-    if (typeof query == 'string' && urlO.hasOwnProperty(query)) {
-        return urlO[query];
+    // skip empty string
+    if (url.length < 1)
+        return;
+    var result = {};
+    /**
+     * Query URL Parser
+     * @param str
+     * @returns
+     */
+    var parseQueries = function (str) {
+        var urlParams = new URLSearchParams(str);
+        return Object.fromEntries(urlParams);
+    };
+    if (url.match(/^(#|\?)/)) {
+        url = 'http://not.actually.domain/' + url;
     }
-    return urlO;
+    var parse = toURL(url);
+    if (parse) {
+        if (parse.hash) {
+            result = Object.assign(result, parseQueries(parse.hash.substring(1)));
+        }
+        if (parse.search) {
+            result = Object.assign(result, parseQueries(parse.search));
+        }
+    }
+    if (typeof query == 'string' && result.hasOwnProperty(query)) {
+        return result[query];
+    }
+    return result;
 }
 _global_parseQuery.parseQuery = parseQuery;
 export default parseQuery;

@@ -14,14 +14,16 @@ export default function encryptionURL(url, passphrase, debug) {
     var defaultRet = {
         value: null,
         base64: {
+            encode_redirector: null,
             encode: null,
-            decode: null,
+            decode: null
         },
         aes: {
             encode: null,
             decode: null,
-            passphrase: passphrase,
-        },
+            encode_redirector: null,
+            passphrase: passphrase
+        }
     };
     if (!url)
         return defaultRet;
@@ -38,13 +40,13 @@ export default function encryptionURL(url, passphrase, debug) {
         value: value,
         base64: {
             encode: b64d ? null : b64e,
-            decode: b64d,
+            decode: b64d
         },
         aes: {
             encode: aesd ? null : aese,
             decode: aesd,
-            passphrase: passphrase,
-        },
+            passphrase: passphrase
+        }
     });
 }
 _global_encryptionURL.encryptionURL = encryptionURL;

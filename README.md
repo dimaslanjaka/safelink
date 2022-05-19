@@ -8,19 +8,21 @@
 [![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink)](https://github.com/dimaslanjaka/safelink/network)
 [![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink)](https://github.com/dimaslanjaka/safelink/stargazers)
 
-Customized safelink url redirector. Transform all hyperlinks to outbound pages. Useful for SEO external links and ADS. [FULL DOCUMENTATION](https://www.webmanajemen.com/safelink/index.html)
+Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS. [FULL DOCUMENTATION](https://www.webmanajemen.com/safelink/index.html)
 
 ## Installation
-
+npm [https://www.npmjs.com/package/safelinkify](https://www.npmjs.com/package/safelinkify)
 ```bash
-npm install --production
+npm install safelinkify --production
 # or
-yarn install --production=true
+yarn install safelinkify --production=true
 ```
 
 ## Development
-
 ```bash
+git clone --single-branch --branch main https://github.com/dimaslanjaka/safelink foldername
+cd foldername
+# install dependents
 yarn install
 # or
 npm install
@@ -30,7 +32,7 @@ npm install
 | ------------ | --------------------------------- |
 | `yarn start` | watch tests and start server      |
 |  | watch src and compile tsc webpack |
-| `tsc`        | build definition files            |
+| `tsc`        | build definition and js files            |
 | `webpack`    | build safelink script             |
 
 ## Usages
@@ -50,7 +52,7 @@ const options = {
 }
 ```
 ### Browser
-script location : `node_modules/safelinkify/dist/bundle.min.js`.
+script location: `node_modules/safelinkify/dist/bundle.min.js`.
 
 Call Core Script:
 ```html

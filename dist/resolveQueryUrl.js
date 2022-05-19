@@ -9,31 +9,36 @@ var _global_resolveQueryUrl = (typeof window !== 'undefined' ? window : global);
  * @param passphrase aes password
  * @returns
  */
-export function resolveQueryUrl(url, passphrase) {
+export default function resolveQueryUrl(url, passphrase, debug) {
     if (passphrase === void 0) { passphrase = 'root'; }
+    if (debug === void 0) { debug = false; }
     var result = {};
-    var search = null;
+    var href = null;
     if (url instanceof URL) {
-        search = url.search;
+        href = url.href;
     }
     else if (typeof url == 'string') {
-        var parse = toURL(url);
-        if (parse != null)
-            search = parse.search;
+        if (url.match(/^(#|\?)/)) {
+            href = 'http://not.actually.domain/' + url;
+        }
+        else {
+            var parse = toURL(url);
+            if (parse !== null)
+                href = parse.href;
+        }
     }
-    else if (typeof location == 'object' && typeof location.search == 'string') {
-        search = location.search;
+    else if (typeof location == 'object' && typeof location.href == 'string') {
+        href = location.href;
     }
-    if (!search)
+    if (!href || !href.match(/#|\?/))
         return null;
-    var parse_query_url = parseQuery(null, search);
+    var parse_query_url = parseQuery(null, href);
     if (typeof parse_query_url == 'object') {
         Object.keys(parse_query_url).forEach(function (key) {
             var value = parse_query_url[key];
-            result[key] = encryptionURL(value);
+            result[key] = encryptionURL(value, passphrase, debug);
         });
     }
     return result;
 }
 _global_resolveQueryUrl.resolveQueryUrl = resolveQueryUrl;
-export default resolveQueryUrl;

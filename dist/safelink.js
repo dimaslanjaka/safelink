@@ -1,4 +1,5 @@
 import encryptionURL from './encryptionURL';
+import { default as _resolveQueryUrl } from './resolveQueryUrl';
 import toURL from './toURL';
 var _global_safelink = (typeof window !== 'undefined' ? window : global);
 var safelink = /** @class */ (function () {
@@ -8,7 +9,7 @@ var safelink = /** @class */ (function () {
             redirect: ['https://www.webmanajemen.com/page/safelink.html?url='],
             password: 'root',
             verbose: false,
-            type: 'base64',
+            type: 'base64'
         };
         if (typeof opt.redirect == 'string')
             opt.redirect = [opt.redirect];
@@ -19,7 +20,7 @@ var safelink = /** @class */ (function () {
         var value = String(url);
         var parsed = url instanceof URL ? url : toURL(value);
         // only process url with protocol
-        if (value.match(/^(?:(ht|f)tp(s?)\:\/\/)?/)) {
+        if (value.match(/^(?:(ht|f)tp(s?):\/\/)?/)) {
             for (var i = 0; i < excludes.length; i++) {
                 var pattern = excludes[i];
                 if (typeof pattern == 'string') {
@@ -35,6 +36,11 @@ var safelink = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * parse html string or element to anonymize urls
+     * @param str
+     * @returns
+     */
     safelink.prototype.parse = function (str) {
         var self = this;
         var content = str;
@@ -57,9 +63,11 @@ var safelink = /** @class */ (function () {
                 var href = m[2];
                 if (typeof href == 'string' && href.length > 0) {
                     var wholeContents = typeof result == 'string' ? result : content;
-                    var processedContent = processStr(wholeContents, href);
-                    if (processedContent)
-                        result = processedContent;
+                    if (typeof wholeContents === 'string') {
+                        var processedContent = processStr(wholeContents, href);
+                        if (processedContent)
+                            result = processedContent;
+                    }
                 }
             }
             if (typeof result == 'string') {
@@ -89,7 +97,7 @@ var safelink = /** @class */ (function () {
                     if (self.options.verbose) {
                         console.log(Object.assign(encryption, {
                             url: href.href,
-                            isExcluded: excluded,
+                            isExcluded: excluded
                         }));
                     }
                     if (!excluded) {
@@ -103,6 +111,43 @@ var safelink = /** @class */ (function () {
                 result = content.outerHTML;
             }
         }
+    };
+    /**
+     * anonymize url directly
+     * @param href
+     */
+    safelink.prototype.encodeURL = function (href) {
+        var self = this;
+        var encryption = encryptionURL(href, self.options.password, self.options.verbose);
+        var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+        var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+        var newhref = randRedir + enc;
+        return newhref;
+    };
+    /**
+     * Resolve query url to decrypt anonymized urls (page redirector)
+     * @param search
+     * @returns
+     */
+    safelink.prototype.resolveQueryUrl = function (search) {
+        var self = this;
+        var obj = _resolveQueryUrl(typeof search == 'string'
+            ? search
+            : typeof location == 'object' && typeof location.search == 'string'
+                ? location.search
+                : null, this.options.password, this.options.verbose);
+        if (obj !== null && typeof obj === 'object') {
+            Object.keys(obj).forEach(function (key) {
+                var encryptions = obj[key];
+                if (encryptions.aes.encode) {
+                    encryptions.aes.encode_redirector = self.options.redirect + encryptions.aes.encode;
+                }
+                if (encryptions.base64.encode) {
+                    encryptions.base64.encode_redirector = self.options.redirect + encryptions.base64.encode;
+                }
+            });
+        }
+        return obj;
     };
     return safelink;
 }());
