@@ -25,3 +25,6 @@
 
 **1.1.0**
 - fix main file js
+
+**1.1.1**
+- fix process on nodejs read from file
