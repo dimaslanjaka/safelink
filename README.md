@@ -74,6 +74,7 @@ Execute functions:
 </script>
 ```
 ### NodeJS
+[full sample here](https://github.com/dimaslanjaka/safelink/blob/main/src/index.test.ts)
 ```ts
 import safelinkify from 'safelinkify'; // const safelinkify = require('safelinkify')
 const sf = new safelinkify.safelink(options);
