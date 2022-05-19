@@ -381,7 +381,7 @@ console.log(processedExternalLinks);
   <pre>
     <code class="language-js">
 &lt;script src=&quot;dist/bundle.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;(() =&gt; {
+&lt;script&gt;document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
   const table = document.querySelector(&#39;table#table&#39;);
   table.querySelector(&#39;#resolveQueryUrl&#39;).innerHTML = typeof resolveQueryUrl;
   table.querySelector(&#39;#parseQuery&#39;).innerHTML = typeof parseQuery;
@@ -438,7 +438,7 @@ console.log(processedExternalLinks);
       });
     }
   });
-})();
+});
 &lt;/script&gt;
     </code>
   </pre>
@@ -502,7 +502,7 @@ console.log(processedExternalLinks);
 </div>
 
 <script src="dist/bundle.js"></script>
-<script>(() => {
+<script>document.addEventListener('DOMContentLoaded', function () {
   const table = document.querySelector('table#table');
   table.querySelector('#resolveQueryUrl').innerHTML = typeof resolveQueryUrl;
   table.querySelector('#parseQuery').innerHTML = typeof parseQuery;
@@ -559,7 +559,7 @@ console.log(processedExternalLinks);
       });
     }
   });
-})();
+});
 </script>
 <link rel="stylesheet" href="/safelink/node_modules/highlight.js/styles/sunburst.css" />
 <script

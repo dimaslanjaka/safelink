@@ -1,4 +1,4 @@
-(() => {
+document.addEventListener('DOMContentLoaded', function () {
   const table = document.querySelector('table#table');
   table.querySelector('#resolveQueryUrl').innerHTML = typeof resolveQueryUrl;
   table.querySelector('#parseQuery').innerHTML = typeof parseQuery;
@@ -55,4 +55,4 @@
       });
     }
   });
-})();
+});
