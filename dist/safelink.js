@@ -45,9 +45,9 @@ var safelink = /** @class */ (function () {
         var self = this;
         var content = str;
         var result;
-        if (typeof content === 'string') {
+        if (typeof content === 'string' && content.trim().length > 0) {
             var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-            var processStr_1 = function (content, href) {
+            var processStr = function (content, href) {
                 var excluded = self.isExcluded(href);
                 if (!excluded) {
                     var encryption = encryptionURL(href, self.options.password, self.options.verbose);
@@ -65,21 +65,13 @@ var safelink = /** @class */ (function () {
                 if (typeof href == 'string' && href.trim().length > 0 && href.trim().match(/^https?:\/\//)) {
                     var wholeContents = typeof result == 'string' ? result : content;
                     if (typeof wholeContents === 'string') {
-                        var processedContent = processStr_1(wholeContents, href);
+                        var processedContent = processStr(wholeContents, href);
                         if (processedContent)
                             result = processedContent;
                     }
                 }
             }
             if (typeof result == 'string') {
-                var retest = result.replace(regex, function (wholeContents, m1, m2) {
-                    var processedContent = processStr_1(wholeContents, m2);
-                    if (processedContent)
-                        return processedContent;
-                    return wholeContents;
-                });
-                if (retest !== result)
-                    return retest;
                 return result;
             }
         }
