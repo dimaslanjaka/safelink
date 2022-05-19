@@ -37,19 +37,30 @@ npm install
 </code></pre><h3 id="nodejs" tabindex="-1"><a class="header-anchor" href="#nodejs">NodeJS</a></h3><p><a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9naXRodWIuY29tL2RpbWFzbGFuamFrYS9zYWZlbGluay9ibG9iL21haW4vc3JjL2luZGV4LnRlc3QudHM=">full sample here</a></p><pre><code class="language-ts">import safelinkify from 'safelinkify'; // const safelinkify = require('safelinkify')
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse(`
-&lt;a href=&quot;www.example.com/page.php?id=xxxx&amp;name=yyyy&quot; ....&gt;&lt;/a&gt;
-&lt;a href=&quot;http://www.example.com/page.php?id=xxxx&amp;name=yyyy&quot; ....&gt;&lt;/a&gt;
-&lt;a href=&quot;https://www.example.com/page.php?id=xxxx&amp;name=yyyy&quot; ....&gt;&lt;/a&gt;
+&lt;a href=&quot;www.example.com/page.php?id=xxxx&amp;name=yyyy&quot; ....&gt;external&lt;/a&gt;
+&lt;a href=&quot;http://www.example.com/page.php?id=xxxx&amp;name=yyyy&quot; ....&gt;external&lt;/a&gt;
+&lt;a href=&quot;https://www.example.com/page.php?id=xxxx&amp;name=yyyy&quot; ....&gt;external&lt;/a&gt;
 &lt;a href=&quot;www.example.com/page.php/404&quot; ....&gt;&lt;/a&gt;
-&lt;a href=&quot;http://external.domain.com&gt;external&lt;/a&gt;
+&lt;a href=&quot;http://external.domain.com&quot;&gt;internal&lt;/a&gt;
+&lt;a href=&quot;http://www.webmanajemen.com&quot;&gt;internal&lt;/a&gt;
+&lt;a href=&quot;http://webmanajemen.com&quot;&gt;internal&lt;/a&gt;
+&lt;a href=&quot;#http://webmanajemen.com&quot;&gt;#internal&lt;/a&gt;
+&lt;a href=&quot;?http://webmanajemen.com&quot;&gt;?internal&lt;/a&gt;
+&lt;a href=&quot;&quot;&gt;internal&lt;/a&gt;
 `);
 console.log(processedExternalLinks);
 /*
-&lt;a href=&quot;https://www.webmanajemen.com/page/safelink.html?url=d3d3LmV4YW1wbGUuY29tL3BhZ2UucGhwP2lkPXh4eHgmbmFtZT15eXl5&quot; ....&gt;&lt;/a&gt;
-&lt;a href=&quot;https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL3d3dy5leGFtcGxlLmNvbS9wYWdlLnBocD9pZD14eHh4Jm5hbWU9eXl5eQ==&quot; ....&gt;&lt;/a&gt;
-&lt;a href=&quot;https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vcGFnZS5waHA/aWQ9eHh4eCZuYW1lPXl5eXk=&quot; ....&gt;&lt;/a&gt;
-&lt;a href=&quot;https://www.webmanajemen.com/page/safelink.html?url=d3d3LmV4YW1wbGUuY29tL3BhZ2UucGhwLzQwNA==&quot; ....&gt;&lt;/a&gt;
-&lt;a href=&quot;http://external.domain.com&gt;external&lt;/a&gt;
+
+&lt;a href=&quot;www.example.com/page.php?id=xxxx&amp;name=yyyy&quot; ....&gt;external&lt;/a&gt;
+&lt;a href=&quot;https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL3d3dy5leGFtcGxlLmNvbS9wYWdlLnBocD9pZD14eHh4Jm5hbWU9eXl5eQ==&quot; ....&gt;external&lt;/a&gt;
+&lt;a href=&quot;https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vcGFnZS5waHA/aWQ9eHh4eCZuYW1lPXl5eXk=&quot; ....&gt;external&lt;/a&gt;
+&lt;a href=&quot;www.example.com/page.php/404&quot; ....&gt;&lt;/a&gt;
+&lt;a href=&quot;http://external.domain.com&quot;&gt;internal&lt;/a&gt;
+&lt;a href=&quot;http://www.webmanajemen.com&quot;&gt;internal&lt;/a&gt;
+&lt;a href=&quot;http://webmanajemen.com&quot;&gt;internal&lt;/a&gt;
+&lt;a href=&quot;#http://webmanajemen.com&quot;&gt;#internal&lt;/a&gt;
+&lt;a href=&quot;?http://webmanajemen.com&quot;&gt;?internal&lt;/a&gt;
+&lt;a href=&quot;&quot;&gt;internal&lt;/a&gt;
 */
 </code></pre></div><hr><div class="mb-4"><h2>Result Above Examples</h2><div class="mb-2"><b id="query-url">Query URL Resolver Samples</b><table class="table"><tr><td>To Encode</td><td><a href="?url=https://webmanajemen.com"></a></td></tr><tr><td>Decode base64</td><td><a href="?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t"></a></td></tr><tr><td>Decode AES</td><td><a href="?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="></a></td></tr><tr><td>Decode AES using hash</td><td><a href="#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="></a></td></tr><tr><td colspan="2"><button class="btn btn-sm btn-primary" onclick="location.href=location.pathname">Remove URL Queries</button></td></tr></table></div><div class="mb-2" id="external"><b>External Link Samples (Hover)</b><div><a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL2V4YW1wbGUuY29t">example</a> <a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL2dvb2dsZS5jb20=">google</a> <a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9mYWNlYm9vay5jb20=">facebook</a></div></div><div class="mb-2" id="internal"><b>Internal Link Samples (Hover)</b><div><a href="http://webmanajemen.com">Homepage</a> <a href="https://webmanajemen.com/p/search.html">Search</a></div></div></div><div class="mb-4"><table class="table" id="table"><tr><td>global parseQuery</td><td><kbd id="parseQuery"></kbd></td></tr><tr><td>global resolveQueryUrl</td><td><kbd id="resolveQueryUrl"></kbd></td></tr></table></div><div class="mb-4"><b>Current Page Script</b><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1165447249910969" crossorigin="anonymous"></script><!-- Responsive Horizontal --> <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1165447249910969" data-ad-slot="6376402862" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><!-- prettier-ignore-start --><pre>
     <code class="language-js">

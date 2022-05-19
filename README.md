@@ -79,18 +79,29 @@ Execute functions:
 import safelinkify from 'safelinkify'; // const safelinkify = require('safelinkify')
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse(`
-<a href="www.example.com/page.php?id=xxxx&name=yyyy" ....></a>
-<a href="http://www.example.com/page.php?id=xxxx&name=yyyy" ....></a>
-<a href="https://www.example.com/page.php?id=xxxx&name=yyyy" ....></a>
+<a href="www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
+<a href="http://www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
+<a href="https://www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
 <a href="www.example.com/page.php/404" ....></a>
-<a href="http://external.domain.com>external</a>
+<a href="http://external.domain.com">internal</a>
+<a href="http://www.webmanajemen.com">internal</a>
+<a href="http://webmanajemen.com">internal</a>
+<a href="#http://webmanajemen.com">#internal</a>
+<a href="?http://webmanajemen.com">?internal</a>
+<a href="">internal</a>
 `);
 console.log(processedExternalLinks);
 /*
-<a href="https://www.webmanajemen.com/page/safelink.html?url=d3d3LmV4YW1wbGUuY29tL3BhZ2UucGhwP2lkPXh4eHgmbmFtZT15eXl5" ....></a>
-<a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL3d3dy5leGFtcGxlLmNvbS9wYWdlLnBocD9pZD14eHh4Jm5hbWU9eXl5eQ==" ....></a>
-<a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vcGFnZS5waHA/aWQ9eHh4eCZuYW1lPXl5eXk=" ....></a>
-<a href="https://www.webmanajemen.com/page/safelink.html?url=d3d3LmV4YW1wbGUuY29tL3BhZ2UucGhwLzQwNA==" ....></a>
-<a href="http://external.domain.com>external</a>
+
+<a href="www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
+<a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL3d3dy5leGFtcGxlLmNvbS9wYWdlLnBocD9pZD14eHh4Jm5hbWU9eXl5eQ==" ....>external</a>
+<a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vcGFnZS5waHA/aWQ9eHh4eCZuYW1lPXl5eXk=" ....>external</a>
+<a href="www.example.com/page.php/404" ....></a>
+<a href="http://external.domain.com">internal</a>
+<a href="http://www.webmanajemen.com">internal</a>
+<a href="http://webmanajemen.com">internal</a>
+<a href="#http://webmanajemen.com">#internal</a>
+<a href="?http://webmanajemen.com">?internal</a>
+<a href="">internal</a>
 */
 ```
