@@ -22,3 +22,6 @@
 
 **1.0.8 - 1.0.9**
 - fix process on nodejs
+
+**1.1.0**
+- fix main file js
