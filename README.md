@@ -32,7 +32,7 @@ npm install
 | ------------ | --------------------------------- |
 | `yarn start` | watch tests and start server      |
 |  | watch src and compile tsc webpack |
-| `tsc`        | build definition files            |
+| `tsc`        | build definition and js files            |
 | `webpack`    | build safelink script             |
 
 ## Usages
@@ -52,7 +52,7 @@ const options = {
 }
 ```
 ### Browser
-script location : `node_modules/safelinkify/dist/bundle.min.js`.
+script location: `node_modules/safelinkify/dist/bundle.min.js`.
 
 Call Core Script:
 ```html

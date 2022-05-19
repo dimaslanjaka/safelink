@@ -4,8 +4,8 @@ import toURL from './toURL';
 
 const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
 interface Options {
-  exclude: string[] | RegExp[];
-  redirect?: string[];
+  exclude: string[] | RegExp[] | (string | RegExp)[];
+  redirect?: string[] | string;
   password: string;
   verbose?: boolean;
   type: string | 'base64' | 'aes';
@@ -143,8 +143,8 @@ export default class safelink {
       typeof search == 'string'
         ? search
         : typeof location == 'object' && typeof location.search == 'string'
-          ? location.search
-          : null,
+        ? location.search
+        : null,
       this.options.password,
       this.options.verbose
     );

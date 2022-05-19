@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "start": "ts-node index.ts",
-    "build": "webpack && gulp",
+    "build": "tsc && webpack && gulp",
     "dev": "nodemon",
     "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile"
   },

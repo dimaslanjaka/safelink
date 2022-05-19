@@ -13,4 +13,5 @@ namespace safelinkify {
   }
   _global_safelinkify.safelinkify = safelinkify;
 }
+
 export default safelinkify;

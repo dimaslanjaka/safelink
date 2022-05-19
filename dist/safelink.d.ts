@@ -1,7 +1,7 @@
 import { Nullable } from './resolveQueryUrl';
 interface Options {
-    exclude: string[] | RegExp[];
-    redirect?: string[];
+    exclude: string[] | RegExp[] | (string | RegExp)[];
+    redirect?: string[] | string;
     password: string;
     verbose?: boolean;
     type: string | 'base64' | 'aes';
