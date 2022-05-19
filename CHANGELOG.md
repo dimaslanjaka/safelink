@@ -19,3 +19,6 @@
 
 **1.0.7**
 - fix query string resolver
+
+**1.0.8 - 1.0.9**
+- fix process on nodejs
