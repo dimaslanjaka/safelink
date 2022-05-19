@@ -8,12 +8,25 @@ import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import gulp from 'gulp';
 import { minify } from 'html-minifier-terser';
 import { join } from 'upath';
+import safelink from './src/safelink';
 import EJSHelper from './tests/EJSHelper';
 
 /** Deployer for https://www.webmanajemen.com/safelink */
 const deploy_dir = join(__dirname, 'gh-pages');
 if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
 
+const safelinkInstance = new safelink({
+  // exclude patterns (dont anonymize these patterns)
+  exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
+  // url redirector
+  redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
+  // debug
+  verbose: false,
+  // encryption type = 'base64' | 'aes'
+  type: 'base64',
+  // password aes, default = root
+  password: 'unique-password'
+});
 const PORT = parseInt(process.env.PORT || '4000');
 let baseUrl = 'http://localhost' + PORT;
 const app = browserSync.create();
@@ -23,9 +36,10 @@ app.emitter.on('service:running', function (data) {
 });
 app.init({
   port: PORT,
-  open: 'tunnel',
+  open: false,
+  //open: 'tunnel',
   cors: true,
-  tunnel: true,
+  //tunnel: true,
   server: {
     baseDir: './',
     routes: {
@@ -39,7 +53,10 @@ app.init({
       {
         route: '/',
         handle: async (req, res, next) => {
-          const url = new URL(baseUrl + req.url);
+          let url = new URL('http://localhost:' + PORT);
+          if (baseUrl) {
+            url = new URL(baseUrl + req.url);
+          }
           const path = (() => {
             const path = url.pathname.replace(/.html$/, '');
             if (path.endsWith('/') || path.length < 1) return path + 'index';
@@ -56,7 +73,13 @@ app.init({
             const renderPage = await helpers.renderFile(view_ejs);
             helpers.add('body', renderPage);
             helpers.add('title', title);
-            const renderLayout = await helpers.renderFile(join(view, 'layout.ejs'));
+            let renderLayout = await helpers.renderFile(join(view, 'layout.ejs'));
+
+            /** Safelinkify */
+            renderLayout = safelinkInstance.parse(renderLayout);
+
+            writeFileSync(join(__dirname, 'src/test/index.html'), renderLayout);
+
             let result = '';
             try {
               result = await minify(renderLayout, {

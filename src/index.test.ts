@@ -1,3 +1,5 @@
+import { readFileSync, writeFileSync } from 'fs';
+import { join } from 'upath';
 import safelinkify from '.';
 
 console.clear();
@@ -21,10 +23,23 @@ const options = {
 
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse(`
-<a href="www.example.com/page.php?id=xxxx&name=yyyy" ....></a>
-<a href="http://www.example.com/page.php?id=xxxx&name=yyyy" ....></a>
-<a href="https://www.example.com/page.php?id=xxxx&name=yyyy" ....></a>
+<a href="www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
+<a href="http://www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
+<a href="https://www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
 <a href="www.example.com/page.php/404" ....></a>
-<a href="http://external.domain.com>external</a>
+<a href="http://external.domain.com">internal</a>
+<a href="http://www.webmanajemen.com">internal</a>
+<a href="http://webmanajemen.com">internal</a>
+<a href="#http://webmanajemen.com">#internal</a>
+<a href="?http://webmanajemen.com">?internal</a>
+<a href="">internal</a>
 `);
-console.log(processedExternalLinks);
+writeFileSync(join(__dirname, 'test/processedExternalLinks.html'), processedExternalLinks);
+
+// parse from file
+const readFromFile = readFileSync(join(__dirname, 'test/index.html')).toString();
+if (typeof readFromFile == 'string' && readFromFile) {
+  const parseFromFile = sf.parse(readFromFile);
+  if (typeof parseFromFile == 'string' && parseFromFile)
+    writeFileSync(join(__dirname, 'test/index.safelinkify.html'), parseFromFile);
+}

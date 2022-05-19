@@ -28,7 +28,7 @@ function git(...args: string[]) {
     ) => {
       const summon = spawn('git', args, {
         cwd: deployDir,
-        stdio: 'inherit',
+        stdio: 'inherit'
       });
       summon.on('close', function (code) {
         // Should probably be 'exit', not 'close'
@@ -36,7 +36,7 @@ function git(...args: string[]) {
         return resolve({
           code: code ? code : 0,
           stdout: String(summon.stdout),
-          stderr: String(summon.stderr),
+          stderr: String(summon.stderr)
         });
       });
       summon.on('error', function (err) {
@@ -52,7 +52,7 @@ const configDeploy = {
   repo: 'https://github.com/dimaslanjaka/safelink',
   branch: 'gh-pages',
   force: false,
-  base: deployDir,
+  base: deployDir
 };
 // [deploy][workflow] test
 gulp.task('deploy-git', async (done?: TaskCallback) => {
@@ -87,5 +87,13 @@ gulp.task('deploy-git', async (done?: TaskCallback) => {
 });
 
 gulp.task('deploy', gulp.series('copy', 'deploy-git'));
+
+gulp.task('serve', () => {
+  return spawn('ts-node', [join(__dirname, 'index.ts')], {
+    cwd: __dirname,
+    shell: true,
+    stdio: 'inherit'
+  });
+});
 
 gulp.task('default', gulp.series('copy'));

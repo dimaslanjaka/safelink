@@ -52,7 +52,7 @@ export default class safelink {
     const self = this;
     const content = str;
     let result: string;
-    if (typeof content === 'string') {
+    if (typeof content === 'string' && content.trim().length > 0) {
       const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
       const processStr = (content: string, href: string) => {
         const excluded = self.isExcluded(href);
@@ -70,7 +70,7 @@ export default class safelink {
       for (let i = 0; i < matches.length; i++) {
         const m = matches[i];
         const href = m[2];
-        if (typeof href == 'string' && href.length > 0) {
+        if (typeof href == 'string' && href.trim().length > 0 && href.trim().match(/^https?:\/\//)) {
           const wholeContents = typeof result == 'string' ? result : content;
           if (typeof wholeContents === 'string') {
             const processedContent = processStr(wholeContents, href);
@@ -80,12 +80,6 @@ export default class safelink {
       }
 
       if (typeof result == 'string') {
-        const retest = result.replace(regex, (wholeContents, m1, m2) => {
-          const processedContent = processStr(wholeContents, m2);
-          if (processedContent) return processedContent;
-          return wholeContents;
-        });
-        if (retest !== result) return retest;
         return result;
       }
     } else if (content instanceof HTMLElement) {
