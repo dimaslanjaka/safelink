@@ -27,4 +27,4 @@ const processedExternalLinks = sf.parse(`
 <a href="www.example.com/page.php/404" ....></a>
 <a href="http://external.domain.com>external</a>
 `);
-//console.log(processedExternalLinks);
+console.log(processedExternalLinks);
