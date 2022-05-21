@@ -1,6 +1,11 @@
-import encryptionURL from './encryptionURL';
-import { default as _resolveQueryUrl } from './resolveQueryUrl';
-import toURL from './toURL';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var encryptionURL_1 = __importDefault(require("./encryptionURL"));
+var resolveQueryUrl_1 = __importDefault(require("./resolveQueryUrl"));
+var toURL_1 = __importDefault(require("./toURL"));
 var _global_safelink = (typeof window !== 'undefined' ? window : global);
 var safelink = /** @class */ (function () {
     function safelink(opt) {
@@ -18,7 +23,7 @@ var safelink = /** @class */ (function () {
     safelink.prototype.isExcluded = function (url) {
         var excludes = this.options.exclude;
         var value = String(url);
-        var parsed = url instanceof URL ? url : toURL(value);
+        var parsed = url instanceof URL ? url : (0, toURL_1.default)(value);
         // only process url with protocol
         if (value.match(/^(?:(ht|f)tp(s?):\/\/)?/)) {
             for (var i = 0; i < excludes.length; i++) {
@@ -50,7 +55,7 @@ var safelink = /** @class */ (function () {
             var processStr = function (content, href) {
                 var excluded = self.isExcluded(href);
                 if (!excluded) {
-                    var encryption = encryptionURL(href, self.options.password, self.options.verbose);
+                    var encryption = (0, encryptionURL_1.default)(href, self.options.password, self.options.verbose);
                     var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
                     var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
                     var newhref = randRedir + enc;
@@ -82,12 +87,12 @@ var safelink = /** @class */ (function () {
                     var a = links[i];
                     if (!a.href)
                         continue;
-                    var href = toURL(a.href);
+                    var href = (0, toURL_1.default)(a.href);
                     if (!href) {
                         console.log(a.href, null);
                         continue;
                     }
-                    var encryption = encryptionURL(href, self.options.password, self.options.verbose);
+                    var encryption = (0, encryptionURL_1.default)(href, self.options.password, self.options.verbose);
                     var excluded = self.isExcluded(href);
                     if (self.options.verbose) {
                         console.log(Object.assign(encryption, {
@@ -114,7 +119,7 @@ var safelink = /** @class */ (function () {
      */
     safelink.prototype.encodeURL = function (href) {
         var self = this;
-        var encryption = encryptionURL(href, self.options.password, self.options.verbose);
+        var encryption = (0, encryptionURL_1.default)(href, self.options.password, self.options.verbose);
         var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
         var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
         var newhref = randRedir + enc;
@@ -127,7 +132,7 @@ var safelink = /** @class */ (function () {
      */
     safelink.prototype.resolveQueryUrl = function (search) {
         var self = this;
-        var obj = _resolveQueryUrl(typeof search == 'string'
+        var obj = (0, resolveQueryUrl_1.default)(typeof search == 'string'
             ? search
             : typeof location == 'object' && typeof location.search == 'string'
                 ? location.search
@@ -147,5 +152,5 @@ var safelink = /** @class */ (function () {
     };
     return safelink;
 }());
-export default safelink;
+exports.default = safelink;
 _global_safelink.safelink = safelink;

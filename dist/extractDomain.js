@@ -1,7 +1,9 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Extract domain from URL
  */
-export default function extractDomain(url) {
+function extractDomain(url) {
     var hostname;
     if (url.indexOf('://') > -1) {
         hostname = url.split('/')[2];
@@ -13,3 +15,4 @@ export default function extractDomain(url) {
     hostname = hostname.split('?')[0];
     return hostname;
 }
+exports.default = extractDomain;
