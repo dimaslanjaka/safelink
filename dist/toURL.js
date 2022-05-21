@@ -1,9 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * transform url string to {@link Nullable}<{@link URL}>
  * @param url
  * @returns
  */
-export default function toURL(url) {
+function toURL(url) {
     try {
         if (url.startsWith('/') || url.startsWith('?')) {
             // url is pathname or query
@@ -20,3 +22,4 @@ export default function toURL(url) {
         return null;
     }
 }
+exports.default = toURL;

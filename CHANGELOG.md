@@ -31,3 +31,6 @@
 
 **1.1.2**
 - fix same link when included as other element (non-hyperlink)
+
+**1.1.3**
+- Compile to ES5

@@ -6,8 +6,8 @@
       "es2021",
       "DOM"
     ],
-    "module": "CommonJS",
-    "target": "es2021",
+    //"module": "CommonJS",
+    //"target": "es2021",
     "moduleResolution": "Node",
     "strict": false,
     "esModuleInterop": true,
