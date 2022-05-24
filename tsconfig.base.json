@@ -3,8 +3,11 @@
   "display": "Node 16",
   "compilerOptions": {
     "lib": [
-      "es2021",
-      "DOM"
+      "ES2020",
+      "DOM",
+      "ES6",
+      "ES2021",
+      "ES2021.String"
     ],
     //"module": "CommonJS",
     //"target": "es2021",
