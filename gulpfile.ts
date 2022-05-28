@@ -1,9 +1,10 @@
 import spawn from 'cross-spawn';
-import { existsSync, mkdirSync, writeFile } from 'fs';
+import { existsSync, mkdirSync, writeFile, writeFileSync } from 'fs';
 import * as gulp from 'gulp';
 import moment from 'moment-timezone';
 import { TaskCallback } from 'undertaker';
 import { join } from 'upath';
+import pkg from './package.json';
 
 /**
  *  BELOW SCRIPT TO DEPLOY OUR GITHUB PAGES
@@ -14,8 +15,12 @@ gulp.task('copy', () => {
   writeFile(join(__dirname, 'gh-pages', '.nojekyll'), '', () => {});
   gulp
     .src(['**/*', '!**/*.d.ts'], { cwd: join(__dirname, 'dist') })
-    .pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist')));
-  return gulp.src(join(__dirname, '{package.json,README.md}')).pipe(gulp.dest(join(__dirname, 'gh-pages')));
+    .pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist')))
+    .once('end', () => {
+      delete pkg.devDependencies;
+      writeFileSync(join(__dirname, 'gh-pages/package.json'), JSON.stringify(pkg, null, 2));
+    });
+  return gulp.src(join(__dirname, '*.md')).pipe(gulp.dest(join(__dirname, 'gh-pages')));
 });
 
 const deployDir = join(__dirname, 'gh-pages');
