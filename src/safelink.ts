@@ -10,6 +10,7 @@ interface Options {
   verbose?: boolean;
   type: string | 'base64' | 'aes';
 }
+export type SafelinkOptions = Options;
 
 export default class safelink {
   options: Partial<Options> = {
