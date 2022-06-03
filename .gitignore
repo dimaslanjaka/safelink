@@ -1,3 +1,14 @@
+# keep all dist files
+!dist
+!dist/*
+!dist/**/*
+dist/**/*.json
+
+# yarn v2
+.yarn/**/*.tgz
+.yarn/**/*.gz
+.yarn/**/*.zip
+
 node_modules
 .deploy_git
 *.log
