@@ -6,14 +6,16 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
+    "src",
     "README.md",
-    "package.json"
+    "./*.json"
   ],
   "scripts": {
     "start": "ts-node index.ts",
     "build": "tsc && webpack && gulp",
     "dev": "nodemon",
-    "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile --check-files"
+    "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
+    "update": "npx npm-check-updates -u -x chalk,hexo"
   },
   "repository": {
     "type": "git",
