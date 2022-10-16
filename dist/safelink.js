@@ -120,6 +120,7 @@ var safelink = /** @class */ (function () {
                                     var newhref = randRedir + enc;
                                     return content.replace(href, newhref);
                                 }
+                                return content;
                             };
                             matches = Array.from(content.matchAll(regex)).filter(function (m) { return m[2].trim().match(/^https?:\/\//); });
                             for (i = 0; i < matches.length; i++) {
@@ -130,7 +131,6 @@ var safelink = /** @class */ (function () {
                                     wholeContents = typeof result == 'string' ? result : content;
                                     if (typeof wholeContents === 'string') {
                                         processedHyperlink = processStr(allMatch, href);
-                                        console.log('processing');
                                         if (processedHyperlink) {
                                             processedContent = wholeContents.replace(allMatch, processedHyperlink);
                                             result = processedContent;
