@@ -110,6 +110,8 @@ var safelink = /** @class */ (function () {
                     case 4:
                         result = null;
                         if (typeof content === 'string' && content.trim().length > 0) {
+                            // make content as default result
+                            result = content;
                             regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
                             processStr = function (content, href) {
                                 var excluded = self.isExcluded(href);
@@ -118,8 +120,10 @@ var safelink = /** @class */ (function () {
                                     var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
                                     var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
                                     var newhref = randRedir + enc;
+                                    // return anonymized href
                                     return content.replace(href, newhref);
                                 }
+                                // return original content
                                 return content;
                             };
                             matches = Array.from(content.matchAll(regex)).filter(function (m) { return m[2].trim().match(/^https?:\/\//); });
