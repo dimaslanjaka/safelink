@@ -26,7 +26,9 @@ var options = {
 };
 var sf = new _1.default.safelink(options);
 var processedExternalLinks = sf.parse("\n<a href=\"www.example.com/page.php?id=xxxx&name=yyyy\" ....>external</a>\n<a href=\"http://www.example.com/page.php?id=xxxx&name=yyyy\" ....>external</a>\n<a href=\"https://www.example.com/page.php?id=xxxx&name=yyyy\" ....>external</a>\n<a href=\"www.example.com/page.php/404\" ....></a>\n<a href=\"http://external.domain.com\">internal</a>\n<a href=\"http://www.webmanajemen.com\">internal</a>\n<a href=\"http://webmanajemen.com\">internal</a>\n<a href=\"#http://webmanajemen.com\">#internal</a>\n<a href=\"?http://webmanajemen.com\">?internal</a>\n<a href=\"\">internal</a>\n");
-(0, fs_1.writeFileSync)((0, upath_1.join)(__dirname, 'test/processedExternalLinks.html'), processedExternalLinks);
+processedExternalLinks.then(function (result) {
+    (0, fs_1.writeFileSync)((0, upath_1.join)(__dirname, 'test/processedExternalLinks.html'), result);
+});
 // parse from file
 var readFromFile = (0, fs_1.readFileSync)((0, upath_1.join)(__dirname, 'test/index.html')).toString();
 if (typeof readFromFile == 'string' && readFromFile) {

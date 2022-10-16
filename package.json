@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "start": "ts-node index.ts",
-    "build": "tsc && webpack && gulp",
+    "build": "tsc -p tsconfig.build.json && webpack && gulp",
     "dev": "nodemon",
     "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
     "update": "npx npm-check-updates -u -x chalk,hexo"
@@ -37,6 +37,7 @@
     "url": "https://github.com/dimaslanjaka/safelink/issues"
   },
   "homepage": "https://www.webmanajemen.com/safelink",
+  "devDependencies": {},
   "dependencies": {
     "@popperjs/core": "^2.11.5",
     "bootstrap": "^5.1.3",
