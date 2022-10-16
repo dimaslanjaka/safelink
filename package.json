@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "start": "ts-node index.ts",
-    "build": "tsc && webpack && gulp",
+    "build": "tsc -p tsconfig.build.json && webpack && gulp",
     "dev": "nodemon",
     "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
     "update": "npx npm-check-updates -u -x chalk,hexo"
