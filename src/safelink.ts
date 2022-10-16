@@ -68,6 +68,12 @@ export default class safelink {
     let result: string = null;
     if (typeof content === 'string' && content.trim().length > 0) {
       const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
+      /**
+       * process string
+       * @param content
+       * @param href
+       * @returns
+       */
       const processStr = (content: string, href: string) => {
         const excluded = self.isExcluded(href);
 
@@ -78,6 +84,7 @@ export default class safelink {
           const newhref = randRedir + enc;
           return content.replace(href, newhref);
         }
+        return content;
       };
 
       const matches = Array.from(content.matchAll(regex)).filter((m) => m[2].trim().match(/^https?:\/\//));
@@ -86,7 +93,7 @@ export default class safelink {
         const href = m[2].trim();
         const allMatch = m[0];
 
-        if (typeof href == 'string' && href) {
+        if (typeof href == 'string' && href.length > 0) {
           const wholeContents = typeof result == 'string' ? result : content;
           if (typeof wholeContents === 'string') {
             const processedHyperlink = processStr(allMatch, href);

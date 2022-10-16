@@ -120,13 +120,14 @@ var safelink = /** @class */ (function () {
                                     var newhref = randRedir + enc;
                                     return content.replace(href, newhref);
                                 }
+                                return content;
                             };
                             matches = Array.from(content.matchAll(regex)).filter(function (m) { return m[2].trim().match(/^https?:\/\//); });
                             for (i = 0; i < matches.length; i++) {
                                 m = matches[i];
                                 href = m[2].trim();
                                 allMatch = m[0];
-                                if (typeof href == 'string' && href) {
+                                if (typeof href == 'string' && href.length > 0) {
                                     wholeContents = typeof result == 'string' ? result : content;
                                     if (typeof wholeContents === 'string') {
                                         processedHyperlink = processStr(allMatch, href);
