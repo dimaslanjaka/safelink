@@ -64,6 +64,65 @@ processedExternalLinks.then(console.log);
 &lt;a href=&quot;?http://webmanajemen.com&quot;&gt;?internal&lt;/a&gt;
 &lt;a href=&quot;&quot;&gt;internal&lt;/a&gt;
 */
+</code></pre><h2 id="using-gulp" tabindex="-1"><a class="header-anchor" href="#using-gulp">Using gulp</a></h2><pre><code class="language-typescript">import gulp from 'gulp'
+import sf from 'safelinkify'
+import { toUnix, join } from 'upath'
+import through2 from 'through2'
+
+// folder to scan
+const destDir = join(__dirname, 'build')
+// scan external link to safelink from dest dir
+gulp.task('safelink', () =&gt; {
+  const safelink = new sf.safelink({
+    // exclude patterns (dont anonymize these patterns)
+    exclude: [
+      /https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/,
+      /([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/
+    ],
+    // url redirector
+    redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
+    // debug
+    verbose: false,
+    // encryption type = 'base64' | 'aes'
+    type: 'base64',
+    // password aes, default = root
+    password: 'unique-password'
+  })
+  return gulp
+    .src(['**/*.html'], {
+      cwd: destDir,
+      ignore: [
+        // exclude non-website and react production files
+        '**/tmp/**',
+        '**/node_modules/**',
+        '**/monsters/**/*',
+        '**/attendants/**/*',
+        '**/materials/**/*',
+        '**/scenic-spots/**/*',
+        '**/static/**/*'
+      ]
+    })
+    .pipe(
+      through2.obj(async (file, _enc, next) =&gt; {
+        // drop null
+        if (file.isNull()) return next()
+        // do safelinkify
+        const content = String(file.contents)
+        const parsed = await safelink.parse(content)
+        if (parsed) {
+          file.contents = Buffer.from(parsed)
+          next(null, file)
+        } else {
+          console.log(
+            'cannot parse',
+            toUnix(file.path).replace(toUnix(process.cwd()), '')
+          )
+          next()
+        }
+      })
+    )
+    .pipe(gulp.dest(destDir))
+})
 </code></pre></div><hr><div class="mb-4"><h2>Result Above Examples</h2><div class="mb-2"><b id="query-url">Query URL Resolver Samples</b><table class="table"><tr><td>To Encode</td><td><a href="?url=https://webmanajemen.com"></a></td></tr><tr><td>Decode base64</td><td><a href="?url=aHR0cHM6Ly93ZWJtYW5hamVtZW4uY29t"></a></td></tr><tr><td>Decode AES</td><td><a href="?url=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="></a></td></tr><tr><td>Decode AES using hash</td><td><a href="#o=Q2LNSrOqZbP8HLK8R2L1psx1x8CFmLIm7vKxqhswcPg="></a></td></tr><tr><td colspan="2"><button class="btn btn-sm btn-primary" onclick="location.href=location.pathname">Remove URL Queries</button></td></tr></table></div><div class="mb-2" id="external"><b>External Link Samples (Hover)</b><div><a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL2V4YW1wbGUuY29t">example</a> <a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL2dvb2dsZS5jb20=">google</a> <a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9mYWNlYm9vay5jb20=">facebook</a></div></div><div class="mb-2" id="internal"><b>Internal Link Samples (Hover)</b><div><a href="http://webmanajemen.com">Homepage</a> <a href="https://webmanajemen.com/p/search.html">Search</a></div></div></div><div class="mb-4"><table class="table" id="table"><tr><td>global parseQuery</td><td><kbd id="parseQuery"></kbd></td></tr><tr><td>global resolveQueryUrl</td><td><kbd id="resolveQueryUrl"></kbd></td></tr></table></div><div class="mb-4"><b>Current Page Script</b><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1165447249910969" crossorigin="anonymous"></script><!-- Responsive Horizontal --> <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1165447249910969" data-ad-slot="6376402862" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script><!-- prettier-ignore-start --><pre>
     <code class="language-js">
 &lt;script src=&quot;dist/bundle.min.js&quot;&gt;&lt;/script&gt;
@@ -127,4 +186,4 @@ processedExternalLinks.then(console.log);
 });
 &lt;/script&gt;
     </code>
-  </pre><!-- prettier-ignore-end --> <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-1165447249910969" data-ad-slot="8307991972"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><div class="mb-4"><h2 id="changelog" tabindex="-1"><a class="header-anchor" href="#changelog">CHANGELOG</a></h2><p><strong>1.0.0</strong></p><ul><li>initial commit</li></ul><p><strong>1.0.1</strong></p><ul><li>fix aes</li></ul><p><strong>1.0.2</strong></p><ul><li>fix object encyrption result</li></ul><p><strong>1.0.3</strong></p><ul><li>add password aes option</li></ul><p><strong>1.0.5 - 1.0.6</strong></p><ul><li>remove useless dependencies</li><li>detach private script</li><li>add object redirect url to result query parser</li></ul><p><strong>1.0.7</strong></p><ul><li>fix query string resolver</li></ul><p><strong>1.0.8 - 1.0.9</strong></p><ul><li>fix process on nodejs</li></ul><p><strong>1.1.0</strong></p><ul><li>fix main file js</li></ul><p><strong>1.1.1</strong></p><ul><li>fix process on nodejs read from file</li></ul><p><strong>1.1.2</strong></p><ul><li>fix same link when included as other element (non-hyperlink)</li></ul><p><strong>1.1.3</strong></p><ul><li>Compile to ES5</li></ul></div><script src="dist/bundle.js"></script><script>document.addEventListener("DOMContentLoaded",(function(){const e=document.querySelector("table#table");e.querySelector("#resolveQueryUrl").innerHTML=typeof resolveQueryUrl,e.querySelector("#parseQuery").innerHTML=typeof parseQuery;const r="function"==typeof(t=safelink)&&(()=>{try{return t(),!1}catch{return!0}})();var t;if(e.innerHTML+=`<tr><td>global safelink</td><td>is ES5 Class: ${r}</td></tr>`,r){const r=new safelink({exclude:[/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],redirect:"https://www.webmanajemen.com/page/safelink.html?url=",verbose:!1,type:"base64",password:"unique-password"});r.parse(document.querySelector("div#external")),r.parse(document.querySelector("div#internal"));const t=JSON.stringify(r.resolveQueryUrl(location.href),null,2);e.innerHTML+=`<tr id="current-queries"><td>Redirector Resolver Using <code>sf.resolveQueryUrl(location.href)</code> <a href="#query-url">Change</a></td><td><pre><code class="language-json">${t}</code></pre></td></tr>`;const n=new URLSearchParams(location.search);(n.has("o")||n.has("url")||location.href.match(/#(o|url)=/))&&document.getElementById("current-queries").scrollIntoView()}Array.from(document.links).forEach((e=>{e.innerHTML.length||(e.textContent=e.getAttribute("href"),e.addEventListener("click",(r=>{r.preventDefault(),window.location.href=e.href,e.href.match(/#(o|url)=/)&&location.reload()})))}))}))</script><link rel="stylesheet" href="/safelink/node_modules/highlight.js/styles/sunburst.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha512-yUUc0qWm2rhM7X0EFe82LNnv2moqArj5nro/w1bi05A09hRVeIZbN6jlMoyu0+4I/Bu4Ck/85JQIU82T82M28w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script>hljs.highlightAll()</script></main><div class="container"><footer class="py-3 my-4"><ul class="nav justify-content-center border-bottom pb-3 mb-3"><li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li><li class="nav-item"><a href="/safelink" class="nav-link px-2 text-muted">Safelink</a></li><li class="nav-item"><a href="/js-prototypes" class="nav-link px-2 text-muted">js-prototypes</a></li><li class="nav-item"><a href="/smartform" class="nav-link px-2 text-muted">Smartform</a></li><li class="nav-item"><a href="/p/about.html" class="nav-link px-2 text-muted">About</a></li></ul><p class="text-center text-muted">© 2022 Website Manajemen Indonesia, Inc</p></footer></div></body></html>
+  </pre><!-- prettier-ignore-end --> <ins class="adsbygoogle" style="display:block" data-ad-format="autorelaxed" data-ad-client="ca-pub-1165447249910969" data-ad-slot="8307991972"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({})</script></div><div class="mb-4"><h2 id="changelog" tabindex="-1"><a class="header-anchor" href="#changelog">CHANGELOG</a></h2><p><strong>1.0.0</strong></p><ul><li>initial commit</li></ul><p><strong>1.0.1</strong></p><ul><li>fix aes</li></ul><p><strong>1.0.2</strong></p><ul><li>fix object encyrption result</li></ul><p><strong>1.0.3</strong></p><ul><li>add password aes option</li></ul><p><strong>1.0.5 - 1.0.6</strong></p><ul><li>remove useless dependencies</li><li>detach private script</li><li>add object redirect url to result query parser</li></ul><p><strong>1.0.7</strong></p><ul><li>fix query string resolver</li></ul><p><strong>1.0.8 - 1.0.9</strong></p><ul><li>fix process on nodejs</li></ul><p><strong>1.1.0</strong></p><ul><li>fix main file js</li></ul><p><strong>1.1.1</strong></p><ul><li>fix process on nodejs read from file</li></ul><p><strong>1.1.2</strong></p><ul><li>fix same link when included as other element (non-hyperlink)</li></ul><p><strong>1.1.3</strong></p><ul><li>Compile to ES5</li></ul><p><strong>1.1.4</strong></p><ul><li><code>parse</code> now async</li><li><code>parse</code> always return string</li><li>add more docs for easy development</li><li>add <code>tsconfig.build.json</code> excluding test files</li></ul></div><script src="dist/bundle.js"></script><script>document.addEventListener("DOMContentLoaded",(function(){const e=document.querySelector("table#table");e.querySelector("#resolveQueryUrl").innerHTML=typeof resolveQueryUrl,e.querySelector("#parseQuery").innerHTML=typeof parseQuery;const r="function"==typeof(t=safelink)&&(()=>{try{return t(),!1}catch{return!0}})();var t;if(e.innerHTML+=`<tr><td>global safelink</td><td>is ES5 Class: ${r}</td></tr>`,r){const r=new safelink({exclude:[/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],redirect:"https://www.webmanajemen.com/page/safelink.html?url=",verbose:!1,type:"base64",password:"unique-password"});r.parse(document.querySelector("div#external")),r.parse(document.querySelector("div#internal"));const t=JSON.stringify(r.resolveQueryUrl(location.href),null,2);e.innerHTML+=`<tr id="current-queries"><td>Redirector Resolver Using <code>sf.resolveQueryUrl(location.href)</code> <a href="#query-url">Change</a></td><td><pre><code class="language-json">${t}</code></pre></td></tr>`;const n=new URLSearchParams(location.search);(n.has("o")||n.has("url")||location.href.match(/#(o|url)=/))&&document.getElementById("current-queries").scrollIntoView()}Array.from(document.links).forEach((e=>{e.innerHTML.length||(e.textContent=e.getAttribute("href"),e.addEventListener("click",(r=>{r.preventDefault(),window.location.href=e.href,e.href.match(/#(o|url)=/)&&location.reload()})))}))}))</script><link rel="stylesheet" href="/safelink/node_modules/highlight.js/styles/sunburst.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js" integrity="sha512-yUUc0qWm2rhM7X0EFe82LNnv2moqArj5nro/w1bi05A09hRVeIZbN6jlMoyu0+4I/Bu4Ck/85JQIU82T82M28w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script>hljs.highlightAll()</script></main><div class="container"><footer class="py-3 my-4"><ul class="nav justify-content-center border-bottom pb-3 mb-3"><li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li><li class="nav-item"><a href="/safelink" class="nav-link px-2 text-muted">Safelink</a></li><li class="nav-item"><a href="/js-prototypes" class="nav-link px-2 text-muted">js-prototypes</a></li><li class="nav-item"><a href="/smartform" class="nav-link px-2 text-muted">Smartform</a></li><li class="nav-item"><a href="/p/about.html" class="nav-link px-2 text-muted">About</a></li></ul><p class="text-center text-muted">© 2022 Website Manajemen Indonesia, Inc</p></footer></div></body></html>
