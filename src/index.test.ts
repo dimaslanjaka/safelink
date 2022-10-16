@@ -34,7 +34,9 @@ const processedExternalLinks = sf.parse(`
 <a href="?http://webmanajemen.com">?internal</a>
 <a href="">internal</a>
 `);
-writeFileSync(join(__dirname, 'test/processedExternalLinks.html'), processedExternalLinks);
+processedExternalLinks.then((result) => {
+  writeFileSync(join(__dirname, 'test/processedExternalLinks.html'), result);
+});
 
 // parse from file
 const readFromFile = readFileSync(join(__dirname, 'test/index.html')).toString();

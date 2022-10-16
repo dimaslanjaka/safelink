@@ -1,5 +1,6 @@
 import encryptionURL from './encryptionURL';
 import { default as _resolveQueryUrl, Nullable } from './resolveQueryUrl';
+import { bufferToString } from './string';
 import toURL from './toURL';
 
 const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
@@ -51,12 +52,17 @@ export default class safelink {
 
   /**
    * parse html string or element to anonymize urls
-   * @param str
+   * @param target
    * @returns
    */
-  parse(str: Nullable<string> | HTMLElement): Nullable<string> {
+  async parse(target: Nullable<string> | HTMLElement | Buffer | NodeJS.ReadWriteStream): Promise<Nullable<string>> {
     const self = this;
-    const content = str;
+    let content: any = target;
+    if (typeof target === 'string' || target instanceof HTMLElement) {
+      content = target;
+    } else if (Buffer.isBuffer(target)) {
+      content = await bufferToString(target);
+    }
     let result: string = null;
     if (typeof content === 'string' && content.trim().length > 0) {
       const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;

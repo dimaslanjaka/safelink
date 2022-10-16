@@ -1,10 +1,47 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var encryptionURL_1 = __importDefault(require("./encryptionURL"));
 var resolveQueryUrl_1 = __importDefault(require("./resolveQueryUrl"));
+var string_1 = require("./string");
 var toURL_1 = __importDefault(require("./toURL"));
 var _global_safelink = (typeof window !== 'undefined' ? window : global);
 var safelink = /** @class */ (function () {
@@ -48,75 +85,93 @@ var safelink = /** @class */ (function () {
     };
     /**
      * parse html string or element to anonymize urls
-     * @param str
+     * @param target
      * @returns
      */
-    safelink.prototype.parse = function (str) {
-        var self = this;
-        var content = str;
-        var result = null;
-        if (typeof content === 'string' && content.trim().length > 0) {
-            var regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
-            var processStr = function (content, href) {
-                var excluded = self.isExcluded(href);
-                if (!excluded) {
-                    var encryption = (0, encryptionURL_1.default)(href, self.options.password, self.options.verbose);
-                    var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-                    var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
-                    var newhref = randRedir + enc;
-                    return content.replace(href, newhref);
-                }
-            };
-            var matches = Array.from(content.matchAll(regex)).filter(function (m) { return m[2].trim().match(/^https?:\/\//); });
-            for (var i = 0; i < matches.length; i++) {
-                var m = matches[i];
-                var href = m[2].trim();
-                var allMatch = m[0];
-                if (typeof href == 'string' && href) {
-                    var wholeContents = typeof result == 'string' ? result : content;
-                    if (typeof wholeContents === 'string') {
-                        var processedHyperlink = processStr(allMatch, href);
-                        if (processedHyperlink) {
-                            var processedContent = wholeContents.replace(allMatch, processedHyperlink);
-                            result = processedContent;
+    safelink.prototype.parse = function (target) {
+        return __awaiter(this, void 0, void 0, function () {
+            var self, content, result, regex, processStr, matches, i, m, href, allMatch, wholeContents, processedHyperlink, processedContent, tagname, links, i, a, href, encryption, excluded, enc, randRedir;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        self = this;
+                        content = target;
+                        if (!(typeof target === 'string' || target instanceof HTMLElement)) return [3 /*break*/, 1];
+                        content = target;
+                        return [3 /*break*/, 3];
+                    case 1:
+                        if (!Buffer.isBuffer(target)) return [3 /*break*/, 3];
+                        return [4 /*yield*/, (0, string_1.bufferToString)(target)];
+                    case 2:
+                        content = _a.sent();
+                        _a.label = 3;
+                    case 3:
+                        result = null;
+                        if (typeof content === 'string' && content.trim().length > 0) {
+                            regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
+                            processStr = function (content, href) {
+                                var excluded = self.isExcluded(href);
+                                if (!excluded) {
+                                    var encryption = (0, encryptionURL_1.default)(href, self.options.password, self.options.verbose);
+                                    var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+                                    var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+                                    var newhref = randRedir + enc;
+                                    return content.replace(href, newhref);
+                                }
+                            };
+                            matches = Array.from(content.matchAll(regex)).filter(function (m) { return m[2].trim().match(/^https?:\/\//); });
+                            for (i = 0; i < matches.length; i++) {
+                                m = matches[i];
+                                href = m[2].trim();
+                                allMatch = m[0];
+                                if (typeof href == 'string' && href) {
+                                    wholeContents = typeof result == 'string' ? result : content;
+                                    if (typeof wholeContents === 'string') {
+                                        processedHyperlink = processStr(allMatch, href);
+                                        if (processedHyperlink) {
+                                            processedContent = wholeContents.replace(allMatch, processedHyperlink);
+                                            result = processedContent;
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    }
+                        else if (content instanceof HTMLElement) {
+                            tagname = content.tagName.toLowerCase();
+                            if (tagname != 'a') {
+                                links = Array.from(content.querySelectorAll('a'));
+                                for (i = 0; i < links.length; i++) {
+                                    a = links[i];
+                                    if (!a.href)
+                                        continue;
+                                    href = (0, toURL_1.default)(a.href);
+                                    if (!href) {
+                                        console.log(a.href, null);
+                                        continue;
+                                    }
+                                    encryption = (0, encryptionURL_1.default)(href, self.options.password, self.options.verbose);
+                                    excluded = self.isExcluded(href);
+                                    if (self.options.verbose) {
+                                        console.log(Object.assign(encryption, {
+                                            url: href.href,
+                                            isExcluded: excluded
+                                        }));
+                                    }
+                                    if (!excluded) {
+                                        enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+                                        randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
+                                        a.href = randRedir + enc;
+                                        a.target = '_blank';
+                                        a.rel = 'nofollow noopener noreferer';
+                                    }
+                                }
+                                result = content.outerHTML;
+                            }
+                        }
+                        return [2 /*return*/, result];
                 }
-            }
-        }
-        else if (content instanceof HTMLElement) {
-            var tagname = content.tagName.toLowerCase();
-            if (tagname != 'a') {
-                var links = Array.from(content.querySelectorAll('a'));
-                for (var i = 0; i < links.length; i++) {
-                    var a = links[i];
-                    if (!a.href)
-                        continue;
-                    var href = (0, toURL_1.default)(a.href);
-                    if (!href) {
-                        console.log(a.href, null);
-                        continue;
-                    }
-                    var encryption = (0, encryptionURL_1.default)(href, self.options.password, self.options.verbose);
-                    var excluded = self.isExcluded(href);
-                    if (self.options.verbose) {
-                        console.log(Object.assign(encryption, {
-                            url: href.href,
-                            isExcluded: excluded
-                        }));
-                    }
-                    if (!excluded) {
-                        var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-                        var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
-                        a.href = randRedir + enc;
-                        a.target = '_blank';
-                        a.rel = 'nofollow noopener noreferer';
-                    }
-                }
-                result = content.outerHTML;
-            }
-        }
-        return result;
+            });
+        });
     };
     /**
      * anonymize url directly

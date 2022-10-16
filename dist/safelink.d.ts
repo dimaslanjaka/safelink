@@ -1,3 +1,5 @@
+/// <reference types="node" />
+/// <reference types="node" />
 import { Nullable } from './resolveQueryUrl';
 interface Options {
     exclude: string[] | RegExp[] | (string | RegExp)[];
@@ -18,10 +20,10 @@ export default class safelink {
     isExcluded(url: string | URL): boolean;
     /**
      * parse html string or element to anonymize urls
-     * @param str
+     * @param target
      * @returns
      */
-    parse(str: Nullable<string> | HTMLElement): Nullable<string>;
+    parse(target: Nullable<string> | HTMLElement | Buffer | NodeJS.ReadWriteStream): Promise<Nullable<string>>;
     /**
      * anonymize url directly
      * @param href
