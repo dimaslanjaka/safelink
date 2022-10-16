@@ -98,14 +98,16 @@ var safelink = /** @class */ (function () {
                         content = target;
                         if (!(typeof target === 'string' || target instanceof HTMLElement)) return [3 /*break*/, 1];
                         content = target;
-                        return [3 /*break*/, 3];
+                        return [3 /*break*/, 4];
                     case 1:
-                        if (!Buffer.isBuffer(target)) return [3 /*break*/, 3];
-                        return [4 /*yield*/, (0, string_1.bufferToString)(target)];
-                    case 2:
-                        content = _a.sent();
-                        _a.label = 3;
+                        if (!Buffer.isBuffer(target)) return [3 /*break*/, 2];
+                        content = (0, string_1.bufferToString)(target);
+                        return [3 /*break*/, 4];
+                    case 2: return [4 /*yield*/, (0, string_1.streamToString)(target)];
                     case 3:
+                        content = _a.sent();
+                        _a.label = 4;
+                    case 4:
                         result = null;
                         if (typeof content === 'string' && content.trim().length > 0) {
                             regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;

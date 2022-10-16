@@ -20,6 +20,9 @@
       "typings"
     ]
   },
+  "typeAcquisition": {
+    "enable": true
+  },
   "ts-node": {
     "esm": true,
     "compilerOptions": {

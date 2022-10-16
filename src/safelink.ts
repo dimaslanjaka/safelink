@@ -1,6 +1,6 @@
 import encryptionURL from './encryptionURL';
 import { default as _resolveQueryUrl, Nullable } from './resolveQueryUrl';
-import { bufferToString } from './string';
+import { bufferToString, streamToString } from './string';
 import toURL from './toURL';
 
 const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
@@ -61,7 +61,9 @@ export default class safelink {
     if (typeof target === 'string' || target instanceof HTMLElement) {
       content = target;
     } else if (Buffer.isBuffer(target)) {
-      content = await bufferToString(target);
+      content = bufferToString(target);
+    } else {
+      content = await streamToString(target);
     }
     let result: string = null;
     if (typeof content === 'string' && content.trim().length > 0) {

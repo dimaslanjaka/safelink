@@ -70,9 +70,11 @@ Execute functions:
 <script>
   const sf = new safelink(options);
   // automated safelinkify all hyperlinks in body
-  sf.parse(document.querySelector('body'));
-  // in page redirector
-  sf.resolveQueryUrl(window.location.href);
+  sf.parse(document.querySelector('body')).then((result)=>{
+    console.log(result);
+    // in page redirector
+    sf.resolveQueryUrl(window.location.href);
+  });
 </script>
 ```
 ### NodeJS
@@ -91,8 +93,8 @@ const processedExternalLinks = sf.parse(`
 <a href="#http://webmanajemen.com">#internal</a>
 <a href="?http://webmanajemen.com">?internal</a>
 <a href="">internal</a>
-`);
-console.log(processedExternalLinks);
+`).then(console.log);
+
 /*
 <a href="www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
 <a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL3d3dy5leGFtcGxlLmNvbS9wYWdlLnBocD9pZD14eHh4Jm5hbWU9eXl5eQ==" ....>external</a>

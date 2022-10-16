@@ -125,7 +125,7 @@ gulp.watch(
   }
 );
 
-let child: ReturnType<typeof spawn> = null;
+let child: ReturnType<typeof spawn> | null = null;
 /**
  * Smart Summoner
  * @param cmd

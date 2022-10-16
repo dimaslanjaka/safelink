@@ -40,9 +40,11 @@
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
     "@types/bluebird": "^3.5.36",
+    "@types/browser-sync": "^2.26.3",
     "@types/cross-spawn": "^6.0.2",
     "@types/crypto-js": "^4.1.1",
     "@types/gulp": "^4.0.9",
+    "@types/html-minifier-terser": "^7.0.0",
     "@types/jquery": "^3.5.14",
     "@types/prettier": "^2.6.0",
     "@types/toastr": "^2.1.39",
