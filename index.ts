@@ -79,7 +79,7 @@ app.init({
             writeFileSync(join(__dirname, 'src/test/index.html'), renderLayout);
 
             /** Safelinkify */
-            renderLayout = safelinkInstance.parse(renderLayout);
+            renderLayout = (await safelinkInstance.parse(renderLayout)) as string;
 
             let result = '';
             try {

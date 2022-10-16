@@ -93,7 +93,8 @@ const processedExternalLinks = sf.parse(`
 <a href="#http://webmanajemen.com">#internal</a>
 <a href="?http://webmanajemen.com">?internal</a>
 <a href="">internal</a>
-`).then(console.log);
+`);
+processedExternalLinks.then(console.log);
 
 /*
 <a href="www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>

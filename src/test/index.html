@@ -262,9 +262,11 @@ npm install
 <pre><code class="language-html">&lt;script&gt;
   const sf = new safelink(options);
   // automated safelinkify all hyperlinks in body
-  sf.parse(document.querySelector('body'));
-  // in page redirector
-  sf.resolveQueryUrl(window.location.href);
+  sf.parse(document.querySelector('body')).then((result)=&gt;{
+    console.log(result);
+    // in page redirector
+    sf.resolveQueryUrl(window.location.href);
+  });
 &lt;/script&gt;
 </code></pre>
 <h3 id="nodejs" tabindex="-1"><a class="header-anchor" href="#nodejs">NodeJS</a></h3>
@@ -283,7 +285,8 @@ const processedExternalLinks = sf.parse(`
 &lt;a href=&quot;?http://webmanajemen.com&quot;&gt;?internal&lt;/a&gt;
 &lt;a href=&quot;&quot;&gt;internal&lt;/a&gt;
 `);
-console.log(processedExternalLinks);
+processedExternalLinks.then(console.log);
+
 /*
 &lt;a href=&quot;www.example.com/page.php?id=xxxx&amp;name=yyyy&quot; ....&gt;external&lt;/a&gt;
 &lt;a href=&quot;https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL3d3dy5leGFtcGxlLmNvbS9wYWdlLnBocD9pZD14eHh4Jm5hbWU9eXl5eQ==&quot; ....&gt;external&lt;/a&gt;
@@ -500,6 +503,10 @@ console.log(processedExternalLinks);
 <p><strong>1.1.2</strong></p>
 <ul>
 <li>fix same link when included as other element (non-hyperlink)</li>
+</ul>
+<p><strong>1.1.3</strong></p>
+<ul>
+<li>Compile to ES5</li>
 </ul>
 </div>
 
