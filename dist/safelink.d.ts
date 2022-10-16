@@ -10,7 +10,12 @@ export declare type SafelinkOptions = Options;
 export default class safelink {
     options: Partial<Options>;
     constructor(opt: Partial<Options>);
-    private isExcluded;
+    /**
+     * is url excluded
+     * @param url
+     * @returns
+     */
+    isExcluded(url: string | URL): boolean;
     /**
      * parse html string or element to anonymize urls
      * @param str

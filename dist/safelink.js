@@ -20,6 +20,11 @@ var safelink = /** @class */ (function () {
             opt.redirect = [opt.redirect];
         this.options = Object.assign(this.options, opt);
     }
+    /**
+     * is url excluded
+     * @param url
+     * @returns
+     */
     safelink.prototype.isExcluded = function (url) {
         var excludes = this.options.exclude;
         var value = String(url);

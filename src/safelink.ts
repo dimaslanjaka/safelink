@@ -24,7 +24,12 @@ export default class safelink {
     if (typeof opt.redirect == 'string') opt.redirect = [opt.redirect];
     this.options = Object.assign(this.options, opt);
   }
-  private isExcluded(url: string | URL) {
+  /**
+   * is url excluded
+   * @param url
+   * @returns
+   */
+  isExcluded(url: string | URL) {
     const excludes = this.options.exclude;
     const value = String(url);
     const parsed = url instanceof URL ? url : toURL(value);
