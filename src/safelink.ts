@@ -67,6 +67,11 @@ export default class safelink {
     }
     let result: string = null;
     if (typeof content === 'string' && content.trim().length > 0) {
+      // make content as default result
+      result = content;
+      /**
+       * regex match href of hyperlink element
+       */
       const regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
       /**
        * process string
@@ -82,8 +87,10 @@ export default class safelink {
           const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
           const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
           const newhref = randRedir + enc;
+          // return anonymized href
           return content.replace(href, newhref);
         }
+        // return original content
         return content;
       };
 
