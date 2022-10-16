@@ -17,7 +17,8 @@ gulp.task('copy', () => {
     .src(['**/*', '!**/*.d.ts'], { cwd: join(__dirname, 'dist') })
     .pipe(gulp.dest(join(__dirname, 'gh-pages', 'dist')))
     .once('end', () => {
-      delete pkg.devDependencies;
+      // delete pkg['devDependencies'];
+      pkg['devDependencies'] = {} as any;
       writeFileSync(join(__dirname, 'gh-pages/package.json'), JSON.stringify(pkg, null, 2));
     });
   return gulp.src(join(__dirname, '*.md')).pipe(gulp.dest(join(__dirname, 'gh-pages')));
