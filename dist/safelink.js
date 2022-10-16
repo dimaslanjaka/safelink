@@ -126,10 +126,11 @@ var safelink = /** @class */ (function () {
                                 m = matches[i];
                                 href = m[2].trim();
                                 allMatch = m[0];
-                                if (typeof href == 'string' && href) {
+                                if (typeof href == 'string' && href.length > 0) {
                                     wholeContents = typeof result == 'string' ? result : content;
                                     if (typeof wholeContents === 'string') {
                                         processedHyperlink = processStr(allMatch, href);
+                                        console.log('processing');
                                         if (processedHyperlink) {
                                             processedContent = wholeContents.replace(allMatch, processedHyperlink);
                                             result = processedContent;
