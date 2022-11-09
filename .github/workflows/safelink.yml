@@ -24,13 +24,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
-          cache: yarn
+          cache: 'npm'
           token: ${{ secrets.GITHUB_TOKEN }}
           submodules: recursive
       - run: npm i -g gulp-cli ts-node typescript npm
         name: install global packages
-      - run: yarn install
+      - run: npm install
         name: clean install
-      - run: yarn build
+      - run: npm run build
         name: build package
       - run: gulp copy
