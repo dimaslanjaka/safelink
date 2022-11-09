@@ -20,6 +20,8 @@ jobs:
         os: [windows-latest, macos-latest, ubuntu-latest]
     steps:
       - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup Node 16.x
         uses: actions/setup-node@v3
         with:
@@ -34,3 +36,9 @@ jobs:
       - run: npm run build
         name: build package
       - run: gulp copy
+      - name: Commits
+        run: |
+          git add dist
+          date=$(date '+%Y-%m-%d %H:%M:%S')
+          git commit -m "Build $(date)"
+          git push -u origin master
