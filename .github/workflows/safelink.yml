@@ -1,12 +1,12 @@
-name: Safelink
+name: Build
 
 on:
   pull_request:
     branches:
-      - main
+      - master
   push:
     branches:
-      - main
+      - master
 
 concurrency:
   group: safelink-${{ github.head_ref }}
