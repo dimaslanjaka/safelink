@@ -41,7 +41,7 @@ export default class safelink {
 
         if (typeof pattern == 'string' && typeof parsed === 'object') {
           // only validate full url
-          if (parsed.host.includes(pattern)) return true;
+          if ((parsed.host||'').includes(pattern)) return true;
         } else if (pattern instanceof RegExp) {
           if (value.match(pattern)) return true;
         }
