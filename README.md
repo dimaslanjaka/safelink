@@ -109,3 +109,66 @@ processedExternalLinks.then(console.log);
 <a href="">internal</a>
 */
 ```
+
+## Using gulp
+```typescript
+import gulp from 'gulp'
+import sf from 'safelinkify'
+import { toUnix, join } from 'upath'
+import through2 from 'through2'
+
+// folder to scan
+const destDir = join(__dirname, 'build')
+// scan external link to safelink from dest dir
+gulp.task('safelink', () => {
+  const safelink = new sf.safelink({
+    // exclude patterns (dont anonymize these patterns)
+    exclude: [
+      /https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/,
+      /([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/
+    ],
+    // url redirector
+    redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
+    // debug
+    verbose: false,
+    // encryption type = 'base64' | 'aes'
+    type: 'base64',
+    // password aes, default = root
+    password: 'unique-password'
+  })
+  return gulp
+    .src(['**/*.html'], {
+      cwd: destDir,
+      ignore: [
+        // exclude non-website and react production files
+        '**/tmp/**',
+        '**/node_modules/**',
+        '**/monsters/**/*',
+        '**/attendants/**/*',
+        '**/materials/**/*',
+        '**/scenic-spots/**/*',
+        '**/static/**/*'
+      ]
+    })
+    .pipe(
+      through2.obj(async (file, _enc, next) => {
+        // drop null
+        if (file.isNull()) return next()
+        // do safelinkify
+        const content = String(file.contents)
+        const parsed = await safelink.parse(content)
+        if (parsed) {
+          file.contents = Buffer.from(parsed)
+          next(null, file)
+        } else {
+          console.log(
+            'cannot parse',
+            toUnix(file.path).replace(toUnix(process.cwd()), '')
+          )
+          next()
+        }
+      })
+    )
+    .pipe(gulp.dest(destDir))
+})
+```

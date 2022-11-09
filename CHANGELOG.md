@@ -34,3 +34,9 @@
 
 **1.1.3**
 - Compile to ES5
+
+**1.1.4**
+- `parse` now async
+- `parse` always return string
+- add more docs for easy development
+- add `tsconfig.build.json` excluding test files
