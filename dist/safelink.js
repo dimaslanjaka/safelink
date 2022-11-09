@@ -70,9 +70,9 @@ var safelink = /** @class */ (function () {
         if (value.match(/^(?:(ht|f)tp(s?):\/\/)?/)) {
             for (var i = 0; i < excludes.length; i++) {
                 var pattern = excludes[i];
-                if (typeof pattern == 'string' && typeof parsed === 'object') {
+                if (typeof pattern == 'string' && typeof parsed === 'object' && parsed !== null) {
                     // only validate full url
-                    if (parsed.host.includes(pattern))
+                    if ((parsed.host || '').includes(pattern))
                         return true;
                 }
                 else if (pattern instanceof RegExp) {
