@@ -14,9 +14,12 @@ Customized safelink url redirector. Transform and Anonymize all hyperlinks to ou
 - npm [https://www.npmjs.com/package/safelinkify](https://www.npmjs.com/package/safelinkify)
 - github [https://github.com/dimaslanjaka/safelink](https://github.com/dimaslanjaka/safelink)
 
+### npm
 ```bash
 npm install safelinkify --production
-# or
+```
+### yarn
+```
 yarn install safelinkify --production=true
 ```
 
