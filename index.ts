@@ -104,7 +104,7 @@ app.init({
       }
     ]
   },
-  ignore: ['*.txt', '*.json', '/gh-pages'],
+  ignore: ['*.txt', '*.json', '**/gh-pages/**', '**/dist/**', '**/node_modules/**', '**/tmp/**'],
   watch: true
 });
 

@@ -1,3 +1,4 @@
+import { ChildProcess } from 'child_process';
 import spawn from 'cross-spawn';
 import { existsSync, mkdirSync, writeFile, writeFileSync } from 'fs';
 import * as gulp from 'gulp';
@@ -52,6 +53,7 @@ function git(...args: string[]) {
     }
   );
 }
+
 const configDeploy = {
   name: 'dimaslanjaka',
   email: 'dimaslanjaka@gmail.com',
@@ -94,12 +96,36 @@ gulp.task('deploy-git', async (done?: TaskCallback) => {
 
 gulp.task('deploy', gulp.series('copy', 'deploy-git'));
 
-gulp.task('serve', () => {
-  return spawn('ts-node', [join(__dirname, 'index.ts')], {
+gulp.task('default', gulp.series('copy'));
+
+let child: ChildProcess;
+const serve = function () {
+  if (child) {
+    if (!child.killed) child.kill();
+  }
+  child = spawn('ts-node', [join(__dirname, 'index.ts')], {
     cwd: __dirname,
     shell: true,
     stdio: 'inherit'
   });
+  return child;
+};
+
+gulp.task('serve', (done) => {
+  const run = serve();
+  run.once('close', done);
 });
 
-gulp.task('default', gulp.series('copy'));
+gulp.task('serve-dev', function (done) {
+  const watcher = gulp.watch([join(__dirname, 'index.ts'), join(__dirname, 'tests/*.ejs')]);
+  // running first for initializer
+  serve().once('spawn', function () {
+    console.log('first spawner hit');
+  });
+  // assign watcher event
+  watcher.on('change', serve);
+  // once watcher exit, finish the task
+  watcher.once('close', done);
+  // once watcher error, finish the task
+  // watcher.once('error', done);
+});
