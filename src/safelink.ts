@@ -1,27 +1,20 @@
 import encryptionURL from './encryptionURL';
-import { default as _resolveQueryUrl, Nullable } from './resolveQueryUrl';
+import { Nullable, SafelinkOptions } from './globals';
+import { default as _resolveQueryUrl } from './resolveQueryUrl';
 import { bufferToString, streamToString } from './string';
 import toURL from './toURL';
 
 const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
-interface Options {
-  exclude: string[] | RegExp[] | (string | RegExp)[];
-  redirect?: string[] | string;
-  password: string;
-  verbose?: boolean;
-  type: string | 'base64' | 'aes';
-}
-export type SafelinkOptions = Options;
 
 export default class safelink {
-  options: Partial<Options> = {
+  options: Partial<SafelinkOptions> = {
     exclude: [],
     redirect: ['https://www.webmanajemen.com/page/safelink.html?url='],
     password: 'root',
     verbose: false,
     type: 'base64'
   };
-  constructor(opt: Partial<Options>) {
+  constructor(opt: Partial<SafelinkOptions>) {
     if (typeof opt.redirect == 'string') opt.redirect = [opt.redirect];
     this.options = Object.assign(this.options, opt);
   }
@@ -41,7 +34,7 @@ export default class safelink {
 
         if (typeof pattern == 'string' && typeof parsed === 'object' && parsed !== null) {
           // only validate full url
-          if ((parsed.host||'').includes(pattern)) return true;
+          if ((parsed.host || '').includes(pattern)) return true;
         } else if (pattern instanceof RegExp) {
           if (value.match(pattern)) return true;
         }

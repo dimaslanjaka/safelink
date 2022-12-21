@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';
-import { Nullable } from './resolveQueryUrl';
+import { Nullable } from './globals';
 
 export const b64 = {
   encode: (str: string): Nullable<string> => {

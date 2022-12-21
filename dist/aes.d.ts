@@ -1,4 +1,4 @@
-import { Nullable } from './resolveQueryUrl';
+import { Nullable } from './globals';
 /**
  * Encrypt function
  * @param {string} passphrase password

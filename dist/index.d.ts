@@ -7,4 +7,4 @@ declare namespace safelinkify {
     const safelink: typeof _safelink;
 }
 export default safelinkify;
-export { Nullable } from './resolveQueryUrl';
+export { Nullable, SafelinkOptions } from './globals';

@@ -1,17 +1,9 @@
 /// <reference types="node" />
 /// <reference types="node" />
-import { Nullable } from './resolveQueryUrl';
-interface Options {
-    exclude: string[] | RegExp[] | (string | RegExp)[];
-    redirect?: string[] | string;
-    password: string;
-    verbose?: boolean;
-    type: string | 'base64' | 'aes';
-}
-export declare type SafelinkOptions = Options;
+import { Nullable, SafelinkOptions } from './globals';
 export default class safelink {
-    options: Partial<Options>;
-    constructor(opt: Partial<Options>);
+    options: Partial<SafelinkOptions>;
+    constructor(opt: Partial<SafelinkOptions>);
     /**
      * is url excluded
      * @param url
@@ -36,4 +28,3 @@ export default class safelink {
      */
     resolveQueryUrl(search?: string): Partial<import("./resolveQueryUrl").resolveQueryResult>;
 }
-export {};

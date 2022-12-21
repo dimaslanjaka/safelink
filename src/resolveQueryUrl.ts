@@ -1,8 +1,8 @@
 import encryptionURL, { encryptionURLResult } from './encryptionURL';
+import { Nullable } from './globals';
 import { parseQuery } from './parseQuery';
 import toURL from './toURL';
 
-export type Nullable<T> = T | null | undefined;
 export interface resolveQueryResult {
   [key: string]: encryptionURLResult;
 }

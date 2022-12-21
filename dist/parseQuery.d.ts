@@ -1,5 +1,5 @@
-import { Nullable } from './resolveQueryUrl';
-declare type parseQueryResult = {
+import { Nullable } from './globals';
+type parseQueryResult = {
     [key: string]: any;
 } | string;
 /**

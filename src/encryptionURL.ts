@@ -1,6 +1,6 @@
-import b64 from './b64';
 import aes from './aes';
-import { Nullable } from './resolveQueryUrl';
+import b64 from './b64';
+import { Nullable } from './globals';
 
 export interface encryptionURLResult {
   aes: {

@@ -1,4 +1,4 @@
-import { Nullable } from './resolveQueryUrl';
+import { Nullable } from './globals';
 export interface encryptionURLResult {
     aes: {
         encode: Nullable<string>;

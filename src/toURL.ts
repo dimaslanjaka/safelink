@@ -1,3 +1,5 @@
+import { Nullable } from './globals';
+
 /**
  * is url valid
  * @param string
@@ -30,8 +32,6 @@ export function fixUrl(url: string | URL) {
   }
   return str.replace(/([^:]\/)\/+/g, '$1');
 }
-
-export type Nullable<T> = T | null | undefined;
 
 /**
  * transform url string to {@link Nullable}<{@link URL}>

@@ -1,3 +1,4 @@
+import { Nullable } from './globals';
 /**
  * is url valid
  * @param string
@@ -11,7 +12,6 @@ export declare function isValidHttpUrl(string: string | URL): boolean;
  * @returns
  */
 export declare function fixUrl(url: string | URL): string;
-export declare type Nullable<T> = T | null | undefined;
 /**
  * transform url string to {@link Nullable}<{@link URL}>
  * @param url

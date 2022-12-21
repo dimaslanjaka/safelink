@@ -1,4 +1,5 @@
-import { Nullable } from './resolveQueryUrl';
+
+import { Nullable } from './globals';
 import toURL from './toURL';
 
 const _global_parseQuery = (typeof window !== 'undefined' ? window : global) as any;

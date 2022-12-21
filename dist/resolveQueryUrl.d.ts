@@ -1,5 +1,4 @@
 import { encryptionURLResult } from './encryptionURL';
-export declare type Nullable<T> = T | null | undefined;
 export interface resolveQueryResult {
     [key: string]: encryptionURLResult;
 }
