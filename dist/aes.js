@@ -17,7 +17,7 @@ function getKey(passphrase, salt) {
     var key = crypto_js_1.default.PBKDF2(passphrase, salt, {
         hasher: crypto_js_1.default.algo.SHA256,
         keySize: 64 / 8,
-        iterations: iterations,
+        iterations: iterations
     });
     return key;
 }
@@ -34,7 +34,7 @@ function userJSEncrypt(passphrase, plainText, debug) {
     try {
         var key = getKey(passphrase, salt);
         var encrypted = crypto_js_1.default.AES.encrypt(plainText, key, {
-            iv: crypto_js_1.default.enc.Utf8.parse(iv),
+            iv: crypto_js_1.default.enc.Utf8.parse(iv)
         });
         var result = encrypted.ciphertext.toString(crypto_js_1.default.enc.Base64);
         if (typeof result == 'string' && result.length)
@@ -44,7 +44,7 @@ function userJSEncrypt(passphrase, plainText, debug) {
         if (error instanceof Error && debug)
             console.log('AES encrypt error', error.message, {
                 plainText: plainText,
-                passphrase: passphrase,
+                passphrase: passphrase
             });
     }
     return null;
@@ -62,7 +62,7 @@ function userJSDecrypt(passphrase, encryptedText, debug) {
     try {
         var key = getKey(passphrase, salt);
         var decrypted = crypto_js_1.default.AES.decrypt(encryptedText, key, {
-            iv: crypto_js_1.default.enc.Utf8.parse(iv),
+            iv: crypto_js_1.default.enc.Utf8.parse(iv)
         });
         var result = decrypted.toString(crypto_js_1.default.enc.Utf8);
         if (typeof result == 'string' && result.length)
@@ -72,7 +72,7 @@ function userJSDecrypt(passphrase, encryptedText, debug) {
         if (error instanceof Error && debug)
             console.log('AES decrypt error', error.message, {
                 encryptedText: encryptedText,
-                passphrase: passphrase,
+                passphrase: passphrase
             });
     }
     return null;
@@ -82,5 +82,5 @@ function userJSDecrypt(passphrase, encryptedText, debug) {
  */
 exports.default = {
     encrypt: userJSEncrypt,
-    decrypt: userJSDecrypt,
+    decrypt: userJSDecrypt
 };

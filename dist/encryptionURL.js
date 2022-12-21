@@ -3,8 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var b64_1 = __importDefault(require("./b64"));
 var aes_1 = __importDefault(require("./aes"));
+var b64_1 = __importDefault(require("./b64"));
 var _global_encryptionURL = (typeof window !== 'undefined' ? window : global);
 /**
  * resolve url encryption
