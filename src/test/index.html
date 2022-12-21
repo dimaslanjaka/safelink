@@ -183,7 +183,28 @@ table {
 >
 <!-- TOP RIGHT RIBBON: END COPYING HERE -->
 
-<div class="mb-4"><h1 id="safelinkify" tabindex="-1"><a class="header-anchor" href="#safelinkify">Safelinkify</a></h1>
+<div class="mb-4">
+  <div class="accordion" id="accordionExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button
+          class="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          Documentation
+        </button>
+      </h2>
+      <div
+        id="collapseOne"
+        class="accordion-collapse collapsed"
+        aria-labelledby="headingOne"
+        data-bs-parent="#accordionExample"
+      >
+        <div class="accordion-body"><h1 id="safelinkify" tabindex="-1"><a class="header-anchor" href="#safelinkify">Safelinkify</a></h1>
 <p><img src="https://img.shields.io/npm/v/safelinkify?label=safelinkify&amp;style=flat" alt="npm version">
 <img src="https://img.shields.io/website?down_color=red&amp;down_message=down&amp;label=www.webmanajemen.com&amp;logo=www.webmanajemen.com&amp;style=flat&amp;up_color=green&amp;up_message=up&amp;url=https%3A%2F%2Fwww.webmanajemen.com" alt="www.webmanajemen.com">
 <img src="https://img.shields.io/npm/l/safelinkify" alt="LICENSE">
@@ -387,6 +408,10 @@ gulp.task('safelink', () =&gt; {
     .pipe(gulp.dest(destDir))
 })
 </code></pre>
+</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <hr />
@@ -689,10 +714,12 @@ gulp.task('safelink', () =&gt; {
           <li class="nav-item"><a href="/safelink" class="nav-link px-2 text-muted">Safelink</a></li>
           <li class="nav-item"><a href="/js-prototypes" class="nav-link px-2 text-muted">js-prototypes</a></li>
           <li class="nav-item"><a href="/smartform" class="nav-link px-2 text-muted">Smartform</a></li>
-          <li class="nav-item"><a href="/p/about.html" class="nav-link px-2 text-muted">About</a></li>
+          <li class="nav-item"><a href="/about" class="nav-link px-2 text-muted">About Me</a></li>
         </ul>
         <p class="text-center text-muted">© 2022 Website Manajemen Indonesia, Inc</p>
       </footer>
     </div>
+
+    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

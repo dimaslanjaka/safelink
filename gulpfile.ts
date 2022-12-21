@@ -98,24 +98,40 @@ gulp.task('deploy', gulp.series('copy', 'deploy-git'));
 
 gulp.task('default', gulp.series('copy'));
 
-let child: ChildProcess | null = null;
+/**
+ * NOT WORKING
+ */
+
+let child: ChildProcess;
 let counter = 0;
-const serve = function () {
-  if (child !== null) {
+const serve = function (restart?: boolean) {
+  if (child) {
     try {
-      child.stdin?.pause();
-      child.kill();
+      child.once('close', () => {
+        console.log(`child[${counter}] killed`);
+        if (restart) serve();
+      });
+
+      if (process.platform === 'win32') {
+        //spawn('taskkill', ['/pid', child.pid, '/f', '/t'], { cwd: __dirname, shell: true, stdio: 'inherit' });
+        if (child.pid) process.kill(child.pid);
+      } else {
+        child.stdout?.destroy();
+        child.stderr?.destroy();
+        child.kill('SIGINT');
+      }
     } catch {
       // no operation once error occurs
     }
+  } else {
+    child = spawn(join(__dirname, 'node_modules/.bin/ts-node'), [join(__dirname, 'index.ts')], {
+      cwd: __dirname,
+      shell: true,
+      stdio: 'inherit'
+    });
+
+    child.once('spawn', () => counter++);
   }
-  child = spawn('ts-node', [join(__dirname, 'index.ts')], {
-    cwd: __dirname,
-    shell: true,
-    stdio: 'inherit'
-  });
-  child.once('close', () => console.log(`child[${counter}] killed`));
-  child.once('spawn', () => counter++);
   return child;
 };
 
@@ -129,7 +145,7 @@ gulp.task('serve-dev', function (done) {
   // running first for initializer
   serve();
   // assign watcher event
-  watcher.on('change', serve);
+  watcher.on('change', () => serve(true));
   // once watcher exit, finish the task
   watcher.once('close', done);
   // once watcher error, finish the task
