@@ -11,13 +11,17 @@
 Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS. [READ FULL DOCUMENTATION AND LIVE DEMO](https://www.webmanajemen.com/safelink/index.html)
 
 ## Installation
+
+### Bundles
 - npm [https://www.npmjs.com/package/safelinkify](https://www.npmjs.com/package/safelinkify)
 - github [https://github.com/dimaslanjaka/safelink](https://github.com/dimaslanjaka/safelink)
+- tarball [https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz](https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz)
 
 ### npm
 ```bash
 npm install safelinkify --production
 ```
+
 ### yarn
 ```
 yarn install safelinkify --production=true
