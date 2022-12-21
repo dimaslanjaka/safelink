@@ -8,6 +8,7 @@ import { existsSync, mkdirSync, writeFileSync } from 'fs';
 import gulp from 'gulp';
 import { minify } from 'html-minifier-terser';
 import { join } from 'upath';
+import pkg from './package.json';
 import safelink from './src/safelink';
 import EJSHelper from './tests/EJSHelper';
 
@@ -74,6 +75,7 @@ app.init({
             const renderPage = await helpers.renderFile(view_ejs);
             helpers.add('body', renderPage);
             helpers.add('title', title);
+            helpers.add('description', pkg.description);
             let renderLayout = await helpers.renderFile(join(view, 'layout.ejs'));
 
             // write to test folder
@@ -82,6 +84,8 @@ app.init({
             /** Safelinkify */
             renderLayout = (await safelinkInstance.parse(renderLayout)) as string;
 
+            /** minify for github pages */
+
             let result = '';
             try {
               result = await minify(renderLayout, {
@@ -89,7 +93,7 @@ app.init({
                 minifyJS: true,
                 collapseWhitespace: true
               });
-            } catch (error) {
+            } catch {
               result = renderLayout;
             }
 
@@ -104,8 +108,17 @@ app.init({
       }
     ]
   },
-  ignore: ['*.txt', '*.json', '**/gh-pages/**', '**/dist/**', '**/node_modules/**', '**/tmp/**'],
-  watch: true
+  ignore: [
+    '*.txt',
+    '*.json',
+    '**/gh-pages/**',
+    '**/dist/**',
+    '**/node_modules/**',
+    '**/tmp/**',
+    'src/test*',
+    '**/gulpfile*'
+  ],
+  watch: false
 });
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
