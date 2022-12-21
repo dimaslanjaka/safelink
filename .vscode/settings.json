@@ -28,5 +28,9 @@
     "source.organizeImports": true,
     "source.fixAll": true
   },
-  "editor.fontSize": 13
+  "editor.fontSize": 13,
+  "code-runner.clearPreviousOutput": true,
+  "code-runner.saveAllFilesBeforeRun": true,
+  "code-runner.runInTerminal": true,
+  "code-runner.saveFileBeforeRun": true
 }

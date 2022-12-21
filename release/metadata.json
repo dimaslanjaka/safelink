@@ -3,12 +3,15 @@
     "hash": "c14b5d28146d022bc00807e689ad8b9f08708f96"
   },
   "/release/safelinkify.tgz": {
-    "hash": "729dbfb35182c1427becf38aa43408fc9b03446a"
+    "hash": "b8008fb4d673990369da8f8dbf399f5598b6b716"
   },
   "/package-lock.json": {
-    "hash": "2d935c9891df1c86d51ab4e1b0e84f8e92058e96"
+    "hash": "f091af4f156abfcb0beee3ea3ef325f0b606a337"
   },
   "/release/safelinkify-1.1.7.tgz": {
     "hash": "729dbfb35182c1427becf38aa43408fc9b03446a"
+  },
+  "/release/safelinkify-1.1.8.tgz": {
+    "hash": "b8008fb4d673990369da8f8dbf399f5598b6b716"
   }
 }
