@@ -13,9 +13,11 @@ Customized safelink url redirector. Transform and Anonymize all hyperlinks to ou
 ## Installation
 
 ### Bundles
-- npm [https://www.npmjs.com/package/safelinkify](https://www.npmjs.com/package/safelinkify)
-- github [https://github.com/dimaslanjaka/safelink](https://github.com/dimaslanjaka/safelink)
-- tarball [https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz](https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz)
+| registry | link | commands |
+| :--- | :--- | :---
+| npm | [https://www.npmjs.com/package/safelinkify](https://www.npmjs.com/package/safelinkify) | `npm i safelinkify` |
+| github | [https://github.com/dimaslanjaka/safelink](https://github.com/dimaslanjaka/safelink) | `npm i https://github.com/dimaslanjaka/safelink` |
+| tarball | [https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz](https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz) | `npm i https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz` |
 
 ### npm
 ```bash
