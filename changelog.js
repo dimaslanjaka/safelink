@@ -33,7 +33,7 @@ const gitExec = (command) =>
   });
 
 let markdown = `
-## CHANGELOG
+## CHANGELOG of safelinkify
 
 **1.0.0**
 - initial commit

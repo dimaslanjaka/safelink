@@ -27,6 +27,7 @@ const safelinkInstance = new safelink({
   // password aes, default = root
   password: 'unique-password'
 });
+
 const PORT = parseInt(process.env.PORT || '4000');
 let baseUrl = 'http://localhost' + PORT;
 const app = browserSync.create();
@@ -65,7 +66,7 @@ app.init({
 
           const view = join(__dirname, 'tests');
           const view_ejs = join(view, path + '.ejs');
-          const title = 'Safelinkify - Website Manajemen Indonesia';
+          const title = 'Safelinkify - External Link Anonymizer';
           if (existsSync(view_ejs)) {
             const helpers = new EJSHelper({
               root: join(view, 'layout.ejs')
@@ -102,6 +103,10 @@ app.init({
         }
       }
     ]
+  },
+  watch: true,
+  watchOptions: {
+    interval: 5000
   }
 });
 
