@@ -95,7 +95,7 @@ gitExec(['log', '--pretty=format:%h !|! %ad !|! %s %d', `--date=format:%Y-%m-%d 
         markdown += `**${o.message.replace(/\(.*\),?/, '').trim()}**` + EOL;
       } else {
         markdown +=
-          `- ${o.date} [${o.hash}](https://github.com/dimaslanjaka/safelink/commit/${o.hash}) ${o.message.replace(
+          `- [ _${o.date}_ ] [${o.hash}](https://github.com/dimaslanjaka/safelink/commit/${o.hash}) ${o.message.replace(
             /,$/,
             ''
           )}` + EOL;
