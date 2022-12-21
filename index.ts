@@ -104,10 +104,8 @@ app.init({
       }
     ]
   },
-  watch: true,
-  watchOptions: {
-    interval: 5000
-  }
+  ignore: ['*.txt', '*.json', '/gh-pages'],
+  watch: true
 });
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
