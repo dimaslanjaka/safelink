@@ -1,7 +1,4 @@
-import { encryptionURLResult } from './encryptionURL';
-export interface resolveQueryResult {
-    [key: string]: encryptionURLResult;
-}
+import { resolveQueryResult } from './globals';
 /**
  * Auto resolve url
  * * parse base64, aes

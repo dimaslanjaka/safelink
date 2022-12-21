@@ -1,21 +1,6 @@
 import aes from './aes';
 import b64 from './b64';
-import { Nullable } from './globals';
-
-export interface encryptionURLResult {
-  aes: {
-    encode: Nullable<string>;
-    encode_redirector: Nullable<string>;
-    decode: Nullable<string>;
-    passphrase: string;
-  };
-  base64: {
-    encode_redirector: Nullable<string>;
-    encode: Nullable<string>;
-    decode: Nullable<string>;
-  };
-  value: Nullable<string>;
-}
+import { encryptionURLResult, Nullable } from './globals';
 
 const _global_encryptionURL = (typeof window !== 'undefined' ? window : global) as any;
 

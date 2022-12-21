@@ -1,11 +1,7 @@
-import encryptionURL, { encryptionURLResult } from './encryptionURL';
-import { Nullable } from './globals';
+import encryptionURL from './encryptionURL';
+import { Nullable, resolveQueryResult } from './globals';
 import { parseQuery } from './parseQuery';
 import toURL from './toURL';
-
-export interface resolveQueryResult {
-  [key: string]: encryptionURLResult;
-}
 
 const _global_resolveQueryUrl = (typeof window !== 'undefined' ? window : global) as any;
 

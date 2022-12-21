@@ -15,4 +15,4 @@ namespace safelinkify {
 }
 
 export default safelinkify;
-export { Nullable, SafelinkOptions } from './globals';
+export { encryptionURLResult, Nullable, resolveQueryResult, SafelinkOptions } from './globals';

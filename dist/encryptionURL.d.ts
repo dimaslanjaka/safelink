@@ -1,18 +1,4 @@
-import { Nullable } from './globals';
-export interface encryptionURLResult {
-    aes: {
-        encode: Nullable<string>;
-        encode_redirector: Nullable<string>;
-        decode: Nullable<string>;
-        passphrase: string;
-    };
-    base64: {
-        encode_redirector: Nullable<string>;
-        encode: Nullable<string>;
-        decode: Nullable<string>;
-    };
-    value: Nullable<string>;
-}
+import { encryptionURLResult, Nullable } from './globals';
 /**
  * resolve url encryption
  * @param url
