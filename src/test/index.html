@@ -33,7 +33,7 @@ table {
         <a class="navbar-brand" href="/safelink">Safelinkify</a>
       </div>
     </nav>
-    <main class="container mb-4" id="main-contents"><style>/*!
+    <main class="container-fluid mb-4 py-4" id="main-contents"><style>/*!
  * "Fork me on GitHub" CSS ribbon v0.2.3 | MIT License
  * https://github.com/simonwhitaker/github-fork-ribbon-css
 */
@@ -183,25 +183,25 @@ table {
 >
 <!-- TOP RIGHT RIBBON: END COPYING HERE -->
 
-<div class="mb-4">
+<div class="mb-2">
   <div class="accordion" id="accordionExample">
     <div class="accordion-item">
-      <h2 class="accordion-header" id="headingOne">
+      <h2 class="accordion-header" id="headingTwo">
         <button
-          class="accordion-button"
+          class="accordion-button collapsed"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#collapseOne"
-          aria-expanded="true"
-          aria-controls="collapseOne"
+          data-bs-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
         >
           Documentation
         </button>
       </h2>
       <div
-        id="collapseOne"
-        class="accordion-collapse collapsed"
-        aria-labelledby="headingOne"
+        id="collapseTwo"
+        class="accordion-collapse collapse"
+        aria-labelledby="headingTwo"
         data-bs-parent="#accordionExample"
       >
         <div class="accordion-body"><h1 id="safelinkify" tabindex="-1"><a class="header-anchor" href="#safelinkify">Safelinkify</a></h1>
@@ -546,7 +546,27 @@ gulp.task('safelink', () =&gt; {
   <!-- prettier-ignore-end -->
 </div>
 
-<div class="mb-4"><h2 id="changelog-of-safelinkify" tabindex="-1"><a class="header-anchor" href="#changelog-of-safelinkify">CHANGELOG of safelinkify</a></h2>
+<div class="accordion" id="accordionExample2">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingThree">
+      <button
+        class="accordion-button collapsed"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#collapseThree"
+        aria-expanded="false"
+        aria-controls="collapseThree"
+      >
+        CHANGELOG
+      </button>
+    </h2>
+    <div
+      id="collapseThree"
+      class="accordion-collapse collapse"
+      aria-labelledby="headingThree"
+      data-bs-parent="#accordionExample"
+    >
+      <div class="accordion-body"><h2 id="changelog-of-safelinkify" tabindex="-1"><a class="header-anchor" href="#changelog-of-safelinkify">CHANGELOG of safelinkify</a></h2>
 <p><strong>1.0.0</strong></p>
 <ul>
 <li>initial commit</li>
@@ -633,6 +653,9 @@ gulp.task('safelink', () =&gt; {
 <li>[ <em>2022-10-17 01:55:33</em> ] <a href="https://github.com/dimaslanjaka/safelink/commit/5298e34">5298e34</a> Update <a href="http://CHANGELOG.md">CHANGELOG.md</a></li>
 <li>[ <em>2022-10-17 01:49:39</em> ] <a href="https://github.com/dimaslanjaka/safelink/commit/3cafc9d">3cafc9d</a> Update <a href="http://README.md">README.md</a></li>
 </ul>
+</div>
+    </div>
+  </div>
 </div>
 
 <script src="dist/bundle.js"></script>
