@@ -31,6 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
   )}</td></tr>`;
 
   if (isSafelinkClass) {
+    /**
+     * @type {(typeof import('safelinkify'))['default']}
+     */
     const instance = new safelink({
       // exclude patterns (dont anonymize these patterns)
       exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
