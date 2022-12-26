@@ -409,7 +409,7 @@ eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod)
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nvar parseQuery_1 = __importDefault(__webpack_require__(/*! ./parseQuery */ \"./src/parseQuery.ts\"));\r\nvar resolveQueryUrl_1 = __importDefault(__webpack_require__(/*! ./resolveQueryUrl */ \"./src/resolveQueryUrl.ts\"));\r\nvar safelink_1 = __importDefault(__webpack_require__(/*! ./safelink */ \"./src/safelink.ts\"));\r\nvar _global_safelinkify = (typeof window !== 'undefined' ? window : __webpack_require__.g);\r\nvar safelinkify;\r\n(function (safelinkify) {\r\n    safelinkify.resolveQueryUrl = resolveQueryUrl_1.default;\r\n    safelinkify.parseQuery = parseQuery_1.default;\r\n    safelinkify.safelink = safelink_1.default;\r\n    if ( true && module.exports) {\r\n        module.exports = safelinkify;\r\n    }\r\n    _global_safelinkify.safelinkify = safelinkify;\r\n})(safelinkify || (safelinkify = {}));\r\nexports[\"default\"] = safelinkify;\r\n\n\n//# sourceURL=webpack://safelinkify/./src/index.ts?");
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nvar parseQuery_1 = __importDefault(__webpack_require__(/*! ./parseQuery */ \"./src/parseQuery.ts\"));\r\nvar resolveQueryUrl_1 = __importDefault(__webpack_require__(/*! ./resolveQueryUrl */ \"./src/resolveQueryUrl.ts\"));\r\nvar safelink_1 = __importDefault(__webpack_require__(/*! ./safelink */ \"./src/safelink.ts\"));\r\nvar _global_safelinkify = (typeof window !== 'undefined' ? window : __webpack_require__.g);\r\nvar safelinkify;\r\n(function (safelinkify) {\r\n    safelinkify.resolveQueryUrl = resolveQueryUrl_1.default;\r\n    safelinkify.parseQuery = parseQuery_1.default;\r\n    safelinkify.safelink = safelink_1.default;\r\n    if ( true && module.exports) {\r\n        module.exports = safelinkify;\r\n    }\r\n    _global_safelinkify.safelinkify = safelinkify;\r\n    _global_safelinkify.safelink = safelinkify.safelink;\r\n})(safelinkify || (safelinkify = {}));\r\n_global_safelinkify.safelinkify = safelinkify;\r\n_global_safelinkify.safelink = safelink_1.default;\r\nexports[\"default\"] = safelinkify;\r\n\n\n//# sourceURL=webpack://safelinkify/./src/index.ts?");
 
 /***/ }),
 
@@ -539,7 +539,7 @@ eval("/* (ignored) */\n\n//# sourceURL=webpack://safelinkify/crypto_(ignored)?")
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("3a0d9c192aad635269ec")
+/******/ 		__webpack_require__.h = () => ("c9f942cce1cf8f604bdf")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
