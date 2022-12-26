@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'upath';
 import renderMarkdown from './markdown';
 
-const file = join(__dirname, '../../../README.md');
+const file = join(__dirname, '../../../readme.md');
 const read = readFileSync(file).toString();
 writeFileSync(
   join(__dirname, 'tmp', 'rendered.html'),
