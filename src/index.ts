@@ -12,7 +12,10 @@ namespace safelinkify {
     module.exports = safelinkify;
   }
   _global_safelinkify.safelinkify = safelinkify;
+  _global_safelinkify.safelink = safelink;
 }
+_global_safelinkify.safelinkify = safelinkify;
+_global_safelinkify.safelink = _safelink;
 
 export default safelinkify;
 export { encryptionURLResult, Nullable, resolveQueryResult, SafelinkOptions } from './globals';
