@@ -3,6 +3,11 @@ document.addEventListener('DOMContentLoaded', function () {
   table.querySelector('#resolveQueryUrl').innerHTML = typeof resolveQueryUrl;
   table.querySelector('#parseQuery').innerHTML = typeof parseQuery;
 
+  /**
+   * Check if variable is ES5 class
+   * @param {any} f
+   * @returns {boolean}
+   */
   function isClass(f) {
     return (
       typeof f === 'function' &&
@@ -18,7 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   const isSafelinkClass = isClass(safelink);
-  table.innerHTML += `<tr><td>global safelink</td><td>is ES5 Class: ${isSafelinkClass}</td></tr>`;
+  table.innerHTML += `<tr><td>global safelink</td> <td><code class="language-javascript">isClass(safelink)</code></td><td>is ES5 Class: ${isSafelinkClass}</td></tr>`;
+  table.innerHTML += `<tr><td>global safelink</td> <td><code class="language-javascript">typeof safelink</code></td><td>${typeof safelink}</td></tr>`;
+  table.innerHTML += `<tr><td>global safelinkify</td> <td><code class="language-javascript">typeof safelinkify</code></td><td>${typeof safelinkify}</td></tr>`;
+  table.innerHTML += `<tr><td>global safelinkify.safelink</td> <td><code class="language-javascript">isClass(safelinkify.safelink)</code></td><td>is ES5 Class: ${isClass(
+    safelinkify.safelink
+  )}</td></tr>`;
 
   if (isSafelinkClass) {
     const instance = new safelink({
@@ -37,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     instance.parse(document.querySelector('div#internal'));
 
     const currentQuery = JSON.stringify(instance.resolveQueryUrl(location.href), null, 2);
-    table.innerHTML += `<tr id="current-queries"><td>Redirector Resolver Using <code>sf.resolveQueryUrl(location.href)</code> <a href="#query-url">Change</a></td><td><pre><code class="language-json">${currentQuery}</code></pre></td></tr>`;
+    table.innerHTML += `<tr id="current-queries"><td>Redirector Resolver <a href="#query-url" class="btn btn-sm btn-warning">Change</a></td> <td><code>sf.resolveQueryUrl(location.href)</code></td><td><pre><code class="language-json">${currentQuery}</code></pre></td></tr>`;
 
     const param = new URLSearchParams(location.search);
     if (param.has('o') || param.has('url') || location.href.match(/#(o|url)=/)) {

@@ -16,5 +16,8 @@ var safelinkify;
         module.exports = safelinkify;
     }
     _global_safelinkify.safelinkify = safelinkify;
+    _global_safelinkify.safelink = safelinkify.safelink;
 })(safelinkify || (safelinkify = {}));
+_global_safelinkify.safelinkify = safelinkify;
+_global_safelinkify.safelink = safelink_1.default;
 exports.default = safelinkify;

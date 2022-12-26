@@ -1,20 +1,26 @@
 {
   "/release/safelinkify-1.1.6.tgz": {
-    "hash": "c14b5d28146d022bc00807e689ad8b9f08708f96"
+    "hash": "c14b5d28146d022bc00807e689ad8b9f08708f96",
+    "size": "102.21 KB"
   },
   "/release/safelinkify.tgz": {
-    "hash": "a0b8c69af92ed55c84ee8a591b2c6426e44b9f7f"
+    "hash": "4668219216f48e4c28aa272b7c83770f8ce18e5d",
+    "size": "103.83 KB"
   },
   "/package-lock.json": {
-    "hash": "680d022fb3d61d1d7f08570fd0f4589a256808c5"
+    "hash": "36881d2e8f5178e991d5789c6a0bde48e39734df",
+    "size": "377.30 KB"
   },
   "/release/safelinkify-1.1.7.tgz": {
-    "hash": "53d7ae662ed58a642a5d21291c41fb0344b09441"
+    "hash": "53d7ae662ed58a642a5d21291c41fb0344b09441",
+    "size": "102.10 KB"
   },
   "/release/safelinkify-1.1.8.tgz": {
-    "hash": "8fcc849603e6363861f283507cd22ac314ca2804"
+    "hash": "8fcc849603e6363861f283507cd22ac314ca2804",
+    "size": "103.77 KB"
   },
   "/release/safelinkify-1.1.9.tgz": {
-    "hash": "a0b8c69af92ed55c84ee8a591b2c6426e44b9f7f"
+    "hash": "4668219216f48e4c28aa272b7c83770f8ce18e5d",
+    "size": "103.83 KB"
   }
 }

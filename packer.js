@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 const { spawn } = require('cross-spawn');
-const { readdirSync, createReadStream, readFileSync } = require('fs');
+const { readdirSync, createReadStream, readFileSync, statSync } = require('fs');
 const { existsSync, renameSync, rmSync, mkdirpSync, writeFileSync } = require('fs-extra');
 const GulpClient = require('gulp');
 const { join, dirname, toUnix } = require('upath');
@@ -58,9 +58,12 @@ child.on('exit', function () {
       readDir.forEach((file, index, all) => {
         sha1(file)
           .then((hash) => {
+            const stat = statSync(file);
+            const size = parseFloat(stat.size / Math.pow(1024, 1)).toFixed(2) + ' KB';
             hashes = Object.assign({}, hashes, {
               [toUnix(file).replace(toUnix(__dirname), '')]: {
-                hash
+                hash,
+                size
               }
             });
           })

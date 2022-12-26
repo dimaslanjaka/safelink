@@ -18,7 +18,7 @@
     "postinstall": "node postinstall.js",
     "dev": "nodemon",
     "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
-    "update": "npx npm-check-updates -u -x chalk,hexo"
+    "update": "npx npm-check-updates -u -x chalk,hexo && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js > packer.js"
   },
   "repository": {
     "type": "git",
