@@ -1,7 +1,7 @@
 const { writeFileSync } = require('fs');
 const { EOL } = require('os');
 const { join } = require('path');
-
+const pkg = require('./package.json');
 const spawn = require('child_process').spawn;
 
 /**
@@ -75,16 +75,23 @@ let markdown = `
 - \`parse\` always return string
 - add more docs for easy development
 - add \`tsconfig.build.json\` excluding test files
-
 `;
 
 // git log reference https://www.edureka.co/blog/git-format-commit-history/
 // git log date format reference https://stackoverflow.com/questions/7853332/how-to-change-git-log-date-formats
 // custom --pretty=format:"%h %ad | %s %d [%an]" --date=short v1.1.4...v1.1.8
 // default --pretty=oneline v1.1.4...v1.1.8
-gitExec(['log', '--pretty=format:%h !|! %ad !|! %s %d', `--date=format:%Y-%m-%d %H:%M:%S`, 'v1.1.4...v1.1.8']).then(
-  function (commits) {
-    commits.split(/\r?\n/gm).forEach((str, index, all) => {
+gitExec([
+  'log',
+  '--pretty=format:%h !|! %ad !|! %s %d',
+  `--date=format:%Y-%m-%d %H:%M:%S`,
+  'v1.1.4...v' + pkg.version
+]).then(function (commits) {
+  commits
+    .split(/\r?\n/gm)
+    .slice()
+    .reverse()
+    .forEach((str, index, all) => {
       const splitx = str.split('!|!').map((str) => str.trim());
       const o = {
         hash: splitx[0],
@@ -92,7 +99,7 @@ gitExec(['log', '--pretty=format:%h !|! %ad !|! %s %d', `--date=format:%Y-%m-%d 
         message: splitx[2]
       };
       if (o.message.includes('tag: v')) {
-        markdown += `**${o.message.replace(/\(.*\),?/, '').trim()}**` + EOL;
+        markdown += `\n**${o.message.replace(/\(.*\),?/, '').trim()}**\n` + EOL;
       } else {
         markdown +=
           `- [ _${o.date}_ ] [${o.hash}](https://github.com/dimaslanjaka/safelink/commit/${o.hash}) ${o.message.replace(
@@ -104,5 +111,4 @@ gitExec(['log', '--pretty=format:%h !|! %ad !|! %s %d', `--date=format:%Y-%m-%d 
         writeFileSync(join(__dirname, 'CHANGELOG.md'), markdown);
       }
     });
-  }
-);
+});
