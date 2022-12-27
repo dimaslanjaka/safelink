@@ -50,7 +50,7 @@
     "@types/html-minifier-terser": "^7.0.0",
     "@types/jquery": "^3.5.14",
     "@types/markdown-it-attrs": "^4.1.0",
-    "@types/node": "^18.11.17",
+    "@types/node": "^18.11.18",
     "@types/prettier": "^2.7.2",
     "@types/toastr": "^2.1.40",
     "@types/undertaker": "^1.2.8",
