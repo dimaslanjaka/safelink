@@ -15,7 +15,7 @@ Customized safelink url redirector. Transform and Anonymize all hyperlinks to ou
 ## Our Production
 | page | source |
 | :--- | :--- |
-| https://www.webmanajemen.com/page/safelink.html | https://github.com/dimaslanjaka/page/blob/master/safelink/safelink-decode.js |
+| https://www.webmanajemen.com/page/safelink.html | https://github.com/dimaslanjaka/page/blob/master/safelink/safelink-decode.js <br />https://github.com/dimaslanjaka/page/tree/master/safelink/layout1 |
 
 ## Installation
 
