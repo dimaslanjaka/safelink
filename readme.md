@@ -4,7 +4,7 @@
 ![www.webmanajemen.com](https://img.shields.io/website?down_color=red&down_message=down&label=www.webmanajemen.com&logo=www.webmanajemen.com&style=flat&up_color=green&up_message=up&url=https%3A%2F%2Fwww.webmanajemen.com)
 ![LICENSE](https://img.shields.io/npm/l/safelinkify)
 ![GitHub language count](https://img.shields.io/github/languages/count/dimaslanjaka/safelink)
-![Github Workflow](https://github.com/dimaslanjaka/safelink/actions/workflows/safelink.yml/badge.svg)
+![Github Workflow](https://github.com/dimaslanjaka/safelink/actions/workflows/build-release.yml/badge.svg)
 ![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink)
 ![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink)
 
