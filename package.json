@@ -72,6 +72,7 @@
     "markdown-it-sup": "^1.0.0",
     "nodejs-package-types": "https://github.com/dimaslanjaka/nodejs-package-types/raw/main/release/nodejs-package-types.tgz",
     "nodemon": "^2.0.20",
+    "npm-check-updates": "^16.6.2",
     "prettier": "^2.8.1",
     "resolve-typescript-plugin": "^2.0.0",
     "rimraf": "^3.0.2",
