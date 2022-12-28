@@ -93,10 +93,19 @@ Execute functions:
   });
 </script>
 ```
+
 ### NodeJS
-[full sample here](https://github.com/dimaslanjaka/safelink/blob/main/src/index.test.ts)
+- [full sample](https://github.com/dimaslanjaka/safelink/blob/main/src/index.test.ts)
+
+#### Import list
+```js
+const { safelink } = require('safelinkify');
+const { default: safelink } = require('safelinkify/dist/safelink');
+```
+#### Usages Example
 ```ts
-import safelinkify from 'safelinkify'; // const safelinkify = require('safelinkify')
+import safelinkify from 'safelinkify'; 
+// const safelinkify = require('safelinkify')
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse(`
 <a href="www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
@@ -126,7 +135,7 @@ processedExternalLinks.then(console.log);
 */
 ```
 
-## Using gulp
+#### Using gulp
 Reference Examples:
 - [https://github.com/dimaslanjaka/page/gulpfile.js](https://github.com/dimaslanjaka/page/blob/a2f16cb5470992ac149204fdca621d1bcac1107c/gulpfile.js#L325)
 
