@@ -127,6 +127,7 @@ processedExternalLinks.then(console.log);
 ```
 
 ## Using gulp
+- [https://github.com/dimaslanjaka/page/gulpfile.js](https://github.com/dimaslanjaka/page/blob/a2f16cb5470992ac149204fdca621d1bcac1107c/gulpfile.js#L325)
 ```typescript
 import gulp from 'gulp'
 import sf from 'safelinkify'
