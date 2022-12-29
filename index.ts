@@ -4,7 +4,8 @@
 
 import browserSync from 'browser-sync';
 import spawn from 'cross-spawn';
-import { existsSync, mkdirSync, writeFileSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs';
+import { writeFile } from 'fs/promises';
 import gulp from 'gulp';
 import { minify } from 'html-minifier-terser';
 import { join } from 'upath';
@@ -45,15 +46,18 @@ app.init({
   server: {
     baseDir: './',
     routes: {
+      '/': '/docs',
+      '/docs': '/docs',
+      // common
       '/node_modules': './node_modules',
+      '/tmp': './tmp',
+      // custom
       '/js': './tests/js',
-      '/css': './tests/css',
-      '/docs/safelinkify': './docs/safelinkify',
-      '/tmp': './tmp'
+      '/css': './tests/css'
     },
     middleware: [
       {
-        route: '/',
+        route: '/docs/safelinkify/demo',
         handle: async (req, res, next) => {
           let url = new URL('http://localhost:' + PORT);
           if (baseUrl) {
@@ -79,7 +83,7 @@ app.init({
             let renderLayout = await helpers.renderFile(join(view, 'layout.ejs'));
 
             // write to test folder
-            writeFileSync(join(__dirname, 'src/test/index.html'), renderLayout);
+            await writeFile(join(__dirname, 'src/test/index.html'), renderLayout);
 
             /** Safelinkify */
             renderLayout = (await safelinkInstance.parse(renderLayout)) as string;
@@ -99,9 +103,9 @@ app.init({
 
             /** Location deploy page */
             const saveTo = join(deploy_dir, 'index.html');
-            writeFileSync(saveTo, result);
+            await writeFile(saveTo, result);
 
-            res.end(result);
+            return res.end(result);
           }
           next();
         }

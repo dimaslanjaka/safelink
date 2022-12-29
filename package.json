@@ -15,7 +15,7 @@
     "start": "ts-node index.ts",
     "prebuild": "git pull -X theirs",
     "build": "tsc -p tsconfig.build.json && webpack && gulp",
-    "postbuild": "node packer.js && node typedoc-runner.js --commit",
+    "postbuild": "node packer.js && node typedoc-runner.js --publish",
     "postinstall": "node postinstall.js",
     "dev": "nodemon",
     "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
@@ -41,7 +41,7 @@
   "bugs": {
     "url": "https://github.com/dimaslanjaka/safelink/issues"
   },
-  "homepage": "https://www.webmanajemen.com/safelink",
+  "homepage": "https://www.webmanajemen.com/docs/safelinkify",
   "devDependencies": {
     "@tsconfig/node16": "^1.0.3",
     "@types/bluebird": "^3.5.38",

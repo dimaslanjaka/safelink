@@ -1,0 +1,76 @@
+const { existsSync } = require('fs');
+const { writeFile } = require('fs/promises');
+const { join } = require('path');
+const pkg = require('./package.json');
+const { default: safelink } = require('./dist/safelink');
+
+//
+require('ts-node').register();
+const { default: EJSHelper } = require('./tests/EJSHelper');
+//
+
+const safelinkInstance = new safelink({
+  // exclude patterns (dont anonymize these patterns)
+  exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
+  // url redirector
+  redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
+  // debug
+  verbose: false,
+  // encryption type = 'base64' | 'aes'
+  type: 'base64',
+  // password aes, default = root
+  password: 'unique-password'
+});
+const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
+
+createDemo();
+
+async function createDemo() {
+  const PORT = parseInt(process.env.PORT || '4000');
+  let baseUrl = 'http://localhost:' + PORT;
+  let url = new URL(baseUrl);
+  const path = (() => {
+    const path = url.pathname.replace(/.html$/, '');
+    if (path.endsWith('/') || path.length < 1) return path + 'index';
+    return path;
+  })();
+
+  const view = join(__dirname, 'tests');
+  const view_ejs = join(view, path + '.ejs');
+  const title = 'Safelinkify - External Link Anonymizer';
+  if (existsSync(view_ejs)) {
+    const helpers = new EJSHelper({
+      root: join(view, 'layout.ejs')
+    });
+    const renderPage = await helpers.renderFile(view_ejs);
+    helpers.add('body', renderPage);
+    helpers.add('title', title);
+    helpers.add('description', pkg.description);
+    let renderLayout = await helpers.renderFile(join(view, 'layout.ejs'));
+
+    // write to test folder
+    await writeFile(join(__dirname, 'src/test/index.html'), renderLayout);
+
+    /** Safelinkify */
+    renderLayout = await safelinkInstance.parse(renderLayout);
+
+    /** minify for github pages */
+
+    let result = '';
+    try {
+      result = await minify(renderLayout, {
+        minifyCSS: true,
+        minifyJS: true,
+        collapseWhitespace: true
+      });
+    } catch {
+      result = renderLayout;
+    }
+
+    /** Location deploy page */
+    const saveTo = join(deploy_dir, 'index.html');
+    await writeFile(saveTo, result);
+
+    return res.end(result);
+  }
+}
