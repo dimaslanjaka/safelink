@@ -11,6 +11,7 @@
 Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS.
 
 - **[API DOCUMENTATION](https://www.webmanajemen.com/docs/safelinkify)**
+- **[MODULES](https://www.webmanajemen.com/docs/safelinkify/modules.html)**
 - **[LIVE DEMO](https://www.webmanajemen.com/docs/safelinkify/demo)**
 
 ## Our Production

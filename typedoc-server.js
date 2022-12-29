@@ -3,6 +3,13 @@ const { spawn } = require('git-command-helper/dist/spawn');
 const bs = browserSync.create();
 
 /**
+ * Docs serve
+ * required:
+ * * add docs script for `npm run docs`
+ * * npm i -D git-command-helper
+ */
+
+/**
  * @type {browserSync.MiddlewareHandler | browserSync.PerRouteMiddleware}
  */
 const buildDocs = async (_req, _res, next) => {
