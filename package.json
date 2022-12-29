@@ -14,7 +14,7 @@
   "scripts": {
     "start": "ts-node index.ts",
     "build": "tsc -p tsconfig.build.json && webpack && gulp",
-    "postbuild": "node packer.js",
+    "postbuild": "node packer.js && node typedoc-runner.js --commit",
     "postinstall": "node postinstall.js",
     "dev": "nodemon",
     "ci": "yarn install --immutable --immutable-cache --check-cache --frozen-lockfile --check-files",
