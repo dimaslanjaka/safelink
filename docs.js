@@ -83,10 +83,11 @@ async function createDemo() {
     // save demo index.html
     const saveTo = join(deploy_dir, 'index.html');
     await writeFile(saveTo, result);
+    console.log('demo saved', saveTo);
 
     // run webpack
     // await spawn('webpack', { cwd: __dirname, stdio: 'inherit' });
     // run gulp
-    await spawn('gulp', { cwd: __dirname, stdio: 'inherit' });
+    // await spawn('gulp', { cwd: __dirname, stdio: 'inherit' });
   }
 }

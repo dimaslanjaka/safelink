@@ -15,12 +15,19 @@ if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
 
 const PORT = parseInt(process.env.PORT || '4000');
 let baseUrl = 'http://localhost' + PORT;
-const app = browserSync.create();
-app.emitter.on('service:running', function (data) {
+const bs = browserSync.create();
+bs.emitter.on('service:running', function (data) {
   //console.log(data.urls.tunnel); // all 3 urls here
   baseUrl = data.urls.tunnel;
 });
-app.init({
+
+const buildDocs: browserSync.MiddlewareHandler | browserSync.PerRouteMiddleware = async (_req, _res, next) => {
+  await spawnPromise('node', [join(__dirname, 'docs.js')], { cwd: __dirname, stdio: 'inherit' });
+  await spawnPromise('gulp', [], { cwd: __dirname, stdio: 'inherit' });
+  next();
+};
+
+bs.init({
   port: PORT,
   open: false,
   //open: 'tunnel',
@@ -41,10 +48,7 @@ app.init({
     middleware: [
       {
         route: '/docs/safelinkify/demo',
-        handle: async (_req, _res, next) => {
-          await spawnPromise('node', [join(__dirname, 'docs.js')], { cwd: __dirname, stdio: 'inherit' });
-          next();
-        }
+        handle: buildDocs
       }
     ]
   },
@@ -63,8 +67,8 @@ app.init({
 });
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
-gulp.watch(['**/*.{js,ejs,ts}'], { cwd: join(__dirname, 'tests') }, app.reload);
-gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, app.reload);
+gulp.watch(['**/*.{js,ejs,ts}'], { cwd: join(__dirname, 'tests') }, bs.reload);
+gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, bs.reload);
 let summoner: ReturnType<typeof summon>;
 gulp.watch(
   ['src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md', '!tests', '!tmp', '!dist', '!release', '!docs'],
@@ -75,7 +79,7 @@ gulp.watch(
     }
     summoner = summon('webpack && gulp', { cwd: __dirname }, (child) => {
       child.on('close', () => {
-        app.reload();
+        bs.reload();
         done();
       });
     });
