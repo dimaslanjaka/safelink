@@ -1,11 +1,11 @@
 {
   "/release/safelinkify-1.1.10.tgz": {
     "integrity": {
-      "sha1": "ac5e62919526632a4aa6d0dbba28c725b4f00206",
-      "sha256": "KfTQ7kOrG4rW8juRAGVWZ6pZNFl8C9XCBMEUhqX1bgU=",
-      "md5": "ec068caefdece37da15e03de2732c270"
+      "sha1": "ab26bd991461a9c5dda49d7ad76f1a5f4b3d1230",
+      "sha256": "pTL4wm/05kPw2dKMRKj6rtoLev7mnQ4Vv30wxjlXlE8=",
+      "md5": "3a8e017054191f5f646864c04c28d49f"
     },
-    "size": "369.55 KB"
+    "size": "223.60 KB"
   },
   "/release/safelinkify-1.1.6.tgz": {
     "integrity": {
@@ -41,18 +41,18 @@
   },
   "/release/safelinkify.tgz": {
     "integrity": {
-      "sha1": "ac5e62919526632a4aa6d0dbba28c725b4f00206",
-      "sha256": "KfTQ7kOrG4rW8juRAGVWZ6pZNFl8C9XCBMEUhqX1bgU=",
-      "md5": "ec068caefdece37da15e03de2732c270"
+      "sha1": "ab26bd991461a9c5dda49d7ad76f1a5f4b3d1230",
+      "sha256": "pTL4wm/05kPw2dKMRKj6rtoLev7mnQ4Vv30wxjlXlE8=",
+      "md5": "3a8e017054191f5f646864c04c28d49f"
     },
-    "size": "369.55 KB"
+    "size": "223.60 KB"
   },
   "/package-lock.json": {
     "integrity": {
-      "sha1": "76fae796074fbd1dc8fb474a60f3c1307335d529",
-      "sha256": "ZxawBaWXiJDWSq5vs4RNiA4Jr9L9/g/l6roFaklBFoc=",
-      "md5": "45ad59a91a06ecdc17e28ee7e0bc1b6a"
+      "sha1": "3092e7767923a0be85f2b0eeaa4896ebb36be141",
+      "sha256": "M5FwUgc384NO4xqMa+APeY9JhqR2PtCMer39IndEDTM=",
+      "md5": "f4b24eb47514b02f38f2c3273f893956"
     },
-    "size": "633.13 KB"
+    "size": "633.39 KB"
   }
 }

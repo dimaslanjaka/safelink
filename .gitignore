@@ -21,3 +21,4 @@ private.*
 *.gz
 tmp
 /docs
+/CHANGELOG.md

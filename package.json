@@ -6,7 +6,6 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "src",
     "readme.md",
     "./*.json",
     "postinstall.js"
@@ -14,9 +13,9 @@
   "scripts": {
     "start": "ts-node docs-serve.ts",
     "prebuild": "git pull -X theirs",
-    "build": "tsc -p tsconfig.build.json && webpack && gulp",
+    "build": "tsc -p tsconfig.build.json && webpack",
     "postbuild": "node packer.js",
-    "docs": "node docs.js && webpack && gulp",
+    "docs": "node docs.js && webpack",
     "postinstall": "node postinstall.js",
     "dev": "nodemon",
     "preupdate": "curl -L https://github.com/microsoft/TypeScript/raw/main/lib/lib.dom.d.ts > src/lib/lib.dom.ts && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc-server.js > typedoc-server.js",
