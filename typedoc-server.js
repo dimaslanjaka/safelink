@@ -1,5 +1,6 @@
 const browserSync = require('browser-sync');
 const spawn = require('cross-spawn');
+const { existsSync } = require('fs');
 const bs = browserSync.create();
 const gulp = require('gulp');
 
@@ -57,11 +58,14 @@ bs.init({
 });
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
-gulp.watch(['**/*.{js,ejs,ts}'], { cwd: join(__dirname, 'test') }, bs.reload);
-gulp.watch(['**/*.{js,ejs,ts}'], { cwd: join(__dirname, 'tests') }, bs.reload);
-gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, bs.reload);
+[join(__dirname, 'test'), join(__dirname, 'tests'), join(__dirname, 'dist')]
+  .filter((path) => existsSync(path))
+  .forEach((cwd) => {
+    gulp.watch(['**/*.*'], { cwd }, bs.reload);
+  });
+
 gulp.watch(
-  ['src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md', '!tests', '!tmp', '!dist', '!release', '!docs'],
+  ['src/*.ts', 'webpack.*.js', '{tsconfig,package}*.json', '*.md', '!tests', '!tmp', '!dist', '!release', '!docs'],
   { cwd: __dirname },
   (done) => {
     if (summoner) {
