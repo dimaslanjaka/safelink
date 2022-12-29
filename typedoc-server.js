@@ -7,6 +7,9 @@ const bs = browserSync.create();
  * required:
  * * add docs script for `npm run docs`
  * * npm i -D git-command-helper
+ * repo: https://github.com/dimaslanjaka/nodejs-package-types/blob/main/typedoc-server.js
+ * raw: https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc-server.js
+ * update: curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc-server.js > typedoc-server.js
  */
 
 /**
