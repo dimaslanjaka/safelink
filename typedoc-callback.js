@@ -1,5 +1,5 @@
 const { existsSync } = require('fs');
-const { writeFile } = require('fs/promises');
+const { writeFile, mkdir } = require('fs/promises');
 const { join } = require('path');
 const pkg = require('./package.json');
 const { default: safelink } = require('./dist/safelink');
@@ -26,6 +26,8 @@ const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
 createDemo();
 
 async function createDemo() {
+  if (!existsSync(deploy_dir)) await mkdir(deploy_dir, { recursive: true });
+
   const PORT = parseInt(process.env.PORT || '4000');
   let baseUrl = 'http://localhost:' + PORT;
   let url = new URL(baseUrl);
@@ -70,7 +72,5 @@ async function createDemo() {
     /** Location deploy page */
     const saveTo = join(deploy_dir, 'index.html');
     await writeFile(saveTo, result);
-
-    return res.end(result);
   }
 }
