@@ -5,7 +5,7 @@
 import browserSync from 'browser-sync';
 import spawn from 'cross-spawn';
 import { existsSync, mkdirSync } from 'fs';
-import { spawnAsync } from 'git-command-helper/dist/spawn';
+import { spawn as spawnPromise } from 'git-command-helper/dist/spawn';
 import gulp from 'gulp';
 import { join } from 'upath';
 
@@ -42,7 +42,7 @@ app.init({
       {
         route: '/docs/safelinkify/demo',
         handle: async (_req, _res, next) => {
-          await spawnAsync('node', [join(__dirname, 'typedoc-callback.js')], { cwd: __dirname, stdio: 'inherit' });
+          await spawnPromise('node', [join(__dirname, 'docs.js')], { cwd: __dirname, stdio: 'inherit' });
           next();
         }
       }
