@@ -51,21 +51,21 @@ bs.init({
       '/node_modules': './node_modules',
       '/tmp': './tmp',
       // custom
-      '/js': './tests/js',
-      '/css': './tests/css'
+      '/js': './src-docs/js',
+      '/css': './src-docs/css'
     }
   }
 });
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
-[join(__dirname, 'test'), join(__dirname, 'tests'), join(__dirname, 'dist')]
+[join(__dirname, 'test'), join(__dirname, 'src-docs'), join(__dirname, 'dist')]
   .filter((path) => existsSync(path))
   .forEach((cwd) => {
     gulp.watch(['**/*.*'], { cwd }, bs.reload);
   });
 
 gulp.watch(
-  ['src/*.ts', 'webpack.*.js', '{tsconfig,package}*.json', '*.md', '!tests', '!tmp', '!dist', '!release', '!docs'],
+  ['src/*.ts', 'webpack.*.js', '{tsconfig,package}*.json', '*.md', '!src-docs', '!tmp', '!dist', '!release', '!docs'],
   { cwd: __dirname },
   (done) => {
     if (summoner) {

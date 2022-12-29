@@ -13,7 +13,7 @@ const webpackConfig = require('./webpack.config');
 
 //
 require('ts-node').register();
-const { default: EJSHelper } = require('./tests/EJSHelper');
+const { default: EJSHelper } = require('./src-docs/EJSHelper');
 const { compileDocs } = require('./typedoc-runner');
 const { spawn } = require('git-command-helper/dist/spawn');
 //
@@ -56,7 +56,7 @@ spawn('node', [join(__dirname, 'changelog.js')], { cwd: __dirname }).then(() => 
 });
 
 /**
- * Create demo from tests
+ * Create demo from src-docs
  */
 async function createDemo() {
   if (!existsSync(deploy_dir)) await mkdir(deploy_dir, { recursive: true });
@@ -70,7 +70,7 @@ async function createDemo() {
     return path;
   })();
 
-  const view = join(__dirname, 'tests');
+  const view = join(__dirname, 'src-docs');
   const view_ejs = join(view, path + '.ejs');
   const title = 'Safelinkify - External Link Anonymizer';
   if (existsSync(view_ejs)) {
