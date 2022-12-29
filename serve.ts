@@ -5,13 +5,10 @@
 import browserSync from 'browser-sync';
 import spawn from 'cross-spawn';
 import { existsSync, mkdirSync } from 'fs';
-import { writeFile } from 'fs/promises';
+import { spawnAsync } from 'git-command-helper/dist/spawn';
 import gulp from 'gulp';
-import { minify } from 'html-minifier-terser';
 import { join } from 'upath';
-import pkg from './package.json';
 import safelink from './src/safelink';
-import EJSHelper from './tests/EJSHelper';
 
 /** Deployer for https://www.webmanajemen.com/safelink */
 const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
@@ -58,55 +55,8 @@ app.init({
     middleware: [
       {
         route: '/docs/safelinkify/demo',
-        handle: async (req, res, next) => {
-          let url = new URL('http://localhost:' + PORT);
-          if (baseUrl) {
-            url = new URL(baseUrl + req.url);
-          }
-          const path = (() => {
-            const path = url.pathname.replace(/.html$/, '');
-            if (path.endsWith('/') || path.length < 1) return path + 'index';
-            return path;
-          })();
-
-          const view = join(__dirname, 'tests');
-          const view_ejs = join(view, path + '.ejs');
-          const title = 'Safelinkify - External Link Anonymizer';
-          if (existsSync(view_ejs)) {
-            const helpers = new EJSHelper({
-              root: join(view, 'layout.ejs')
-            });
-            const renderPage = await helpers.renderFile(view_ejs);
-            helpers.add('body', renderPage);
-            helpers.add('title', title);
-            helpers.add('description', pkg.description);
-            let renderLayout = await helpers.renderFile(join(view, 'layout.ejs'));
-
-            // write to test folder
-            await writeFile(join(__dirname, 'src/test/index.html'), renderLayout);
-
-            /** Safelinkify */
-            renderLayout = (await safelinkInstance.parse(renderLayout)) as string;
-
-            /** minify for github pages */
-
-            let result = '';
-            try {
-              result = await minify(renderLayout, {
-                minifyCSS: true,
-                minifyJS: true,
-                collapseWhitespace: true
-              });
-            } catch {
-              result = renderLayout;
-            }
-
-            /** Location deploy page */
-            const saveTo = join(deploy_dir, 'index.html');
-            await writeFile(saveTo, result);
-
-            return res.end(result);
-          }
+        handle: async (_req, _res, next) => {
+          await spawnAsync('node', [join(__dirname, 'typedoc-callback.js')], { cwd: __dirname, stdio: 'inherit' });
           next();
         }
       }
