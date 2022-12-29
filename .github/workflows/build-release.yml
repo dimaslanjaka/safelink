@@ -130,8 +130,15 @@ jobs:
       - name: Install Global Packages
         run: npm i -g typescript ts-node gulp-cli hexo-cli webpack-cli
 
-      - name: Install
+      - name: Install Legacy Peer Dependencies
         run: npm install --legacy-peer-deps
+        id: install-legacy
+        continue-on-error: true
+      
+      - name: Install
+        if: steps.install-legacy.outcome != 'success'
+        id: install-normal
+        run: npm install
 
       - if: ${{ steps.cache.outputs.cache-hit != 'true' }}
         name: List the state of node modules
