@@ -49,9 +49,9 @@
   },
   "/package-lock.json": {
     "integrity": {
-      "sha1": "93c0b4dc50b297477d21450c2c3ecb6b67255726",
-      "sha256": "v05k37AKtxrsC4bAqxsSZwRtabgRM22kndeLnTKPQDc=",
-      "md5": "009fd528ceb2ca62b3f1c0fc09640fd0"
+      "sha1": "6d6ce8d6c037873464c49faf500333cf79e410b0",
+      "sha256": "w7/poyfJW2tXAcT5oDKi/THAN+xZYShd4Ceqw5Q22IQ=",
+      "md5": "85af673a82623cd2b821f6f47c4238bf"
     },
     "size": "633.13 KB"
   },
