@@ -1,8 +1,9 @@
-const { existsSync } = require('fs');
+const { existsSync, writeFileSync } = require('fs');
 const { writeFile, mkdir } = require('fs/promises');
 const { join } = require('path');
 const pkg = require('./package.json');
 const { default: safelink } = require('./dist/safelink');
+const gulp = require('gulp');
 
 //
 // DEMO BUILDER
@@ -12,7 +13,6 @@ const { default: safelink } = require('./dist/safelink');
 require('ts-node').register();
 const { default: EJSHelper } = require('./tests/EJSHelper');
 const { compileDocs } = require('./typedoc-runner');
-const { spawn } = require('git-command-helper/dist/spawn');
 //
 
 compileDocs(
@@ -92,3 +92,26 @@ async function createDemo() {
     // await spawn('npx', ['gulp'], { cwd: __dirname, stdio: 'inherit' });
   }
 }
+
+function copyDistToDocs(done) {
+  // add .nojekyll
+  writeFileSync(join(deploy_dir, '.nojekyll'), '');
+  // copy package.json
+  pkg['devDependencies'] = {};
+  writeFileSync(join(deploy_dir, '/package.json'), JSON.stringify(pkg, null, 2));
+
+  const copyDist = () =>
+    gulp.src(['**/*', '!**/*.d.ts'], { cwd: join(__dirname, 'dist') }).pipe(gulp.dest(join(deploy_dir, 'dist')));
+
+  const copyMd = () => gulp.src(join(__dirname, '*.md')).pipe(gulp.dest(deploy_dir));
+  return gulp
+    .series(
+      copyDist,
+      copyMd
+    )(done)
+    .once('end', () => console.log('finish'));
+}
+
+module.exports = {
+  copyDistToDocs
+};
