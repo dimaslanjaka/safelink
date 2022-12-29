@@ -4,11 +4,18 @@
 ![www.webmanajemen.com](https://img.shields.io/website?down_color=red&down_message=down&label=www.webmanajemen.com&logo=www.webmanajemen.com&style=flat&up_color=green&up_message=up&url=https%3A%2F%2Fwww.webmanajemen.com)
 ![LICENSE](https://img.shields.io/npm/l/safelinkify)
 ![GitHub language count](https://img.shields.io/github/languages/count/dimaslanjaka/safelink)
-![Github Workflow](https://github.com/dimaslanjaka/safelink/actions/workflows/safelink.yml/badge.svg)
+![Github Workflow](https://github.com/dimaslanjaka/safelink/actions/workflows/build-release.yml/badge.svg)
 ![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink)
 ![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink)
 
-Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS. [READ FULL DOCUMENTATION AND LIVE DEMO](https://www.webmanajemen.com/safelink/index.html)
+Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS. 
+
+**[READ FULL DOCUMENTATION AND LIVE DEMO](https://www.webmanajemen.com/safelink/index.html)**
+
+## Our Production
+| page | source |
+| :--- | :--- |
+| [https://www.webmanajemen.com/page/safelink.html](https://www.webmanajemen.com/page/safelink.html) | [safelink-decode.js](https://github.com/dimaslanjaka/page/blob/master/safelink/safelink-decode.js) <br />[layout](https://github.com/dimaslanjaka/page/tree/master/safelink/layout1) <br/>[template](https://github.com/dimaslanjaka/page/blob/master/_layout.njk) <br />[compiler](https://github.com/dimaslanjaka/page/blob/1601e212200eaa7e8b4534ae7511b4fb6f179a96/gulpfile.js#L222) |
 
 ## Installation
 
@@ -86,10 +93,21 @@ Execute functions:
   });
 </script>
 ```
+
 ### NodeJS
-[full sample here](https://github.com/dimaslanjaka/safelink/blob/main/src/index.test.ts)
+#### Reference Examples:
+- [full sample](https://github.com/dimaslanjaka/safelink/blob/main/src/index.test.ts)
+- [https://github.com/dimaslanjaka/page/blob/master/gulpfile.js](https://github.com/dimaslanjaka/page/blob/master/gulpfile.js)
+
+#### Import list
+```js
+const { safelink } = require('safelinkify');
+const { default: safelink } = require('safelinkify/dist/safelink');
+```
+#### Usages Example
 ```ts
-import safelinkify from 'safelinkify'; // const safelinkify = require('safelinkify')
+import safelinkify from 'safelinkify'; 
+// const safelinkify = require('safelinkify')
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse(`
 <a href="www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
@@ -119,7 +137,11 @@ processedExternalLinks.then(console.log);
 */
 ```
 
-## Using gulp
+#### Using gulp
+Reference Examples:
+- [https://github.com/dimaslanjaka/page/gulpfile.js](https://github.com/dimaslanjaka/page/blob/a2f16cb5470992ac149204fdca621d1bcac1107c/gulpfile.js#L325)
+
+Usages:
 ```typescript
 import gulp from 'gulp'
 import sf from 'safelinkify'
