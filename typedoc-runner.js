@@ -8,6 +8,8 @@ const gulp = require('gulp');
 const pkgjson = require('./package.json');
 const { EOL } = require('os');
 const { spawnAsync } = require('git-command-helper/dist/spawn');
+const axios = require('axios');
+const { writeFile } = require('fs/promises');
 
 // required : npm i upath && npm i -D semver typedoc git-command-helper gulp cross-spawn
 // update   : curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc-runner.js > typedoc-runner.js
@@ -54,15 +56,17 @@ const compile = async function (options = {}, callback = null) {
   if (typeof project !== 'undefined') {
     await app.generateDocs(project, projectDocsDir);
     await app.generateJson(project, join(projectDocsDir, 'info.json'));
-    const callback_script = join(__dirname, 'typedoc-callback.js');
-    if (existsSync(callback_script)) {
-      await spawnAsync('node', [callback_script], { cwd: __dirname, stdio: 'inherit' });
-    }
   } else {
     console.error('[error]', 'project undefined');
   }
 
+  // call API callback
   if (typeof callback === 'function') await callback.apply(app);
+  // call standalone callback
+  const callback_script = join(__dirname, 'typedoc-callback.js');
+  if (existsSync(callback_script)) {
+    await spawnAsync('node', [callback_script], { cwd: __dirname, stdio: 'inherit' });
+  }
   await createIndex();
 };
 
@@ -94,23 +98,16 @@ const publish = async function (options = {}, callback = null) {
     await compile(options, callback);
   }
 
-  writeFileSync(
-    join(outDir, '.gitattributes'),
-    `
-*           text=auto
-*.txt       text eol=lf
-*.json      text eol=lf
-*.txt       text
-*.vcproj    text eol=crlf
-*.sh        text eol=lf
-*.ts        text eol=lf
-*.js        text eol=lf
-*.png       binary diff
-*.jpg       binary diff
-*.ico       binary diff
-*.pdf       binary diff
-`.trim()
+  const response = await axios.default.get(
+    'https://raw.githubusercontent.com/dimaslanjaka/nodejs-package-types/main/.gitattributes',
+    {
+      responseType: 'blob'
+    }
   );
+  writeFile(join(outDir, '.gitattributes'), response.data, (err) => {
+    if (err) throw err;
+    console.log('.gitattributes has been saved!');
+  });
 
   try {
     const commit = await new git(__dirname).latestCommit().catch(noop);

@@ -11,6 +11,7 @@ const { default: safelink } = require('./dist/safelink');
 //
 require('ts-node').register();
 const { default: EJSHelper } = require('./tests/EJSHelper');
+const { spawnAsync, spawn } = require('git-command-helper/dist/spawn');
 //
 
 const safelinkInstance = new safelink({
@@ -73,8 +74,13 @@ async function createDemo() {
       result = renderLayout;
     }
 
-    /** Location deploy page */
+    // save demo index.html
     const saveTo = join(deploy_dir, 'index.html');
     await writeFile(saveTo, result);
+
+    // run webpack
+    // await spawn('webpack', { cwd: __dirname, stdio: 'inherit' });
+    // run gulp
+    // await spawn('gulp', { cwd: __dirname, stdio: 'inherit' });
   }
 }

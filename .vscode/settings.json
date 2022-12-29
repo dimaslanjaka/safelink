@@ -1,7 +1,7 @@
 {
   "npm.packageManager": "yarn",
   "emmet.includeLanguages": {
-    "ejs": "html",
+    "ejs": "html"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[json]": {
@@ -28,7 +28,6 @@
     "source.organizeImports": true,
     "source.fixAll": true
   },
-  "editor.fontSize": 13,
   "code-runner.clearPreviousOutput": true,
   "code-runner.saveAllFilesBeforeRun": true,
   "code-runner.runInTerminal": true,

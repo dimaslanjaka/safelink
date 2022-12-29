@@ -8,24 +8,10 @@ import { existsSync, mkdirSync } from 'fs';
 import { spawnAsync } from 'git-command-helper/dist/spawn';
 import gulp from 'gulp';
 import { join } from 'upath';
-import safelink from './src/safelink';
 
 /** Deployer for https://www.webmanajemen.com/safelink */
 const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
 if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
-
-const safelinkInstance = new safelink({
-  // exclude patterns (dont anonymize these patterns)
-  exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
-  // url redirector
-  redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
-  // debug
-  verbose: false,
-  // encryption type = 'base64' | 'aes'
-  type: 'base64',
-  // password aes, default = root
-  password: 'unique-password'
-});
 
 const PORT = parseInt(process.env.PORT || '4000');
 let baseUrl = 'http://localhost' + PORT;
@@ -81,7 +67,7 @@ gulp.watch(['**/*.{js,ejs,ts}'], { cwd: join(__dirname, 'tests') }, app.reload);
 gulp.watch(['**/*.js'], { cwd: join(__dirname, 'dist') }, app.reload);
 let summoner: ReturnType<typeof summon>;
 gulp.watch(
-  ['src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md', '!tests', '!tmp', '!dist'],
+  ['src/*.ts', 'webpack.*.js', '{tsconfig,package}.json', '*.md', '!tests', '!tmp', '!dist', '!release', '!docs'],
   { cwd: __dirname },
   (done) => {
     if (summoner) {
