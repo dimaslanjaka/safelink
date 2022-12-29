@@ -7,7 +7,7 @@
   "files": [
     "dist",
     "readme.md",
-    "./*.json",
+    "tsconfig*.json",
     "postinstall.js"
   ],
   "scripts": {
