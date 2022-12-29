@@ -13,7 +13,7 @@ import safelink from './src/safelink';
 import EJSHelper from './tests/EJSHelper';
 
 /** Deployer for https://www.webmanajemen.com/safelink */
-const deploy_dir = join(__dirname, 'gh-pages');
+const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
 if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
 
 const safelinkInstance = new safelink({
@@ -48,7 +48,7 @@ app.init({
       '/node_modules': './node_modules',
       '/js': './tests/js',
       '/css': './tests/css',
-      '/safelink': './gh-pages',
+      '/docs/safelinkify': './docs/safelinkify',
       '/tmp': './tmp'
     },
     middleware: [
@@ -111,7 +111,7 @@ app.init({
   ignore: [
     '*.txt',
     '*.json',
-    '**/gh-pages/**',
+    '**/docs/**',
     '**/dist/**',
     '**/node_modules/**',
     '**/tmp/**',
