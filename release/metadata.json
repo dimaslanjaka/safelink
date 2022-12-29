@@ -1,30 +1,58 @@
 {
   "/release/safelinkify-1.1.6.tgz": {
-    "hash": "c14b5d28146d022bc00807e689ad8b9f08708f96",
+    "integrity": {
+      "sha1": "c14b5d28146d022bc00807e689ad8b9f08708f96",
+      "sha256": "zafL0VWRA3oTmSPLOuqAFZe8cdeTWekqN8ZXSX3sQEg=",
+      "md5": "cb5ef16012c16a1bbaa17868992d6798"
+    },
     "size": "102.21 KB"
   },
   "/release/safelinkify.tgz": {
-    "hash": "88c465a30fef5e4153af1d8642c5319ff6ba0e41",
-    "size": "104.11 KB"
+    "integrity": {
+      "sha1": "3dfd442162e77b16d8ce6a34658163ded78a4e10",
+      "sha256": "iYih3R4PIC2tVxaHNAHEUVkBxTT6pmf+nMz9fmBShI4=",
+      "md5": "67491dc441a550cd7937d2b678948503"
+    },
+    "size": "235.47 KB"
   },
   "/package-lock.json": {
-    "hash": "ff5d31307aaf44b23cdaeb8474a594b54b021752",
-    "size": "569.39 KB"
+    "integrity": {
+      "sha1": "88013f0c3f658c419c60c0f2b96370adb5db5b66",
+      "sha256": "febk6KuRhULSHHM80N4CfyqdkSFPQzdoFh56tPrm5n8=",
+      "md5": "5815a96477a40761fc908fc35cb3ff19"
+    },
+    "size": "569.58 KB"
   },
   "/release/safelinkify-1.1.7.tgz": {
-    "hash": "53d7ae662ed58a642a5d21291c41fb0344b09441",
+    "integrity": {
+      "sha1": "53d7ae662ed58a642a5d21291c41fb0344b09441",
+      "sha256": "Vp7rAYH9zwExySrBRXImCGsuRe3cNTlnFQog9frNYu4=",
+      "md5": "ed70e22e32db3b92ad811949df7ada3a"
+    },
     "size": "102.10 KB"
   },
   "/release/safelinkify-1.1.8.tgz": {
-    "hash": "8fcc849603e6363861f283507cd22ac314ca2804",
+    "integrity": {
+      "sha1": "8fcc849603e6363861f283507cd22ac314ca2804",
+      "sha256": "mNje0GLoDS+YGX3MzblpzyqqW2nHrj7opfmOBlgkMFw=",
+      "md5": "d38f5d9b23574bd05d606ee3537d4c95"
+    },
     "size": "103.77 KB"
   },
   "/release/safelinkify-1.1.9.tgz": {
-    "hash": "22fc380f3ebff603ce5ce23bef75eacd807d3b95",
+    "integrity": {
+      "sha1": "22fc380f3ebff603ce5ce23bef75eacd807d3b95",
+      "sha256": "Kx01xMojZDr+ZKoDVfrAzZxvPa6E3qHE0wzG6JhLP88=",
+      "md5": "c6c21a89a74013f3959d0b1861bcd1a8"
+    },
     "size": "104.09 KB"
   },
   "/release/safelinkify-1.1.10.tgz": {
-    "hash": "88c465a30fef5e4153af1d8642c5319ff6ba0e41",
-    "size": "104.11 KB"
+    "integrity": {
+      "sha1": "3dfd442162e77b16d8ce6a34658163ded78a4e10",
+      "sha256": "iYih3R4PIC2tVxaHNAHEUVkBxTT6pmf+nMz9fmBShI4=",
+      "md5": "67491dc441a550cd7937d2b678948503"
+    },
+    "size": "235.47 KB"
   }
 }

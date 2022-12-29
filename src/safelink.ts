@@ -4,12 +4,16 @@ import { default as _resolveQueryUrl } from './resolveQueryUrl';
 import { bufferToString, streamToString } from './string';
 import toURL from './toURL';
 
+/// <reference path="./lib/lib.dom.d.ts" />
+export type DOMElement = globalThis.Element;
+export type HTMLElement = globalThis.HTMLElement;
+
 const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
 
 export default class safelink {
   options: Partial<SafelinkOptions> = {
     exclude: [],
-    redirect: ['https://www.webmanajemen.com/page/safelink.html?url='],
+    redirect: [], // 'https://www.webmanajemen.com/page/safelink.html?url='
     password: 'root',
     verbose: false,
     type: 'base64'

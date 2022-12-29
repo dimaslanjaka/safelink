@@ -2,13 +2,8 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "target": "es5",
-    "outDir": "dist",
+    "outDir": "dist"
   },
-  "include": [
-    "./src"
-  ],
-  "exclude": [
-    "*.test.*",
-    "**/test/**"
-  ]
+  "include": ["./src", "./src/lib/lib.dom.d.ts"],
+  "exclude": ["*.test.*", "**/test/**"]
 }
