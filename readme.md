@@ -8,7 +8,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/dimaslanjaka/safelink)
 ![GitHub stars](https://img.shields.io/github/stars/dimaslanjaka/safelink)
 
-Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS. 
+Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS.
 
 **[READ FULL DOCUMENTATION AND LIVE DEMO](https://www.webmanajemen.com/safelink/index.html)**
 
@@ -106,7 +106,7 @@ const { default: safelink } = require('safelinkify/dist/safelink');
 ```
 #### Usages Example
 ```ts
-import safelinkify from 'safelinkify'; 
+import safelinkify from 'safelinkify';
 // const safelinkify = require('safelinkify')
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse(`
