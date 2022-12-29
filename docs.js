@@ -1,9 +1,11 @@
-const { existsSync, writeFileSync } = require('fs');
+const { existsSync, writeFileSync, mkdirSync } = require('fs');
 const { writeFile, mkdir } = require('fs/promises');
 const { join } = require('path');
 const pkg = require('./package.json');
 const { default: safelink } = require('./dist/safelink');
 const gulp = require('gulp');
+const webpack = require('webpack');
+const webpackConfig = require('./webpack.config');
 
 //
 // DEMO BUILDER
@@ -15,13 +17,7 @@ const { default: EJSHelper } = require('./tests/EJSHelper');
 const { compileDocs } = require('./typedoc-runner');
 //
 
-compileDocs(
-  {
-    cleanOutputDir: false,
-    commentStyle: 'All'
-  },
-  createDemo
-);
+// VARS
 
 const safelinkInstance = new safelink({
   // exclude patterns (dont anonymize these patterns)
@@ -37,6 +33,28 @@ const safelinkInstance = new safelink({
 });
 const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
 
+// VARS END
+
+compileDocs(
+  {
+    cleanOutputDir: false,
+    commentStyle: 'All'
+  },
+  () => {
+    webpack(webpackConfig, (err, stats) => {
+      if (err || (stats && stats.hasErrors())) {
+        console.log('webpack error');
+        console.log(stats);
+        return;
+      }
+      copyDistToDemo(createDemo);
+    });
+  }
+);
+
+/**
+ * Create demo from tests
+ */
 async function createDemo() {
   if (!existsSync(deploy_dir)) await mkdir(deploy_dir, { recursive: true });
 
@@ -85,15 +103,15 @@ async function createDemo() {
     const saveTo = join(deploy_dir, 'index.html');
     await writeFile(saveTo, result);
     console.log('demo saved', saveTo);
-
-    // run webpack
-    // await spawn('npx', ['webpack'], { cwd: __dirname, stdio: 'inherit' });
-    // run gulp
-    // await spawn('npx', ['gulp'], { cwd: __dirname, stdio: 'inherit' });
   }
 }
 
-function copyDistToDocs(done) {
+/**
+ * Copy Dist to Demo
+ */
+function copyDistToDemo(done) {
+  // check exist
+  if (!existsSync(deploy_dir)) mkdirSync(deploy_dir, { recursive: true });
   // add .nojekyll
   writeFileSync(join(deploy_dir, '.nojekyll'), '');
   // copy package.json
@@ -104,14 +122,17 @@ function copyDistToDocs(done) {
     gulp.src(['**/*', '!**/*.d.ts'], { cwd: join(__dirname, 'dist') }).pipe(gulp.dest(join(deploy_dir, 'dist')));
 
   const copyMd = () => gulp.src(join(__dirname, '*.md')).pipe(gulp.dest(deploy_dir));
-  return gulp
-    .series(
-      copyDist,
-      copyMd
-    )(done)
-    .once('end', () => console.log('finish'));
+
+  return gulp.series(
+    copyDist,
+    copyMd
+  )(() => {
+    console.log('copy finish');
+    if (typeof done === 'function') done();
+  });
 }
 
 module.exports = {
-  copyDistToDocs
+  copyDistToDemo,
+  createDemo
 };
