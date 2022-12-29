@@ -3,6 +3,7 @@ const spawn = require('cross-spawn');
 const { existsSync } = require('fs');
 const bs = browserSync.create();
 const gulp = require('gulp');
+const { join } = require('path');
 
 /**
  * Docs serve
@@ -35,7 +36,10 @@ const buildDocs = async (_req, _res, next) => {
 };
 
 // Serve files from 3 directories with serve-static options
-bs.init({
+/**
+ * @type {browserSync.Options}
+ */
+const bsOpt = {
   cors: true,
   open: false,
   port: 4000,
@@ -50,12 +54,20 @@ bs.init({
       // common
       '/node_modules': './node_modules',
       '/tmp': './tmp',
-      // custom
-      '/js': './src-docs/js',
-      '/css': './src-docs/css'
+      '/temp': './temp'
     }
   }
-});
+};
+if (existsSync(join(__dirname, 'src-docs'))) {
+  bsOpt.server = Object.assign(bsOpt.server, { '/js': './src-docs/js', '/css': './src-docs/css' });
+}
+if (existsSync(join(__dirname, 'test'))) {
+  bsOpt.server = Object.assign(bsOpt.server, { '/js': './test/js', '/css': './test/css' });
+}
+if (existsSync(join(__dirname, 'tests'))) {
+  bsOpt.server = Object.assign(bsOpt.server, { '/js': './tests/js', '/css': './tests/css' });
+}
+bs.init(bsOpt);
 
 // since `nodemon` file watcher and `browsersync` are annoying let's make `gulp` shine
 [join(__dirname, 'test'), join(__dirname, 'src-docs'), join(__dirname, 'dist')]
