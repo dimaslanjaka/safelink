@@ -17,7 +17,8 @@ const { spawn } = require('git-command-helper/dist/spawn');
 
 compileDocs(
   {
-    cleanOutputDir: false
+    cleanOutputDir: false,
+    commentStyle: 'All'
   },
   createDemo
 );
@@ -86,8 +87,8 @@ async function createDemo() {
     console.log('demo saved', saveTo);
 
     // run webpack
-    // await spawn('webpack', { cwd: __dirname, stdio: 'inherit' });
+    // await spawn('npx', ['webpack'], { cwd: __dirname, stdio: 'inherit' });
     // run gulp
-    // await spawn('gulp', { cwd: __dirname, stdio: 'inherit' });
+    // await spawn('npx', ['gulp'], { cwd: __dirname, stdio: 'inherit' });
   }
 }

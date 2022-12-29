@@ -6,8 +6,7 @@ const bs = browserSync.create();
  * @type {browserSync.MiddlewareHandler | browserSync.PerRouteMiddleware}
  */
 const buildDocs = async (_req, _res, next) => {
-  await spawn('node', [join(__dirname, 'docs.js')], { cwd: __dirname, stdio: 'inherit' });
-  await spawn('gulp', [], { cwd: __dirname, stdio: 'inherit' });
+  await spawn('npm', ['run', 'docs'], { cwd: __dirname, stdio: 'inherit' });
   next();
 };
 
