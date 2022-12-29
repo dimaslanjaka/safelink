@@ -12,6 +12,7 @@ const { default: safelink } = require('./dist/safelink');
 require('ts-node').register();
 const { default: EJSHelper } = require('./tests/EJSHelper');
 const { compileDocs } = require('./typedoc-runner');
+const { spawn } = require('git-command-helper/dist/spawn');
 //
 
 compileDocs(
@@ -86,6 +87,6 @@ async function createDemo() {
     // run webpack
     // await spawn('webpack', { cwd: __dirname, stdio: 'inherit' });
     // run gulp
-    // await spawn('gulp', { cwd: __dirname, stdio: 'inherit' });
+    await spawn('gulp', { cwd: __dirname, stdio: 'inherit' });
   }
 }
