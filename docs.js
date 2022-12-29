@@ -15,6 +15,7 @@ const webpackConfig = require('./webpack.config');
 require('ts-node').register();
 const { default: EJSHelper } = require('./tests/EJSHelper');
 const { compileDocs } = require('./typedoc-runner');
+const { spawn } = require('git-command-helper/dist/spawn');
 //
 
 // VARS
@@ -35,22 +36,24 @@ const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
 
 // VARS END
 
-compileDocs(
-  {
-    cleanOutputDir: false,
-    commentStyle: 'All'
-  },
-  () => {
-    webpack(webpackConfig, (err, stats) => {
-      if (err || (stats && stats.hasErrors())) {
-        console.log('webpack error');
-        console.log(stats);
-        return;
-      }
-      copyDistToDemo(createDemo);
-    });
-  }
-);
+spawn('node', [join(__dirname, 'changelog.js')], { cwd: __dirname }).then(() => {
+  compileDocs(
+    {
+      cleanOutputDir: false,
+      commentStyle: 'All'
+    },
+    () => {
+      webpack(webpackConfig, (err, stats) => {
+        if (err || (stats && stats.hasErrors())) {
+          console.log('webpack error');
+          console.log(stats);
+          return;
+        }
+        copyDistToDemo(createDemo);
+      });
+    }
+  );
+});
 
 /**
  * Create demo from tests

@@ -1,173 +1,49 @@
-**0.0.1** - _init project_
-- [ _2022-04-23 00:29:55_ ] [45ad09e](https://github.com/dimaslanjaka/safelink/commit/45ad09e) Initial commit
-- [ _2022-04-23 00:31:06_ ] [6cb4348](https://github.com/dimaslanjaka/safelink/commit/6cb4348) migrate from dimaslanjaka.github.io/tree/safelink
-- [ _2022-04-23 00:31:59_ ] [90910d0](https://github.com/dimaslanjaka/safelink/commit/90910d0) migrate from origin https://github.com/dimaslanjaka.github.io/tree/safelink 
-- [ _2022-04-23 00:32:03_ ] [1035436](https://github.com/dimaslanjaka/safelink/commit/1035436) Merge branch 'main' of https://github.com/dimaslanjaka/safelink into main
-- [ _2022-04-23 00:37:50_ ] [2e489c4](https://github.com/dimaslanjaka/safelink/commit/2e489c4) Update safelink.yml
-- [ _2022-04-23 00:47:49_ ] [5fad709](https://github.com/dimaslanjaka/safelink/commit/5fad709) +submodule 
-- [ _2022-04-23 00:49:56_ ] [4a0be51](https://github.com/dimaslanjaka/safelink/commit/4a0be51) update deployment 
-- [ _2022-04-23 00:51:40_ ] [235d262](https://github.com/dimaslanjaka/safelink/commit/235d262) [workflow] update 
-- [ _2022-04-23 00:57:18_ ] [04ca596](https://github.com/dimaslanjaka/safelink/commit/04ca596) update 
-- [ _2022-04-23 00:57:50_ ] [0f27f27](https://github.com/dimaslanjaka/safelink/commit/0f27f27) update 
-- [ _2022-04-23 01:12:32_ ] [237af50](https://github.com/dimaslanjaka/safelink/commit/237af50) update 
-- [ _2022-04-23 01:15:41_ ] [f9687a2](https://github.com/dimaslanjaka/safelink/commit/f9687a2) [workflow] test 
-- [ _2022-04-23 01:17:32_ ] [62e09f3](https://github.com/dimaslanjaka/safelink/commit/62e09f3) [workflow] test
-- [ _2022-04-23 01:22:03_ ] [5588b82](https://github.com/dimaslanjaka/safelink/commit/5588b82) update
-- [ _2022-04-23 01:28:34_ ] [2266479](https://github.com/dimaslanjaka/safelink/commit/2266479) [workflow] test 
-- [ _2022-04-23 01:40:39_ ] [4034239](https://github.com/dimaslanjaka/safelink/commit/4034239) + .nojekyll 
-- [ _2022-04-23 01:43:18_ ] [a711a54](https://github.com/dimaslanjaka/safelink/commit/a711a54) fix bundle location 
-- [ _2022-04-23 01:53:21_ ] [36caf76](https://github.com/dimaslanjaka/safelink/commit/36caf76) [workflow] just test 
-- [ _2022-04-23 02:04:22_ ] [8af8a28](https://github.com/dimaslanjaka/safelink/commit/8af8a28) fix EJSHelper location 
-- [ _2022-04-23 02:06:23_ ] [badd507](https://github.com/dimaslanjaka/safelink/commit/badd507) v1.0.2 
-- [ _2022-04-23 02:06:58_ ] [d55f1fd](https://github.com/dimaslanjaka/safelink/commit/d55f1fd) update 1.0.2 
-- [ _2022-04-23 02:10:01_ ] [ad07842](https://github.com/dimaslanjaka/safelink/commit/ad07842) +docs 
-- [ _2022-04-23 03:14:51_ ] [addce76](https://github.com/dimaslanjaka/safelink/commit/addce76) +layout redirector 
-- [ _2022-04-23 04:04:53_ ] [30363e2](https://github.com/dimaslanjaka/safelink/commit/30363e2) v1.0.3 
-- [ _2022-04-23 04:04:59_ ] [ee55c98](https://github.com/dimaslanjaka/safelink/commit/ee55c98) update 1.0.3
-- [ _2022-04-23 04:05:42_ ] [5544bd6](https://github.com/dimaslanjaka/safelink/commit/5544bd6) update 1.0.3
-- [ _2022-04-23 05:11:07_ ] [6b18aaa](https://github.com/dimaslanjaka/safelink/commit/6b18aaa) prepare redirector 
-- [ _2022-04-23 18:45:40_ ] [4f9fe86](https://github.com/dimaslanjaka/safelink/commit/4f9fe86) update
-- [ _2022-04-23 18:45:57_ ] [067bf56](https://github.com/dimaslanjaka/safelink/commit/067bf56) update 
-- [ _2022-04-23 19:34:27_ ] [53ed674](https://github.com/dimaslanjaka/safelink/commit/53ed674) Update README.md 
-- [ _2022-04-23 19:37:35_ ] [5d7f3ed](https://github.com/dimaslanjaka/safelink/commit/5d7f3ed) Update README.md 
-- [ _2022-04-23 19:41:03_ ] [b1516da](https://github.com/dimaslanjaka/safelink/commit/b1516da) Update README.md 
-- [ _2022-04-23 19:41:37_ ] [cee579e](https://github.com/dimaslanjaka/safelink/commit/cee579e) Update README.md 
-- [ _2022-04-23 20:02:32_ ] [442b7e6](https://github.com/dimaslanjaka/safelink/commit/442b7e6) update 
-- [ _2022-04-23 20:02:46_ ] [3160589](https://github.com/dimaslanjaka/safelink/commit/3160589) update 
-- [ _2022-04-23 20:23:25_ ] [4201016](https://github.com/dimaslanjaka/safelink/commit/4201016) skip CNAME
-- [ _2022-04-23 20:54:47_ ] [5570edc](https://github.com/dimaslanjaka/safelink/commit/5570edc) Update README.md 
-- [ _2022-04-23 23:49:18_ ] [b6153b3](https://github.com/dimaslanjaka/safelink/commit/b6153b3) fix yarn start 
-- [ _2022-04-24 01:23:12_ ] [848022d](https://github.com/dimaslanjaka/safelink/commit/848022d) fix file watchers 
-- [ _2022-04-24 01:23:47_ ] [4dd3fca](https://github.com/dimaslanjaka/safelink/commit/4dd3fca) [windows] eol 
-- [ _2022-04-24 01:34:55_ ] [2ac5c01](https://github.com/dimaslanjaka/safelink/commit/2ac5c01) fix import by typescript
-- [ _2022-04-24 01:58:38_ ] [2d508ec](https://github.com/dimaslanjaka/safelink/commit/2d508ec) fix node instance 
-- [ _2022-04-24 02:15:49_ ] [9682678](https://github.com/dimaslanjaka/safelink/commit/9682678) +fix fs webpack, +nodemon ignore 
-- [ _2022-04-24 02:22:23_ ] [095009f](https://github.com/dimaslanjaka/safelink/commit/095009f) fix nodemon 
-- [ _2022-04-24 02:29:52_ ] [3fc9d30](https://github.com/dimaslanjaka/safelink/commit/3fc9d30) remove dumper 
-- [ _2022-04-24 03:09:23_ ] [eae4a57](https://github.com/dimaslanjaka/safelink/commit/eae4a57) update 
-- [ _2022-04-24 04:45:01_ ] [cb3d57d](https://github.com/dimaslanjaka/safelink/commit/cb3d57d) +ribbon
-- [ _2022-04-24 05:07:19_ ] [2ce0af3](https://github.com/dimaslanjaka/safelink/commit/2ce0af3) [node] fix process content from string
-- [ _2022-04-24 05:23:16_ ] [4fe6f3f](https://github.com/dimaslanjaka/safelink/commit/4fe6f3f) [node] fix parsing from string 
-- [ _2022-04-24 05:27:13_ ] [70a8997](https://github.com/dimaslanjaka/safelink/commit/70a8997) [gulp] dont copy d.ts 
-- [ _2022-04-24 05:29:24_ ] [45a42d7](https://github.com/dimaslanjaka/safelink/commit/45a42d7) Update README.md 
-- [ _2022-04-24 05:30:32_ ] [23e23d1](https://github.com/dimaslanjaka/safelink/commit/23e23d1) Update README.md 
-- [ _2022-04-24 06:08:37_ ] [2a33248](https://github.com/dimaslanjaka/safelink/commit/2a33248) fix index docs 
-- [ _2022-04-24 07:03:18_ ] [4e16d79](https://github.com/dimaslanjaka/safelink/commit/4e16d79) -nodemon no more limitation of watched files
-- [ _2022-04-24 07:09:10_ ] [465d757](https://github.com/dimaslanjaka/safelink/commit/465d757) update docs 
-- [ _2022-04-24 07:27:01_ ] [cf8aced](https://github.com/dimaslanjaka/safelink/commit/cf8aced) update docs 
-- [ _2022-04-24 07:28:13_ ] [29a3116](https://github.com/dimaslanjaka/safelink/commit/29a3116) Update README.md 
-- [ _2022-04-24 07:30:06_ ] [2b69679](https://github.com/dimaslanjaka/safelink/commit/2b69679) Update README.md 
-- [ _2022-04-24 07:33:04_ ] [e92c6cf](https://github.com/dimaslanjaka/safelink/commit/e92c6cf) migrate to subfolder 
-- [ _2022-04-24 07:46:28_ ] [d610e28](https://github.com/dimaslanjaka/safelink/commit/d610e28) v1.0.4
-- [ _2022-04-24 08:00:47_ ] [b689834](https://github.com/dimaslanjaka/safelink/commit/b689834) update docs 
-- [ _2022-04-24 08:27:16_ ] [4243ec6](https://github.com/dimaslanjaka/safelink/commit/4243ec6) +log summoner 
-- [ _2022-04-24 12:07:35_ ] [7ecd564](https://github.com/dimaslanjaka/safelink/commit/7ecd564) reload after summoner closed 
-- [ _2022-04-24 12:29:27_ ] [0e12853](https://github.com/dimaslanjaka/safelink/commit/0e12853) [dev] fix summoner 
-- [ _2022-04-24 12:42:18_ ] [be3db52](https://github.com/dimaslanjaka/safelink/commit/be3db52) anonymize only for url start with http/s 
-- [ _2022-04-24 12:45:12_ ] [1a1ccaa](https://github.com/dimaslanjaka/safelink/commit/1a1ccaa) [ejs] responsive improvement 
-- [ _2022-04-24 12:50:50_ ] [001deea](https://github.com/dimaslanjaka/safelink/commit/001deea) [filter] only process url with protocols 
-- [ _2022-04-24 12:53:00_ ] [3bdf2db](https://github.com/dimaslanjaka/safelink/commit/3bdf2db) [dev] fix `MaxListenersExceededWarning` 
-- [ _2022-04-24 12:55:36_ ] [2c9960f](https://github.com/dimaslanjaka/safelink/commit/2c9960f) [node] filter improvement 
-- [ _2022-04-24 13:02:55_ ] [0b59ef4](https://github.com/dimaslanjaka/safelink/commit/0b59ef4) migrate build to gulp 
-- [ _2022-04-24 13:15:55_ ] [a7f28a3](https://github.com/dimaslanjaka/safelink/commit/a7f28a3) [migrate] prefer old builder, webpack on-fly 
-- [ _2022-04-24 13:21:49_ ] [91a5238](https://github.com/dimaslanjaka/safelink/commit/91a5238) [webpack] improvement log 
-- [ _2022-04-24 13:27:13_ ] [7b6bb11](https://github.com/dimaslanjaka/safelink/commit/7b6bb11) [gulp] detach `index.ts` 
-- [ _2022-04-24 13:29:28_ ] [1f841c1](https://github.com/dimaslanjaka/safelink/commit/1f841c1) Update gulpfile.ts 
-- [ _2022-04-24 13:54:47_ ] [69e9ee1](https://github.com/dimaslanjaka/safelink/commit/69e9ee1) split webpack watcher 
-- [ _2022-04-24 14:20:24_ ] [0759d51](https://github.com/dimaslanjaka/safelink/commit/0759d51) [webpack] integrate `webpack` watcher to `browser-sync` [webpack] watcher improvements
-- [ _2022-04-24 14:53:04_ ] [acd17c6](https://github.com/dimaslanjaka/safelink/commit/acd17c6) [dev] bring barck old watcher 
-- [ _2022-04-24 15:01:47_ ] [1383db2](https://github.com/dimaslanjaka/safelink/commit/1383db2) update docs 
-- [ _2022-04-24 15:02:25_ ] [9822e8c](https://github.com/dimaslanjaka/safelink/commit/9822e8c) Update README.md 
-- [ _2022-04-24 16:59:23_ ] [e3f1a1b](https://github.com/dimaslanjaka/safelink/commit/e3f1a1b) detach private script from compiler
-- [ _2022-04-24 16:59:29_ ] [d67bc39](https://github.com/dimaslanjaka/safelink/commit/d67bc39) Merge branch 'main' of https://github.com/dimaslanjaka/safelink 
-- [ _2022-04-24 17:00:19_ ] [c6ca0e6](https://github.com/dimaslanjaka/safelink/commit/c6ca0e6) update compiled
-- [ _2022-04-24 17:10:22_ ] [f89cf49](https://github.com/dimaslanjaka/safelink/commit/f89cf49) restore docs index 
-- [ _2022-04-24 18:24:45_ ] [69f6cd9](https://github.com/dimaslanjaka/safelink/commit/69f6cd9) v1.0.5 
-- [ _2022-04-24 20:31:41_ ] [5747ffa](https://github.com/dimaslanjaka/safelink/commit/5747ffa) prepare update 1.0.6 
-- [ _2022-04-24 20:34:30_ ] [0d54a08](https://github.com/dimaslanjaka/safelink/commit/0d54a08) update docs 
-- [ _2022-04-24 20:36:04_ ] [d3c1f1e](https://github.com/dimaslanjaka/safelink/commit/d3c1f1e) v1.0.6 
-- [ _2022-04-26 00:44:01_ ] [c962efc](https://github.com/dimaslanjaka/safelink/commit/c962efc) improve summoner 
-- [ _2022-04-26 01:02:26_ ] [294d5f9](https://github.com/dimaslanjaka/safelink/commit/294d5f9) [fix][1.0.7] `resolveQueryUrl`
-- [ _2022-04-26 01:03:55_ ] [3653aac](https://github.com/dimaslanjaka/safelink/commit/3653aac) -log 
-- [ _2022-04-26 01:04:53_ ] [3946a35](https://github.com/dimaslanjaka/safelink/commit/3946a35) skip non-exist search and hashes 
-- [ _2022-04-26 01:05:37_ ] [d63a58c](https://github.com/dimaslanjaka/safelink/commit/d63a58c) v1.0.7 
-- [ _2022-04-26 01:06:06_ ] [e9033ba](https://github.com/dimaslanjaka/safelink/commit/e9033ba) release 1.0.7 
-- [ _2022-04-26 01:12:56_ ] [74f2cad](https://github.com/dimaslanjaka/safelink/commit/74f2cad) update docs 
-- [ _2022-04-26 01:13:12_ ] [89431f1](https://github.com/dimaslanjaka/safelink/commit/89431f1) update docs 
-- [ _2022-04-26 01:22:18_ ] [9c850a7](https://github.com/dimaslanjaka/safelink/commit/9c850a7) Update README.md
-- [ _2022-04-26 04:40:09_ ] [89ac38b](https://github.com/dimaslanjaka/safelink/commit/89ac38b) Update README.md 
-- [ _2022-04-26 14:30:25_ ] [458bd2c](https://github.com/dimaslanjaka/safelink/commit/458bd2c) [gh-pages] +toastr 
-- [ _2022-05-04 04:41:07_ ] [37c3fb0](https://github.com/dimaslanjaka/safelink/commit/37c3fb0) fix deps 
-- [ _2022-05-04 05:07:05_ ] [054611e](https://github.com/dimaslanjaka/safelink/commit/054611e) +encode single url
-- [ _2022-05-04 05:10:04_ ] [01f504e](https://github.com/dimaslanjaka/safelink/commit/01f504e) +string type for dynamic typescript 
-- [ _2022-05-04 05:11:13_ ] [dfcd836](https://github.com/dimaslanjaka/safelink/commit/dfcd836) v1.0.8 
-- [ _2022-05-17 01:10:04_ ] [3b0a439](https://github.com/dimaslanjaka/safelink/commit/3b0a439) update
-- [ _2022-05-19 06:42:08_ ] [b7ab961](https://github.com/dimaslanjaka/safelink/commit/b7ab961) update linux
-- [ _2022-05-19 08:24:16_ ] [772e5dc](https://github.com/dimaslanjaka/safelink/commit/772e5dc) Update README.md 
-- [ _2022-05-19 08:40:03_ ] [db5f5ca](https://github.com/dimaslanjaka/safelink/commit/db5f5ca) fix for nodeJS 
-- [ _2022-05-19 08:40:33_ ] [46a521f](https://github.com/dimaslanjaka/safelink/commit/46a521f) fix 
-- [ _2022-05-19 08:53:37_ ] [df13456](https://github.com/dimaslanjaka/safelink/commit/df13456) fix nodejs process 
-- [ _2022-05-19 08:53:49_ ] [9a68d2b](https://github.com/dimaslanjaka/safelink/commit/9a68d2b) update docs 
-- [ _2022-05-19 08:55:51_ ] [e607c06](https://github.com/dimaslanjaka/safelink/commit/e607c06) update docs 
-- [ _2022-05-19 08:55:57_ ] [76cec9f](https://github.com/dimaslanjaka/safelink/commit/76cec9f) update docs 
-- [ _2022-05-19 08:57:09_ ] [76f2135](https://github.com/dimaslanjaka/safelink/commit/76f2135) v1.0.9 
-- [ _2022-05-19 08:57:37_ ] [2ec240d](https://github.com/dimaslanjaka/safelink/commit/2ec240d) +changelog 
-- [ _2022-05-19 08:58:57_ ] [25ff578](https://github.com/dimaslanjaka/safelink/commit/25ff578) v1.1.0 
-- [ _2022-05-19 08:59:17_ ] [2611fef](https://github.com/dimaslanjaka/safelink/commit/2611fef) update changelog 
-- [ _2022-05-19 09:03:15_ ] [8e3977b](https://github.com/dimaslanjaka/safelink/commit/8e3977b) fix documenter 
-- [ _2022-05-19 10:22:24_ ] [4b1be16](https://github.com/dimaslanjaka/safelink/commit/4b1be16) fix nodejs process 
-- [ _2022-05-19 10:26:25_ ] [546e33d](https://github.com/dimaslanjaka/safelink/commit/546e33d) Update README.md 
-- [ _2022-05-19 10:26:57_ ] [8a2fb17](https://github.com/dimaslanjaka/safelink/commit/8a2fb17) update docs
-- [ _2022-05-19 10:28:55_ ] [b5d6362](https://github.com/dimaslanjaka/safelink/commit/b5d6362) fix update 
-- [ _2022-05-19 10:30:25_ ] [c910922](https://github.com/dimaslanjaka/safelink/commit/c910922) update 1.1.1
-- [ _2022-05-19 10:31:21_ ] [cc08fab](https://github.com/dimaslanjaka/safelink/commit/cc08fab) v1.1.1 
-- [ _2022-05-19 10:31:47_ ] [de49114](https://github.com/dimaslanjaka/safelink/commit/de49114) update 1.1.1 
-- [ _2022-05-19 10:35:02_ ] [58e9c38](https://github.com/dimaslanjaka/safelink/commit/58e9c38) update docs 
-- [ _2022-05-19 10:35:35_ ] [80cd1ec](https://github.com/dimaslanjaka/safelink/commit/80cd1ec) update docs 
-- [ _2022-05-19 10:35:42_ ] [96a7465](https://github.com/dimaslanjaka/safelink/commit/96a7465) update docs
-- [ _2022-05-19 10:48:47_ ] [73ea90c](https://github.com/dimaslanjaka/safelink/commit/73ea90c) update docs 
-- [ _2022-05-19 10:49:28_ ] [e18de77](https://github.com/dimaslanjaka/safelink/commit/e18de77) update docs 
-- [ _2022-05-19 11:17:25_ ] [2482a80](https://github.com/dimaslanjaka/safelink/commit/2482a80) fix anonymizing same link on non-hyperlink 
-- [ _2022-05-19 11:17:46_ ] [2e64dce](https://github.com/dimaslanjaka/safelink/commit/2e64dce) fix anonymizing same link on non-hyperlink 
-- [ _2022-05-19 11:18:06_ ] [955f9ee](https://github.com/dimaslanjaka/safelink/commit/955f9ee) v1.1.2 
-- [ _2022-05-19 11:19:01_ ] [5b3eb76](https://github.com/dimaslanjaka/safelink/commit/5b3eb76) fix anonymizing same link on non-hyperlink 
-- [ _2022-05-19 11:21:52_ ] [bdfa182](https://github.com/dimaslanjaka/safelink/commit/bdfa182) update docs 
-- [ _2022-05-19 11:24:45_ ] [0a24dcd](https://github.com/dimaslanjaka/safelink/commit/0a24dcd) update docs 
-- [ _2022-05-19 11:26:16_ ] [a87c735](https://github.com/dimaslanjaka/safelink/commit/a87c735) update docs 
-- [ _2022-05-21 10:14:05_ ] [41facd5](https://github.com/dimaslanjaka/safelink/commit/41facd5) export interface Nullable 
-- [ _2022-05-21 11:32:25_ ] [ee36bee](https://github.com/dimaslanjaka/safelink/commit/ee36bee) v1.1.3 
-- [ _2022-05-21 11:32:57_ ] [bcde9f0](https://github.com/dimaslanjaka/safelink/commit/bcde9f0) update 1.1.3 ES5 
-- [ _2022-05-21 11:33:54_ ] [35da245](https://github.com/dimaslanjaka/safelink/commit/35da245) compile to es5 
-- [ _2022-05-25 00:25:15_ ] [eed24bc](https://github.com/dimaslanjaka/safelink/commit/eed24bc) +lib 
-- [ _2022-05-28 15:39:28_ ] [d50c52d](https://github.com/dimaslanjaka/safelink/commit/d50c52d) fix module resolutions 
-- [ _2022-05-28 15:47:45_ ] [eacf6bb](https://github.com/dimaslanjaka/safelink/commit/eacf6bb) fix build 
-- [ _2022-05-28 17:52:09_ ] [311c604](https://github.com/dimaslanjaka/safelink/commit/311c604) update d.ts 
-- [ _2022-05-31 07:40:04_ ] [786d238](https://github.com/dimaslanjaka/safelink/commit/786d238) export options
-- [ _2022-06-03 07:40:56_ ] [1322357](https://github.com/dimaslanjaka/safelink/commit/1322357) migrate to `yarn v2` 
-- [ _2022-06-03 08:03:10_ ] [4313451](https://github.com/dimaslanjaka/safelink/commit/4313451) fix `yarn v2` exclusions
-- [ _2022-06-03 08:32:17_ ] [3bdbb35](https://github.com/dimaslanjaka/safelink/commit/3bdbb35) update module resolutions 
-- [ _2022-06-03 08:51:04_ ] [f9564bf](https://github.com/dimaslanjaka/safelink/commit/f9564bf) enable global cache 
-- [ _2022-06-10 16:37:52_ ] [301f8a4](https://github.com/dimaslanjaka/safelink/commit/301f8a4) using `npm` instead of `yarn` 
-- [ _2022-06-14 18:29:13_ ] [29b7fae](https://github.com/dimaslanjaka/safelink/commit/29b7fae) fresh build 
-- [ _2022-06-14 18:29:42_ ] [b3b8803](https://github.com/dimaslanjaka/safelink/commit/b3b8803) add test unit 
-- [ _2022-06-14 18:31:01_ ] [3db17d7](https://github.com/dimaslanjaka/safelink/commit/3db17d7) fresh install 
-- [ _2022-06-14 18:34:14_ ] [aa36bea](https://github.com/dimaslanjaka/safelink/commit/aa36bea) fresh install 
-- [ _2022-10-17 00:51:27_ ] [78ffef3](https://github.com/dimaslanjaka/safelink/commit/78ffef3) update 
-- [ _2022-10-17 00:55:56_ ] [3344980](https://github.com/dimaslanjaka/safelink/commit/3344980) convert parse to async 
-- [ _2022-10-17 00:59:02_ ] [6447426](https://github.com/dimaslanjaka/safelink/commit/6447426) -test 
-- [ _2022-10-17 01:02:36_ ] [a2a60db](https://github.com/dimaslanjaka/safelink/commit/a2a60db) update 
-- [ _2022-10-17 01:16:56_ ] [c98019c](https://github.com/dimaslanjaka/safelink/commit/c98019c) update dependencies 
-- [ _2022-10-17 01:30:34_ ] [7d3d31e](https://github.com/dimaslanjaka/safelink/commit/7d3d31e) update 
-- [ _2022-10-17 01:40:24_ ] [6753a42](https://github.com/dimaslanjaka/safelink/commit/6753a42) fix nulled process 
-- [ _2022-10-17 01:43:15_ ] [1bd954d](https://github.com/dimaslanjaka/safelink/commit/1bd954d) add docs 
-- [ _2022-10-17 01:44:54_ ] [9e460f4](https://github.com/dimaslanjaka/safelink/commit/9e460f4) update docs 
-- [ _2022-10-17 01:45:16_ ] [8aa82c4](https://github.com/dimaslanjaka/safelink/commit/8aa82c4) update docs 
+
+## CHANGELOG of safelinkify
+
+**1.0.0**
+- initial commit
+
+**1.0.1**
+- fix aes
+
+**1.0.2**
+- fix object encyrption result
+
+**1.0.3**
+- add password aes option
+
+**1.0.5 - 1.0.6**
+- remove useless dependencies
+- detach private script
+- add object redirect url to result query parser
+
+**1.0.7**
+- fix query string resolver
+
+**1.0.8 - 1.0.9**
+- fix process on nodejs
+
+**1.1.0**
+- fix main file js
+
+**1.1.1**
+- fix process on nodejs read from file
+
+**1.1.2**
+- fix same link when included as other element (non-hyperlink)
+
+**1.1.3**
+- Compile to ES5
 
 **1.1.4**
-
-- [ _2022-10-17 01:49:39_ ] [3cafc9d](https://github.com/dimaslanjaka/safelink/commit/3cafc9d) Update README.md 
+- `parse` now async
+- `parse` always return string
+- add more docs for easy development
+- add `tsconfig.build.json` excluding test files
+- [ _2022-10-17 01:49:39_ ] [3cafc9d](https://github.com/dimaslanjaka/safelink/commit/3cafc9d) Update README.md
 - [ _2022-10-17 01:55:33_ ] [5298e34](https://github.com/dimaslanjaka/safelink/commit/5298e34) Update CHANGELOG.md 
-- [ _2022-10-17 01:58:21_ ] [2974c3a](https://github.com/dimaslanjaka/safelink/commit/2974c3a) update docs 
+- [ _2022-10-17 01:58:21_ ] [2974c3a](https://github.com/dimaslanjaka/safelink/commit/2974c3a) update docs
 - [ _2022-10-26 09:03:33_ ] [d50f681](https://github.com/dimaslanjaka/safelink/commit/d50f681) update dependencies 
 
 **1.1.5**
@@ -175,21 +51,21 @@
 - [ _2022-11-09 16:30:14_ ] [b5b6896](https://github.com/dimaslanjaka/safelink/commit/b5b6896) add OR 
 - [ _2022-11-09 16:31:28_ ] [ae6fca5](https://github.com/dimaslanjaka/safelink/commit/ae6fca5) add null validation 
 - [ _2022-11-09 16:32:08_ ] [6011523](https://github.com/dimaslanjaka/safelink/commit/6011523) Update safelink.yml 
-- [ _2022-11-09 16:33:27_ ] [61c0d03](https://github.com/dimaslanjaka/safelink/commit/61c0d03) Using npm 
-- [ _2022-11-09 16:37:43_ ] [ecc409f](https://github.com/dimaslanjaka/safelink/commit/ecc409f) add commits 
-- [ _2022-11-09 16:38:18_ ] [abd46eb](https://github.com/dimaslanjaka/safelink/commit/abd46eb) update build 
+- [ _2022-11-09 16:33:27_ ] [61c0d03](https://github.com/dimaslanjaka/safelink/commit/61c0d03) Using npm
+- [ _2022-11-09 16:37:43_ ] [ecc409f](https://github.com/dimaslanjaka/safelink/commit/ecc409f) add commits
+- [ _2022-11-09 16:38:18_ ] [abd46eb](https://github.com/dimaslanjaka/safelink/commit/abd46eb) update build
 - [ _2022-11-09 16:53:11_ ] [d63681d](https://github.com/dimaslanjaka/safelink/commit/d63681d) Update safelink.yml 
-- [ _2022-11-09 16:53:44_ ] [5acfae9](https://github.com/dimaslanjaka/safelink/commit/5acfae9) Update safelink.yml
+- [ _2022-11-09 16:53:44_ ] [5acfae9](https://github.com/dimaslanjaka/safelink/commit/5acfae9) Update safelink.yml 
 - [ _2022-11-09 16:54:14_ ] [96ba98c](https://github.com/dimaslanjaka/safelink/commit/96ba98c) Update safelink.yml 
 - [ _2022-11-09 16:59:58_ ] [600ae45](https://github.com/dimaslanjaka/safelink/commit/600ae45) Update safelink.yml 
-- [ _2022-11-09 17:06:39_ ] [4c865fe](https://github.com/dimaslanjaka/safelink/commit/4c865fe) update build 
+- [ _2022-11-09 17:06:39_ ] [4c865fe](https://github.com/dimaslanjaka/safelink/commit/4c865fe) update build
 
 **1.1.6**
 
 - [ _2022-11-20 11:38:32_ ] [7bc960f](https://github.com/dimaslanjaka/safelink/commit/7bc960f) Update README.md 
 - [ _2022-11-20 11:41:15_ ] [8d3c848](https://github.com/dimaslanjaka/safelink/commit/8d3c848) Update README.md 
 - [ _2022-12-21 10:12:29_ ] [694c87c](https://github.com/dimaslanjaka/safelink/commit/694c87c) update deps and scripts 
-- [ _2022-12-21 10:13:04_ ] [377a912](https://github.com/dimaslanjaka/safelink/commit/377a912) move and export all types from/to globals 
+- [ _2022-12-21 10:13:04_ ] [377a912](https://github.com/dimaslanjaka/safelink/commit/377a912) move and export all types from/to globals
 - [ _2022-12-21 10:13:30_ ] [7405a4b](https://github.com/dimaslanjaka/safelink/commit/7405a4b) Update 
 - [ _2022-12-21 10:14:48_ ] [9051509](https://github.com/dimaslanjaka/safelink/commit/9051509) Update README.md 
 - [ _2022-12-21 10:16:11_ ] [3faabe5](https://github.com/dimaslanjaka/safelink/commit/3faabe5) Update README.md 
@@ -198,62 +74,40 @@
 **1.1.7**
 
 - [ _2022-12-21 10:18:48_ ] [9d5848d](https://github.com/dimaslanjaka/safelink/commit/9d5848d) Update docs 
-- [ _2022-12-21 03:21:46_ ] [bbf14f7](https://github.com/dimaslanjaka/safelink/commit/bbf14f7) Build Wed Dec 21 03:21:46 UTC 2022 
-- [ _2022-12-21 10:23:57_ ] [13adeeb](https://github.com/dimaslanjaka/safelink/commit/13adeeb) move types to globals 
-- [ _2022-12-21 10:26:37_ ] [71d007e](https://github.com/dimaslanjaka/safelink/commit/71d007e) Merge branch 'master' of https://github.com/dimaslanjaka/safelink 
+- [ _2022-12-21 03:21:46_ ] [bbf14f7](https://github.com/dimaslanjaka/safelink/commit/bbf14f7) Build Wed Dec 21 03:21:46 UTC 2022
+- [ _2022-12-21 10:23:57_ ] [13adeeb](https://github.com/dimaslanjaka/safelink/commit/13adeeb) move types to globals
+- [ _2022-12-21 10:26:37_ ] [71d007e](https://github.com/dimaslanjaka/safelink/commit/71d007e) Merge branch 'master' of https://github.com/dimaslanjaka/safelink
 
 **1.1.8**
 
 - [ _2022-12-21 03:29:08_ ] [efe5f39](https://github.com/dimaslanjaka/safelink/commit/efe5f39) Build Wed Dec 21 03:29:08 UTC 2022
 - [ _2022-12-21 11:48:28_ ] [7fcb525](https://github.com/dimaslanjaka/safelink/commit/7fcb525) add changelog builder 
-- [ _2022-12-21 11:49:39_ ] [f77bf91](https://github.com/dimaslanjaka/safelink/commit/f77bf91) Merge branch 'master' of https://github.com/dimaslanjaka/safelink 
-- [ _2022-12-21 04:50:57_ ] [c6f6d10](https://github.com/dimaslanjaka/safelink/commit/c6f6d10) Build Wed Dec 21 04:50:57 UTC 2022 
+- [ _2022-12-21 11:49:39_ ] [f77bf91](https://github.com/dimaslanjaka/safelink/commit/f77bf91) Merge branch 'master' of https://github.com/dimaslanjaka/safelink
+- [ _2022-12-21 04:50:57_ ] [c6f6d10](https://github.com/dimaslanjaka/safelink/commit/c6f6d10) Build Wed Dec 21 04:50:57 UTC 2022
 - [ _2022-12-21 11:53:31_ ] [62ab8f2](https://github.com/dimaslanjaka/safelink/commit/62ab8f2) Update changelog 
 - [ _2022-12-21 12:02:39_ ] [20064ec](https://github.com/dimaslanjaka/safelink/commit/20064ec) Update docs and changelog 
 - [ _2022-12-21 12:02:48_ ] [6b571ce](https://github.com/dimaslanjaka/safelink/commit/6b571ce) Merge branch 'master' of https://github.com/dimaslanjaka/safelink 
 - [ _2022-12-21 05:03:53_ ] [987061a](https://github.com/dimaslanjaka/safelink/commit/987061a) Build Wed Dec 21 05:03:53 UTC 2022 
-- [ _2022-12-21 12:06:25_ ] [6323d22](https://github.com/dimaslanjaka/safelink/commit/6323d22) Update docs 
-- [ _2022-12-21 12:06:31_ ] [4e0e5b7](https://github.com/dimaslanjaka/safelink/commit/4e0e5b7) Merge branch 'master' of https://github.com/dimaslanjaka/safelink 
-- [ _2022-12-21 05:07:42_ ] [2335f6b](https://github.com/dimaslanjaka/safelink/commit/2335f6b) Build Wed Dec 21 05:07:42 UTC 2022 
+- [ _2022-12-21 12:06:25_ ] [6323d22](https://github.com/dimaslanjaka/safelink/commit/6323d22) Update docs
+- [ _2022-12-21 12:06:31_ ] [4e0e5b7](https://github.com/dimaslanjaka/safelink/commit/4e0e5b7) Merge branch 'master' of https://github.com/dimaslanjaka/safelink
+- [ _2022-12-21 05:07:42_ ] [2335f6b](https://github.com/dimaslanjaka/safelink/commit/2335f6b) Build Wed Dec 21 05:07:42 UTC 2022
 - [ _2022-12-21 12:27:37_ ] [fe68ba9](https://github.com/dimaslanjaka/safelink/commit/fe68ba9) Update docs 
 - [ _2022-12-21 12:48:00_ ] [2a3ea1a](https://github.com/dimaslanjaka/safelink/commit/2a3ea1a) using customized package cross-spawn 
-- [ _2022-12-21 12:48:07_ ] [38eee66](https://github.com/dimaslanjaka/safelink/commit/38eee66) Merge branch 'master' of https://github.com/dimaslanjaka/safelink 
-- [ _2022-12-21 13:10:23_ ] [534a6e6](https://github.com/dimaslanjaka/safelink/commit/534a6e6) Update docs 
+- [ _2022-12-21 12:48:07_ ] [38eee66](https://github.com/dimaslanjaka/safelink/commit/38eee66) Merge branch 'master' of https://github.com/dimaslanjaka/safelink
+- [ _2022-12-21 13:10:23_ ] [534a6e6](https://github.com/dimaslanjaka/safelink/commit/534a6e6) Update docs
 - [ _2022-12-21 06:11:40_ ] [437e3ba](https://github.com/dimaslanjaka/safelink/commit/437e3ba) Build Wed Dec 21 06:11:40 UTC 2022 
 - [ _2022-12-21 13:17:22_ ] [fd76b3b](https://github.com/dimaslanjaka/safelink/commit/fd76b3b) Update docs 
 - [ _2022-12-21 13:19:47_ ] [858ead5](https://github.com/dimaslanjaka/safelink/commit/858ead5) Update build 
 
 **1.1.9**
 
-- [ _2022-12-21 13:21:59_ ] [5422f9f](https://github.com/dimaslanjaka/safelink/commit/5422f9f) Merge branch 'master' of https://github.com/dimaslanjaka/safelink 
-- [ _2022-12-21 06:23:16_ ] [34980a9](https://github.com/dimaslanjaka/safelink/commit/34980a9) Build Wed Dec 21 06:23:16 UTC 2022 
-- [ _2022-12-26 12:35:58_ ] [5253b1d](https://github.com/dimaslanjaka/safelink/commit/5253b1d) declare to global scope `safelink` and `safelinkify` 
-- [ _2022-12-26 05:37:11_ ] [64542d5](https://github.com/dimaslanjaka/safelink/commit/64542d5) Build Mon Dec 26 05:37:11 UTC 2022 
-- [ _2022-12-26 12:55:41_ ] [050a356](https://github.com/dimaslanjaka/safelink/commit/050a356) export safelink and safelinkify to global scrope - update docs 
-- [ _2022-12-26 12:55:50_ ] [28be9cc](https://github.com/dimaslanjaka/safelink/commit/28be9cc) export safelink and safelinkify to global scrope - update docs 
-- [ _2022-12-26 12:57:09_ ] [e41b97a](https://github.com/dimaslanjaka/safelink/commit/e41b97a) Merge branch 'master' of https://github.com/dimaslanjaka/safelink 
+- [ _2022-12-21 13:21:59_ ] [5422f9f](https://github.com/dimaslanjaka/safelink/commit/5422f9f) Merge branch 'master' of https://github.com/dimaslanjaka/safelink
+- [ _2022-12-21 06:23:16_ ] [34980a9](https://github.com/dimaslanjaka/safelink/commit/34980a9) Build Wed Dec 21 06:23:16 UTC 2022
+- [ _2022-12-26 12:35:58_ ] [5253b1d](https://github.com/dimaslanjaka/safelink/commit/5253b1d) declare to global scope `safelink` and `safelinkify`
+- [ _2022-12-26 05:37:11_ ] [64542d5](https://github.com/dimaslanjaka/safelink/commit/64542d5) Build Mon Dec 26 05:37:11 UTC 2022
+- [ _2022-12-26 12:55:41_ ] [050a356](https://github.com/dimaslanjaka/safelink/commit/050a356) export safelink and safelinkify to global scrope - update docs
+- [ _2022-12-26 12:55:50_ ] [28be9cc](https://github.com/dimaslanjaka/safelink/commit/28be9cc) export safelink and safelinkify to global scrope - update docs
+- [ _2022-12-26 12:57:09_ ] [e41b97a](https://github.com/dimaslanjaka/safelink/commit/e41b97a) Merge branch 'master' of https://github.com/dimaslanjaka/safelink
 
 **1.1.10**
 
-- [ _2022-12-26 12:58:46_ ] [5c7522e](https://github.com/dimaslanjaka/safelink/commit/5c7522e) update changelog 
-- [ _2022-12-26 05:59:54_ ] [b2c344c](https://github.com/dimaslanjaka/safelink/commit/b2c344c) Build Mon Dec 26 05:59:54 UTC 2022 
-- [ _2022-12-26 13:02:29_ ] [074689d](https://github.com/dimaslanjaka/safelink/commit/074689d) rename `README.md` to lowercase 
-- [ _2022-12-26 13:02:38_ ] [997b116](https://github.com/dimaslanjaka/safelink/commit/997b116) Merge branch 'master' of https://github.com/dimaslanjaka/safelink 
-- [ _2022-12-26 06:03:46_ ] [7a8591f](https://github.com/dimaslanjaka/safelink/commit/7a8591f) Build Mon Dec 26 06:03:46 UTC 2022 
-- [ _2022-12-26 13:13:41_ ] [c3d4870](https://github.com/dimaslanjaka/safelink/commit/c3d4870) Update script.js
-- [ _2022-12-27 18:13:26_ ] [f6eadd8](https://github.com/dimaslanjaka/safelink/commit/f6eadd8) update scripts 
-- [ _2022-12-27 11:14:25_ ] [80ec2fb](https://github.com/dimaslanjaka/safelink/commit/80ec2fb) Build Tue Dec 27 11:14:25 UTC 2022 
-- [ _2022-12-28 03:17:12_ ] [32d231a](https://github.com/dimaslanjaka/safelink/commit/32d231a) Update readme.md
-- [ _2022-12-27 20:18:29_ ] [cb13551](https://github.com/dimaslanjaka/safelink/commit/cb13551) Build Tue Dec 27 20:18:29 UTC 2022 
-- [ _2022-12-28 03:23:55_ ] [e7ef4a8](https://github.com/dimaslanjaka/safelink/commit/e7ef4a8) update deps 
-- [ _2022-12-28 03:25:15_ ] [b7b2260](https://github.com/dimaslanjaka/safelink/commit/b7b2260) Update readme.md 
-- [ _2022-12-27 20:25:32_ ] [dec138a](https://github.com/dimaslanjaka/safelink/commit/dec138a) Update build from https://github.com/dimaslanjaka/safelink/commit/e7ef4a8f1d7e97ec34d7ce41d0d469923bafb80d 
-- [ _2022-12-28 03:29:52_ ] [311f600](https://github.com/dimaslanjaka/safelink/commit/311f600) Update readme.md 
-- [ _2022-12-27 20:31:12_ ] [e2ca426](https://github.com/dimaslanjaka/safelink/commit/e2ca426) Update build from https://github.com/dimaslanjaka/safelink/commit/311f600c3b1070cb25abf40053a7e191dc10a4f7 
-- [ _2022-12-28 03:31:19_ ] [1cd8dca](https://github.com/dimaslanjaka/safelink/commit/1cd8dca) Update readme.md 
-- [ _2022-12-27 20:32:50_ ] [0555283](https://github.com/dimaslanjaka/safelink/commit/0555283) Update build from https://github.com/dimaslanjaka/safelink/commit/1cd8dca84c8753c1ccd7be96bc74253f18daa8e7 
-- [ _2022-12-28 03:33:15_ ] [9aef05f](https://github.com/dimaslanjaka/safelink/commit/9aef05f) Update readme.md 
-- [ _2022-12-28 03:33:41_ ] [fabe245](https://github.com/dimaslanjaka/safelink/commit/fabe245) Update readme.md
-- [ _2022-12-28 03:34:49_ ] [b32220a](https://github.com/dimaslanjaka/safelink/commit/b32220a) Update readme.md
-- [ _2022-12-28 03:35:18_ ] [103c90c](https://github.com/dimaslanjaka/safelink/commit/103c90c) Update readme.md
-- [ _2022-12-27 20:35:31_ ] [4d3107e](https://github.com/dimaslanjaka/safelink/commit/4d3107e) Update build from https://github.com/dimaslanjaka/safelink/commit/9aef05feff13da3a26818c382b4676ae57efeaa5  (HEAD -> master, origin/master, origin/HEAD)
