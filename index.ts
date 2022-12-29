@@ -115,7 +115,8 @@ app.init({
     '**/dist/**',
     '**/node_modules/**',
     '**/tmp/**',
-    'src/test*',
+    '**/release/**',
+    '**/src/test*',
     '**/gulpfile*'
   ],
   watch: false
