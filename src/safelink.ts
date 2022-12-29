@@ -4,7 +4,7 @@ import { default as _resolveQueryUrl } from './resolveQueryUrl';
 import { bufferToString, streamToString } from './string';
 import toURL from './toURL';
 
-/// <reference path="./lib/lib.dom.d.ts" />
+/// <reference path="./lib/lib.dom.ts" />
 export type DOMElement = globalThis.Element;
 export type HTMLElement = globalThis.HTMLElement;
 
