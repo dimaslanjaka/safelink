@@ -11,8 +11,15 @@ const { default: safelink } = require('./dist/safelink');
 //
 require('ts-node').register();
 const { default: EJSHelper } = require('./tests/EJSHelper');
-const { spawnAsync, spawn } = require('git-command-helper/dist/spawn');
+const { compileDocs } = require('./typedoc-runner');
 //
+
+compileDocs(
+  {
+    cleanOutputDir: false
+  },
+  createDemo
+);
 
 const safelinkInstance = new safelink({
   // exclude patterns (dont anonymize these patterns)
@@ -27,8 +34,6 @@ const safelinkInstance = new safelink({
   password: 'unique-password'
 });
 const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
-
-createDemo();
 
 async function createDemo() {
   if (!existsSync(deploy_dir)) await mkdir(deploy_dir, { recursive: true });

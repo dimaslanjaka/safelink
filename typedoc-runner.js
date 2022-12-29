@@ -144,6 +144,7 @@ let opt = typedocOptions;
 function getTypedocOptions() {
   return opt;
 }
+
 /**
  * Set typedoc options
  * @param {typeof import('./typedoc')} newOpt
@@ -210,6 +211,7 @@ async function createIndex() {
 module.exports = {
   watch,
   compile,
+  compileDocs: compile,
   publish,
   getTypedocOptions,
   setTypedocOptions

@@ -12,7 +12,7 @@
     "postinstall.js"
   ],
   "scripts": {
-    "start": "ts-node serve.ts",
+    "start": "ts-node docs-serve.ts",
     "prebuild": "git pull -X theirs",
     "build": "tsc -p tsconfig.build.json && webpack && gulp",
     "postbuild": "node packer.js && node typedoc-runner.js --publish",
