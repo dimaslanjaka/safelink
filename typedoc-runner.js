@@ -54,6 +54,10 @@ const compile = async function (options = {}, callback = null) {
   if (typeof project !== 'undefined') {
     await app.generateDocs(project, projectDocsDir);
     await app.generateJson(project, join(projectDocsDir, 'info.json'));
+    const callback_script = join(__dirname, 'typedoc-callback.js');
+    if (existsSync(callback_script)) {
+      await spawnAsync('node', [callback_script], { cwd: __dirname, stdio: 'inherit' });
+    }
   } else {
     console.error('[error]', 'project undefined');
   }
