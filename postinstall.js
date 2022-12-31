@@ -78,28 +78,19 @@ const packages = [pjson.dependencies, pjson.devDependencies];
 
 /**
  * list packages to update
- * @type {string[]}
+ * @type {Set<string>}
  */
-const toUpdate = [];
+const toUpdate = new Set();
 let hasNotInstalled = false;
 const coloredScriptName = colors.grey(scriptname);
-/**
- * argument value
- */
-const argv = process.argv.slice(2);
 
 (async () => {
   try {
     const node_modules_dir = path.join(__dirname, 'node_modules');
+
     // skip if project not yet installed
     if (!fs.existsSync(node_modules_dir)) {
       console.log(coloredScriptName, 'project not yet installed');
-      return;
-    }
-
-    if (!fs.accessSync(path.join(node_modules_dir))) {
-      console.log(coloredScriptName, 'cannot access node_modules');
-      console.log(coloredScriptName, 'probably you still run `npm install`');
       return;
     }
 
@@ -108,7 +99,10 @@ const argv = process.argv.slice(2);
     if (!fs.existsSync(path.dirname(jsonfile))) {
       fs.mkdirSync(path.dirname(jsonfile), { recursive: true });
     }
-    const json = {};
+    let json = {};
+    if (fs.existsSync(jsonfile)) {
+      json = JSON.parse(fs.readFileSync(jsonfile, 'utf-8'));
+    }
 
     for (let i = 0; i < packages.length; i++) {
       const pkgs = packages[i];
@@ -123,33 +117,34 @@ const argv = process.argv.slice(2);
          */
         const coloredPkgname = colors.magenta(pkgname);
 
-        // node postinstall.js --simple
-        // add all monorepos packages to be updated without checking
-        if (argv.includes('--simple')) {
-          // push update local and monorepo package
-          if (/^((file|github):|(git|ssh)\+|http)/i.test(version)) {
-            //const arg = [version, isDev ? '-D' : ''].filter((str) => str.trim().length > 0);
-            toUpdate.push(pkgname);
-            continue;
-          }
-        }
-
-        // push update for private ssh package
-        if (/^(ssh+|git+ssh)/i.test(version)) {
-          toUpdate.push(pkgname);
-          continue;
+        // add all monorepos and private ssh packages to be updated without checking
+        if (/^((file|github):|(git|ssh)\+|http)/i.test(version)) {
+          //const arg = [version, isDev ? '-D' : ''].filter((str) => str.trim().length > 0);
+          toUpdate.add(pkgname);
         }
 
         const locks = ['./node_modules/.package-lock.json', './package-lock.json']
           .map((str) => path.join(__dirname, str))
-          .filter(fs.existsSync)[0];
+          .filter((str) => {
+            try {
+              return fs.existsSync(str);
+            } catch {
+              console.log(coloredScriptName, 'cannot access', str);
+            }
+            return false;
+          })[0];
         /**
          * @type {import('./package-lock.json')}
          */
-        const lockfile = fs.existsSync(locks) ? JSON.parse(fs.readFileSync(locks, 'utf-8')) : {};
+        const lockfile = fs.existsSync(locks)
+          ? JSON.parse(fs.readFileSync(locks, 'utf-8'))
+          : {
+              packages: {}
+            };
 
         // parse existing lock file
         const installedLock = lockfile.packages['node_modules/' + pkgname];
+        if (!installedLock) continue;
         installedLock.name = pkgname;
         const { integrity, resolved } = installedLock;
         let original = typeof resolved === 'string' && !/^https?/i.test(String(resolved)) ? resolved : null;
@@ -172,7 +167,7 @@ const argv = process.argv.slice(2);
         // fix conflict type package url and git
         if (/^https?:\/\/github.com\//i.test(version)) {
           // is tarball path
-          const isTarball = /\/tarball\//i.test(version);
+          const isTarball = /\/tarball\//i.test(version) || /.(tgz|zip|tar|tar.gz)$/i.test(version);
           isGitPkg = isGitPkg && !isTarball;
           if (isUrlPkg) {
             // is link to github directly
@@ -214,8 +209,11 @@ const argv = process.argv.slice(2);
           if (integrity !== hash) {
             console.log(coloredScriptName, 'remote package', pkgname, 'has different integrity');
             // fs.rmSync(node_modules_path, { recursive: true, force: true });
-            toUpdate.push(pkgname);
+            toUpdate.add(pkgname);
             continue;
+          } else {
+            console.log(coloredScriptName, coloredPkgname, 'already at latest version');
+            toUpdate.delete(pkgname);
           }
         }
 
@@ -229,8 +227,11 @@ const argv = process.argv.slice(2);
             if (originalHash !== integrity && fs.existsSync(node_modules_path)) {
               console.log(coloredScriptName, 'local package', pkgname, 'has different integrity');
               // fs.rmSync(node_modules_path, { recursive: true, force: true });
-              toUpdate.push(pkgname);
+              toUpdate.add(pkgname);
               continue;
+            } else {
+              console.log(coloredScriptName, coloredPkgname, 'already at latest version');
+              toUpdate.delete(pkgname);
             }
           }
         }
@@ -251,6 +252,7 @@ const argv = process.argv.slice(2);
             if (isBranchPkg) {
               const branch = String(version).split('#')[1];
               const api = 'https://api.github.com/repos/' + githubPath + '/commits/' + branch;
+              console.log(coloredScriptName, 'accessing', api);
               const getApi = await axiosGet(api);
               // skip when get api failure
               if (!getApi) continue;
@@ -264,10 +266,11 @@ const argv = process.argv.slice(2);
                   'has different commit hash'
                 );
                 // fs.rmSync(node_modules_path, { recursive: true, force: true });
-                toUpdate.push(pkgname);
+                toUpdate.add(pkgname);
                 continue;
               }
             } else {
+              console.log(coloredScriptName, 'accessing', apiRoot);
               const getApiRoot = await axiosGet(apiRoot);
               // skip when get api failure
               if (!getApiRoot) continue;
@@ -287,7 +290,7 @@ const argv = process.argv.slice(2);
                   'has different commit hash'
                 );
                 // fs.rmSync(node_modules_path, { recursive: true, force: true });
-                toUpdate.push(pkgname);
+                toUpdate.add(pkgname);
                 continue;
               }
             }
@@ -327,7 +330,7 @@ const argv = process.argv.slice(2);
 
     if (checkNodeModules()) {
       // filter duplicates package names
-      const filterUpdates = toUpdate.filter((item, index) => toUpdate.indexOf(item) === index);
+      const filterUpdates = Array.from(toUpdate).filter((item, index) => Array.from(toUpdate).indexOf(item) === index);
       if (filterUpdates.length > 0) {
         // do update
         try {
@@ -622,7 +625,7 @@ function isPackageInstalled(packageName) {
  * @returns
  */
 function checkNodeModules() {
-  const exists = toUpdate.map(
+  const exists = Array.from(toUpdate).map(
     (pkgname) =>
       fs.existsSync(path.join(__dirname, 'node_modules', pkgname)) &&
       fs.existsSync(path.join(__dirname, 'node_modules', pkgname, 'package.json'))
