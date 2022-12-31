@@ -80,9 +80,6 @@ gulp.watch(
   ['src/*.ts', 'webpack.*.js', '{tsconfig,package}*.json', '*.md', '!src-docs', '!tmp', '!dist', '!release', '!docs'],
   { cwd: __dirname },
   (done) => {
-    if (summoner) {
-      if (!summoner.killed) summoner.kill();
-    }
     buildDocs(null, null, done);
   }
 );
