@@ -50,11 +50,12 @@ npm install
 
 | command      | description                       |
 | ------------ | --------------------------------- |
-| `yarn start`    | serve docs |
-| `tsc`           | build definition and js files            |
-| `webpack`       | build safelink script             |
-| `node docs.js`  | build docs |
+| `yarn start`    | serve generated docs           |
+| `tsc`           | build definition and js files  |
+| `webpack`       | build safelink script          |
+| `npm run docs`  | build docs |
 | `npm run build` | build dist |
+| `ts-node old-docs.ts` | (_deprecated_) watch src-docs and start server, watch src and compile tsc webpack |
 
 ## Usages
 Setup options:
