@@ -30,16 +30,16 @@ let compiled = 0;
 const compile = async function (options = {}, callback = null) {
   const outDir = join(__dirname, 'docs');
   const projectDocsDir = join(outDir, pkgjson.name);
+  if (options) setTypedocOptions(options);
 
   if (!existsSync(outDir)) {
     await spawnAsync('git', ['clone', REPO_URL, 'docs'], { cwd: __dirname });
   }
 
   if (!existsSync(projectDocsDir)) mkdirSync(projectDocsDir, { recursive: true });
-  options = Object.assign(getTypedocOptions(), options || {});
 
   // disable delete dir while running twice
-  if (compiled > 0) options.cleanOutputDir = false;
+  if (compiled > 0) setTypedocOptions({ cleanOutputDir: false });
   compiled++;
 
   const app = new typedocModule.Application();
@@ -51,7 +51,7 @@ const compile = async function (options = {}, callback = null) {
   //console.log(options);
   //delete options.run;
 
-  app.bootstrap(options);
+  app.bootstrap(getTypedocOptions());
   const project = app.convert();
   if (typeof project !== 'undefined') {
     await app.generateDocs(project, projectDocsDir);
@@ -151,6 +151,7 @@ function getTypedocOptions() {
  */
 function setTypedocOptions(newOpt) {
   opt = Object.assign(opt, newOpt || {});
+  writefile(join(__dirname, 'tmp/typedocs/options.json'), JSON.stringify(opt));
   return opt;
 }
 
@@ -206,6 +207,37 @@ async function createIndex() {
   });
 
   writeFileSync(join(__dirname, 'docs/index.html'), body.trim());
+}
+
+/**
+ * read file with validation
+ * @param {string} str
+ * @param {import('fs').EncodingOption} encoding
+ * @returns
+ */
+function readfile(str, encoding = 'utf-8') {
+  if (fs.existsSync(str)) {
+    if (fs.statSync(str).isFile()) {
+      return fs.readFileSync(str, encoding);
+    } else {
+      throw str + ' is directory';
+    }
+  } else {
+    throw str + ' not found';
+  }
+}
+
+/**
+ * write to file recursively
+ * @param {string} dest
+ * @param {any} data
+ */
+function writefile(dest, data) {
+  if (!fs.existsSync(path.dirname(dest))) fs.mkdirSync(path.dirname(dest), { recursive: true });
+  if (fs.existsSync(dest)) {
+    if (fs.statSync(dest).isDirectory()) throw dest + ' is directory';
+  }
+  fs.writeFileSync(dest, data);
 }
 
 module.exports = {
