@@ -50,10 +50,11 @@ npm install
 
 | command      | description                       |
 | ------------ | --------------------------------- |
-| `yarn start` | watch src-docs and start server      |
-|  | watch src and compile tsc webpack |
-| `tsc`        | build definition and js files            |
-| `webpack`    | build safelink script             |
+| `yarn start`    | serve docs |
+| `tsc`           | build definition and js files            |
+| `webpack`       | build safelink script             |
+| `node docs.js`  | build docs |
+| `npm run build` | build dist |
 
 ## Usages
 Setup options:
