@@ -105,7 +105,7 @@
   },
   "optionalDependencies": {
     "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/tarball/typescript",
-    "git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/master/release/git-command-helper.tgz",
+    "git-command-helper": "https://github.com/dimaslanjaka/git-command-helper/raw/monorepo/release/git-command-helper.tgz",
     "nodejs-package-types": "https://github.com/dimaslanjaka/nodejs-package-types/raw/main/release/nodejs-package-types.tgz",
     "persistent-cache": "https://github.com/dimaslanjaka/persistent-cache/tarball/improve2"
   }
