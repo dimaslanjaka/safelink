@@ -14,7 +14,7 @@ function gen(fn) {
       aggregateTimeout: 10000,
       poll: 1000,
       followSymlinks: true,
-      ignored: /node_modules|tmp|tests|typings|dist/,
+      ignored: /node_modules|tmp|tests|typings|dist/
     },
     plugins: [new webpack.HotModuleReplacementPlugin()],
     module: {
@@ -22,9 +22,9 @@ function gen(fn) {
         {
           test: /\.(ts|js)?$/,
           use: 'ts-loader',
-          exclude: /node_modules|.test.(ts|js)$/,
-        },
-      ],
+          exclude: /node_modules|.test.(ts|js)$/
+        }
+      ]
     },
     resolve: {
       extensions: ['.ts', '.js'],
@@ -32,8 +32,8 @@ function gen(fn) {
       fallback: {
         crypto: require.resolve('crypto-browserify'),
         path: require.resolve('path-browserify'),
-        fs: false,
-      },
+        fs: false
+      }
     },
     output: {
       filename: fn + '.js',
@@ -41,9 +41,9 @@ function gen(fn) {
       sourceMapFilename: fn + '.map',
       library: 'safelinkify',
       libraryTarget: 'umd',
-      globalObject: 'this',
+      globalObject: 'this'
     },
-    mode: fn.includes('.min') ? 'production' : 'development',
+    mode: fn.includes('.min') ? 'production' : 'development'
   };
   return config;
 }
