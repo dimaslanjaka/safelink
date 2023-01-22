@@ -14,7 +14,7 @@
     "start": "ts-node typedoc-server.js",
     "prebuild": "git pull -X theirs",
     "build": "tsc -p tsconfig.build.json && webpack",
-    "postbuild": "node packer.js",
+    "pack": "node packer.js",
     "docs": "node docs.js && webpack",
     "dev": "nodemon",
     "preupdate": "curl -L https://github.com/microsoft/TypeScript/raw/main/lib/lib.dom.d.ts > src/lib/lib.dom.ts && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc-server.js > typedoc-server.js",
