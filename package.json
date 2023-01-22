@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/dimaslanjaka/safelink.git"
+    "url": "git+https://github.com/dimaslanjaka/safelink.git"
   },
   "keywords": [
     "safelink",
@@ -30,12 +30,8 @@
     "hyperlinks",
     "redirector"
   ],
-  "author": {
-    "email": "dimaslanjaka@gmail.com",
-    "name": "Dimas Lanjaka",
-    "url": "https://www.webmanajemen.com"
-  },
-  "license": "ISC",
+  "author": "Dimas Lanjaka <dimaslanjaka@gmail.com> (https://www.webmanajemen.com)",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/dimaslanjaka/safelink/issues"
   },
