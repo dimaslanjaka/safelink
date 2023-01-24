@@ -26,7 +26,7 @@ on:
 
 # run single job
 concurrency:
-  group: actions-${{ github.head_ref }}
+  group: build-release #actions-${{ github.head_ref }}
   cancel-in-progress: true
 
 jobs:
