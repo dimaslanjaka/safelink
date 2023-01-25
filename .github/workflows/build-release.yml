@@ -102,6 +102,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          architecture: ${{ matrix.architecture }}
           #cache: 'npm'
           #cache-dependency-path: '**/package-lock.json'
 
