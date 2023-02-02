@@ -221,3 +221,4 @@ var safelink = /** @class */ (function () {
 }());
 exports.default = safelink;
 _global_safelink.safelink = safelink;
+//# sourceMappingURL=safelink.js.map
