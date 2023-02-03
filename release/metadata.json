@@ -46,12 +46,12 @@
   },
   "/release/safelinkify.tgz": {
     "integrity": {
-      "sha1": "8eee6f1677091f6eaf172182ce6eee90fc9eae92",
-      "sha256": "LQC1D49FUI5mTHjPQRBcAvLducFGaTQYWCx8V/tJ868=",
-      "md5": "1dbb54437eab3a2009960e30d34b9c3b",
-      "sha512": "WCd2A/n/lvYlBVwMAqMN6Wks/DcTioooRm3ukZW4Gm5HT0CN58o700Cg9KJfJl3Zm6RbtOPRqAqbukcnv+ht/w=="
+      "sha1": "ba457376ce5e0d3063b94986ae4c5ac7e996e731",
+      "sha256": "DMdGFBj6yyttdUlCFpZEHI9Zd3r2rbqfYPj0TCaIEBI=",
+      "md5": "0f4c8c350b06abc194064c4456f39083",
+      "sha512": "dPwVS0CLNXpO1PQz0JOHaHP9t2bYn5pC2VtxgnbqPyijFzMs4NEOy0JijmNu9qSlhyM1BfrYLtxTEtS9J9+F1Q=="
     },
-    "size": "220.71 KB"
+    "size": "113.54 KB"
   },
   "/package-lock.json": {
     "integrity": {
@@ -82,11 +82,11 @@
   },
   "/release/safelinkify-1.1.13.tgz": {
     "integrity": {
-      "sha1": "8eee6f1677091f6eaf172182ce6eee90fc9eae92",
-      "sha256": "LQC1D49FUI5mTHjPQRBcAvLducFGaTQYWCx8V/tJ868=",
-      "md5": "1dbb54437eab3a2009960e30d34b9c3b",
-      "sha512": "WCd2A/n/lvYlBVwMAqMN6Wks/DcTioooRm3ukZW4Gm5HT0CN58o700Cg9KJfJl3Zm6RbtOPRqAqbukcnv+ht/w=="
+      "sha1": "ba457376ce5e0d3063b94986ae4c5ac7e996e731",
+      "sha256": "DMdGFBj6yyttdUlCFpZEHI9Zd3r2rbqfYPj0TCaIEBI=",
+      "md5": "0f4c8c350b06abc194064c4456f39083",
+      "sha512": "dPwVS0CLNXpO1PQz0JOHaHP9t2bYn5pC2VtxgnbqPyijFzMs4NEOy0JijmNu9qSlhyM1BfrYLtxTEtS9J9+F1Q=="
     },
-    "size": "220.71 KB"
+    "size": "113.54 KB"
   }
 }
