@@ -13,7 +13,7 @@
   "scripts": {
     "start": "ts-node typedoc-server.js",
     "build": "tsc -p tsconfig.build.json && webpack",
-    "pack": "node packer.js",
+    "pack": "node packer.js --yarn",
     "docs": "node docs.js && webpack",
     "dev": "nodemon",
     "lib-dom": "curl -L https://github.com/microsoft/TypeScript/raw/main/lib/lib.dom.d.ts > src/lib/lib.dom.ts",
