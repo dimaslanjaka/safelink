@@ -96,7 +96,7 @@
     "bootstrap": "^5.2.3",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.1.1",
-    "highlight.js": "11.7.0",
+    "highlight.js": "https://github.com/highlightjs/highlight.js/tarball/11-stable",
     "jquery": "^3.6.3",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.40",
@@ -104,7 +104,7 @@
     "toastr": "^2.1.4"
   },
   "optionalDependencies": {
-    "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/tarball/typescript",
+    "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/tarball/private",
     "git-command-helper": "*",
     "nodejs-package-types": "https://github.com/dimaslanjaka/nodejs-package-types/raw/main/release/nodejs-package-types.tgz",
     "persistent-cache": "https://github.com/dimaslanjaka/persistent-cache/tarball/improve2"
