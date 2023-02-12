@@ -94,19 +94,17 @@
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
+    "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/tarball/private",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.1.1",
+    "git-command-helper": "workspace:^",
     "highlight.js": "11.7.0",
     "jquery": "^3.6.3",
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.40",
-    "path-browserify": "^1.0.1",
-    "toastr": "^2.1.4"
-  },
-  "optionalDependencies": {
-    "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/tarball/private",
-    "git-command-helper": "*",
     "nodejs-package-types": "https://github.com/dimaslanjaka/nodejs-package-types/raw/main/release/nodejs-package-types.tgz",
-    "persistent-cache": "https://github.com/dimaslanjaka/persistent-cache/tarball/improve2"
+    "path-browserify": "^1.0.1",
+    "persistent-cache": "https://github.com/dimaslanjaka/persistent-cache/tarball/improve2",
+    "toastr": "^2.1.4"
   }
 }
