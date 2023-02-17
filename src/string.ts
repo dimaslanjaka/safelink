@@ -16,7 +16,7 @@ export function escapeRegex(string: string, method: '1' | '2' = '1') {
  * @param moreSymbols add more symbols
  * @returns
  */
-export function capitalizer(str: string, moreSymbols: ConcatArray<string> = []) {
+export function capitalizer(str: string, moreSymbols: string[] = []) {
   let symbols = ['-', ' '];
   if (Array.isArray(moreSymbols)) {
     // concatenate more symbols
@@ -38,7 +38,7 @@ export function capitalizer(str: string, moreSymbols: ConcatArray<string> = []) 
  * @param stream
  * @returns
  */
-export function streamToString(stream: NodeJS.ReadableStream) {
+export function streamToString(stream: import('fs').ReadStream) {
   const chunks: Uint8Array[] | Buffer[] = [];
   return new Promise((resolve, reject) => {
     stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
@@ -54,8 +54,8 @@ export function streamToString(stream: NodeJS.ReadableStream) {
  */
 export function bufferToString(array: Buffer) {
   if (typeof Uint8Array !== 'undefined' && typeof TextDecoder !== 'undefined') {
-    let td = new TextDecoder();
-    let ua = new Uint8Array(array);
+    const td = new TextDecoder();
+    const ua = new Uint8Array(array);
     return td.decode(ua);
   } else {
     return array.toString();
