@@ -18,7 +18,7 @@
     "docs": "node docs.js && webpack",
     "dev": "nodemon",
     "preupdate": "curl -L https://github.com/microsoft/TypeScript/raw/main/lib/lib.dom.d.ts > src/lib/lib.dom.ts && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc-server.js > typedoc-server.js",
-    "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/.github/workflows/build-release.yml > .github/workflows/build-release.yml && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js > packer.js && npx npm-check-updates -u -x chalk,hexo && node postinstall.js"
+    "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/.github/workflows/build-release.yml > .github/workflows/build-release.yml && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js > packer.js && npx npm-check-updates -u -x chalk,hexo"
   },
   "repository": {
     "type": "git",
@@ -46,7 +46,7 @@
     "@types/html-minifier-terser": "^7.0.0",
     "@types/jquery": "^3.5.16",
     "@types/markdown-it-attrs": "^4.1.0",
-    "@types/node": "^18.13.0",
+    "@types/node": "^18.14.0",
     "@types/prettier": "^2.7.2",
     "@types/toastr": "^2.1.40",
     "@types/undertaker": "^1.2.8",
@@ -75,7 +75,7 @@
     "markdown-it-sub": "^1.0.0",
     "markdown-it-sup": "^1.0.0",
     "nodemon": "^2.0.20",
-    "npm-check-updates": "^16.7.4",
+    "npm-check-updates": "^16.7.5",
     "prettier": "^2.8.4",
     "resolve-typescript-plugin": "^2.0.0",
     "rimraf": "^4.1.2",
