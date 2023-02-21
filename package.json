@@ -8,7 +8,8 @@
     "dist",
     "readme.md",
     "tsconfig*.json",
-    "postinstall.js"
+    "postinstall.js",
+    "!**/*.tsbuildinfo"
   ],
   "scripts": {
     "start": "ts-node typedoc-server.js",
