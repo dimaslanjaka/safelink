@@ -102,7 +102,7 @@
     "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/tarball/private",
     "crypto-browserify": "^3.12.0",
     "crypto-js": "^4.1.1",
-    "git-command-helper": "workspace:^",
+    "git-command-helper": "*",
     "highlight.js": "11.7.0",
     "jquery": "^3.6.3",
     "moment": "^2.29.4",
