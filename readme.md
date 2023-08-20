@@ -14,10 +14,10 @@ Customized safelink url redirector. Transform and Anonymize all hyperlinks to ou
 - **[MODULES](https://www.webmanajemen.com/docs/safelinkify/modules.html)**
 - **[LIVE DEMO](https://www.webmanajemen.com/docs/safelinkify/demo)**
 
-## Our Production
-| page | source |
+## Demo
+| page | source | samples |
 | :--- | :--- |
-| [https://www.webmanajemen.com/page/safelink.html](https://www.webmanajemen.com/page/safelink.html) | [safelink-decode.js](https://github.com/dimaslanjaka/page/blob/master/safelink/safelink-decode.js) <br />[layout](https://github.com/dimaslanjaka/page/tree/master/safelink/layout1) <br/>[template](https://github.com/dimaslanjaka/page/blob/master/_layout.njk) <br />[compiler](https://github.com/dimaslanjaka/page/blob/1601e212200eaa7e8b4534ae7511b4fb6f179a96/gulpfile.js#L222) |
+| [https://www.webmanajemen.com/page/safelink.html](https://www.webmanajemen.com/page/safelink.html) | [safelink-decode.js](https://github.com/dimaslanjaka/page/blob/master/safelink/safelink-decode.js) <br />[layout](https://github.com/dimaslanjaka/page/tree/master/safelink/layout1) <br/>[template](https://github.com/dimaslanjaka/page/blob/master/_layout.njk) <br />[compiler](https://github.com/dimaslanjaka/page/blob/1601e212200eaa7e8b4534ae7511b4fb6f179a96/gulpfile.js#L222) | https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9jb2RlcGVuLmlvL2RpbWFzbGFuamFrYS9wZW4veUxiclpWbw== |
 
 ## Installation
 
