@@ -11,7 +11,7 @@ export type HTMLElement = globalThis.HTMLElement;
 const _global_safelink = (typeof window !== 'undefined' ? window : global) as any;
 
 export default class safelink {
-  options: Partial<SafelinkOptions> = {
+  options: Required<SafelinkOptions> = {
     exclude: [],
     redirect: [], // 'https://www.webmanajemen.com/page/safelink.html?url='
     password: 'root',
@@ -59,10 +59,10 @@ export default class safelink {
       content = target;
     } else if (Buffer.isBuffer(target)) {
       content = bufferToString(target);
-    } else {
+    } else if (target) {
       content = await streamToString(target);
     }
-    let result: string = null;
+    let result: string | null = null;
     if (typeof content === 'string' && content.trim().length > 0) {
       // make content as default result
       result = content;
@@ -98,7 +98,7 @@ export default class safelink {
         const allMatch = m[0];
 
         if (typeof href == 'string' && href.length > 0) {
-          const wholeContents = typeof result == 'string' ? result : content;
+          const wholeContents: string = typeof result == 'string' ? result : content;
           if (typeof wholeContents === 'string') {
             const processedHyperlink = processStr(allMatch, href);
             if (processedHyperlink) {
@@ -169,18 +169,20 @@ export default class safelink {
         ? search
         : typeof location == 'object' && typeof location.search == 'string'
         ? location.search
-        : null,
+        : undefined,
       this.options.password,
       this.options.verbose
     );
     if (obj !== null && typeof obj === 'object') {
       Object.keys(obj).forEach((key) => {
         const encryptions = obj[key];
-        if (encryptions.aes.encode) {
-          encryptions.aes.encode_redirector = self.options.redirect + encryptions.aes.encode;
-        }
-        if (encryptions.base64.encode) {
-          encryptions.base64.encode_redirector = self.options.redirect + encryptions.base64.encode;
+        if (encryptions) {
+          if (encryptions.aes.encode) {
+            encryptions.aes.encode_redirector = self.options.redirect + encryptions.aes.encode;
+          }
+          if (encryptions.base64.encode) {
+            encryptions.base64.encode_redirector = self.options.redirect + encryptions.base64.encode;
+          }
         }
       });
     }
