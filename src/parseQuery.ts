@@ -1,4 +1,3 @@
-
 import { Nullable } from './globals';
 import toURL from './toURL';
 
@@ -14,11 +13,11 @@ type parseQueryResult =
  * @param  query query key, null = return all objects
  * @param  url target query, ex: {@link location.href} or {@link location.search}
  */
-export function parseQuery(query: Nullable<string>, url: Nullable<string>): parseQueryResult {
+export function parseQuery(query: Nullable<string>, url: Nullable<string>): Nullable<parseQueryResult> {
   // skip null, undefined
-  if (typeof url !== 'string') return;
+  if (typeof url !== 'string') return null;
   // skip empty string
-  if (url.length < 1) return;
+  if (url.length < 1) return null;
   let result: { [key: string]: any } = {};
 
   /**
