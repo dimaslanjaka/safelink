@@ -44,7 +44,7 @@ export function parseQuery(query: Nullable<string>, url: Nullable<string>): Null
     }
   }
 
-  if (typeof query == 'string' && result.hasOwnProperty(query)) {
+  if (typeof query == 'string' && query in result) {
     return result[query];
   }
 
