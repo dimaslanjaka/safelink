@@ -33,7 +33,7 @@ export default function resolveQueryUrl(url?: string | URL, passphrase = 'root',
   const parse_query_url = parseQuery(null, href);
   if (parse_query_url) {
     Object.keys(parse_query_url).forEach((key) => {
-      const value = parse_query_url[key];
+      const value = (parse_query_url as { [key: string]: string })[key];
       result[key] = encryptionURL(value, passphrase, debug);
     });
   }
