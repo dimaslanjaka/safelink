@@ -1,10 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.b64 = void 0;
-var crypto_js_1 = __importDefault(require("crypto-js"));
+var tslib_1 = require("tslib");
+var crypto_js_1 = tslib_1.__importDefault(require("crypto-js"));
 exports.b64 = {
     encode: function (str) {
         if (!str)
@@ -32,4 +30,3 @@ exports.b64 = {
     }
 };
 exports.default = exports.b64;
-//# sourceMappingURL=b64.js.map

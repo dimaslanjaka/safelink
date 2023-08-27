@@ -1,10 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseQuery = void 0;
-var toURL_1 = __importDefault(require("./toURL"));
+var tslib_1 = require("tslib");
+var toURL_1 = tslib_1.__importDefault(require("./toURL"));
 var _global_parseQuery = (typeof window !== 'undefined' ? window : global);
 /**
  * Parse Query URL and Hash
@@ -14,10 +12,10 @@ var _global_parseQuery = (typeof window !== 'undefined' ? window : global);
 function parseQuery(query, url) {
     // skip null, undefined
     if (typeof url !== 'string')
-        return;
+        return null;
     // skip empty string
     if (url.length < 1)
-        return;
+        return null;
     var result = {};
     /**
      * Query URL Parser
@@ -40,7 +38,7 @@ function parseQuery(query, url) {
             result = Object.assign(result, parseQueries(parse.search));
         }
     }
-    if (typeof query == 'string' && result.hasOwnProperty(query)) {
+    if (typeof query == 'string' && query in result) {
         return result[query];
     }
     return result;
@@ -48,4 +46,3 @@ function parseQuery(query, url) {
 exports.parseQuery = parseQuery;
 _global_parseQuery.parseQuery = parseQuery;
 exports.default = parseQuery;
-//# sourceMappingURL=parseQuery.js.map
