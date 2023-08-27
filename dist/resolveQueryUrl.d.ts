@@ -6,4 +6,4 @@ import { resolveQueryResult } from './globals';
  * @param passphrase aes password
  * @returns
  */
-export default function resolveQueryUrl(url?: string | URL, passphrase?: string, debug?: boolean): Partial<resolveQueryResult>;
+export default function resolveQueryUrl(url?: string | URL, passphrase?: string, debug?: boolean): Partial<resolveQueryResult> | null;

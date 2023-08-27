@@ -4,7 +4,7 @@
  * @param string
  * @returns
  */
-export declare function escapeRegex(string: string, method?: '1' | '2'): string;
+export declare function escapeRegex(string: string, method?: '1' | '2'): string | undefined;
 /**
  * capitalize string first letter of each word which mixed with symbols
  * @param str
