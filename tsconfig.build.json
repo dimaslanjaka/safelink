@@ -3,7 +3,7 @@
   "compilerOptions": {
     "rootDir": "src",
     "target": "es5",
-    "tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo",
+    //"tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo",
     "outDir": "dist"
   },
   "include": ["./src/**/*", "src/**/*.json"],
