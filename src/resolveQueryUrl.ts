@@ -31,7 +31,7 @@ export default function resolveQueryUrl(url?: string | URL, passphrase = 'root',
   if (!href || !href.match(/#|\?/)) return null;
 
   const parse_query_url = parseQuery(null, href);
-  if (typeof parse_query_url == 'object') {
+  if (parse_query_url) {
     Object.keys(parse_query_url).forEach((key) => {
       const value = parse_query_url[key];
       result[key] = encryptionURL(value, passphrase, debug);
