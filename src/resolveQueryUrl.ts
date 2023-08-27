@@ -22,7 +22,7 @@ export default function resolveQueryUrl(url?: string | URL, passphrase = 'root',
       href = 'http://not.actually.domain/' + url;
     } else {
       const parse = toURL(url);
-      if (parse !== null) href = parse.href;
+      if (parse) href = parse.href;
     }
   } else if (typeof location == 'object' && typeof location.href == 'string') {
     href = location.href;
