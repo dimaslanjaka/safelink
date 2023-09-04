@@ -1,8 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseQuery = void 0;
-var tslib_1 = require("tslib");
-var toURL_1 = tslib_1.__importDefault(require("./toURL"));
+var toURL_1 = __importDefault(require("./toURL"));
 var _global_parseQuery = (typeof window !== 'undefined' ? window : global);
 /**
  * Parse Query URL and Hash

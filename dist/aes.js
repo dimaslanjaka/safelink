@@ -1,7 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var tslib_1 = require("tslib");
-var crypto_js_1 = tslib_1.__importDefault(require("crypto-js"));
+var crypto_js_1 = __importDefault(require("crypto-js"));
 var salt = 'salt'; //salt
 var iv = '1111111111111111'; //pass salt minimum length 12 chars
 var iterations = 999; //iterations

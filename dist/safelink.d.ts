@@ -27,5 +27,5 @@ export default class safelink {
      * @param search
      * @returns
      */
-    resolveQueryUrl(search?: string): Partial<import("./globals").resolveQueryResult> | null;
+    resolveQueryUrl(search?: string): Partial<import("./globals").resolveQueryResult>;
 }

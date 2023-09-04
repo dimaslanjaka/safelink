@@ -1,4 +1,4 @@
 /**
  * Extract domain from URL
  */
-export default function extractDomain(url: string): string;
+export default function extractDomain(url: string): any;
