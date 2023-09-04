@@ -11,6 +11,7 @@ dist/**/*.json
 
 node_modules
 .deploy_git
+*.tsbuildinfo
 *.log
 private.*
 *.private.*
