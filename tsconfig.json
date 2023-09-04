@@ -6,12 +6,22 @@
     "allowJs": true,
     "checkJs": false,
     "paths": {
-      "src": ["./src"],
-      "sbg-*": ["../sbg-*"]
-    }
+      "src": [
+        "./src"
+      ]
+    },
+    "lib": [
+      "es2020"
+    ]
   },
-  "include": ["./src/**/*", "./test/**/*", "**/*.json"],
-  "exclude": ["**/dist/**"],
+  "include": [
+    "./src/**/*",
+    "./test/**/*",
+    "**/*.json"
+  ],
+  "exclude": [
+    "**/dist/**"
+  ],
   /*"references": [
     { "path": "../sbg-utility" },
     { "path": "../sbg-server" },

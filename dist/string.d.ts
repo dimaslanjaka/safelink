@@ -23,4 +23,4 @@ export declare function streamToString(stream: import('fs').ReadStream): Promise
  * @param array
  * @returns
  */
-export declare function bufferToString(array: Buffer): string;
+export declare function bufferToString(array: Buffer): any;

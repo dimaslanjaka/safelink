@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { resolveQueryResult } from './globals';
 /**
  * Auto resolve url
