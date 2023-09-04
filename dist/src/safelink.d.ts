@@ -3,7 +3,7 @@ import { Nullable, SafelinkOptions } from './globals';
 export type DOMElement = globalThis.Element;
 export type HTMLElement = globalThis.HTMLElement;
 export default class safelink {
-    options: Partial<SafelinkOptions>;
+    options: Required<SafelinkOptions>;
     constructor(opt: Partial<SafelinkOptions>);
     /**
      * is url excluded
