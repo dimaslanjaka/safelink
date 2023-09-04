@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { Nullable } from './globals';
 /**
  * is url valid

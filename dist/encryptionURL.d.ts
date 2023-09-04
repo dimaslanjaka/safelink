@@ -1,4 +1,3 @@
-/// <reference types="node" />
 import { encryptionURLResult, Nullable } from './globals';
 /**
  * resolve url encryption

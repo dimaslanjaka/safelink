@@ -11,7 +11,8 @@
       ]
     },
     "lib": [
-      "es2020"
+      "es2020",
+      "DOM"
     ],
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,

@@ -1,6 +1,3 @@
-/// <reference types="react" />
-/// <reference types="bootstrap" />
-/// <reference types="node" />
 /// <reference types="node" />
 import { Nullable, SafelinkOptions } from './globals';
 export type DOMElement = globalThis.Element;
