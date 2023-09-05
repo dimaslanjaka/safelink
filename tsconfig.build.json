@@ -5,8 +5,17 @@
     "target": "es5",
     //"tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo",
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "declarationDir": "dist"
   },
-  "include": ["./src/**/*", "src/**/*.json"],
-  "exclude": ["*.test.*", "**/test/**", "**/*.test.ts", "**/*.runner.ts"]
+  "include": [
+    "./src/**/*",
+    "src/**/*.json"
+  ],
+  "exclude": [
+    "*.test.*",
+    "**/test/**",
+    "**/*.test.ts",
+    "**/*.runner.ts"
+  ]
 }
