@@ -1,3 +1,3 @@
-const safelinkify = require('../dist');
+const safelinkify = require('../');
 
 console.log(Object.keys(safelinkify));

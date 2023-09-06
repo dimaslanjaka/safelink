@@ -3,12 +3,12 @@
   "version": "1.1.19",
   "description": "NodeJS anonymizer external links into outbound page. Anonymize external links to outbound page redirector for SEO.",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "typings/safelinkify.d.ts",
   "files": [
     "dist",
     "readme.md",
     "tsconfig*.json",
-    "postinstall.js",
+    "typings",
     "!**/*.tsbuildinfo"
   ],
   "scripts": {
