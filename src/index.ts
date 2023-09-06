@@ -18,4 +18,6 @@ _global_safelinkify.safelinkify = safelinkify;
 _global_safelinkify.safelink = _safelink;
 
 export default safelinkify;
-export { encryptionURLResult, Nullable, resolveQueryResult, SafelinkOptions } from './globals';
+export { Nullable, SafelinkOptions, encryptionURLResult, resolveQueryResult } from './globals';
+
+//
