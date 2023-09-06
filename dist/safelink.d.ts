@@ -18,6 +18,13 @@ export default class safelink {
      */
     parse(target: Nullable<string> | HTMLElement | Buffer | import('fs').ReadStream): Promise<string | null>;
     /**
+     * parse single url
+     * @param url
+     * @returns return redirect url
+     * * when redirect not set, will return encoded URL only
+     */
+    parseUrl(url: string): string | null;
+    /**
      * anonymize url directly
      * @param href
      */
