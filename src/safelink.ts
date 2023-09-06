@@ -77,15 +77,11 @@ export default class safelink {
        * @returns
        */
       const processStr = (content: string, href: string) => {
-        const excluded = self.isExcluded(href);
+        const parseUrl = self.parseUrl(href);
 
-        if (!excluded) {
-          const encryption = encryptionURL(href, self.options.password, self.options.verbose);
-          const enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-          const randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
-          const newhref = randRedir + enc;
+        if (!parseUrl) {
           // return anonymized href
-          return content.replace(href, newhref);
+          return content.replace(href, parseUrl);
         }
         // return original content
         return content;
@@ -143,6 +139,26 @@ export default class safelink {
       }
     }
     return result;
+  }
+
+  /**
+   * parse single url
+   * @param url
+   * @returns return redirect url
+   * * when redirect not set, will return encoded URL only
+   */
+  parseUrl(url: string): string | null {
+    const excluded = this.isExcluded(url);
+
+    if (!excluded) {
+      const encryption = encryptionURL(url, this.options.password, this.options.verbose);
+      const enc = this.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+      const randRedir = this.options.redirect[Math.floor(Math.random() * this.options.redirect.length)];
+      // return anonymized href
+      if (randRedir) return randRedir + enc;
+      return enc;
+    }
+    return null;
   }
 
   /**
