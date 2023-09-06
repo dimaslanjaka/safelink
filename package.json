@@ -109,5 +109,6 @@
     "moment": "^2.29.4",
     "moment-timezone": "^0.5.43",
     "path-browserify": "^1.0.1"
-  }
+  },
+  "packageManager": "yarn@3.6.3"
 }
