@@ -3,7 +3,7 @@
   "version": "1.2.0",
   "description": "NodeJS anonymizer external links into outbound page. Anonymize external links to outbound page redirector for SEO.",
   "main": "dist/index.js",
-  "types": "typings/safelinkify.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "readme.md",
@@ -81,7 +81,7 @@
     "markdown-it-sup": "^1.0.0",
     "nodemon": "^3.0.1",
     "npm-check-updates": "^16.13.2",
-    "prettier": "^3.0.3",
+    "prettier": "2",
     "resolve-typescript-plugin": "^2.0.1",
     "rimraf": "^5.0.1",
     "semver": "^7.5.4",
