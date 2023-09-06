@@ -25,3 +25,4 @@ tmp
 /CHANGELOG.md
 unused.md
 /dist
+/yarn.lock
