@@ -116,14 +116,10 @@ var safelink = /** @class */ (function () {
                             result = content;
                             regex = /<a\s+(?:[^>]*?\s+)?href=(["'])(.*?)\1/gim;
                             processStr = function (content, href) {
-                                var excluded = self.isExcluded(href);
-                                if (!excluded) {
-                                    var encryption = (0, encryptionURL_1.default)(href, self.options.password, self.options.verbose);
-                                    var enc = self.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-                                    var randRedir = self.options.redirect[Math.floor(Math.random() * self.options.redirect.length)];
-                                    var newhref = randRedir + enc;
+                                var parseUrl = self.parseUrl(href);
+                                if (!parseUrl) {
                                     // return anonymized href
-                                    return content.replace(href, newhref);
+                                    return content.replace(href, parseUrl);
                                 }
                                 // return original content
                                 return content;
@@ -181,6 +177,25 @@ var safelink = /** @class */ (function () {
                 }
             });
         });
+    };
+    /**
+     * parse single url
+     * @param url
+     * @returns return redirect url
+     * * when redirect not set, will return encoded URL only
+     */
+    safelink.prototype.parseUrl = function (url) {
+        var excluded = this.isExcluded(url);
+        if (!excluded) {
+            var encryption = (0, encryptionURL_1.default)(url, this.options.password, this.options.verbose);
+            var enc = this.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+            var randRedir = this.options.redirect[Math.floor(Math.random() * this.options.redirect.length)];
+            // return anonymized href
+            if (randRedir)
+                return randRedir + enc;
+            return enc;
+        }
+        return null;
     };
     /**
      * anonymize url directly

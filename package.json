@@ -1,6 +1,6 @@
 {
   "name": "safelinkify",
-  "version": "1.1.19",
+  "version": "1.2.0",
   "description": "NodeJS anonymizer external links into outbound page. Anonymize external links to outbound page redirector for SEO.",
   "main": "dist/index.js",
   "types": "typings/safelinkify.d.ts",
