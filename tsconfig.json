@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "./dist",
+    "outDir": "./tmp/dist",
     //"tsBuildInfoFile": "./dist/tsconfig.build.tsbuildinfo",
     "allowJs": true,
     "checkJs": false,
