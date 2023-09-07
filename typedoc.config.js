@@ -90,7 +90,7 @@ const defaultOptions = {
   gitRevision: 'master',
   githubPages: true,
   //theme: 'hierarchy',
-  plugin: ['typedoc-plugin-missing-exports'],
+  //plugin: ['typedoc-plugin-missing-exports'],
   //ignoreCompilerErrors: true,
   logLevel: 'Verbose'
   //version: true,
