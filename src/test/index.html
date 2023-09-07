@@ -215,7 +215,6 @@ table {
 <p>Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS.</p>
 <ul>
 <li><strong><a href="https://www.webmanajemen.com/docs/safelinkify">API DOCUMENTATION</a></strong></li>
-<li><strong><a href="https://www.webmanajemen.com/docs/safelinkify/modules.html">MODULES</a></strong></li>
 <li><strong><a href="https://www.webmanajemen.com/docs/safelinkify/demo">LIVE DEMO</a></strong></li>
 </ul>
 <h2 id="demo" tabindex="-1"><a class="header-anchor" href="#demo">Demo</a></h2>
@@ -529,7 +528,10 @@ gulp.task('safelink', () =&gt; {
   <pre>
     <code class="language-javascript">
 &lt;script src=&quot;dist/bundle.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
+&lt;script&gt;/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// &lt;reference path=&#34;../../dist/index.d.ts&#34; /&gt;
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
   const table = document.querySelector(&#39;table#table&#39;);
   table.querySelector(&#39;#resolveQueryUrl&#39;).innerHTML = typeof resolveQueryUrl;
   table.querySelector(&#39;#parseQuery&#39;).innerHTML = typeof parseQuery;
@@ -553,19 +555,15 @@ gulp.task('safelink', () =&gt; {
     );
   }
 
-  const isSafelinkClass = isClass(safelink);
+  const isSafelinkClass = isClass(window.safelink);
   table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelink&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;isClass(safelink)&lt;/code&gt;&lt;/td&gt;&lt;td&gt;is ES5 Class: ${isSafelinkClass}&lt;/td&gt;&lt;/tr&gt;`;
-  table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelink&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;typeof safelink&lt;/code&gt;&lt;/td&gt;&lt;td&gt;${typeof safelink}&lt;/td&gt;&lt;/tr&gt;`;
-  table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelinkify&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;typeof safelinkify&lt;/code&gt;&lt;/td&gt;&lt;td&gt;${typeof safelinkify}&lt;/td&gt;&lt;/tr&gt;`;
+  table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelink&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;typeof safelink&lt;/code&gt;&lt;/td&gt;&lt;td&gt;${typeof window.safelink}&lt;/td&gt;&lt;/tr&gt;`;
   table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelinkify.safelink&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;isClass(safelinkify.safelink)&lt;/code&gt;&lt;/td&gt;&lt;td&gt;is ES5 Class: ${isClass(
-    safelinkify.safelink
+    window.safelink
   )}&lt;/td&gt;&lt;/tr&gt;`;
 
   if (isSafelinkClass) {
-    /**
-     * @type {(typeof import(&#39;safelinkify&#39;))[&#39;default&#39;]}
-     */
-    const instance = new safelink({
+    const instance = new window.safelink({
       // exclude patterns (dont anonymize these patterns)
       exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
       // url redirector
@@ -880,7 +878,10 @@ gulp.task('safelink', () =&gt; {
 </div>
 
 <script src="dist/bundle.js"></script>
-<script>document.addEventListener('DOMContentLoaded', function () {
+<script>/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// <reference path="../../dist/index.d.ts" />
+
+document.addEventListener('DOMContentLoaded', function () {
   const table = document.querySelector('table#table');
   table.querySelector('#resolveQueryUrl').innerHTML = typeof resolveQueryUrl;
   table.querySelector('#parseQuery').innerHTML = typeof parseQuery;
@@ -904,19 +905,15 @@ gulp.task('safelink', () =&gt; {
     );
   }
 
-  const isSafelinkClass = isClass(safelink);
+  const isSafelinkClass = isClass(window.safelink);
   table.innerHTML += `<tr><td>global safelink</td> <td><code class="language-javascript">isClass(safelink)</code></td><td>is ES5 Class: ${isSafelinkClass}</td></tr>`;
-  table.innerHTML += `<tr><td>global safelink</td> <td><code class="language-javascript">typeof safelink</code></td><td>${typeof safelink}</td></tr>`;
-  table.innerHTML += `<tr><td>global safelinkify</td> <td><code class="language-javascript">typeof safelinkify</code></td><td>${typeof safelinkify}</td></tr>`;
+  table.innerHTML += `<tr><td>global safelink</td> <td><code class="language-javascript">typeof safelink</code></td><td>${typeof window.safelink}</td></tr>`;
   table.innerHTML += `<tr><td>global safelinkify.safelink</td> <td><code class="language-javascript">isClass(safelinkify.safelink)</code></td><td>is ES5 Class: ${isClass(
-    safelinkify.safelink
+    window.safelink
   )}</td></tr>`;
 
   if (isSafelinkClass) {
-    /**
-     * @type {(typeof import('safelinkify'))['default']}
-     */
-    const instance = new safelink({
+    const instance = new window.safelink({
       // exclude patterns (dont anonymize these patterns)
       exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
       // url redirector

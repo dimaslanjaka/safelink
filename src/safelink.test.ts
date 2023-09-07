@@ -18,9 +18,14 @@ const _parse_html = sf.parse(
 
 const _parse_url = sf.parseUrl('https://google.com');
 
-log(_parse_url);
+log(_parse_url, _parse_html);
 
-function log(obj: any) {
-  if (obj.then) return Bluebird.resolve(obj).then(console.log);
-  return console.log(obj);
+function log(...args: any[]) {
+  args.forEach((obj) => {
+    if (obj.then) {
+      Bluebird.resolve(obj).then(console.log);
+    } else {
+      console.log(obj);
+    }
+  });
 }

@@ -1,5 +1,6 @@
 import { Nullable, SafelinkOptions } from './';
 import encryptionURL from './encryptionURL';
+import { default as _parseQuery } from './parseQuery';
 import { default as _resolveQueryUrl } from './resolveQueryUrl';
 import { bufferToString, streamToString } from './string';
 import toURL from './toURL';
@@ -22,6 +23,9 @@ export default class safelink {
     if (typeof opt.redirect == 'string') opt.redirect = [opt.redirect];
     this.options = Object.assign(this.options, opt);
   }
+
+  parseQuery = _parseQuery;
+
   /**
    * is url excluded
    * @param url
@@ -79,7 +83,7 @@ export default class safelink {
       const processStr = (content: string, href: string) => {
         const parseUrl = self.parseUrl(href);
 
-        if (!parseUrl) {
+        if (parseUrl) {
           // return anonymized href
           return content.replace(href, parseUrl);
         }
@@ -144,7 +148,7 @@ export default class safelink {
   /**
    * parse single url
    * @param url
-   * @returns return redirect url
+   * @returns return redirect url or original url
    * * when redirect not set, will return encoded URL only
    */
   parseUrl(url: string): string | null {
