@@ -16,6 +16,7 @@ require('ts-node').register();
 const { default: EJSHelper } = require('./src-docs/EJSHelper');
 const { compileDocs } = require('./typedoc-runner');
 const { spawn } = require('git-command-helper/dist/spawn');
+const { minify } = require('html-minifier-terser');
 //
 
 // VARS

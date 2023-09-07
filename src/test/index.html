@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Safelinkify - External Link Anonymizer</title>
-    <meta name="description" content="NodeJS anonymizer external links. Anonymize external links to outbound page redirector for SEO." />
+    <meta name="description" content="NodeJS anonymizer external links into outbound page. Anonymize external links to outbound page redirector for SEO." />
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="shortcut icon" href="https://www.google.com/s2/favicons?domain=github.com" type="image/x-icon" />
     <style>* {
@@ -218,18 +218,20 @@ table {
 <li><strong><a href="https://www.webmanajemen.com/docs/safelinkify/modules.html">MODULES</a></strong></li>
 <li><strong><a href="https://www.webmanajemen.com/docs/safelinkify/demo">LIVE DEMO</a></strong></li>
 </ul>
-<h2 id="our-production" tabindex="-1"><a class="header-anchor" href="#our-production">Our Production</a></h2>
+<h2 id="demo" tabindex="-1"><a class="header-anchor" href="#demo">Demo</a></h2>
 <table>
 <thead>
 <tr>
 <th style="text-align:left">page</th>
 <th style="text-align:left">source</th>
+<th style="text-align:left">samples</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td style="text-align:left"><a href="https://www.webmanajemen.com/page/safelink.html">https://www.webmanajemen.com/page/safelink.html</a></td>
 <td style="text-align:left"><a href="https://github.com/dimaslanjaka/page/blob/master/safelink/safelink-decode.js">safelink-decode.js</a> <br /><a href="https://github.com/dimaslanjaka/page/tree/master/safelink/layout1">layout</a> <br/><a href="https://github.com/dimaslanjaka/page/blob/master/_layout.njk">template</a> <br /><a href="https://github.com/dimaslanjaka/page/blob/1601e212200eaa7e8b4534ae7511b4fb6f179a96/gulpfile.js#L222">compiler</a></td>
+<td style="text-align:left"><a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9jb2RlcGVuLmlvL2RpbWFzbGFuamFrYS9wZW4veUxiclpWbw==">https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9jb2RlcGVuLmlvL2RpbWFzbGFuamFrYS9wZW4veUxiclpWbw==</a></td>
 </tr>
 </tbody>
 </table>
@@ -247,25 +249,25 @@ table {
 <tr>
 <td style="text-align:left">npm</td>
 <td style="text-align:left"><a href="https://www.npmjs.com/package/safelinkify">https://www.npmjs.com/package/safelinkify</a></td>
-<td style="text-align:left"><code>npm i safelinkify</code></td>
+<td style="text-align:left"><code>npm i safelinkify -D</code></td>
 </tr>
 <tr>
 <td style="text-align:left">github</td>
 <td style="text-align:left"><a href="https://github.com/dimaslanjaka/safelink">https://github.com/dimaslanjaka/safelink</a></td>
-<td style="text-align:left"><code>npm i https://github.com/dimaslanjaka/safelink</code></td>
+<td style="text-align:left"><code>npm i https://github.com/dimaslanjaka/safelink -D</code></td>
 </tr>
 <tr>
 <td style="text-align:left">tarball</td>
 <td style="text-align:left"><a href="https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz">https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz</a></td>
-<td style="text-align:left"><code>npm i https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz</code></td>
+<td style="text-align:left"><code>npm i https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz -D</code></td>
 </tr>
 </tbody>
 </table>
 <h3 id="npm" tabindex="-1"><a class="header-anchor" href="#npm">npm</a></h3>
-<pre><code class="language-bash">npm install safelinkify --production
+<pre><code class="language-bash">npm install safelinkify -D
 </code></pre>
 <h3 id="yarn" tabindex="-1"><a class="header-anchor" href="#yarn">yarn</a></h3>
-<pre><code>yarn install safelinkify --production=true
+<pre><code>yarn install safelinkify --dev
 </code></pre>
 <h2 id="development" tabindex="-1"><a class="header-anchor" href="#development">Development</a></h2>
 <pre><code class="language-bash">git clone --single-branch --branch main https://github.com/dimaslanjaka/safelink foldername
