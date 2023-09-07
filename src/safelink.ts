@@ -1,5 +1,5 @@
+import { Nullable, SafelinkOptions } from './';
 import encryptionURL from './encryptionURL';
-import { Nullable, SafelinkOptions } from './globals';
 import { default as _resolveQueryUrl } from './resolveQueryUrl';
 import { bufferToString, streamToString } from './string';
 import toURL from './toURL';

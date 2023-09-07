@@ -1,5 +1,5 @@
+import { Nullable, resolveQueryResult } from './';
 import encryptionURL from './encryptionURL';
-import { Nullable, resolveQueryResult } from './globals';
 import { parseQuery } from './parseQuery';
 import toURL from './toURL';
 

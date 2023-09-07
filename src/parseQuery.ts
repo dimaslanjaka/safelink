@@ -1,4 +1,4 @@
-import { Nullable } from './globals';
+import { Nullable } from './';
 import toURL from './toURL';
 
 const _global_parseQuery = (typeof window !== 'undefined' ? window : global) as any;
