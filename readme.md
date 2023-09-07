@@ -41,20 +41,15 @@ yarn install safelinkify --dev
 ```bash
 git clone --single-branch --branch main https://github.com/dimaslanjaka/safelink foldername
 cd foldername
-# install dependents
-yarn install
-# or
-npm install
+yarn install # npm install
 ```
 
 | command      | description                       |
 | ------------ | --------------------------------- |
-| `yarn start`    | serve generated docs           |
-| `tsc`           | build definition and js files  |
-| `webpack`       | build safelink script          |
+| `yarn start` | serve generated docs              |
+| `yarn dev`   | watch and build docs              |
 | `npm run docs`  | build docs |
 | `npm run build` | build dist |
-| `ts-node old-docs.ts` | (_deprecated_) watch src-docs and start server, watch src and compile tsc webpack |
 
 ## Usages
 Setup options:
