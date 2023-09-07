@@ -2,37 +2,32 @@ const fs = require('fs');
 const { join } = require('path');
 const path = require('upath');
 const pkgjson = require('./package.json');
+const { minimatch } = require('minimatch');
 
 // required: npm i upath
 // required: npm i -D typedoc typedoc-plugin-missing-exports
 // update   : curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc.js > typedoc.js
 // repo     : https://github.com/dimaslanjaka/nodejs-package-types/blob/main/typedoc.js
 
+const exclude = ['*.test.ts', '*.test.js'];
 /**
  * @type {import('typedoc').TypeDocOptions['entryPoints']}
  */
 let entryPoints = fs.readdirSync(path.join(__dirname, 'src')).map((path) => './src/' + path);
-const getFilesRecursively = (directory) => {
-  const filesInDirectory = fs.readdirSync(directory);
-  for (const file of filesInDirectory) {
-    const absolute = path.join(directory, file);
-    if (fs.statSync(absolute).isDirectory()) {
-      getFilesRecursively(absolute);
-    } else {
-      entryPoints.push('.' + absolute.replace(path.toUnix(__dirname), ''));
-      // unique
-      entryPoints = entryPoints.filter(function (x, i, a) {
-        return a.indexOf(x) === i;
-      });
-    }
-  }
-};
 
 getFilesRecursively(path.join(__dirname, 'src'));
 // filter ts only and remove duplicates
-entryPoints = entryPoints.filter((path) => /.ts$/.test(path)).filter((v, i, a) => a.indexOf(v) === i);
+entryPoints = entryPoints
+  .filter((path) => /.ts$/.test(path))
+  .filter((v, i, a) => a.indexOf(v) === i)
+  .filter((str) => {
+    // validate tests
+    const isTest = minimatch(str, '*.test.*', { matchBase: true });
+    const isSpec = minimatch(str, '*.spec*.*', { matchBase: true });
+    return !isTest && !isSpec;
+  });
 
-// console.log(entryPoints);
+//console.log(entryPoints);
 
 /**
  * Build Readme
@@ -52,8 +47,8 @@ if (typeof readme === 'string') {
       content += '\n\n' + fs.readFileSync(changelog, 'utf-8');
     }
 
-    const tmp = path.join(__dirname, 'tmp');
-    if (!fs.existsSync(tmp)) fs.mkdirSync(tmp);
+    const tmp = path.join(__dirname, 'tmp/typedoc');
+    if (!fs.existsSync(tmp)) fs.mkdirSync(tmp, { recursive: true });
     fs.writeFileSync(path.join(tmp, 'readme.md'), content);
   }
 }
@@ -81,21 +76,22 @@ const defaultOptions = {
     GitHub: 'https://github.com/dimaslanjaka'
   },
   inlineTags: ['@link'],
-  readme: './tmp/readme.md',
+  readme: './tmp/typedoc/readme.md',
+  // detect tsconfig for build
   tsconfig: fs.existsSync(path.join(__dirname, 'tsconfig.build.json'))
     ? './tsconfig.build.json'
     : fs.existsSync(path.join(__dirname, 'tsconfig-build.json'))
     ? './tsconfig-build.json'
     : './tsconfig.json',
   //includes: ['src'],
-  exclude: ['*.test.ts', '*.test.js'],
+  exclude,
   htmlLang: 'en',
   //gitRemote: 'https://github.com/dimaslanjaka/static-blog-generator-hexo.git',
   gitRevision: 'master',
   githubPages: true,
   //theme: 'hierarchy',
   plugin: ['typedoc-plugin-missing-exports'],
-  ignoreCompilerErrors: true,
+  //ignoreCompilerErrors: true,
   logger: 'none'
   //version: true,
   //includeVersion: true
@@ -108,6 +104,7 @@ if (fs.existsSync(generatedOptionFile)) {
   typedocOptions = Object.assign(defaultOptions, typedocOptions);
 }
 
+/*
 const cjson = path.join(__dirname, 'typedoc.json');
 const scriptName = path.basename(__filename);
 
@@ -117,7 +114,7 @@ if (scriptName.endsWith('-config.js')) {
   fs.writeFileSync(cjson, JSON.stringify(typedocOptions, null, 2));
 } else {
   if (fs.existsSync(cjson)) fs.rm(cjson);
-}
+}*/
 
 /**
  * read file with validation
@@ -138,3 +135,23 @@ function readfile(str, encoding = 'utf-8') {
 }
 
 module.exports = typedocOptions;
+
+/**
+ * read files recursively then push to {@link entryPoints}
+ * @param {string} directory
+ */
+function getFilesRecursively(directory) {
+  const filesInDirectory = fs.readdirSync(directory);
+  for (const file of filesInDirectory) {
+    const absolute = path.join(directory, file);
+    if (fs.statSync(absolute).isDirectory()) {
+      getFilesRecursively(absolute);
+    } else {
+      entryPoints.push('.' + absolute.replace(path.toUnix(__dirname), ''));
+      // unique
+      entryPoints = entryPoints.filter(function (x, i, a) {
+        return a.indexOf(x) === i;
+      });
+    }
+  }
+}
