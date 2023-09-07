@@ -18,7 +18,7 @@ interface Helpers extends Partial<ejs.Options> {
 
 export class EJSHelper {
   options: Helpers;
-  constructor(options: Helpers) {
+  constructor(options: Helpers = { root: process.cwd() }) {
     this.options = options;
   }
   setRoot(path: string) {
@@ -87,10 +87,11 @@ export class EJSHelper {
    * @param value object value
    * @returns
    */
-  add(key: any, value: any) {
+  addOption(key: any, value: any) {
     this.options[key] = value;
     return this;
   }
+
   /**
    * render ejs
    * @param path
@@ -99,10 +100,50 @@ export class EJSHelper {
   renderFile(path: string) {
     return ejs.renderFile(path, this.toObject());
   }
+
+  /**
+   * export current methods to object ejs
+   * @returns
+   */
   toObject() {
-    this.options.htmltag = this.htmltag.bind(this);
-    this.options.markdown = this.markdown.bind(this);
+    this.getAllFuncs(this).forEach((member) => {
+      this.options[member] = this[member].bind(this);
+    });
+
     return this.options;
+  }
+
+  private getAllFuncs(toCheck: { [x: string]: any }) {
+    const props = [];
+    let obj = toCheck;
+    do {
+      props.push(...Object.getOwnPropertyNames(obj));
+    } while ((obj = Object.getPrototypeOf(obj)));
+
+    return props
+      .sort()
+      .filter((e, i, arr) => {
+        if (e != arr[i + 1] && typeof toCheck[e] == 'function') return true;
+      })
+      .filter((member) => {
+        const defaultMembers = [
+          '__defineGetter__',
+          '__defineSetter__',
+          '__lookupGetter__',
+          '__lookupSetter__',
+          'valueOf',
+          'propertyIsEnumerable',
+          'isPrototypeOf',
+          'toLocaleString',
+          'toString',
+          'constructor',
+          'hasOwnProperty',
+          'getAllFuncs',
+          'toObject'
+        ];
+        // filter excludes
+        return !defaultMembers.includes(member);
+      });
   }
 }
 

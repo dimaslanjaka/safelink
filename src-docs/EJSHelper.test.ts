@@ -1,7 +1,7 @@
-import ejs from 'ejs';
+import { inspect } from 'util';
 import EJSHelper from './EJSHelper';
 
 const obj = new EJSHelper({
-  root: __dirname,
+  root: __dirname
 }).toObject();
-console.log(obj);
+console.log(inspect(obj, true, 2, true));

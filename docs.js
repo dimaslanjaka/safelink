@@ -83,9 +83,9 @@ async function createDemo() {
       root: join(view, 'layout.ejs')
     });
     const renderPage = await helpers.renderFile(view_ejs);
-    helpers.add('body', renderPage);
-    helpers.add('title', title);
-    helpers.add('description', pkg.description);
+    helpers.addOption('body', renderPage);
+    helpers.addOption('title', title);
+    helpers.addOption('description', pkg.description);
     let renderLayout = await helpers.renderFile(join(view, 'layout.ejs'));
 
     // write to test folder
