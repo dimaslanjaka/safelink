@@ -48,7 +48,7 @@
     "@types/jquery": "^3.5.18",
     "@types/markdown-it": "^13.0.1",
     "@types/markdown-it-attrs": "^4.1.0",
-    "@types/node": "^14",
+    "@types/node": "^20",
     "@types/prettier": "^2.7.3",
     "@types/toastr": "^2.1.40",
     "@types/undertaker": "^1.2.9",
