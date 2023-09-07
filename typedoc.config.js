@@ -76,7 +76,7 @@ const defaultOptions = {
     GitHub: 'https://github.com/dimaslanjaka'
   },
   inlineTags: ['@link'],
-  readme: './tmp/typedocs/readme.md',
+  readme: './tmp/typedoc/readme.md',
   // detect tsconfig for build
   tsconfig: fs.existsSync(path.join(__dirname, 'tsconfig.build.json'))
     ? './tsconfig.build.json'

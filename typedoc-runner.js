@@ -162,7 +162,7 @@ function getTypedocOptions() {
 function setTypedocOptions(newOpt) {
   opt = Object.assign(opt, newOpt || {});
   opt['$schema'] = 'https://typedoc.org/schema.json';
-  writefile(join(__dirname, 'tmp/typedocs/options.json'), JSON.stringify(opt, null, 2));
+  writefile(join(__dirname, 'tmp/typedoc/options.json'), JSON.stringify(opt, null, 2));
   return opt;
 }
 
