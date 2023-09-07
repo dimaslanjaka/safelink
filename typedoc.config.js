@@ -58,7 +58,7 @@ if (typeof readme === 'string') {
  * @type {import('typedoc').TypeDocOptions}
  */
 const defaultOptions = {
-  name: pkgjson.projectName || 'Static Blog Generator Gulp',
+  name: pkgjson.projectName || pkgjson.name || 'Static Blog Generator Gulp',
   //entryPoints: pkgjson.main.replace('dist', 'src'),
   entryPoints,
   // Output options (see TypeDoc docs http://typedoc.org/api/interfaces/typedocoptionmap.html)
