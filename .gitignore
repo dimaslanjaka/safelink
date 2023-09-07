@@ -22,7 +22,6 @@ private.*
 *.gz
 tmp
 /docs
-/CHANGELOG.md
 unused.md
 /dist
 /yarn.lock
