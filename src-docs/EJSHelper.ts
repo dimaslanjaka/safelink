@@ -16,7 +16,7 @@ interface Helpers extends Partial<ejs.Options> {
   root: string;
 }
 
-export default class EJSHelper {
+export class EJSHelper {
   options: Helpers;
   constructor(options: Helpers) {
     this.options = options;
@@ -105,3 +105,5 @@ export default class EJSHelper {
     return this.options;
   }
 }
+
+export default EJSHelper;
