@@ -1,6 +1,6 @@
 {
   "name": "safelinkify",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "NodeJS anonymizer external links into outbound page. Anonymize external links to outbound page redirector for SEO.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,6 +14,7 @@
   "scripts": {
     "start": "ts-node typedoc-server.js",
     "build": "tsc -p tsconfig.build.json && webpack",
+    "clean": "rm -rf dist && npm run build",
     "pack": "node packer.js --yarn",
     "docs": "node docs.js && webpack",
     "dev": "nodemon",
