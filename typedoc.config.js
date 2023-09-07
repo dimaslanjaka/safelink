@@ -98,10 +98,10 @@ const defaultOptions = {
 };
 
 const generatedOptionFile = join(tmp, 'options.json');
-let typedocOptions = defaultOptions;
+let localTypedocOptions = defaultOptions;
 if (fs.existsSync(generatedOptionFile)) {
-  typedocOptions = JSON.parse(readfile(generatedOptionFile, 'utf-8'));
-  typedocOptions = Object.assign(defaultOptions, typedocOptions);
+  localTypedocOptions = JSON.parse(readfile(generatedOptionFile, 'utf-8'));
+  localTypedocOptions = Object.assign(defaultOptions, localTypedocOptions);
 }
 
 /*
@@ -134,7 +134,7 @@ function readfile(str, encoding = 'utf-8') {
   }
 }
 
-module.exports = typedocOptions;
+module.exports = localTypedocOptions;
 
 /**
  * read files recursively then push to {@link entryPoints}

@@ -2,7 +2,7 @@ const { join } = require('upath');
 const typedocModule = require('typedoc');
 const semver = require('semver');
 const { mkdirSync, existsSync, writeFileSync, readdirSync, statSync } = require('fs');
-const typedocOptions = require('./typedoc.config');
+const localTypedocOptions = require('./typedoc.config');
 const pkgjson = require('./package.json');
 const { EOL } = require('os');
 const { spawnAsync } = require('cross-spawn');
@@ -144,7 +144,7 @@ function noop(..._) {
   return;
 }
 
-let opt = typedocOptions;
+let opt = localTypedocOptions;
 /**
  * Get typedoc options
  * @returns {typeof import('./typedoc.config')}
