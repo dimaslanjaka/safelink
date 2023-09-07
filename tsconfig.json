@@ -7,6 +7,7 @@
       "es2020",
       "DOM"
     ],
+    "resolveJsonModule": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
@@ -15,17 +16,13 @@
   },
   "include": [
     "./src/**/*",
+    "./src-docs/**/*",
     "./test/**/*",
-    "**/*.json",
+    "./*.json",
     "./*.js"
   ],
   "exclude": [
-    "**/dist/**"
-  ],
-  /*"references": [
-    { "path": "../sbg-utility" },
-    { "path": "../sbg-server" },
-    { "path": "../sbg-api" },
-    { "path": "../git-command-helper" }
-  ]*/
+    "**/dist/**",
+    "**/node_modules/**"
+  ]
 }
