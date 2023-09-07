@@ -73,6 +73,7 @@
     "gulp": "^4.0.2",
     "hpagent": "^1.2.0",
     "html-minifier-terser": "^7.2.0",
+    "is-plain-object": "^5.0.0",
     "jsdom": "21",
     "jsdom-global": "^3.0.2",
     "markdown-it": "^13.0.1",
