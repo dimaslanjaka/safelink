@@ -3,6 +3,11 @@ import { existsSync, readFileSync } from 'fs';
 import { dirname, join, resolve } from 'upath';
 import renderMarkdown from './EJSHelper/markdown';
 
+interface PackageJson {
+  dependencies: Record<string, string>;
+  version: string;
+}
+
 interface Helpers extends Partial<ejs.Options> {
   [key: string]: any;
   /**
@@ -19,10 +24,26 @@ export default class EJSHelper {
   setRoot(path: string) {
     this.options.root = path;
   }
-  htmltag(tagname: 'script' | 'style' | string, path: string) {
+  /**
+   * load package.json
+   * @param pathFile
+   * @returns
+   */
+  loadPackageJson(pathFile: string): PackageJson {
+    const root = dirname(this.options.root);
+    const file = join(root, pathFile);
+    return JSON.parse(readFileSync(file, 'utf-8'));
+  }
+  /**
+   * create html tag
+   * @param tagname
+   * @param pathFile
+   * @returns
+   */
+  htmltag(tagname: 'script' | 'style' | string, pathFile: string) {
     let result = '';
     const root = dirname(this.options.root);
-    const file = join(root, path);
+    const file = join(root, pathFile);
     const read = (file: string) => readFileSync(file).toString();
     if (existsSync(file)) {
       result = read(file);
@@ -45,6 +66,11 @@ export default class EJSHelper {
         return result;
     }
   }
+  /**
+   * import markdown
+   * @param path
+   * @returns
+   */
   markdown(path: string) {
     const root = dirname(this.options.root);
     const file = resolve(join(root, path));
