@@ -23,7 +23,6 @@ private.*
 tmp
 /docs
 unused.md
-/dist
 /yarn.lock
 **/.yarn/cache
 **/.yarn/versions
