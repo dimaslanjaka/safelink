@@ -237,4 +237,13 @@
 
 **1.1.13**
 
-**Changelog needs to be fixed**
+- all commits truncated here
+
+**1.2.1**
+
+- fix(`safelink.parse()`) null validation
+- deprecate namespace `safelinkify`
+- add global [`window.safelink`](https://github.com/dimaslanjaka/safelink/blob/f7f1ab8708d8ad1ab0e39f25aca190dde62495cd/src/safelink.ts)
+- add global [`window.resolveQueryUrl`](https://github.com/dimaslanjaka/safelink/blob/f7f1ab8708d8ad1ab0e39f25aca190dde62495cd/src/resolveQueryUrl.ts)
+- add global [`window.parseQuery`](https://github.com/dimaslanjaka/safelink/blob/f7f1ab8708d8ad1ab0e39f25aca190dde62495cd/src/parseQuery.ts)
+
