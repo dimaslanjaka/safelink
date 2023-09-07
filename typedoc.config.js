@@ -137,17 +137,4 @@ function readfile(str, encoding = 'utf-8') {
   }
 }
 
-/**
- * write to file recursively
- * @param {string} dest
- * @param {any} data
- */
-function writefile(dest, data) {
-  if (!fs.existsSync(path.dirname(dest))) fs.mkdirSync(path.dirname(dest), { recursive: true });
-  if (fs.existsSync(dest)) {
-    if (fs.statSync(dest).isDirectory()) throw dest + ' is directory';
-  }
-  fs.writeFileSync(dest, data);
-}
-
 module.exports = typedocOptions;
