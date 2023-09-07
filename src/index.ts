@@ -1,6 +1,6 @@
 import { default as _parseQuery } from './parseQuery';
 import { default as _resolveQueryUrl } from './resolveQueryUrl';
-import safelink, { default as _safelink } from './safelink';
+import { default as _safelink } from './safelink';
 
 /**
  * safelink options
@@ -35,19 +35,21 @@ export interface resolveQueryResult {
 }
 
 const _global_safelinkify = (typeof window !== 'undefined' ? window : global) as any;
+declare let module: any;
+const vars = { safelink: _safelink, parseQuery: _parseQuery, resolveQueryUrl: _resolveQueryUrl };
 export const resolveQueryUrl = _resolveQueryUrl;
 export const parseQuery = _parseQuery;
-//export const safelink = _safelink;
-declare let module: any;
+export const safelink = _safelink;
+export default vars;
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { safelink, parseQuery, resolveQueryUrl };
+  module.exports = vars;
 }
 _global_safelinkify.safelink = _safelink;
-
 declare global {
   interface Window {
-    safelink: _safelink;
+    safelink: typeof vars.safelink;
+    parseQuery: (typeof vars)['parseQuery'];
+    resolveQueryUrl: (typeof vars)['resolveQueryUrl'];
   }
 }
-
 //
