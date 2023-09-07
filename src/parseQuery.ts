@@ -1,5 +1,4 @@
-
-import { Nullable } from './globals';
+import { Nullable } from './';
 import toURL from './toURL';
 
 const _global_parseQuery = (typeof window !== 'undefined' ? window : global) as any;
@@ -14,11 +13,11 @@ type parseQueryResult =
  * @param  query query key, null = return all objects
  * @param  url target query, ex: {@link location.href} or {@link location.search}
  */
-export function parseQuery(query: Nullable<string>, url: Nullable<string>): parseQueryResult {
+export function parseQuery(query: Nullable<string>, url: Nullable<string>): Nullable<parseQueryResult> {
   // skip null, undefined
-  if (typeof url !== 'string') return;
+  if (typeof url !== 'string') return null;
   // skip empty string
-  if (url.length < 1) return;
+  if (url.length < 1) return null;
   let result: { [key: string]: any } = {};
 
   /**
@@ -45,7 +44,7 @@ export function parseQuery(query: Nullable<string>, url: Nullable<string>): pars
     }
   }
 
-  if (typeof query == 'string' && result.hasOwnProperty(query)) {
+  if (typeof query == 'string' && query in result) {
     return result[query];
   }
 

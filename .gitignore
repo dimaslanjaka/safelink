@@ -11,6 +11,7 @@ dist/**/*.json
 
 node_modules
 .deploy_git
+*.tsbuildinfo
 *.log
 private.*
 *.private.*
@@ -21,4 +22,8 @@ private.*
 *.gz
 tmp
 /docs
-/CHANGELOG.md
+unused.md
+/dist
+/yarn.lock
+**/.yarn/cache
+**/.yarn/versions

@@ -21,13 +21,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
       - name: Setup Node 16.x
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
           cache: 'npm'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.ACCESS_TOKEN }}
           submodules: recursive
       - run: npm i -g gulp-cli ts-node typescript npm
         name: install global packages

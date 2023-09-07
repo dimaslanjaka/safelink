@@ -2,7 +2,7 @@
  * Extract domain from URL
  */
 export default function extractDomain(url: string) {
-  var hostname;
+  let hostname: string;
   if (url.indexOf('://') > -1) {
     hostname = url.split('/')[2];
   } else {

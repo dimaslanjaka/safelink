@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,7 @@
     <meta name="description" content="<%- description %>" />
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="shortcut icon" href="https://www.google.com/s2/favicons?domain=github.com" type="image/x-icon" />
+    <link rel="shortcut icon" type="image" href="https://www.google.com/s2/favicons?domain=github.com" />
     <%- htmltag('style','css/style.css') %>
     <meta name="robots" content="index,nofollow" />
   </head>
@@ -15,7 +16,7 @@
   <body>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/safelink">Safelinkify</a>
+        <a class="navbar-brand" href="/safelink">Safelinkify v<%- loadPackageJson('../package.json').version %></a>
       </div>
     </nav>
     <main class="container-fluid mb-4 py-4" id="main-contents"><%- body %></main>
@@ -28,7 +29,7 @@
           <li class="nav-item"><a href="/smartform" class="nav-link px-2 text-muted">Smartform</a></li>
           <li class="nav-item"><a href="/about" class="nav-link px-2 text-muted">About Me</a></li>
         </ul>
-        <p class="text-center text-muted">© 2022 Website Manajemen Indonesia, Inc</p>
+        <p class="text-center text-muted">© 2023 Website Manajemen Indonesia, Inc</p>
       </footer>
     </div>
 

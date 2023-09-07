@@ -11,51 +11,45 @@
 Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS.
 
 - **[API DOCUMENTATION](https://www.webmanajemen.com/docs/safelinkify)**
-- **[MODULES](https://www.webmanajemen.com/docs/safelinkify/modules.html)**
 - **[LIVE DEMO](https://www.webmanajemen.com/docs/safelinkify/demo)**
 
-## Our Production
-| page | source |
-| :--- | :--- |
-| [https://www.webmanajemen.com/page/safelink.html](https://www.webmanajemen.com/page/safelink.html) | [safelink-decode.js](https://github.com/dimaslanjaka/page/blob/master/safelink/safelink-decode.js) <br />[layout](https://github.com/dimaslanjaka/page/tree/master/safelink/layout1) <br/>[template](https://github.com/dimaslanjaka/page/blob/master/_layout.njk) <br />[compiler](https://github.com/dimaslanjaka/page/blob/1601e212200eaa7e8b4534ae7511b4fb6f179a96/gulpfile.js#L222) |
+## Demo
+| page | source | samples |
+| :--- | :--- | :--- |
+| [/page/safelink.html](https://www.webmanajemen.com/page/safelink.html) | [safelink-decode.js](https://github.com/dimaslanjaka/page/blob/master/safelink/safelink-decode.js) <br />[layout](https://github.com/dimaslanjaka/page/tree/master/safelink/layout1) <br/>[template](https://github.com/dimaslanjaka/page/blob/master/_layout.njk) <br />[compiler](https://github.com/dimaslanjaka/page/blob/1601e212200eaa7e8b4534ae7511b4fb6f179a96/gulpfile.js#L222) | [/page/safelink.html?url=aHR0cHM6Ly...](https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9jb2RlcGVuLmlvL2RpbWFzbGFuamFrYS9wZW4veUxiclpWbw==) |
 
 ## Installation
 
 ### Bundles
 | registry | link | commands |
 | :--- | :--- | :---
-| npm | [https://www.npmjs.com/package/safelinkify](https://www.npmjs.com/package/safelinkify) | `npm i safelinkify` |
-| github | [https://github.com/dimaslanjaka/safelink](https://github.com/dimaslanjaka/safelink) | `npm i https://github.com/dimaslanjaka/safelink` |
-| tarball | [https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz](https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz) | `npm i https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz` |
+| npm | [https://www.npmjs.com/package/safelinkify](https://www.npmjs.com/package/safelinkify) | `npm i safelinkify -D` |
+| github | [https://github.com/dimaslanjaka/safelink](https://github.com/dimaslanjaka/safelink) | `npm i https://github.com/dimaslanjaka/safelink -D` |
+| tarball | [https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz](https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz) | `npm i https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz -D` |
 
 ### npm
 ```bash
-npm install safelinkify --production
+npm install safelinkify -D
 ```
 
 ### yarn
 ```
-yarn install safelinkify --production=true
+yarn install safelinkify --dev
 ```
 
 ## Development
 ```bash
 git clone --single-branch --branch main https://github.com/dimaslanjaka/safelink foldername
 cd foldername
-# install dependents
-yarn install
-# or
-npm install
+yarn install # npm install
 ```
 
 | command      | description                       |
 | ------------ | --------------------------------- |
-| `yarn start`    | serve generated docs           |
-| `tsc`           | build definition and js files  |
-| `webpack`       | build safelink script          |
+| `yarn start` | serve generated docs              |
+| `yarn dev`   | watch and build docs              |
 | `npm run docs`  | build docs |
 | `npm run build` | build dist |
-| `ts-node old-docs.ts` | (_deprecated_) watch src-docs and start server, watch src and compile tsc webpack |
 
 ## Usages
 Setup options:

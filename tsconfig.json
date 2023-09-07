@@ -1,25 +1,28 @@
 {
-  "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "es5",
-    "outDir": "dist",
-    "noImplicitAny": true,
+    "outDir": "./tmp/dist",
     "allowJs": true,
-    "moduleResolution": "node",
+    "checkJs": false,
+    "lib": [
+      "es2020",
+      "DOM"
+    ],
+    "resolveJsonModule": true,
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
-    "lib": ["DOM", "ES5", "ES6"],
-    "typeRoots": ["node_modules/@types", "typings"]
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "typeRoots": ["./node_modules/@types", "./typings"]
   },
-  "typeAcquisition": {
-    "enable": true
-  },
-  "ts-node": {
-    "esm": true,
-    "compilerOptions": {
-      "module": "CommonJS",
-      "strict": false
-    }
-  }
+  "include": [
+    "./src/**/*",
+    "./src-docs/**/*",
+    "./test/**/*",
+    "./*.json",
+    "./*.js"
+  ],
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**"
+  ]
 }

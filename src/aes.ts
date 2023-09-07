@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';
-import { Nullable } from './globals';
+import { Nullable } from './';
 
 var salt = 'salt'; //salt
 var iv = '1111111111111111'; //pass salt minimum length 12 chars

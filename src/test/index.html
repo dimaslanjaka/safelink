@@ -1,13 +1,14 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Safelinkify - External Link Anonymizer</title>
-    <meta name="description" content="NodeJS anonymizer external links. Anonymize external links to outbound page redirector for SEO." />
+    <meta name="description" content="NodeJS anonymizer external links into outbound page. Anonymize external links to outbound page redirector for SEO." />
     <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="shortcut icon" href="https://www.google.com/s2/favicons?domain=github.com" type="image/x-icon" />
+    <link rel="shortcut icon" type="image" href="https://www.google.com/s2/favicons?domain=github.com" />
     <style>* {
   word-wrap: break-word;
 }
@@ -30,7 +31,7 @@ table {
   <body>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/safelink">Safelinkify</a>
+        <a class="navbar-brand" href="/safelink">Safelinkify v1.2.1</a>
       </div>
     </nav>
     <main class="container-fluid mb-4 py-4" id="main-contents"><style>/*!
@@ -215,21 +216,22 @@ table {
 <p>Customized safelink url redirector. Transform and Anonymize all hyperlinks to outbound pages. Useful for SEO external links and ADS.</p>
 <ul>
 <li><strong><a href="https://www.webmanajemen.com/docs/safelinkify">API DOCUMENTATION</a></strong></li>
-<li><strong><a href="https://www.webmanajemen.com/docs/safelinkify/modules.html">MODULES</a></strong></li>
 <li><strong><a href="https://www.webmanajemen.com/docs/safelinkify/demo">LIVE DEMO</a></strong></li>
 </ul>
-<h2 id="our-production" tabindex="-1"><a class="header-anchor" href="#our-production">Our Production</a></h2>
+<h2 id="demo" tabindex="-1"><a class="header-anchor" href="#demo">Demo</a></h2>
 <table>
 <thead>
 <tr>
 <th style="text-align:left">page</th>
 <th style="text-align:left">source</th>
+<th style="text-align:left">samples</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left"><a href="https://www.webmanajemen.com/page/safelink.html">https://www.webmanajemen.com/page/safelink.html</a></td>
+<td style="text-align:left"><a href="https://www.webmanajemen.com/page/safelink.html">/page/safelink.html</a></td>
 <td style="text-align:left"><a href="https://github.com/dimaslanjaka/page/blob/master/safelink/safelink-decode.js">safelink-decode.js</a> <br /><a href="https://github.com/dimaslanjaka/page/tree/master/safelink/layout1">layout</a> <br/><a href="https://github.com/dimaslanjaka/page/blob/master/_layout.njk">template</a> <br /><a href="https://github.com/dimaslanjaka/page/blob/1601e212200eaa7e8b4534ae7511b4fb6f179a96/gulpfile.js#L222">compiler</a></td>
+<td style="text-align:left"><a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly9jb2RlcGVuLmlvL2RpbWFzbGFuamFrYS9wZW4veUxiclpWbw==">/page/safelink.html?url=aHR0cHM6Ly…</a></td>
 </tr>
 </tbody>
 </table>
@@ -247,33 +249,30 @@ table {
 <tr>
 <td style="text-align:left">npm</td>
 <td style="text-align:left"><a href="https://www.npmjs.com/package/safelinkify">https://www.npmjs.com/package/safelinkify</a></td>
-<td style="text-align:left"><code>npm i safelinkify</code></td>
+<td style="text-align:left"><code>npm i safelinkify -D</code></td>
 </tr>
 <tr>
 <td style="text-align:left">github</td>
 <td style="text-align:left"><a href="https://github.com/dimaslanjaka/safelink">https://github.com/dimaslanjaka/safelink</a></td>
-<td style="text-align:left"><code>npm i https://github.com/dimaslanjaka/safelink</code></td>
+<td style="text-align:left"><code>npm i https://github.com/dimaslanjaka/safelink -D</code></td>
 </tr>
 <tr>
 <td style="text-align:left">tarball</td>
 <td style="text-align:left"><a href="https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz">https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz</a></td>
-<td style="text-align:left"><code>npm i https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz</code></td>
+<td style="text-align:left"><code>npm i https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz -D</code></td>
 </tr>
 </tbody>
 </table>
 <h3 id="npm" tabindex="-1"><a class="header-anchor" href="#npm">npm</a></h3>
-<pre><code class="language-bash">npm install safelinkify --production
+<pre><code class="language-bash">npm install safelinkify -D
 </code></pre>
 <h3 id="yarn" tabindex="-1"><a class="header-anchor" href="#yarn">yarn</a></h3>
-<pre><code>yarn install safelinkify --production=true
+<pre><code>yarn install safelinkify --dev
 </code></pre>
 <h2 id="development" tabindex="-1"><a class="header-anchor" href="#development">Development</a></h2>
 <pre><code class="language-bash">git clone --single-branch --branch main https://github.com/dimaslanjaka/safelink foldername
 cd foldername
-# install dependents
-yarn install
-# or
-npm install
+yarn install # npm install
 </code></pre>
 <table>
 <thead>
@@ -288,12 +287,8 @@ npm install
 <td>serve generated docs</td>
 </tr>
 <tr>
-<td><code>tsc</code></td>
-<td>build definition and js files</td>
-</tr>
-<tr>
-<td><code>webpack</code></td>
-<td>build safelink script</td>
+<td><code>yarn dev</code></td>
+<td>watch and build docs</td>
 </tr>
 <tr>
 <td><code>npm run docs</code></td>
@@ -302,10 +297,6 @@ npm install
 <tr>
 <td><code>npm run build</code></td>
 <td>build dist</td>
-</tr>
-<tr>
-<td><code>ts-node old-docs.ts</code></td>
-<td>(<em>deprecated</em>) watch src-docs and start server, watch src and compile tsc webpack</td>
 </tr>
 </tbody>
 </table>
@@ -510,12 +501,12 @@ gulp.task('safelink', () =&gt; {
   <table class="table" id="table">
     <tr>
       <td>global parseQuery</td>
-      <td><code class="language-javascript">typeof parseQuery</code></td>
+      <td><code class="language-javascript">typeof window.parseQuery</code></td>
       <td><kbd id="parseQuery"></kbd></td>
     </tr>
     <tr>
       <td>global resolveQueryUrl</td>
-      <td><code class="language-javascript">typeof resolveQueryUrl</code></td>
+      <td><code class="language-javascript">typeof window.resolveQueryUrl</code></td>
       <td><kbd id="resolveQueryUrl"></kbd></td>
     </tr>
   </table>
@@ -527,10 +518,13 @@ gulp.task('safelink', () =&gt; {
   <pre>
     <code class="language-javascript">
 &lt;script src=&quot;dist/bundle.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
+&lt;script&gt;/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// &lt;reference path=&#34;../../dist/index.d.ts&#34; /&gt;
+
+document.addEventListener(&#39;DOMContentLoaded&#39;, function () {
   const table = document.querySelector(&#39;table#table&#39;);
-  table.querySelector(&#39;#resolveQueryUrl&#39;).innerHTML = typeof resolveQueryUrl;
-  table.querySelector(&#39;#parseQuery&#39;).innerHTML = typeof parseQuery;
+  table.querySelector(&#39;#resolveQueryUrl&#39;).innerHTML = typeof window.resolveQueryUrl;
+  table.querySelector(&#39;#parseQuery&#39;).innerHTML = typeof window.parseQuery;
 
   /**
    * Check if variable is ES5 class
@@ -551,19 +545,12 @@ gulp.task('safelink', () =&gt; {
     );
   }
 
-  const isSafelinkClass = isClass(safelink);
-  table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelink&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;isClass(safelink)&lt;/code&gt;&lt;/td&gt;&lt;td&gt;is ES5 Class: ${isSafelinkClass}&lt;/td&gt;&lt;/tr&gt;`;
-  table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelink&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;typeof safelink&lt;/code&gt;&lt;/td&gt;&lt;td&gt;${typeof safelink}&lt;/td&gt;&lt;/tr&gt;`;
-  table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelinkify&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;typeof safelinkify&lt;/code&gt;&lt;/td&gt;&lt;td&gt;${typeof safelinkify}&lt;/td&gt;&lt;/tr&gt;`;
-  table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelinkify.safelink&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;isClass(safelinkify.safelink)&lt;/code&gt;&lt;/td&gt;&lt;td&gt;is ES5 Class: ${isClass(
-    safelinkify.safelink
-  )}&lt;/td&gt;&lt;/tr&gt;`;
+  const isSafelinkClass = isClass(window.safelink);
+  table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelink&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;isClass(window.safelink)&lt;/code&gt;&lt;/td&gt;&lt;td&gt;is ES5 Class: ${isSafelinkClass}&lt;/td&gt;&lt;/tr&gt;`;
+  table.innerHTML += `&lt;tr&gt;&lt;td&gt;global safelink&lt;/td&gt; &lt;td&gt;&lt;code class=&#34;language-javascript&#34;&gt;typeof window.safelink&lt;/code&gt;&lt;/td&gt;&lt;td&gt;${typeof window.safelink}&lt;/td&gt;&lt;/tr&gt;`;
 
   if (isSafelinkClass) {
-    /**
-     * @type {(typeof import(&#39;safelinkify&#39;))[&#39;default&#39;]}
-     */
-    const instance = new safelink({
+    const instance = new window.safelink({
       // exclude patterns (dont anonymize these patterns)
       exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
       // url redirector
@@ -579,9 +566,9 @@ gulp.task('safelink', () =&gt; {
     instance.parse(document.querySelector(&#39;div#internal&#39;));
 
     const currentQuery = JSON.stringify(instance.resolveQueryUrl(location.href), null, 2);
-    table.innerHTML += `&lt;tr id=&#34;current-queries&#34;&gt;&lt;td&gt;Redirector Resolver &lt;a href=&#34;#query-url&#34; class=&#34;btn btn-sm btn-warning&#34;&gt;Change&lt;/a&gt;&lt;/td&gt; &lt;td&gt;&lt;code&gt;sf.resolveQueryUrl(location.href)&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;${currentQuery}&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;`;
+    table.innerHTML += `&lt;tr id=&#34;current-queries&#34;&gt;&lt;td&gt;Redirector Resolver &lt;a href=&#34;#query-url&#34; class=&#34;btn btn-sm btn-warning&#34;&gt;Change&lt;/a&gt;&lt;/td&gt; &lt;td&gt;&lt;code&gt;window.safelink.resolveQueryUrl(location.href)&lt;/code&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;${currentQuery}&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;`;
 
-    const param = new URLSearchParams(location.search);
+    const param = new URLSearchParams(window.location.search);
     if (param.has(&#39;o&#39;) || param.has(&#39;url&#39;) || location.href.match(/#(o|url)=/)) {
       document.getElementById(&#39;current-queries&#39;).scrollIntoView();
     }
@@ -872,16 +859,20 @@ gulp.task('safelink', () =&gt; {
 <li>[ <em>2022-12-31 23:08:30</em> ] <a href="https://github.com/dimaslanjaka/safelink/commit/ff2e631">ff2e631</a> update deps</li>
 </ul>
 <p><strong>1.1.13</strong></p>
+<p><strong>Changelog needs to be fixed</strong></p>
 </div>
     </div>
   </div>
 </div>
 
 <script src="dist/bundle.js"></script>
-<script>document.addEventListener('DOMContentLoaded', function () {
+<script>/* eslint-disable @typescript-eslint/triple-slash-reference */
+/// <reference path="../../dist/index.d.ts" />
+
+document.addEventListener('DOMContentLoaded', function () {
   const table = document.querySelector('table#table');
-  table.querySelector('#resolveQueryUrl').innerHTML = typeof resolveQueryUrl;
-  table.querySelector('#parseQuery').innerHTML = typeof parseQuery;
+  table.querySelector('#resolveQueryUrl').innerHTML = typeof window.resolveQueryUrl;
+  table.querySelector('#parseQuery').innerHTML = typeof window.parseQuery;
 
   /**
    * Check if variable is ES5 class
@@ -902,19 +893,12 @@ gulp.task('safelink', () =&gt; {
     );
   }
 
-  const isSafelinkClass = isClass(safelink);
-  table.innerHTML += `<tr><td>global safelink</td> <td><code class="language-javascript">isClass(safelink)</code></td><td>is ES5 Class: ${isSafelinkClass}</td></tr>`;
-  table.innerHTML += `<tr><td>global safelink</td> <td><code class="language-javascript">typeof safelink</code></td><td>${typeof safelink}</td></tr>`;
-  table.innerHTML += `<tr><td>global safelinkify</td> <td><code class="language-javascript">typeof safelinkify</code></td><td>${typeof safelinkify}</td></tr>`;
-  table.innerHTML += `<tr><td>global safelinkify.safelink</td> <td><code class="language-javascript">isClass(safelinkify.safelink)</code></td><td>is ES5 Class: ${isClass(
-    safelinkify.safelink
-  )}</td></tr>`;
+  const isSafelinkClass = isClass(window.safelink);
+  table.innerHTML += `<tr><td>global safelink</td> <td><code class="language-javascript">isClass(window.safelink)</code></td><td>is ES5 Class: ${isSafelinkClass}</td></tr>`;
+  table.innerHTML += `<tr><td>global safelink</td> <td><code class="language-javascript">typeof window.safelink</code></td><td>${typeof window.safelink}</td></tr>`;
 
   if (isSafelinkClass) {
-    /**
-     * @type {(typeof import('safelinkify'))['default']}
-     */
-    const instance = new safelink({
+    const instance = new window.safelink({
       // exclude patterns (dont anonymize these patterns)
       exclude: [/([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
       // url redirector
@@ -930,9 +914,9 @@ gulp.task('safelink', () =&gt; {
     instance.parse(document.querySelector('div#internal'));
 
     const currentQuery = JSON.stringify(instance.resolveQueryUrl(location.href), null, 2);
-    table.innerHTML += `<tr id="current-queries"><td>Redirector Resolver <a href="#query-url" class="btn btn-sm btn-warning">Change</a></td> <td><code>sf.resolveQueryUrl(location.href)</code></td><td><pre><code class="language-json">${currentQuery}</code></pre></td></tr>`;
+    table.innerHTML += `<tr id="current-queries"><td>Redirector Resolver <a href="#query-url" class="btn btn-sm btn-warning">Change</a></td> <td><code>window.safelink.resolveQueryUrl(location.href)</code></td><td><pre><code class="language-json">${currentQuery}</code></pre></td></tr>`;
 
-    const param = new URLSearchParams(location.search);
+    const param = new URLSearchParams(window.location.search);
     if (param.has('o') || param.has('url') || location.href.match(/#(o|url)=/)) {
       document.getElementById('current-queries').scrollIntoView();
     }
@@ -971,7 +955,7 @@ gulp.task('safelink', () =&gt; {
           <li class="nav-item"><a href="/smartform" class="nav-link px-2 text-muted">Smartform</a></li>
           <li class="nav-item"><a href="/about" class="nav-link px-2 text-muted">About Me</a></li>
         </ul>
-        <p class="text-center text-muted">© 2022 Website Manajemen Indonesia, Inc</p>
+        <p class="text-center text-muted">© 2023 Website Manajemen Indonesia, Inc</p>
       </footer>
     </div>
 

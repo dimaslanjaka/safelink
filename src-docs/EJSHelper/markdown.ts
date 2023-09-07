@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path='../../typings/index.d.ts' />
 import MarkdownIt from 'markdown-it';
 import MarkdownItAbbr from 'markdown-it-abbr';
@@ -42,7 +43,7 @@ function plug(md: MarkdownIt) {
   return md;
 }
 
-function mdNew() {
+export function mdCommonMark() {
   return plug(MarkdownIt('commonmark'));
 }
 

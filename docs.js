@@ -16,6 +16,7 @@ require('ts-node').register();
 const { default: EJSHelper } = require('./src-docs/EJSHelper');
 const { compileDocs } = require('./typedoc-runner');
 const { spawn } = require('git-command-helper/dist/spawn');
+const { minify } = require('html-minifier-terser');
 //
 
 // VARS
@@ -36,19 +37,23 @@ const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
 
 // VARS END
 
+// @fixme: generate changelog.md
 spawn('node', [join(__dirname, 'changelog.js')], { cwd: __dirname }).then(() => {
+  // compie JSDoc API using TSDoc
   compileDocs(
     {
       cleanOutputDir: false,
       commentStyle: 'All'
     },
     () => {
+      // generate dist
       webpack(webpackConfig, (err, stats) => {
         if (err || (stats && stats.hasErrors())) {
           console.log('webpack error');
           console.log(stats);
           return;
         }
+        // copy dist
         copyDistToDemo(createDemo);
       });
     }
@@ -78,9 +83,9 @@ async function createDemo() {
       root: join(view, 'layout.ejs')
     });
     const renderPage = await helpers.renderFile(view_ejs);
-    helpers.add('body', renderPage);
-    helpers.add('title', title);
-    helpers.add('description', pkg.description);
+    helpers.addOption('body', renderPage);
+    helpers.addOption('title', title);
+    helpers.addOption('description', pkg.description);
     let renderLayout = await helpers.renderFile(join(view, 'layout.ejs'));
 
     // write to test folder
@@ -121,9 +126,17 @@ function copyDistToDemo(done) {
   pkg['devDependencies'] = {};
   writeFileSync(join(deploy_dir, '/package.json'), JSON.stringify(pkg, null, 2));
 
+  /**
+   * copy dist/*.js to {@link deploy_dir}/dist
+   * @returns
+   */
   const copyDist = () =>
     gulp.src(['**/*', '!**/*.d.ts'], { cwd: join(__dirname, 'dist') }).pipe(gulp.dest(join(deploy_dir, 'dist')));
 
+  /**
+   * copy markdowns to {@link deploy_dir}/dist
+   * @returns
+   */
   const copyMd = () => gulp.src(join(__dirname, '*.md')).pipe(gulp.dest(deploy_dir));
 
   return gulp.series(

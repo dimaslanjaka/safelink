@@ -1,5 +1,5 @@
+import { Nullable, resolveQueryResult } from './';
 import encryptionURL from './encryptionURL';
-import { Nullable, resolveQueryResult } from './globals';
 import { parseQuery } from './parseQuery';
 import toURL from './toURL';
 
@@ -22,7 +22,7 @@ export default function resolveQueryUrl(url?: string | URL, passphrase = 'root',
       href = 'http://not.actually.domain/' + url;
     } else {
       const parse = toURL(url);
-      if (parse !== null) href = parse.href;
+      if (parse) href = parse.href;
     }
   } else if (typeof location == 'object' && typeof location.href == 'string') {
     href = location.href;
@@ -31,9 +31,9 @@ export default function resolveQueryUrl(url?: string | URL, passphrase = 'root',
   if (!href || !href.match(/#|\?/)) return null;
 
   const parse_query_url = parseQuery(null, href);
-  if (typeof parse_query_url == 'object') {
+  if (parse_query_url) {
     Object.keys(parse_query_url).forEach((key) => {
-      const value = parse_query_url[key];
+      const value = (parse_query_url as { [key: string]: string })[key];
       result[key] = encryptionURL(value, passphrase, debug);
     });
   }
