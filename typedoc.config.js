@@ -92,7 +92,7 @@ const defaultOptions = {
   //theme: 'hierarchy',
   plugin: ['typedoc-plugin-missing-exports'],
   //ignoreCompilerErrors: true,
-  logger: 'none'
+  logLevel: 'Verbose'
   //version: true,
   //includeVersion: true
 };
