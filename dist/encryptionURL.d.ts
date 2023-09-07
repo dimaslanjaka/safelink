@@ -1,4 +1,4 @@
-import { encryptionURLResult, Nullable } from './globals';
+import { encryptionURLResult, Nullable } from './';
 /**
  * resolve url encryption
  * @param url

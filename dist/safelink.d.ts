@@ -1,10 +1,12 @@
 /// <reference types="node" />
-import { Nullable, SafelinkOptions } from './globals';
+import { Nullable, SafelinkOptions } from './';
+import { default as _parseQuery } from './parseQuery';
 export type DOMElement = globalThis.Element;
 export type HTMLElement = globalThis.HTMLElement;
 export default class safelink {
-    options: Partial<SafelinkOptions>;
+    options: Required<SafelinkOptions>;
     constructor(opt: Partial<SafelinkOptions>);
+    parseQuery: typeof _parseQuery;
     /**
      * is url excluded
      * @param url
@@ -18,6 +20,13 @@ export default class safelink {
      */
     parse(target: Nullable<string> | HTMLElement | Buffer | import('fs').ReadStream): Promise<string | null>;
     /**
+     * parse single url
+     * @param url
+     * @returns return redirect url or original url
+     * * when redirect not set, will return encoded URL only
+     */
+    parseUrl(url: string): string | null;
+    /**
      * anonymize url directly
      * @param href
      */
@@ -27,5 +36,5 @@ export default class safelink {
      * @param search
      * @returns
      */
-    resolveQueryUrl(search?: string): Partial<import("./globals").resolveQueryResult>;
+    resolveQueryUrl(search?: string): Partial<import("./").resolveQueryResult>;
 }

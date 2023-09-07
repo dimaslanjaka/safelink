@@ -1,4 +1,4 @@
-import { Nullable } from './globals';
+import { Nullable } from './';
 /**
  * is url valid
  * @param string

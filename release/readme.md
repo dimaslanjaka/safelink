@@ -1,6 +1,36 @@
-# Release `safelinkify` Tarball
+# Release `safelinkify` tarball
+## Releases
+| version | tarball url |
+| :--- | :--- |
+| 1.1.10 | https://github.com/dimaslanjaka/safelink/raw/1e51695/release/safelinkify-1.1.10.tgz |
+| 1.1.11 | https://github.com/dimaslanjaka/safelink/raw/055d6d7/release/safelinkify-1.1.11.tgz |
+| 1.1.12 | https://github.com/dimaslanjaka/safelink/raw/5c8491c/release/safelinkify-1.1.12.tgz |
+| 1.1.13 | https://github.com/dimaslanjaka/safelink/raw/13511c1/release/safelinkify-1.1.13.tgz |
+| 1.1.14 | https://github.com/dimaslanjaka/safelink/raw/13511c1/release/safelinkify-1.1.14.tgz |
+| 1.1.15 | https://github.com/dimaslanjaka/safelink/raw/13511c1/release/safelinkify-1.1.15.tgz |
+| 1.1.16 | https://github.com/dimaslanjaka/safelink/raw/569daa7/release/safelinkify-1.1.16.tgz |
+| 1.1.17 | https://github.com/dimaslanjaka/safelink/raw/183a662/release/safelinkify-1.1.17.tgz |
+| 1.1.18 | https://github.com/dimaslanjaka/safelink/raw/5e5296a/release/safelinkify-1.1.18.tgz |
+| 1.1.19 | https://github.com/dimaslanjaka/safelink/raw/10a6704/release/safelinkify-1.1.19.tgz |
+| 1.1.6 | https://github.com/dimaslanjaka/safelink/raw/377a912/release/safelinkify-1.1.6.tgz |
+| 1.1.7 | https://github.com/dimaslanjaka/safelink/raw/efe5f39/release/safelinkify-1.1.7.tgz |
+| 1.1.8 | https://github.com/dimaslanjaka/safelink/raw/858ead5/release/safelinkify-1.1.8.tgz |
+| 1.1.9 | https://github.com/dimaslanjaka/safelink/raw/e41b97a/release/safelinkify-1.1.9.tgz |
+| latest | https://github.com/dimaslanjaka/safelink/raw/13511c1/release/safelinkify.tgz |
+| latest | https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz |
 
-## Get URL of `safelinkify` Release Tarball
+use this tarball with `resolutions`:
+```json
+{
+  "resolutions": {
+    "safelinkify": "<url of tarball>"
+  }
+}
+```
+
+## Releases
+
+    ## Get URL of `safelinkify` Release Tarball
 - select tarball file
 ![gambar](https://user-images.githubusercontent.com/12471057/203216375-8af4b5d9-00c2-40fb-8d3d-d220beaabd46.png)
 - copy raw url

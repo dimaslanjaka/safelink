@@ -1,4 +1,4 @@
-import { Nullable } from './globals';
+import { Nullable } from './';
 /**
  * Encrypt function
  * @param {string} passphrase password

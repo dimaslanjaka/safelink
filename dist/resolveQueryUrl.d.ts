@@ -1,4 +1,4 @@
-import { resolveQueryResult } from './globals';
+import { resolveQueryResult } from './';
 /**
  * Auto resolve url
  * * parse base64, aes
