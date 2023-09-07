@@ -9,6 +9,7 @@ const { minimatch } = require('minimatch');
 // update   : curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc.js > typedoc.js
 // repo     : https://github.com/dimaslanjaka/nodejs-package-types/blob/main/typedoc.js
 
+const tmp = path.join(__dirname, 'tmp/typedoc');
 const exclude = ['*.test.ts', '*.test.js'];
 /**
  * @type {import('typedoc').TypeDocOptions['entryPoints']}
@@ -47,7 +48,6 @@ if (typeof readme === 'string') {
       content += '\n\n' + fs.readFileSync(changelog, 'utf-8');
     }
 
-    const tmp = path.join(__dirname, 'tmp/typedoc');
     if (!fs.existsSync(tmp)) fs.mkdirSync(tmp, { recursive: true });
     fs.writeFileSync(path.join(tmp, 'readme.md'), content);
   }
@@ -97,7 +97,7 @@ const defaultOptions = {
   //includeVersion: true
 };
 
-const generatedOptionFile = join(__dirname, 'tmp/typedocs/options.json');
+const generatedOptionFile = join(tmp, 'options.json');
 let typedocOptions = defaultOptions;
 if (fs.existsSync(generatedOptionFile)) {
   typedocOptions = JSON.parse(readfile(generatedOptionFile, 'utf-8'));
