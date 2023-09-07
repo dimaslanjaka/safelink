@@ -90,6 +90,7 @@
     "prettier": "3",
     "resolve-typescript-plugin": "^2.0.1",
     "rimraf": "^5.0.1",
+    "sbg-utility": "*",
     "semver": "^7.5.4",
     "terser-webpack-plugin": "^5.3.9",
     "toastr": "^2.1.4",
