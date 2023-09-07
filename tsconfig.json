@@ -16,7 +16,8 @@
   "include": [
     "./src/**/*",
     "./test/**/*",
-    "**/*.json"
+    "**/*.json",
+    "./*.js"
   ],
   "exclude": [
     "**/dist/**"
