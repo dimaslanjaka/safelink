@@ -1,0 +1,2 @@
+- typedoc UnhandledPromiseRejectionWarning: Error: An application handle must be retrieved with
+Application.bootstrap or Application.bootstrapWithPlugins
