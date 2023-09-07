@@ -1,5 +1,5 @@
 import ejs from 'ejs';
-import { existsSync, PathOrFileDescriptor, readFileSync } from 'fs';
+import { existsSync, readFileSync } from 'fs';
 import { dirname, join, resolve } from 'upath';
 import renderMarkdown from './EJSHelper/markdown';
 
@@ -23,7 +23,7 @@ export default class EJSHelper {
     let result = '';
     const root = dirname(this.options.root);
     const file = join(root, path);
-    const read = (file: PathOrFileDescriptor) => readFileSync(file).toString();
+    const read = (file: string) => readFileSync(file).toString();
     if (existsSync(file)) {
       result = read(file);
     }
