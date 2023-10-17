@@ -11,6 +11,23 @@
     "typings",
     "!**/*.tsbuildinfo"
   ],
+  "exports": {
+    ".": {
+      "types": {
+        "require": "./dist/index.d.ts",
+        "default": "./dist/index.d.ts"
+      },
+      "browser": {
+        "require": "./dist/bundle.js",
+        "default": "./dist/index.js"
+      },
+      "default": {
+        "require": "./dist/index.js",
+        "default": "./dist/index.js"
+      }
+    },
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "start": "ts-node typedoc-server.js",
     "build": "tsc -p tsconfig.build.json && webpack",
