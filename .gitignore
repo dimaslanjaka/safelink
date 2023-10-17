@@ -26,3 +26,5 @@ unused.md
 /yarn.lock
 **/.yarn/cache
 **/.yarn/versions
+
+/release/safelinkify-*

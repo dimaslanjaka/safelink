@@ -16,7 +16,8 @@
 | 1.1.7 | https://github.com/dimaslanjaka/safelink/raw/efe5f39/release/safelinkify-1.1.7.tgz |
 | 1.1.8 | https://github.com/dimaslanjaka/safelink/raw/858ead5/release/safelinkify-1.1.8.tgz |
 | 1.1.9 | https://github.com/dimaslanjaka/safelink/raw/e41b97a/release/safelinkify-1.1.9.tgz |
-| latest | https://github.com/dimaslanjaka/safelink/raw/13511c1/release/safelinkify.tgz |
+| 1.2.1 | https://github.com/dimaslanjaka/safelink/raw/196ea3e/release/safelinkify-1.2.1.tgz |
+| latest | https://github.com/dimaslanjaka/safelink/raw/196ea3e/release/safelinkify.tgz |
 | latest | https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz |
 
 use this tarball with `resolutions`:
