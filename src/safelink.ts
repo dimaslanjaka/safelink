@@ -35,6 +35,14 @@ export default class safelink {
     const excludes = this.options.exclude;
     const value = String(url);
     const parsed = url instanceof URL ? url : toURL(value);
+    // skip empty string
+    if (typeof url === 'string' && url.length === 0) {
+      return true;
+    }
+    // skip url starts with ? and #
+    if (value.match(/^(\?|#)/)) {
+      return true;
+    }
     // only process url with protocol
     if (value.match(/^(?:(ht|f)tp(s?):\/\/)?/)) {
       for (let i = 0; i < excludes.length; i++) {

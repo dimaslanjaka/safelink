@@ -247,3 +247,7 @@
 - add global [`window.resolveQueryUrl`](https://github.com/dimaslanjaka/safelink/blob/f7f1ab8708d8ad1ab0e39f25aca190dde62495cd/src/resolveQueryUrl.ts)
 - add global [`window.parseQuery`](https://github.com/dimaslanjaka/safelink/blob/f7f1ab8708d8ad1ab0e39f25aca190dde62495cd/src/parseQuery.ts)
 
+**1.2.2**
+
+- fix(`safelink.parseURL()`) url starts with `?` and `#` should be internal/not anonymize
+- chore(deps): update
