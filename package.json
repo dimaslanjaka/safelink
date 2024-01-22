@@ -90,7 +90,7 @@
     "html-minifier-terser": "^7.2.0",
     "husky": "^8.0.3",
     "is-plain-object": "^5.0.0",
-    "jsdom": "21",
+    "jsdom": "24",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^15.0.1",
     "markdown-it": "^13.0.2",
