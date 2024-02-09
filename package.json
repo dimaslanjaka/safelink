@@ -65,7 +65,7 @@
     "@types/jquery": "^3.5.22",
     "@types/markdown-it": "^13.0.2",
     "@types/markdown-it-attrs": "^4.1.1",
-    "@types/node": "^14",
+    "@types/node": "^20",
     "@types/toastr": "^2.1.41",
     "@types/undertaker": "^1.2.9",
     "@typescript-eslint/eslint-plugin": "^6.6.0",
