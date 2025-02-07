@@ -95,7 +95,7 @@ Execute functions:
 ### NodeJS
 #### Reference Examples:
 - [full sample](https://github.com/dimaslanjaka/safelink/blob/main/src/index.test.ts)
-- [https://github.com/dimaslanjaka/page/blob/master/gulpfile.js](https://github.com/dimaslanjaka/page/blob/master/gulpfile.js)
+- [https://github.com/dimaslanjaka/page/blob/master/gulpfile.js](https://github.com/dimaslanjaka/page/blob/62994d60100b4648283e1847ad026947e184b86f/gulpfile.js#L55-L89)
 
 #### Import list
 ```js
