@@ -136,5 +136,10 @@
   "packageManager": "yarn@3.6.4",
   "engines": {
     "node": ">=14"
+  },
+  "resolutions": {
+    "binary-collections": "https://github.com/dimaslanjaka/bin/raw/df7369fec61ef9888752a13d896020bb2984542d/releases/bin.tgz",
+    "markdown-it": "https://github.com/dimaslanjaka/markdown-it/raw/17ccc825cbb3e4c6d59edada5f6d93f27075d752/release/markdown-it.tgz",
+    "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/67e658f4cdc6bab94fef60a9a146a441df43f050/packages/sbg-utility/release/sbg-utility.tgz"
   }
 }
