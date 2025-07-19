@@ -36,16 +36,17 @@ export function parseQuery(query: Nullable<string>, url: Nullable<string>): Null
 
   const parse = toURL(url);
   if (parse) {
-    if (parse.hash) {
-      result = Object.assign(result, parseQueries(parse.hash.substring(1)));
-    }
+    // First parse search, then hash (hash overrides search)
     if (parse.search) {
       result = Object.assign(result, parseQueries(parse.search));
     }
+    if (parse.hash) {
+      result = Object.assign(result, parseQueries(parse.hash.substring(1)));
+    }
   }
 
-  if (typeof query == 'string' && query in result) {
-    return result[query];
+  if (typeof query == 'string') {
+    return Object.prototype.hasOwnProperty.call(result, query) ? result[query] : undefined;
   }
 
   return result;
