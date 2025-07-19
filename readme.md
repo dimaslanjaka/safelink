@@ -108,6 +108,27 @@ Usage example:
 
 ### Node.js
 
+#### Modern framework (vite,webpack,etc)
+
+```js
+import * as safelink from 'safelinkify/browser_module';
+
+const sf = new safelinkify.safelink(options);
+const processedExternalLinks = sf.parse(`
+<a href="www.example.com/page.php?id=xxxx&name=yyyy">external</a>
+<a href="http://www.example.com/page.php?id=xxxx&name=yyyy">external</a>
+<a href="https://www.example.com/page.php?id=xxxx&name=yyyy">external</a>
+<a href="www.example.com/page.php/404"></a>
+<a href="http://external.domain.com">internal</a>
+<a href="http://www.webmanajemen.com">internal</a>
+<a href="http://webmanajemen.com">internal</a>
+<a href="#http://webmanajemen.com">#internal</a>
+<a href="?http://webmanajemen.com">?internal</a>
+<a href="">internal</a>
+`);
+processedExternalLinks.then(console.log);
+```
+
 #### Reference Examples
 - [Full sample](https://github.com/dimaslanjaka/safelink/blob/main/src/index.test.ts)
 - [Gulp usage](https://github.com/dimaslanjaka/page/blob/62994d60100b4648283e1847ad026947e184b86f/gulpfile.js#L55-L89)

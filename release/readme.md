@@ -17,8 +17,8 @@
 | 1.1.8 | https://github.com/dimaslanjaka/safelink/raw/858ead5/release/safelinkify-1.1.8.tgz |
 | 1.1.9 | https://github.com/dimaslanjaka/safelink/raw/e41b97a/release/safelinkify-1.1.9.tgz |
 | 1.2.1 | https://github.com/dimaslanjaka/safelink/raw/196ea3e/release/safelinkify-1.2.1.tgz |
-| latest | https://github.com/dimaslanjaka/safelink/raw/196ea3e/release/safelinkify.tgz |
-| latest | https://github.com/dimaslanjaka/safelink/raw/master/release/safelinkify.tgz |
+| latest | https://github.com/dimaslanjaka/safelink/raw/07990b6/release/safelinkify.tgz |
+| latest | https://github.com/dimaslanjaka/safelink/raw/monorepo/release/safelinkify.tgz |
 
 use this tarball with `resolutions`:
 ```json
