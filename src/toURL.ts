@@ -46,6 +46,9 @@ export default function toURL(url: string): Nullable<URL> {
     } else if (url.match(/^https?:\/\//)) {
       // test full url with protocol://
       return new URL(url);
+    } else {
+      // Not a valid URL for our use case
+      return null;
     }
   } catch (error) {
     if (error instanceof Error) console.log(url, error.message);
