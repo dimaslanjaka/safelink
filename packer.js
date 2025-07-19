@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 /* eslint-disable no-useless-escape */
-const { spawn, async: spawnAsync } = require('cross-spawn');
+const { spawn } = require('child_process');
 const fs = require('fs-extra');
 const { resolve, join, dirname, toUnix, basename } = require('upath');
 const packagejson = require('./package.json');
@@ -18,7 +19,7 @@ const crypto = require('crypto');
 //// CHECK REQUIRED PACKAGES
 
 const scriptname = `[packer]`;
-const isAllPackagesInstalled = ['cross-spawn', 'ansi-colors', 'glob', 'upath', 'minimist'].map((name) => ({
+const isAllPackagesInstalled = ['ansi-colors', 'glob', 'upath', 'minimist'].map((name) => ({
   name,
   installed: isPackageInstalled(name)
 }));
@@ -60,8 +61,8 @@ log('='.repeat(19));
 const _isCI = process.env.GITHUB_ACTION && process.env.GITHUB_ACTIONS;
 
 const child = !withYarn
-  ? spawn('npm', ['pack'], { cwd: __dirname, stdio: 'ignore' })
-  : spawn('yarn', ['pack'], { cwd: __dirname, stdio: 'ignore' });
+  ? spawn('npm', ['pack'], { cwd: __dirname, shell: true, stdio: 'ignore', env: { PATH: process.env.PATH } })
+  : spawn('yarn', ['pack'], { cwd: __dirname, shell: true, stdio: 'ignore', env: { PATH: process.env.PATH } });
 
 const version = (function () {
   const v = parseVersion(packagejson.version);
@@ -166,7 +167,9 @@ function bundleWithNpm() {
   if (!fs.existsSync(tgz)) {
     const filename2 = slugifyPkgName(`${packagejson.name}-${packagejson.version}.tgz`);
     const origintgz = join(__dirname, filename2);
-    fs.renameSync(origintgz, tgz);
+    if (fs.existsSync(origintgz) && origintgz !== tgz) {
+      fs.renameSync(origintgz, tgz);
+    }
   }
   const tgzlatest = join(releaseDir, slugifyPkgName(`${packagejson.name}.tgz`));
 
@@ -219,6 +222,9 @@ function parseVersion(versionString) {
  * create release/readme.md
  */
 async function addReadMe() {
+  const isCrossSpawn = packagejson.name == 'cross-spawn';
+  const isGitCommandHelper = packagejson.name == 'git-command-helper';
+  const { async: spawnAsync } = isCrossSpawn ? await import('./dist/index.js') : await import('cross-spawn');
   // set username and email on CI
   if (_isCI) {
     await spawnAsync('git', ['config', '--global', 'user.name', 'dimaslanjaka'], {
@@ -234,9 +240,11 @@ async function addReadMe() {
   /**
    * @type {typeof import('git-command-helper')}
    */
-  const gch = packagejson.name !== 'git-command-helper' ? require('git-command-helper') : require('./dist');
+  const { gitCommandHelper: gch } = isGitCommandHelper
+    ? await import('./dist/index.js')
+    : await import('git-command-helper');
 
-  const git = new gch.default(__dirname);
+  const git = new gch(__dirname);
   const branch = (await git.getbranch()).filter((o) => o.active)[0].branch;
   const gitlatest = await git.latestCommit();
 
@@ -379,7 +387,7 @@ function isPackageInstalled(packageName) {
   try {
     const modules = Array.from(process.moduleLoadList).filter((str) => !str.startsWith('NativeModule internal/'));
     return modules.indexOf(`NativeModule ${packageName}`) >= 0 || fs.existsSync(require.resolve(packageName));
-  } catch (e) {
+  } catch (_e) {
     return false;
   }
 }
