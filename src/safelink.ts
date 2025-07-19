@@ -64,7 +64,7 @@ export default class safelink {
    * @param target
    * @returns
    */
-  async parse(target: Nullable<string> | HTMLElement | Buffer | import('fs').ReadStream): Promise<string | null> {
+  async parse(target: Nullable<string> | HTMLElement | Buffer | NodeJS.ReadStream): Promise<string | null> {
     const self = this;
     let content: any = target;
     if (typeof target === 'string' || target instanceof HTMLElement) {
