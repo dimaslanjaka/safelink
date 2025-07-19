@@ -6,11 +6,22 @@ import { parse } from 'jsonc-parser';
 import path from 'path';
 import dts from 'rollup-plugin-dts';
 
-const tsconfigContent = fs.readFileSync(path.join(process.cwd(), 'tsconfig.json'), 'utf-8');
+const tsconfigContent = fs.readFileSync(path.join(process.cwd(), 'tsconfig.build.json'), 'utf-8');
+/**
+ * The parsed contents of the tsconfig.json file.
+ * @type {{ compilerOptions: import('typescript').CompilerOptions, include: string[], exclude: string[] }}
+ */
 const tsconfig = parse(tsconfigContent);
-// Remove outDir from tsconfig for Rollup compatibility
-if (tsconfig.compilerOptions && tsconfig.compilerOptions.outDir) {
-  delete tsconfig.compilerOptions.outDir;
+// Remove Options key from tsconfig for Rollup compatibility
+if (tsconfig.compilerOptions) {
+  if (tsconfig.compilerOptions.outDir) delete tsconfig.compilerOptions.outDir;
+  if (tsconfig.compilerOptions.declarationDir) delete tsconfig.compilerOptions.declarationDir;
+  if (tsconfig.compilerOptions.rootDir) delete tsconfig.compilerOptions.rootDir;
+  if (tsconfig.compilerOptions.declaration) delete tsconfig.compilerOptions.declaration;
+  if (tsconfig.compilerOptions.include) delete tsconfig.include;
+  if (tsconfig.compilerOptions.exclude) delete tsconfig.exclude;
+  if (tsconfig.compilerOptions.composite) delete tsconfig.compilerOptions.composite;
+  if (tsconfig.compilerOptions.tsBuildInfoFile) delete tsconfig.compilerOptions.tsBuildInfoFile;
 }
 
 const plugins = [
