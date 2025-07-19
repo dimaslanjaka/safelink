@@ -86,6 +86,9 @@ function extractVersions(str) {
     if (o.summary.trim().startsWith('v')) {
       isBumped = true; // Treat any commit starting with 'v' as a version bump
     }
+    if (/^\d+\.\d+\.\d+$/.test(o.summary.trim())) {
+      isBumped = true; // Treat commits with version format as version bumps
+    }
     if (o.summary.trim().startsWith('fix:')) {
       isBumped = false; // Do not treat 'fix:' commits as version bumps
     }
