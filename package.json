@@ -49,7 +49,7 @@
     "build": "tsc -p tsconfig.build.json && webpack && rollup -c",
     "clean": "rm -rf dist tmp && npm run build && npm run docs",
     "pack": "node packer.cjs --yarn",
-    "docs": "node docs-runner.cjs && webpack",
+    "docs": "node docs-runner.js && webpack",
     "dev": "nodemon",
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,hexo,jsdom,deepmerge-ts,@types/node",
     "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/.github/workflows/build-release.yml > .github/workflows/build-release.yml && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js > packer.cjs && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc-server.js > typedoc-server.cjs",
@@ -161,7 +161,7 @@
     "ts-jest": "^29.4.0",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
-    "typedoc": "0.28.7",
+    "typedoc": "^0.28.7",
     "typescript": "5.8.3",
     "undertaker": "^2.0.0",
     "upath": "^2.0.1",
@@ -184,7 +184,6 @@
   "resolutions": {
     "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/raw/80999ac7a7031a81e11ddb5fab0f8ba433041c98/release/cross-spawn.tgz",
     "binary-collections": "https://github.com/dimaslanjaka/bin/raw/df7369fec61ef9888752a13d896020bb2984542d/releases/bin.tgz",
-    "markdown-it": "https://github.com/dimaslanjaka/markdown-it/raw/17ccc825cbb3e4c6d59edada5f6d93f27075d752/release/markdown-it.tgz",
     "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/67e658f4cdc6bab94fef60a9a146a441df43f050/packages/sbg-utility/release/sbg-utility.tgz"
   }
 }
