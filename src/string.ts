@@ -38,7 +38,7 @@ export function capitalizer(str: string, moreSymbols: string[] = []) {
  * @param stream
  * @returns
  */
-export function streamToString(stream: import('fs').ReadStream) {
+export function streamToString(stream: NodeJS.ReadableStream) {
   const chunks: Uint8Array[] | Buffer[] = [];
   return new Promise((resolve, reject) => {
     stream.on('data', (chunk) => chunks.push(Buffer.from(chunk)));
