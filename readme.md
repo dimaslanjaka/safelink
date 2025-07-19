@@ -32,86 +32,105 @@ Customized safelink url redirector. Transform and Anonymize all hyperlinks to ou
 npm install safelinkify -D
 ```
 
-### yarn
-```
-yarn install safelinkify --dev
+
+#### Using yarn
+
+```bash
+yarn add safelinkify --dev
 ```
 
+
 ## Development
+
 ```bash
 git clone --single-branch --branch main https://github.com/dimaslanjaka/safelink foldername
 cd foldername
-yarn install # npm install
+yarn install # or npm install
 ```
 
-| command      | description                       |
-| ------------ | --------------------------------- |
-| `yarn start` | serve generated docs              |
-| `yarn dev`   | watch and build docs              |
-| `npm run docs`  | build docs |
-| `npm run build` | build dist |
+| Command        | Description           |
+| :------------- | :-------------------- |
+| `yarn start`   | Serve generated docs  |
+| `yarn dev`     | Watch and build docs  |
+| `yarn run docs`  | Build docs           |
+| `yarn run build` | Build dist           |
 
-## Usages
-Setup options:
+## Usage
+
+### Options
+
 ```js
 const options = {
-  // exclude patterns (dont anonymize these patterns)
-  exclude: ['domain.com', /another.domain.com/, /https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/, /([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/],
-  // url redirector
+  // Exclude patterns (do not anonymize these patterns)
+  exclude: [
+    'domain.com',
+    /another.domain.com/,
+    /https?:\/\/?([^*]+)\.)?webmanajemen\.com/,
+    /([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/
+  ],
+  // URL redirector
   redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
-  // debug
+  // Debug
   verbose: false,
-  // encryption type = 'base64' | 'aes'
+  // Encryption type: 'base64' | 'aes'
   type: 'base64',
-  // password aes, default = root
+  // Password for AES (default: 'root')
   password: 'unique-password'
-}
+};
 ```
-### Browser
-script location: `node_modules/safelinkify/dist/bundle.min.js`.
 
-Call Core Script:
+### Browser
+
+Script location: `node_modules/safelinkify/dist/bundle.min.js`
+
+Include the script:
+
 ```html
 <script src="dist/bundle.min.js"></script>
-<!--or using rawgit-->
+<!-- or use CDN -->
 <script src="https://raw.githack.com/dimaslanjaka/safelink/main/dist/bundle.min.js"></script>
-<!--or using statically-->
 <script src="https://cdn.statically.io/gh/dimaslanjaka/safelink/main/dist/bundle.min.js"></script>
 ```
 
-Execute functions:
+Usage example:
+
 ```html
 <script>
   const sf = new safelink(options);
-  // automated safelinkify all hyperlinks in body
-  sf.parse(document.querySelector('body')).then((result)=>{
+  // Automatically safelinkify all hyperlinks in body
+  sf.parse(document.querySelector('body')).then((result) => {
     console.log(result);
-    // in page redirector
+    // In-page redirector
     sf.resolveQueryUrl(window.location.href);
   });
 </script>
 ```
 
-### NodeJS
-#### Reference Examples:
-- [full sample](https://github.com/dimaslanjaka/safelink/blob/main/src/index.test.ts)
-- [https://github.com/dimaslanjaka/page/blob/master/gulpfile.js](https://github.com/dimaslanjaka/page/blob/62994d60100b4648283e1847ad026947e184b86f/gulpfile.js#L55-L89)
+### Node.js
 
-#### Import list
+#### Reference Examples
+- [Full sample](https://github.com/dimaslanjaka/safelink/blob/main/src/index.test.ts)
+- [Gulp usage](https://github.com/dimaslanjaka/page/blob/62994d60100b4648283e1847ad026947e184b86f/gulpfile.js#L55-L89)
+
+#### Import
+
 ```js
 const { safelink } = require('safelinkify');
+// or
 const { default: safelink } = require('safelinkify/dist/safelink');
 ```
-#### Usages Example
+
+#### Usage Example
+
 ```ts
 import safelinkify from 'safelinkify';
-// const safelinkify = require('safelinkify')
+// const safelinkify = require('safelinkify');
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse(`
-<a href="www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
-<a href="http://www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
-<a href="https://www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
-<a href="www.example.com/page.php/404" ....></a>
+<a href="www.example.com/page.php?id=xxxx&name=yyyy">external</a>
+<a href="http://www.example.com/page.php?id=xxxx&name=yyyy">external</a>
+<a href="https://www.example.com/page.php?id=xxxx&name=yyyy">external</a>
+<a href="www.example.com/page.php/404"></a>
 <a href="http://external.domain.com">internal</a>
 <a href="http://www.webmanajemen.com">internal</a>
 <a href="http://webmanajemen.com">internal</a>
@@ -120,56 +139,50 @@ const processedExternalLinks = sf.parse(`
 <a href="">internal</a>
 `);
 processedExternalLinks.then(console.log);
+```
 
-/*
-<a href="www.example.com/page.php?id=xxxx&name=yyyy" ....>external</a>
-<a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL3d3dy5leGFtcGxlLmNvbS9wYWdlLnBocD9pZD14eHh4Jm5hbWU9eXl5eQ==" ....>external</a>
-<a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vcGFnZS5waHA/aWQ9eHh4eCZuYW1lPXl5eXk=" ....>external</a>
-<a href="www.example.com/page.php/404" ....></a>
+**Result:**
+
+```html
+<a href="www.example.com/page.php?id=xxxx&name=yyyy">external</a>
+<a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cDovL3d3dy5leGFtcGxlLmNvbS9wYWdlLnBocD9pZD14eHh4Jm5hbWU9eXl5eQ==">external</a>
+<a href="https://www.webmanajemen.com/page/safelink.html?url=aHR0cHM6Ly93d3cuZXhhbXBsZS5jb20vcGFnZS5waHA/aWQ9eHh4eCZuYW1lPXl5eXk=">external</a>
+<a href="www.example.com/page.php/404"></a>
 <a href="http://external.domain.com">internal</a>
 <a href="http://www.webmanajemen.com">internal</a>
 <a href="http://webmanajemen.com">internal</a>
 <a href="#http://webmanajemen.com">#internal</a>
 <a href="?http://webmanajemen.com">?internal</a>
 <a href="">internal</a>
-*/
 ```
 
-#### Using gulp
-Reference Examples:
-- [https://github.com/dimaslanjaka/page/gulpfile.js](https://github.com/dimaslanjaka/page/blob/a2f16cb5470992ac149204fdca621d1bcac1107c/gulpfile.js#L325)
+#### Using Gulp
 
-Usages:
-```typescript
-import gulp from 'gulp'
-import sf from 'safelinkify'
-import { toUnix, join } from 'upath'
-import through2 from 'through2'
+Reference: [Gulp safelink task](https://github.com/dimaslanjaka/page/blob/a2f16cb5470992ac149204fdca621d1bcac1107c/gulpfile.js#L325)
 
-// folder to scan
-const destDir = join(__dirname, 'build')
-// scan external link to safelink from dest dir
+```ts
+import gulp from 'gulp';
+import sf from 'safelinkify';
+import { toUnix, join } from 'upath';
+import through2 from 'through2';
+
+const destDir = join(__dirname, 'build');
+
 gulp.task('safelink', () => {
   const safelink = new sf.safelink({
-    // exclude patterns (dont anonymize these patterns)
     exclude: [
-      /https?:\/\/?(?:([^*]+)\.)?webmanajemen\.com/,
+      /https?:\/\/?([^*]+)\.)?webmanajemen\.com/,
       /([a-z0-9](?:[a-z0-9-]{1,61}[a-z0-9])?[.])*webmanajemen\.com/
     ],
-    // url redirector
     redirect: 'https://www.webmanajemen.com/page/safelink.html?url=',
-    // debug
     verbose: false,
-    // encryption type = 'base64' | 'aes'
     type: 'base64',
-    // password aes, default = root
     password: 'unique-password'
-  })
+  });
   return gulp
     .src(['**/*.html'], {
       cwd: destDir,
       ignore: [
-        // exclude non-website and react production files
         '**/tmp/**',
         '**/node_modules/**',
         '**/monsters/**/*',
@@ -181,23 +194,19 @@ gulp.task('safelink', () => {
     })
     .pipe(
       through2.obj(async (file, _enc, next) => {
-        // drop null
-        if (file.isNull()) return next()
-        // do safelinkify
-        const content = String(file.contents)
-        const parsed = await safelink.parse(content)
+        if (file.isNull()) return next();
+        const content = String(file.contents);
+        const parsed = await safelink.parse(content);
         if (parsed) {
-          file.contents = Buffer.from(parsed)
-          next(null, file)
+          file.contents = Buffer.from(parsed);
+          next(null, file);
         } else {
-          console.log(
-            'cannot parse',
-            toUnix(file.path).replace(toUnix(process.cwd()), '')
-          )
-          next()
+          console.log('cannot parse', toUnix(file.path).replace(toUnix(process.cwd()), ''));
+          next();
         }
       })
     )
-    .pipe(gulp.dest(destDir))
-})
+    .pipe(gulp.dest(destDir));
+});
+```
 ```
