@@ -1,9 +1,9 @@
-import { Nullable, SafelinkOptions } from './';
-import encryptionURL from './encryptionURL';
-import { default as _parseQuery } from './parseQuery';
-import { default as _resolveQueryUrl } from './resolveQueryUrl';
-import { bufferToString, streamToString } from './string';
-import toURL from './toURL';
+import { Nullable, SafelinkOptions } from './index.js';
+import encryptionURL from './encryptionURL.js';
+import { default as _parseQuery } from './parseQuery.js';
+import { default as _resolveQueryUrl } from './resolveQueryUrl.js';
+import { bufferToString, streamToString } from './string.js';
+import toURL from './toURL.js';
 
 /// <reference path="./lib/lib.dom.ts" />
 export type DOMElement = globalThis.Element;

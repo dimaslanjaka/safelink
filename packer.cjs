@@ -2,7 +2,7 @@
 /* eslint-disable no-useless-escape */
 const { spawn } = require('child_process');
 const fs = require('fs-extra');
-const { resolve, join, dirname, toUnix, basename } = require('upath');
+const upath = require('upath');
 const packagejson = require('./package.json');
 const crypto = require('crypto');
 
@@ -42,8 +42,8 @@ if (!verbose) {
 
 const withYarn = args.includes('-yarn') || args.includes('--yarn');
 const withFilename = argv['fn'] || argv['filename'] ? true : false;
-const releaseDir1 = join(__dirname, 'release');
-const releaseDir2 = join(__dirname, 'releases');
+const releaseDir1 = upath.join(__dirname, 'release');
+const releaseDir2 = upath.join(__dirname, 'releases');
 const releaseDir = !fs.existsSync(releaseDir2) ? releaseDir1 : releaseDir2;
 
 // create released directory when not exist
@@ -123,7 +123,7 @@ function bundleWithYarn() {
 
   // start bundle
   let filename = 'package.tgz';
-  let tgz = join(__dirname, filename);
+  let tgz = upath.join(__dirname, filename);
   const targetFname =
     argv['fn'] || argv['filename'] || slugifyPkgName(`${packagejson.name}-${packagejson.version}.tgz`);
   if (!fs.existsSync(tgz)) {
@@ -132,13 +132,13 @@ function bundleWithYarn() {
   }
 
   if (withFilename) {
-    const tgzlatest = join(releaseDir, targetFname + '.tgz');
+    const tgzlatest = upath.join(releaseDir, targetFname + '.tgz');
     if (fs.existsSync(tgz)) {
       fs.copySync(tgz, tgzlatest, { overwrite: true });
     }
   } else {
-    const tgzlatest = join(releaseDir, slugifyPkgName(`${packagejson.name}.tgz`));
-    const tgzversion = join(releaseDir, targetFname);
+    const tgzlatest = upath.join(releaseDir, slugifyPkgName(`${packagejson.name}.tgz`));
+    const tgzversion = upath.join(releaseDir, targetFname);
 
     if (fs.existsSync(tgz)) {
       fs.copySync(tgz, tgzlatest, { overwrite: true });
@@ -161,21 +161,21 @@ function bundleWithYarn() {
 
 function bundleWithNpm() {
   const filename = slugifyPkgName(`${packagejson.name}-${version}.tgz`);
-  const tgz = join(__dirname, filename);
-  const tgzversion = join(releaseDir, filename);
+  const tgz = upath.join(__dirname, filename);
+  const tgzversion = upath.join(releaseDir, filename);
 
   if (!fs.existsSync(tgz)) {
     const filename2 = slugifyPkgName(`${packagejson.name}-${packagejson.version}.tgz`);
-    const origintgz = join(__dirname, filename2);
+    const origintgz = upath.join(__dirname, filename2);
     if (fs.existsSync(origintgz) && origintgz !== tgz) {
       fs.renameSync(origintgz, tgz);
     }
   }
-  const tgzlatest = join(releaseDir, slugifyPkgName(`${packagejson.name}.tgz`));
+  const tgzlatest = upath.join(releaseDir, slugifyPkgName(`${packagejson.name}.tgz`));
 
   // create dir when not exist
-  if (!fs.existsSync(dirname(tgzlatest))) {
-    fs.mkdirpSync(dirname(tgzlatest));
+  if (!fs.existsSync(upath.dirname(tgzlatest))) {
+    fs.mkdirpSync(upath.dirname(tgzlatest));
   }
 
   // create readme
@@ -253,8 +253,8 @@ async function addReadMe() {
     .filter((str) => str.endsWith('tgz'))
     .map((str) => {
       return {
-        absolute: resolve(releaseDir, str),
-        relative: resolve(releaseDir, str).replace(toUnix(__dirname), '')
+        absolute: upath.resolve(releaseDir, str),
+        relative: upath.resolve(releaseDir, str).replace(upath.toUnix(__dirname), '')
       };
     })
     .filter((o) => fs.statSync(o.absolute).isFile());
@@ -307,7 +307,7 @@ async function addReadMe() {
     let tarballUrl;
     const dev = raw.rawURL;
     const prod = raw.rawURL.replace('/raw/' + branch, '/raw/' + hash);
-    let ver = basename(tarball.relative, '.tgz').replace(`${packagejson.name}-`, '');
+    let ver = upath.basename(tarball.relative, '.tgz').replace(`${packagejson.name}-`, '');
     if (typeof hash === 'string') {
       if (isNaN(parseFloat(ver))) {
         ver = 'latest';
@@ -335,7 +335,7 @@ use this tarball with \`resolutions\`:
     `;
 
   fs.writeFileSync(
-    join(releaseDir, 'readme.md'),
+    upath.join(releaseDir, 'readme.md'),
     md +
       `
 

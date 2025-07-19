@@ -1,5 +1,5 @@
-import { Nullable } from './';
-import toURL from './toURL';
+import { Nullable } from './index.js';
+import toURL from './toURL.js';
 
 const _global_parseQuery = (typeof window !== 'undefined' ? window : global) as any;
 

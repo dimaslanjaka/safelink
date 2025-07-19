@@ -33,7 +33,8 @@
   "code-runner.runInTerminal": true,
   "code-runner.saveFileBeforeRun": true,
   "code-runner.executorMapByGlob": {
-    "*.test.ts": "yarn test"
+    "*.test.ts": "yarn test",
+    "*.ts": "node --no-warnings=ExperimentalWarning --loader ts-node/esm"
   },
   "eslint.useFlatConfig": true
 }

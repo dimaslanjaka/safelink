@@ -1,7 +1,7 @@
-import { Nullable, resolveQueryResult } from './';
-import encryptionURL from './encryptionURL';
-import { parseQuery } from './parseQuery';
-import toURL from './toURL';
+import { Nullable, resolveQueryResult } from './index.js';
+import encryptionURL from './encryptionURL.js';
+import { parseQuery } from './parseQuery.js';
+import toURL from './toURL.js';
 
 const _global_resolveQueryUrl = (typeof window !== 'undefined' ? window : global) as any;
 
