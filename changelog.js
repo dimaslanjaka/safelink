@@ -55,11 +55,12 @@ function extractVersions(str) {
 // Fields are separated by " !|! "
 // Example: --pretty=format:"%h !|! %ad !|! %B %d" --date=format:"%Y-%m-%d %H:%M:%S"
 // `--pretty=format:"%h !|! %ad !|! %B %d"`, `--date=format:"%Y-%m-%d %H:%M:%S"`
+// Now includes author and committer name/email in the log format
 (async () => {
   const log = await gitExec([
     'log',
     '--reverse',
-    `--pretty=format:"=!=%h !|! %ad !|! %s !|! %B !|! %d=!="`,
+    `--pretty=format:"=!=%h !|! %ad !|! %an !|! %cn !|! %s !|! %B !|! %d=!="`,
     `--date=format:"%Y-%m-%d %H:%M:%S"`
   ]);
   let markdown = `## CHANGELOG of ${pkg.name}\n\n`;
@@ -74,12 +75,15 @@ function extractVersions(str) {
   let currentVersionCommit = '';
   for (const str of results) {
     const splitx = str.split('!|!').map((s) => s.trim());
+    // Now splitx: [hash, date, authorName, committerName, summary, message, ref]
     const o = {
       hash: splitx[0] ? splitx[0] : '',
       date: splitx[1] ? splitx[1].replace(/^"|"$/g, '') : '',
-      summary: splitx[2] ? splitx[2] : '',
-      message: splitx[3] ? splitx[3] : '',
-      ref: splitx[4] ? splitx[4] : ''
+      authorName: splitx[2] ? splitx[2] : '',
+      committerName: splitx[3] ? splitx[3] : '',
+      summary: splitx[4] ? splitx[4] : '',
+      message: splitx[5] ? splitx[5] : '',
+      ref: splitx[6] ? splitx[6] : ''
     };
     let isBumped =
       /chore\(bump\)|chore: release/i.test(o.summary) || /release/i.test(o.summary) || /tag: v/i.test(o.summary);
@@ -94,7 +98,20 @@ function extractVersions(str) {
     }
     if (isBumped && !extractVersions(o.summary).length > 0) isBumped = false; // Ensure we have a version in the summary
     if (o.hash && o.date && o.message) {
-      if (/merge branch|^migrate from|^update$|^update build from https?:\/\//i.test(o.message)) {
+      // Skip commits by dependabot[bot]
+      if (o.authorName === 'dependabot[bot]') {
+        continue;
+      }
+      // Skip commits by regex
+      if (
+        /^chore\(tarball\): update|merge pull request|merge branch|^migrate from|^update$|^update build from https?:\/\//i.test(
+          o.message
+        )
+      ) {
+        continue;
+      }
+      // Skip build summary messages like "Build Tue Dec 27 20:18:29 UTC 2022"
+      if (/^Build\s+\w{3}\s+\w{3}\s+\d{1,2}\s+\d{2}:\d{2}:\d{2}\s+\w+\s+\d{4}$/i.test(o.summary)) {
         continue;
       }
       if (/initial commit/i.test(o.message)) {
@@ -115,12 +132,29 @@ function extractVersions(str) {
         const cleanMsg = o.message.replace(/["'\s,]+$/g, '');
         // Overwrite previous entry if message is duplicated (keep latest hash)
         const commitsArr = versionsCommits[currentVersionCommit];
-        // Find index of previous entry with the same message
+        // Find index of previous entry with the same message (message is now on the line after the metadata)
         const prevIdx = commitsArr.findIndex((entry) => {
-          const match = entry.match(/\) ([^\n]*)/);
-          return match && match[1].trim() === cleanMsg;
+          // Extract the message part (after the first empty line)
+          const parts = entry.split(/\r?\n/);
+          // Find the first non-empty line after the metadata line
+          let msgLine = '';
+          for (let i = 1; i < parts.length; i++) {
+            if (parts[i].trim() !== '') {
+              msgLine = parts[i].trim();
+              break;
+            }
+          }
+          return msgLine === cleanMsg;
         });
-        const newEntry = `- [ _${o.date}_ ] [${o.hash}](<${repoUrl}/commit/${o.hash}>) ${cleanMsg}` + EOL;
+        // Add changelog entry without author/committer info
+        let newEntry;
+        if (cleanMsg.includes('\n')) {
+          // Multiline message: put message on new line
+          newEntry = `- [ _${o.date}_ ] [${o.hash}](<${repoUrl}/commit/${o.hash}>)` + EOL + EOL + `${cleanMsg}`;
+        } else {
+          // Single line message: put message on same line
+          newEntry = `- [ _${o.date}_ ] [${o.hash}](<${repoUrl}/commit/${o.hash}>) ${cleanMsg}`;
+        }
         if (prevIdx !== -1) {
           // Overwrite previous occurrence with the latest hash/date
           commitsArr[prevIdx] = newEntry;
