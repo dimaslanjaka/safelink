@@ -4,6 +4,9 @@
 !dist/**/*
 dist/**/*.json
 
+# ignore dist
+/dist
+
 # yarn v2
 .yarn/**/*.tgz
 .yarn/**/*.gz
