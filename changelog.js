@@ -1,6 +1,6 @@
-const { writeFileSync } = require('fs');
+const fs = require('fs');
+const path = require('path');
 const { EOL } = require('os');
-const { join } = require('path');
 const pkg = require('./package.json');
 const spawn = require('child_process').spawn;
 
@@ -32,88 +32,122 @@ const gitExec = (command) =>
     });
   });
 
-let markdown = `
-## CHANGELOG of safelinkify
+/**
+ * Extracts all version numbers in X.X.X format from a multiline string.
+ * @param {string} str
+ * @returns {string[]}
+ */
+function extractVersions(str) {
+  const regex = /\bv?(\d+\.\d+\.\d+)\b/g;
+  const matches = [];
+  let match;
+  while ((match = regex.exec(str)) !== null) {
+    matches.push(match[1]);
+  }
+  return Array.from(new Set(matches));
+}
 
-**1.0.0**
-- initial commit
+// Git log format used:
+// %h   - Abbreviated commit hash
+// %ad  - Author date (formatted as "YYYY-MM-DD HH:MM:SS")
+// %B   - Raw body (commit message)
+// %d   - Ref names (branch, tag, etc.)
+// Fields are separated by " !|! "
+// Example: --pretty=format:"%h !|! %ad !|! %B %d" --date=format:"%Y-%m-%d %H:%M:%S"
+// `--pretty=format:"%h !|! %ad !|! %B %d"`, `--date=format:"%Y-%m-%d %H:%M:%S"`
+(async () => {
+  const log = await gitExec([
+    'log',
+    '--reverse',
+    `--pretty=format:"=!=%h !|! %ad !|! %s !|! %B !|! %d=!="`,
+    `--date=format:"%Y-%m-%d %H:%M:%S"`
+  ]);
+  let markdown = `## CHANGELOG of ${pkg.name}\n\n`;
+  const repo = await gitExec(['remote', 'get-url', 'origin']);
+  const repoUrl = repo.trim().replace(/\.git$/, '');
+  console.log(`Repository URL: ${repoUrl}`);
 
-**1.0.1**
-- fix aes
-
-**1.0.2**
-- fix object encyrption result
-
-**1.0.3**
-- add password aes option
-
-**1.0.5 - 1.0.6**
-- remove useless dependencies
-- detach private script
-- add object redirect url to result query parser
-
-**1.0.7**
-- fix query string resolver
-
-**1.0.8 - 1.0.9**
-- fix process on nodejs
-
-**1.1.0**
-- fix main file js
-
-**1.1.1**
-- fix process on nodejs read from file
-
-**1.1.2**
-- fix same link when included as other element (non-hyperlink)
-
-**1.1.3**
-- Compile to ES5
-
-**1.1.4**
-- \`parse\` now async
-- \`parse\` always return string
-- add more docs for easy development
-- add \`tsconfig.build.json\` excluding test files
-`;
-
-// git log reference https://www.edureka.co/blog/git-format-commit-history/
-// git log date format reference https://stackoverflow.com/questions/7853332/how-to-change-git-log-date-formats
-// custom --pretty=format:"%h %ad | %s %d [%an]" --date=short v1.1.4...v1.1.8
-// default --pretty=oneline v1.1.4...v1.1.8
-const args = [
-  'log',
-  `--pretty=format:"%h !|! %ad !|! %s %d"`,
-  `--date=format:"%Y-%m-%d %H:%M:%S"`,
-  'v1.1.4...v' + pkg.version
-];
-gitExec(args)
-  .then(function (commits) {
-    commits
-      .split(/\r?\n/gm)
-      .slice()
-      .reverse()
-      .forEach((str, index, all) => {
-        const splitx = str.split('!|!').map((str) => str.trim());
-        const o = {
-          hash: splitx[0],
-          date: splitx[1],
-          message: splitx[2]
-        };
-        if (o.message.includes('tag: v')) {
-          markdown += `\n**${o.message.replace(/\(.*\),?/, '').trim()}**\n` + EOL;
-        } else {
-          markdown +=
-            `- [ _${o.date}_ ] [${o.hash}](https://github.com/dimaslanjaka/safelink/commit/${
-              o.hash
-            }) ${o.message.replace(/,$/, '')}` + EOL;
+  const matches = [...log.matchAll(/=!=(.*?)(?:=!=|=!=,)/gs)];
+  const results = matches.map((m) => m[1].trim());
+  /** @type {Record<string, string[]>} */
+  const versionsCommits = {};
+  let currentVersionCommit = '';
+  for (const str of results) {
+    const splitx = str.split('!|!').map((s) => s.trim());
+    const o = {
+      hash: splitx[0] ? splitx[0] : '',
+      date: splitx[1] ? splitx[1].replace(/^"|"$/g, '') : '',
+      summary: splitx[2] ? splitx[2] : '',
+      message: splitx[3] ? splitx[3] : '',
+      ref: splitx[4] ? splitx[4] : ''
+    };
+    let isBumped =
+      /chore\(bump\)|chore: release/i.test(o.summary) || /release/i.test(o.summary) || /tag: v/i.test(o.summary);
+    if (o.summary.trim().startsWith('v')) {
+      isBumped = true; // Treat any commit starting with 'v' as a version bump
+    }
+    if (o.summary.trim().startsWith('fix:')) {
+      isBumped = false; // Do not treat 'fix:' commits as version bumps
+    }
+    if (isBumped && !extractVersions(o.summary).length > 0) isBumped = false; // Ensure we have a version in the summary
+    if (o.hash && o.date && o.message) {
+      if (/merge branch|^migrate from|^update$/i.test(o.message)) {
+        continue;
+      }
+      if (/initial commit/i.test(o.message)) {
+        versionsCommits['0.0.0'] = [];
+        currentVersionCommit = '0.0.0';
+        continue;
+      }
+      if (isBumped) {
+        console.log(`Detected version bump: ${o.summary}`);
+        const v = extractVersions(o.message).join(', ');
+        versionsCommits[v] = [];
+        currentVersionCommit = v;
+      } else {
+        if (!currentVersionCommit) {
+          throw new Error(`No current version commit set for message: ${o.message} (hash: ${o.hash})`);
         }
-        if (index === all.length - 1) {
-          writeFileSync(join(__dirname, 'CHANGELOG.md'), markdown);
-        }
-      });
-  })
-  .catch((e) => {
-    console.error(e);
-    console.log(args.join(' '));
+        // Remove all trailing quotes, spaces, and commas from message
+        const cleanMsg = o.message.replace(/["'\s,]+$/g, '');
+        versionsCommits[currentVersionCommit].push(
+          `- [ _${o.date}_ ] [${o.hash}](<${repoUrl}/commit/${o.hash}>) ${cleanMsg}` + EOL
+        );
+      }
+    }
+  }
+
+  // Iterate versionsCommits in reverse order
+  const versions = Object.keys(versionsCommits).sort((a, b) => {
+    const aParts = a.split('.').map(Number);
+    const bParts = b.split('.').map(Number);
+    for (let i = 0; i < Math.max(aParts.length, bParts.length); i++) {
+      const aPart = aParts[i] || 0; // Default to 0 if part is missing
+      const bPart = bParts[i] || 0; // Default to 0 if part is missing
+      if (aPart !== bPart) {
+        return bPart - aPart; // Sort in descending order
+      }
+    }
+    return 0; // They are equal
   });
+  for (const version of versions) {
+    if (versionsCommits[version].length > 0) {
+      markdown += `\n### ${version}\n\n`;
+      markdown += versionsCommits[version]
+        .map((str) => {
+          const lines = str.trim().split(/\r?\n/);
+          return [lines[0], ...lines.slice(1).map((line) => '    ' + line)].join(EOL);
+        })
+        .join(EOL);
+    } else {
+      markdown += `\n### ${version}\n\n`;
+      markdown += `- No changes recorded for this version.\n`;
+    }
+  }
+
+  fs.mkdirSync(path.join(__dirname, 'tmp'), { recursive: true });
+  fs.writeFileSync(path.join(__dirname, 'tmp/original.md'), log);
+  fs.writeFileSync(path.join(__dirname, 'CHANGELOG.md'), markdown);
+  console.log(`Original log written to tmp/original.md`);
+  console.log(`Changelog updated successfully. You can find it at CHANGELOG.md`);
+})();
