@@ -24,7 +24,7 @@ let compiled = 0;
 
 /**
  * Compile typedocs
- * @param {import('typedoc').TypeDocOptions} options
+ * @param {Partial<import('typedoc').TypeDocOptions>} options
  * @param {(...args: any[]) => any} callback
  */
 const compile = async function (options = {}, callback = null) {
