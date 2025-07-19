@@ -6,8 +6,8 @@ const { minimatch } = require('minimatch');
 
 // required: npm i upath
 // required: npm i -D typedoc typedoc-plugin-missing-exports
-// update   : curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc.js > typedoc.js
-// repo     : https://github.com/dimaslanjaka/nodejs-package-types/blob/main/typedoc.js
+// update   : curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc.config.js > typedoc.config.js
+// repo     : https://github.com/dimaslanjaka/nodejs-package-types/blob/main/typedoc.config.js
 
 const tmp = path.join(__dirname, 'tmp/typedoc');
 const exclude = ['*.test.ts', '*.test.js'];
@@ -81,8 +81,8 @@ const defaultOptions = {
   tsconfig: fs.existsSync(path.join(__dirname, 'tsconfig.build.json'))
     ? './tsconfig.build.json'
     : fs.existsSync(path.join(__dirname, 'tsconfig-build.json'))
-    ? './tsconfig-build.json'
-    : './tsconfig.json',
+      ? './tsconfig-build.json'
+      : './tsconfig.json',
   //includes: ['src'],
   exclude,
   htmlLang: 'en',
