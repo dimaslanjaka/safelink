@@ -1,71 +1,82 @@
-import type { Config } from 'jest';
+import fs from 'fs';
 import { defaults } from 'jest-config';
-import { join } from 'path';
+import path from 'path';
+import type { JestConfigWithTsJest } from 'ts-jest';
 
 /**
- * @type {import('jest').Config}
  * @see {@link https://jestjs.io/docs/configuration}
  * * how to run single test {@link https://stackoverflow.com/questions/28725955/how-do-i-test-a-single-file-using-jest}
  */
-const config: Config = {
-  // preset for typescript
+const config: JestConfigWithTsJest = {
   preset: 'ts-jest',
-  // test environtment
   testEnvironment: 'node',
-  // extension of modules
-  moduleFileExtensions: [...defaults.moduleFileExtensions, 'mts'],
-  // jest verbose
-  verbose: false,
-  // jest use cache
+  moduleFileExtensions: [...defaults.moduleFileExtensions, 'mts', 'cts', 'mjs', 'cjs', 'jsx', 'tsx'],
+  verbose: true,
   cache: true,
-  // jest cache directory
-  cacheDirectory: join(__dirname, 'tmp/jest'),
-  // collect coverage from src folder but ignore with negate patterns
-  collectCoverageFrom: ['src/*.{js,ts}', '!**/node_modules/**', '!**/vendor/**', '!**/test/**', '!**/*.test.{js,ts}'],
-  // test root directory
+  cacheDirectory: path.join(__dirname, 'tmp/jest'),
+  collectCoverageFrom: [
+    'src/*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}',
+    '!**/node_modules/**',
+    '!**/vendor/**',
+    '!**/test*/**',
+    '!**/*.test.{js,jsx,ts,tsx,mjs,cjs,mts,cts}',
+    '!**/*.builder.ts',
+    '!**/.deploy_git/**'
+  ],
   roots: [`<rootDir>/test`],
-  // ignore collect coverage from these patterns
-  coveragePathIgnorePatterns: ['/node_modules/', '/dist/', '/tmp/', '/test/'],
-  // test files with these patterns
-  testMatch: [`**/__tests__/**/*.+(ts|tsx|js)`, `**/?(*.)+(spec|test).+(ts|tsx|js)`, `**/test/*.test.ts`],
-  // transformer typescript
+  coveragePathIgnorePatterns: ['/node_modules/', '/dist/', '/tmp/', '/test*/'],
+  testMatch: [
+    '**/__tests__/**/*.+(ts|tsx|js|jsx|mjs|cjs|mts|cts)',
+    '**/?(*.)+(spec|test).+(ts|tsx|js|jsx|mjs|cjs|mts|cts)',
+    '**/test/*.test.{ts,tsx,js,jsx,mjs,cjs,mts,cts}',
+    '!**/.deploy_git/**'
+  ],
+  moduleNameMapper: {
+    '^(\\.{1,2}/.*)\\.js$': '$1'
+  },
   transform: {
-    '^.+\\.(ts|tsx)$': [
+    '^.+\\.(ts|tsx|mts|cts)$': [
       'ts-jest',
-      // required due to custom location of tsconfig.json configuration file
-      // https://kulshekhar.github.io/ts-jest/docs/getting-started/options/tsconfig
-      { tsconfig: './tsconfig.json' }
+      {
+        babelConfig: {
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                targets: { node: 'current' }
+              }
+            ],
+            '@babel/preset-typescript'
+          ]
+        },
+        useESM: true,
+        tsconfig: path.join(__dirname, 'tsconfig.json')
+      }
+    ],
+    // Only transform js, jsx, cjs (not mjs)
+    '^.+\\.(js|jsx|cjs)$': [
+      'babel-jest',
+      {
+        presets: [['@babel/preset-env', { targets: { node: 'current' } }]]
+      }
     ]
   },
-  // detect memory leaks
+  transformIgnorePatterns: ['/node_modules/'],
   // detectLeaks: true,
-  // Automatically clear mock calls, instances, contexts and results before every test
+  // detectOpenHandles: true,
   clearMocks: true,
-
-  // Indicates whether the coverage information should be collected while executing the test
-  // collectCoverage: true,
-
-  // An array of glob patterns indicating a set of files for which coverage information should be collected
-  // collectCoverageFrom: undefined,
-
-  // The directory where Jest should output its coverage files
-  coverageDirectory: 'coverage',
-
-  // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "\\\\node_modules\\\\"
-  // ],
-
-  // Indicates which provider should be used to instrument code for coverage
+  collectCoverage: true,
+  coverageDirectory: 'coverage/jest',
   coverageProvider: 'v8'
-
-  // A list of reporter names that Jest uses when writing coverage reports
-  // coverageReporters: [
-  //   "json",
-  //   "text",
-  //   "lcov",
-  //   "clover"
-  // ],
 };
+
+// Ensure the 'tmp' directory exists before using it for Jest cache
+const tmpDir = path.join(__dirname, 'tmp');
+if (!fs.existsSync(tmpDir)) {
+  fs.mkdirSync(tmpDir, { recursive: true });
+}
+if (!fs.existsSync(<string>config.cacheDirectory)) {
+  fs.mkdirSync(<string>config.cacheDirectory, { recursive: true });
+}
 
 export default config;

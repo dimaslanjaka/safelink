@@ -1,7 +1,7 @@
 import ejs from 'ejs';
-import { existsSync, readFileSync } from 'fs';
-import { dirname, join, resolve } from 'upath';
-import renderMarkdown from './EJSHelper/markdown';
+import fs from 'fs';
+import upath from 'upath';
+import renderMarkdown from './EJSHelper/markdown.js';
 
 interface PackageJson {
   dependencies: Record<string, string>;
@@ -30,9 +30,9 @@ export class EJSHelper {
    * @returns
    */
   loadPackageJson(pathFile: string): PackageJson {
-    const root = dirname(this.options.root);
-    const file = join(root, pathFile);
-    return JSON.parse(readFileSync(file, 'utf-8'));
+    const root = upath.dirname(this.options.root);
+    const file = upath.join(root, pathFile);
+    return JSON.parse(fs.readFileSync(file, 'utf-8'));
   }
   /**
    * create html tag
@@ -42,16 +42,16 @@ export class EJSHelper {
    */
   htmltag(tagname: 'script' | 'style' | string, pathFile: string) {
     let result = '';
-    const root = dirname(this.options.root);
-    const file = join(root, pathFile);
-    const read = (file: string) => readFileSync(file).toString();
-    if (existsSync(file)) {
+    const root = upath.dirname(this.options.root);
+    const file = upath.join(root, pathFile);
+    const read = (file: string) => fs.readFileSync(file).toString();
+    if (fs.existsSync(file)) {
       result = read(file);
     }
     const exts = ['.ejs', '.css', '.js'];
     for (let i = 0; i < exts.length; i++) {
       const filepath = file + exts[i];
-      if (existsSync(filepath)) {
+      if (fs.existsSync(filepath)) {
         result = read(filepath);
       }
     }
@@ -72,10 +72,10 @@ export class EJSHelper {
    * @returns
    */
   markdown(path: string) {
-    const root = dirname(this.options.root);
-    const file = resolve(join(root, path));
-    if (existsSync(file)) {
-      const read = readFileSync(file).toString();
+    const root = upath.dirname(this.options.root);
+    const file = upath.resolve(upath.join(root, path));
+    if (fs.existsSync(file)) {
+      const read = fs.readFileSync(file).toString();
       return renderMarkdown(read);
     }
     return '';

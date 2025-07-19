@@ -1,5 +1,5 @@
 import { inspect } from 'util';
-import EJSHelper from './EJSHelper';
+import EJSHelper from './EJSHelper.js';
 
 const obj = new EJSHelper({
   root: __dirname

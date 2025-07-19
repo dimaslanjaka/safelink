@@ -1,4 +1,4 @@
-import safelink from '../src/safelink';
+import safelink from '../src/safelink.js';
 
 describe('safelink class', () => {
   it('should initialize with default options', () => {

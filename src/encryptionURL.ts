@@ -1,6 +1,6 @@
-import { encryptionURLResult, Nullable } from './';
-import aes from './aes';
-import b64 from './b64';
+import { encryptionURLResult, Nullable } from './index.js';
+import aes from './aes.js';
+import b64 from './b64.js';
 
 const _global_encryptionURL = (typeof window !== 'undefined' ? window : global) as any;
 

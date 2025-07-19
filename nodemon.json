@@ -16,6 +16,6 @@
     "release"
   ],
   "delay": 3000,
-  "ext": "ts,js",
+  "ext": "ts,js,cjs,mjs",
   "verbose": true
 }

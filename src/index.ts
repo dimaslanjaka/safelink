@@ -1,6 +1,6 @@
-import { default as _parseQuery } from './parseQuery';
-import { default as _resolveQueryUrl } from './resolveQueryUrl';
-import { default as _safelink } from './safelink';
+import { default as _parseQuery } from './parseQuery.js';
+import { default as _resolveQueryUrl } from './resolveQueryUrl.js';
+import { default as _safelink } from './safelink.js';
 
 /**
  * safelink options

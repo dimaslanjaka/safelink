@@ -70,5 +70,15 @@ export default [
       format: 'es'
     },
     plugins: [dts()]
+  },
+  // Simple bundle for src/index.ts to dest/bundle.js (no minify)
+  {
+    input: 'src/index.ts',
+    output: {
+      file: 'dist/bundle.js',
+      format: 'iife',
+      sourcemap: true
+    },
+    plugins
   }
 ];

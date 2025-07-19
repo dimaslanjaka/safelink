@@ -1,13 +1,13 @@
-const TerserPlugin = require('terser-webpack-plugin');
-const { resolve } = require('upath');
-var webpack = require('webpack');
-const ResolveTypeScriptPlugin = require('resolve-typescript-plugin');
+import TerserPlugin from 'terser-webpack-plugin';
+import upath from 'upath';
+import webpack from 'webpack';
+import ResolveTypeScriptPlugin from 'resolve-typescript-plugin';
 
-/** @type {webpack.Configuration[]} */
+/** @type {import('webpack').Configuration[]} */
 const config = [];
 
 function gen(fn) {
-  /** @type {webpack.Configuration} */
+  /** @type {import('webpack').Configuration} */
   const config = {
     entry: './src/index.ts',
     watchOptions: {
@@ -30,14 +30,14 @@ function gen(fn) {
       extensions: ['.ts', '.js'],
       plugins: [new ResolveTypeScriptPlugin()],
       fallback: {
-        crypto: require.resolve('crypto-browserify'),
-        path: require.resolve('path-browserify'),
+        crypto: 'crypto-browserify',
+        path: 'path-browserify',
         fs: false
       }
     },
     output: {
       filename: fn + '.js',
-      path: resolve(__dirname, 'dist'),
+      path: upath.resolve(process.cwd(), 'dist'),
       sourceMapFilename: fn + '.map',
       library: 'safelinkify',
       libraryTarget: 'umd',
@@ -48,8 +48,8 @@ function gen(fn) {
   return config;
 }
 
-['bundle', 'bundle.min'].forEach(function (key) {
+for (const key of ['bundle', 'bundle.min']) {
   config.push(gen(key));
-});
+}
 
-module.exports = config;
+export default config;

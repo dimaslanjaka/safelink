@@ -1,6 +1,6 @@
-import { readFileSync, writeFileSync } from 'fs';
-import { join } from 'upath';
-import safelinkify from '../src';
+import fs from 'fs';
+import upath from 'upath';
+import safelinkify from '../src/index.js';
 
 console.clear();
 const options = {
@@ -35,13 +35,13 @@ const processedExternalLinks = sf.parse(`
 <a href="">internal</a>
 `);
 processedExternalLinks.then((result) => {
-  writeFileSync(join(__dirname, 'test/processedExternalLinks.html'), result);
+  fs.writeFileSync(upath.join(__dirname, 'test/processedExternalLinks.html'), result);
 });
 
 // parse from file
-const readFromFile = readFileSync(join(__dirname, 'test/index.html')).toString();
+const readFromFile = fs.readFileSync(upath.join(__dirname, 'test/index.html')).toString();
 if (typeof readFromFile == 'string' && readFromFile) {
   const parseFromFile = sf.parse(readFromFile);
   if (typeof parseFromFile == 'string' && parseFromFile)
-    writeFileSync(join(__dirname, 'test/index.safelinkify.html'), parseFromFile);
+    fs.writeFileSync(upath.join(__dirname, 'test/index.safelinkify.html'), parseFromFile);
 }

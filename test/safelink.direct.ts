@@ -1,5 +1,5 @@
 import Bluebird from 'bluebird';
-import safelink from '../src/safelink';
+import safelink from '../src/safelink.js';
 
 const sf = new safelink({
   exclude: ['webmanajemen.com']
