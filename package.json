@@ -29,7 +29,7 @@
     }
   },
   "scripts": {
-    "start": "ts-node typedoc-server.js",
+    "start": "node typedoc-server.js",
     "build": "tsc -p tsconfig.build.json && webpack && rollup -c",
     "clean": "rm -rf dist tmp && npm run build && npm run docs",
     "pack": "node packer.js --yarn",
@@ -40,7 +40,8 @@
     "prepack": "node changelog.js",
     "prepublish": "npm run build",
     "test": "jest --runInBand --forceExit",
-    "test:cov": "yarn test -- --coverage --coverageReporters=text-summary --coverageReporters=html"
+    "test:cov": "yarn test -- --coverage --coverageReporters=text-summary --coverageReporters=html",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
