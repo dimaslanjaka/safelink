@@ -111,7 +111,7 @@ Usage example:
 #### Modern framework (vite,webpack,etc)
 
 ```js
-import * as safelink from 'safelinkify/browser_module';
+import * as safelink from 'safelinkify/dist/safelink-browser-module';
 
 const sf = new safelinkify.safelink(options);
 const processedExternalLinks = sf.parse(`
