@@ -91,7 +91,7 @@ function extractVersions(str) {
     }
     if (isBumped && !extractVersions(o.summary).length > 0) isBumped = false; // Ensure we have a version in the summary
     if (o.hash && o.date && o.message) {
-      if (/merge branch|^migrate from|^update$/i.test(o.message)) {
+      if (/merge branch|^migrate from|^update$|^update build from https?:\/\//i.test(o.message)) {
         continue;
       }
       if (/initial commit/i.test(o.message)) {
@@ -110,9 +110,20 @@ function extractVersions(str) {
         }
         // Remove all trailing quotes, spaces, and commas from message
         const cleanMsg = o.message.replace(/["'\s,]+$/g, '');
-        versionsCommits[currentVersionCommit].push(
-          `- [ _${o.date}_ ] [${o.hash}](<${repoUrl}/commit/${o.hash}>) ${cleanMsg}` + EOL
-        );
+        // Overwrite previous entry if message is duplicated (keep latest hash)
+        const commitsArr = versionsCommits[currentVersionCommit];
+        // Find index of previous entry with the same message
+        const prevIdx = commitsArr.findIndex((entry) => {
+          const match = entry.match(/\) ([^\n]*)/);
+          return match && match[1].trim() === cleanMsg;
+        });
+        const newEntry = `- [ _${o.date}_ ] [${o.hash}](<${repoUrl}/commit/${o.hash}>) ${cleanMsg}` + EOL;
+        if (prevIdx !== -1) {
+          // Overwrite previous occurrence with the latest hash/date
+          commitsArr[prevIdx] = newEntry;
+        } else {
+          commitsArr.push(newEntry);
+        }
       }
     }
   }
