@@ -32,5 +32,8 @@
   "code-runner.saveAllFilesBeforeRun": true,
   "code-runner.runInTerminal": true,
   "code-runner.saveFileBeforeRun": true,
+  "code-runner.executorMapByGlob": {
+    "*.test.ts": "yarn test"
+  },
   "eslint.useFlatConfig": true
 }

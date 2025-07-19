@@ -1,9 +1,9 @@
 import CryptoJS from 'crypto-js';
 import { Nullable } from './';
 
-var salt = 'salt'; //salt
-var iv = '1111111111111111'; //pass salt minimum length 12 chars
-var iterations = 999; //iterations
+const salt = 'salt'; //salt
+const iv = '1111111111111111'; //pass salt minimum length 12 chars
+const iterations = 999; //iterations
 
 /**
  * Get key
@@ -12,7 +12,7 @@ var iterations = 999; //iterations
  * @see {@link https://www.webmanajemen.com/2019/07/phpjs-cryptojs-encrypt-decrypt.html}
  */
 function getKey(passphrase: string, salt: string) {
-  var key = CryptoJS.PBKDF2(passphrase, salt, {
+  const key = CryptoJS.PBKDF2(passphrase, salt, {
     hasher: CryptoJS.algo.SHA256,
     keySize: 64 / 8,
     iterations
@@ -29,8 +29,8 @@ function getKey(passphrase: string, salt: string) {
 function userJSEncrypt(passphrase: string, plainText: Nullable<string>, debug = false): Nullable<string> {
   if (!plainText) return null;
   try {
-    var key = getKey(passphrase, salt);
-    var encrypted = CryptoJS.AES.encrypt(plainText, key, {
+    const key = getKey(passphrase, salt);
+    const encrypted = CryptoJS.AES.encrypt(plainText, key, {
       iv: CryptoJS.enc.Utf8.parse(iv)
     });
     const result = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
@@ -54,8 +54,8 @@ function userJSEncrypt(passphrase: string, plainText: Nullable<string>, debug = 
 function userJSDecrypt(passphrase: string, encryptedText: Nullable<string>, debug = false): Nullable<string> {
   if (!encryptedText) return null;
   try {
-    var key = getKey(passphrase, salt);
-    var decrypted = CryptoJS.AES.decrypt(encryptedText, key, {
+    const key = getKey(passphrase, salt);
+    const decrypted = CryptoJS.AES.decrypt(encryptedText, key, {
       iv: CryptoJS.enc.Utf8.parse(iv)
     });
     const result = decrypted.toString(CryptoJS.enc.Utf8);

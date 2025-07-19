@@ -38,7 +38,9 @@
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,hexo,jsdom,deepmerge-ts,@types/node",
     "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/.github/workflows/build-release.yml > .github/workflows/build-release.yml && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js > packer.js && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc-server.js > typedoc-server.js",
     "prepack": "node changelog.js",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "test": "jest --runInBand --forceExit",
+    "test:cov": "yarn test -- --coverage --coverageReporters=text-summary --coverageReporters=html"
   },
   "repository": {
     "type": "git",
@@ -59,6 +61,10 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.31.0",
+    "@jest/environment": "^30.0.4",
+    "@jest/expect": "^30.0.4",
+    "@jest/globals": "^30.0.4",
+    "@jest/types": "^30.0.1",
     "@tsconfig/node16": "^16.1.4",
     "@types/bluebird": "^3.5.42",
     "@types/browser-sync": "^2.29.0",
@@ -66,6 +72,7 @@
     "@types/ejs": "^3.1.5",
     "@types/gulp": "^4",
     "@types/html-minifier-terser": "^7.0.2",
+    "@types/jest": "^30.0.0",
     "@types/jquery": "^3.5.32",
     "@types/markdown-it": "^14.1.2",
     "@types/markdown-it-attrs": "^4.1.3",
@@ -96,6 +103,9 @@
     "html-minifier-terser": "^7.2.0",
     "husky": "^9.1.7",
     "is-plain-object": "^5.0.0",
+    "jest": "^30.0.4",
+    "jest-config": "^30.0.4",
+    "jest-mock": "^30.0.2",
     "jsdom": "26",
     "jsdom-global": "^3.0.2",
     "lint-staged": "^16.1.2",
@@ -118,6 +128,7 @@
     "semver": "^7.7.2",
     "terser-webpack-plugin": "^5.3.14",
     "toastr": "^2.1.4",
+    "ts-jest": "^29.4.0",
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "typedoc": "0.28.7",

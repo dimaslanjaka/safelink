@@ -4,8 +4,10 @@
 !dist/**/*
 dist/**/*.json
 
-# ignore dist
+# ignore auto generated files
 /dist
+/coverage
+/.cache
 
 # yarn v2
 .yarn/**/*.tgz
