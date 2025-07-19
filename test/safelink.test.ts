@@ -30,9 +30,9 @@ describe('safelink class', () => {
     expect(sf.parseUrl('https://google.com')).toBe('aHR0cHM6Ly9nb29nbGUuY29t');
   });
 
-  it('should return null for parseUrl if excluded', () => {
+  it('should return original url for parseUrl if excluded', () => {
     const sf = new safelink({ exclude: ['google.com'] });
-    expect(sf.parseUrl('https://google.com')).toBeNull();
+    expect(sf.parseUrl('https://google.com')).toBe('https://google.com');
   });
 
   it('should encode URL with encodeURL', () => {
