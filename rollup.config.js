@@ -39,11 +39,27 @@ export default [
     },
     plugins
   },
-  // DTS bundle
+  // DTS bundles
   {
     input: 'src/index.ts',
     output: {
       file: 'dist/safelink-browser-module.d.ts',
+      format: 'es'
+    },
+    plugins: [dts()]
+  },
+  {
+    input: 'src/index.ts',
+    output: {
+      file: 'dist/safelink-browser-module.d.cts',
+      format: 'es'
+    },
+    plugins: [dts()]
+  },
+  {
+    input: 'src/index.ts',
+    output: {
+      file: 'dist/safelink-browser-module.d.mts',
       format: 'es'
     },
     plugins: [dts()]
