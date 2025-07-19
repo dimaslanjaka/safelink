@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join } from 'upath';
-import safelinkify from '.';
+import safelinkify from '../src';
 
 console.clear();
 const options = {
