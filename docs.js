@@ -38,7 +38,7 @@ const deploy_dir = join(__dirname, 'docs/safelinkify/demo');
 // VARS END
 
 // @fixme: generate changelog.md
-spawn('node', [join(__dirname, 'changelog.js')], { cwd: __dirname }).then(() => {
+spawn('node', [join(__dirname, 'changelog.cjs')], { cwd: __dirname }).then(() => {
   // compie JSDoc API using TSDoc
   compileDocs(
     {
