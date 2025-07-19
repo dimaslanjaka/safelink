@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable no-useless-escape */
 const { spawn } = require('child_process');
 const fs = require('fs-extra');
 const upath = require('upath');
@@ -73,7 +71,7 @@ child.on('exit', withYarn ? bundleWithYarn : bundleWithNpm);
 
 const getPackageHashes = async function () {
   let hashes = {};
-  const metafile = join(releaseDir, 'metadata.json');
+  const metafile = upath.join(releaseDir, 'metadata.json');
   // read old meta
   if (fs.existsSync(metafile)) {
     try {
@@ -82,13 +80,13 @@ const getPackageHashes = async function () {
       hashes = {};
     }
   }
-  const pkglock = [join(__dirname, 'package-lock.json'), join(__dirname, 'yarn.lock')].filter((str) =>
+  const pkglock = [upath.join(__dirname, 'package-lock.json'), upath.join(__dirname, 'yarn.lock')].filter((str) =>
     fs.existsSync(str)
   )[0];
   const readDir = fs
     .readdirSync(releaseDir)
     .filter((path) => path.endsWith('tgz'))
-    .map((path) => join(releaseDir, path));
+    .map((path) => upath.join(releaseDir, path));
 
   if (typeof pkglock === 'string' && fs.existsSync(pkglock)) {
     readDir.push(pkglock);
@@ -99,7 +97,7 @@ const getPackageHashes = async function () {
     const size = `${parseFloat(stat.size / Math.pow(1024, 1)).toFixed(2)} KB`;
     // assign to existing object
     hashes = Object.assign({}, hashes, {
-      [toUnix(file).replace(toUnix(__dirname), '')]: {
+      [upath.toUnix(file).replace(upath.toUnix(__dirname), '')]: {
         integrity: {
           sha1: await file_to_hash('sha1', file),
           sha256: await file_to_hash('sha256', file, 'base64'),
@@ -128,7 +126,7 @@ function bundleWithYarn() {
     argv['fn'] || argv['filename'] || slugifyPkgName(`${packagejson.name}-${packagejson.version}.tgz`);
   if (!fs.existsSync(tgz)) {
     filename = slugifyPkgName(`${packagejson.name}-v${packagejson.version}.tgz`);
-    tgz = join(__dirname, filename);
+    tgz = upath.join(__dirname, filename);
   }
 
   if (withFilename) {

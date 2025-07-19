@@ -90,13 +90,8 @@ export default class safelink {
        */
       const processStr = (content: string, href: string) => {
         const parseUrl = self.parseUrl(href);
-
-        if (parseUrl) {
-          // return anonymized href
-          return content.replace(href, parseUrl);
-        }
-        // return original content
-        return content;
+        // always returns a string now
+        return content.replace(href, parseUrl);
       };
 
       const matches = Array.from(content.matchAll(regex)).filter((m) => m[2].trim().match(/^https?:\/\//));
@@ -159,18 +154,17 @@ export default class safelink {
    * @returns return redirect url or original url
    * * when redirect not set, will return encoded URL only
    */
-  parseUrl(url: string): string | null {
+  parseUrl(url: string): string {
     const excluded = this.isExcluded(url);
-
-    if (!excluded) {
-      const encryption = encryptionURL(url, this.options.password, this.options.verbose);
-      const enc = this.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
-      const randRedir = this.options.redirect[Math.floor(Math.random() * this.options.redirect.length)];
-      // return anonymized href
-      if (randRedir) return randRedir + enc;
-      return enc;
+    if (excluded) {
+      return url;
     }
-    return null;
+    const encryption = encryptionURL(url, this.options.password, this.options.verbose);
+    const enc = this.options.type == 'base64' ? encryption.base64.encode : encryption.aes.encode;
+    const randRedir = this.options.redirect[Math.floor(Math.random() * this.options.redirect.length)];
+    // return anonymized href
+    if (randRedir) return randRedir + enc;
+    return enc;
   }
 
   /**
