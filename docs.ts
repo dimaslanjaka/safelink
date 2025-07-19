@@ -71,8 +71,8 @@ async function createDemo() {
   if (!fs.existsSync(deploy_dir)) await fsp.mkdir(deploy_dir, { recursive: true });
 
   const PORT = parseInt(process.env.PORT || '4000');
-  let baseUrl = 'http://localhost:' + PORT;
-  let url = new URL(baseUrl);
+  const baseUrl = 'http://localhost:' + PORT;
+  const url = new URL(baseUrl);
   const pathName = (() => {
     const path = url.pathname.replace(/.html$/, '');
     if (path.endsWith('/') || path.length < 1) return path + 'index';
@@ -124,7 +124,7 @@ async function createDemo() {
 /**
  * Copy Dist to Demo
  */
-function copyDistToDemo(done) {
+function copyDistToDemo(done: (...args: any[]) => any) {
   // check exist
   if (!fs.existsSync(deploy_dir)) fs.mkdirSync(deploy_dir, { recursive: true });
   // add .nojekyll
