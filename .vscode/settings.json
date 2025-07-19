@@ -31,5 +31,6 @@
   "code-runner.clearPreviousOutput": true,
   "code-runner.saveAllFilesBeforeRun": true,
   "code-runner.runInTerminal": true,
-  "code-runner.saveFileBeforeRun": true
+  "code-runner.saveFileBeforeRun": true,
+  "eslint.useFlatConfig": true
 }
