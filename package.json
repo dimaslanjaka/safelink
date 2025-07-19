@@ -17,6 +17,7 @@
       "require": "./dist/index.js",
       "import": "./dist/index.js",
       "browser": {
+        "types": "./dist/index.d.ts",
         "require": "./dist/bundle.js",
         "import": "./dist/index.js"
       }
@@ -25,7 +26,8 @@
     "./browser_module": {
       "types": "./dist/safelink-browser-module.d.ts",
       "require": "./dist/safelink-browser-module.cjs",
-      "import": "./dist/safelink-browser-module.mjs"
+      "import": "./dist/safelink-browser-module.mjs",
+      "default": "./dist/safelink-browser-module.mjs"
     }
   },
   "scripts": {
@@ -37,7 +39,7 @@
     "dev": "nodemon",
     "update:ncu": "npx npm-check-updates --enginesNode -u -x chalk,hexo,jsdom,deepmerge-ts,@types/node",
     "update": "curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/.github/workflows/build-release.yml > .github/workflows/build-release.yml && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/postinstall.js > postinstall.js && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js > packer.js && curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/typedoc-server.js > typedoc-server.js",
-    "prepack": "node changelog.js",
+    "prepack": "node changelog.cjs",
     "prepublish": "npm run build",
     "test": "jest --runInBand --forceExit",
     "test:cov": "yarn test -- --coverage --coverageReporters=text-summary --coverageReporters=html",
