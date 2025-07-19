@@ -11,7 +11,7 @@ import MarkdownItSup from 'markdown-it-sup';
 
 function mdold() {
   return plug(
-    new MarkdownIt({
+    new MarkdownIt('commonmark', {
       html: true,
       // Autoconvert URL-like text to links
       linkify: true,
@@ -44,9 +44,9 @@ function plug(md: MarkdownIt) {
 }
 
 export function mdCommonMark() {
-  return plug(MarkdownIt('commonmark'));
+  return plug(new MarkdownIt('commonmark', {}));
 }
 
 export default function renderMarkdown(str: string) {
-  return mdold().render(str);
+  return mdold().render(str, {});
 }
