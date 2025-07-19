@@ -19,8 +19,8 @@ export default class safelink {
     verbose: false,
     type: 'base64'
   };
-  constructor(opt: Partial<SafelinkOptions>) {
-    if (typeof opt.redirect == 'string') opt.redirect = [opt.redirect];
+  constructor(opt?: Partial<SafelinkOptions>) {
+    if (opt && typeof opt.redirect == 'string') opt.redirect = [opt.redirect];
     this.options = Object.assign(this.options, opt);
   }
 
@@ -196,8 +196,8 @@ export default class safelink {
       typeof search == 'string'
         ? search
         : typeof location == 'object' && typeof location.search == 'string'
-        ? location.search
-        : undefined,
+          ? location.search
+          : undefined,
       this.options.password,
       this.options.verbose
     );
