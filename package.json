@@ -47,7 +47,7 @@
   "scripts": {
     "start": "node typedoc-server.cjs",
     "build": "tsc -p tsconfig.build.json && webpack && rollup -c",
-    "clean": "rm -rf dist tmp && npm run build && npm run docs",
+    "clean": "rm -rf dist tmp",
     "pack": "node packer.cjs --yarn",
     "docs": "node docs-runner.js && webpack",
     "dev": "nodemon",
