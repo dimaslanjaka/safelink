@@ -26,8 +26,7 @@
     "./browser_module": {
       "types": "./dist/safelink-browser-module.d.ts",
       "require": "./dist/safelink-browser-module.cjs",
-      "import": "./dist/safelink-browser-module.mjs",
-      "default": "./dist/safelink-browser-module.mjs"
+      "import": "./dist/safelink-browser-module.mjs"
     },
     "./dist/safelink-browser-module": {
       "types": "./dist/safelink-browser-module.d.ts",
