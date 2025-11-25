@@ -114,7 +114,7 @@
     "binary-collections": "^2.0.10",
     "bluebird": "^3.7.2",
     "browser-sync": "^3.0.4",
-    "cross-spawn": "^7.0.6",
+    "cross-spawn": "https://github.com/dimaslanjaka/node-cross-spawn/raw/80999ac7a7031a81e11ddb5fab0f8ba433041c98/release/cross-spawn.tgz",
     "crypto-browserify": "^3.12.1",
     "ejs": "^3.1.10",
     "eslint": "^9.33.0",
