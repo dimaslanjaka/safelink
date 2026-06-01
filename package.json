@@ -2,6 +2,7 @@
   "name": "safelinkify",
   "version": "1.2.3",
   "description": "NodeJS anonymizer external links into outbound page. Anonymize external links to outbound page redirector for SEO.",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
@@ -161,8 +162,8 @@
     "node": ">=14"
   },
   "resolutions": {
-    "binary-collections": "https://github.com/dimaslanjaka/bin/raw/df7369fec61ef9888752a13d896020bb2984542d/releases/bin.tgz",
-    "markdown-it": "https://github.com/dimaslanjaka/markdown-it/raw/17ccc825cbb3e4c6d59edada5f6d93f27075d752/release/markdown-it.tgz",
-    "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/67e658f4cdc6bab94fef60a9a146a441df43f050/packages/sbg-utility/release/sbg-utility.tgz"
+    "binary-collections": "https://github.com/dimaslanjaka/bin/raw/133c80753f7d9fca68ebd4a291a1a6bea2034d85/releases/bin.tgz",
+    "markdown-it": "https://github.com/dimaslanjaka/markdown-it/raw/1ae935ad36c5f09a394c2a187037e5acd593ce68/release/markdown-it.tgz",
+    "sbg-utility": "https://github.com/dimaslanjaka/static-blog-generator/raw/44e5c7b79b4e60f8c2d34857c27b8ce677d7493e/packages/sbg-utility/release/sbg-utility.tgz"
   }
 }

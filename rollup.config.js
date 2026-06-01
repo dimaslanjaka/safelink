@@ -6,17 +6,24 @@ import { parse } from 'jsonc-parser';
 import path from 'path';
 import dts from 'rollup-plugin-dts';
 
-const tsconfigContent = fs.readFileSync(path.join(process.cwd(), 'tsconfig.json'), 'utf-8');
-const tsconfig = parse(tsconfigContent);
-// Remove outDir from tsconfig for Rollup compatibility
-if (tsconfig.compilerOptions && tsconfig.compilerOptions.outDir) {
-  delete tsconfig.compilerOptions.outDir;
-}
-
 const plugins = [
   resolve({ browser: true }),
   commonjs(),
-  typescript({ tsconfig: false, compilerOptions: tsconfig.compilerOptions })
+  // Must resolve the actual tsconfig (not tsconfig: false) so that TypeScript's
+  // getCommonSourceDirectoryOfConfig receives a valid configFilePath.
+  // Using tsconfig: false causes Debug.checkDefined(options.configFilePath) to
+  // throw "Debug Failure" in TypeScript 5.8.3.
+  // outDir/rootDir overrides keep compilation scoped; Rollup controls final output.
+  // declaration: false because rollup-plugin-dts handles the .d.ts bundle.
+  typescript({
+    tsconfig: './tsconfig.json',
+    compilerOptions: {
+      rootDir: './src',
+      outDir: './dist',
+      declaration: false,
+      declarationMap: false
+    }
+  })
 ];
 
 export default [
