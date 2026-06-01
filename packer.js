@@ -1,20 +1,24 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-/* eslint-disable no-useless-escape */
+/**
+ * packer.js - Automated tarball (tgz) creator for release folder
+ *
+ * Requirements: npm i -D https://github.com/dimaslanjaka/node-cross-spawn/tarball/private upath fs-extra
+ * Source (raw): https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js
+ * GitHub:      https://github.com/dimaslanjaka/nodejs-package-types/blob/main/packer.js
+ * Update:      curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js > packer.js
+ * Usage:       node packer.js
+ * CI Example:  https://github.com/dimaslanjaka/nodejs-package-types/blob/main/.github/workflows/build-release.yml
+ *
+ * For ESM projects, download as package.cjs:
+ *   curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js -o package.cjs
+ *   Invoke-WebRequest -Uri "https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js" -OutFile "package.cjs"
+ */
+
 const { spawn } = require('child_process');
 const fs = require('fs-extra');
 const { resolve, join, dirname, toUnix, basename } = require('upath');
 const packagejson = require('./package.json');
 const crypto = require('crypto');
-
-// const os = require('os');
-
-// auto create tarball (tgz) on release folder
-// requred        : npm i -D https://github.com/dimaslanjaka/node-cross-spawn/tarball/private upath fs-extra
-// raw            : https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js
-// github         : https://github.com/dimaslanjaka/nodejs-package-types/blob/main/packer.js
-// update         : curl -L https://github.com/dimaslanjaka/nodejs-package-types/raw/main/packer.js > packer.js
-// usage          : node packer.js
-// github actions : https://github.com/dimaslanjaka/nodejs-package-types/blob/main/.github/workflows/build-release.yml
+const path = require('upath');
 
 //// CHECK REQUIRED PACKAGES
 
@@ -58,7 +62,7 @@ log('='.repeat(19));
 /**
  * is current device is Github Actions
  */
-const _isCI = process.env.GITHUB_ACTION && process.env.GITHUB_ACTIONS;
+const isCI = process.env.GITHUB_ACTION && process.env.GITHUB_ACTIONS;
 
 const child = !withYarn
   ? spawn('npm', ['pack'], { cwd: __dirname, shell: true, stdio: 'ignore', env: { PATH: process.env.PATH } })
@@ -77,22 +81,22 @@ const getPackageHashes = async function () {
   // read old meta
   if (fs.existsSync(metafile)) {
     try {
-      hashes = Object.assign(hashes, JSON.parse(fs.readFileSync(metafile, 'utf-8')));
+      hashes = Object.assign(
+        hashes,
+        Object.fromEntries(
+          Object.entries(JSON.parse(fs.readFileSync(metafile, 'utf-8'))).filter(
+            ([key]) => !key.endsWith('yarn.lock') && !key.endsWith('package-lock.json')
+          )
+        )
+      );
     } catch {
       hashes = {};
     }
   }
-  const pkglock = [join(__dirname, 'package-lock.json'), join(__dirname, 'yarn.lock')].filter((str) =>
-    fs.existsSync(str)
-  )[0];
   const readDir = fs
     .readdirSync(releaseDir)
     .filter((path) => path.endsWith('tgz'))
     .map((path) => join(releaseDir, path));
-
-  if (typeof pkglock === 'string' && fs.existsSync(pkglock)) {
-    readDir.push(pkglock);
-  }
   for (let i = 0; i < readDir.length; i++) {
     const file = readDir[i];
     const stat = fs.statSync(file);
@@ -112,7 +116,7 @@ const getPackageHashes = async function () {
     //log("Last callback call at index " + index + " with value " + file);
 
     //hashes = { [os.type()]: { [os.arch()]: hashes } };
-    fs.writeFileSync(metafile, JSON.stringify(hashes, null, 2));
+    fs.writeFileSync(metafile, JSON.stringify(hashes, null, 2) + '\n');
     log(hashes);
   }
 };
@@ -167,6 +171,7 @@ function bundleWithNpm() {
   if (!fs.existsSync(tgz)) {
     const filename2 = slugifyPkgName(`${packagejson.name}-${packagejson.version}.tgz`);
     const origintgz = join(__dirname, filename2);
+    // Only rename if source exists and is different from destination
     if (fs.existsSync(origintgz) && origintgz !== tgz) {
       fs.renameSync(origintgz, tgz);
     }
@@ -222,11 +227,16 @@ function parseVersion(versionString) {
  * create release/readme.md
  */
 async function addReadMe() {
+  if (!fs.existsSync(path.join(__dirname, '.git'))) {
+    // Not a git repository
+    console.log('Not a git repository, skipping readme creation');
+    return;
+  }
   const isCrossSpawn = packagejson.name == 'cross-spawn';
   const isGitCommandHelper = packagejson.name == 'git-command-helper';
   const { async: spawnAsync } = isCrossSpawn ? await import('./dist/index.js') : await import('cross-spawn');
   // set username and email on CI
-  if (_isCI) {
+  if (isCI) {
     await spawnAsync('git', ['config', '--global', 'user.name', 'dimaslanjaka'], {
       cwd: __dirname,
       stdio: 'inherit'
@@ -336,7 +346,8 @@ use this tarball with \`resolutions\`:
 
   fs.writeFileSync(
     join(releaseDir, 'readme.md'),
-    md +
+    (
+      md +
       `
 
 ## Get URL of \`${packagejson.name}\` Release Tarball
@@ -357,7 +368,8 @@ npm i https://github.com/dimaslanjaka/nodejs-package-types/raw/main/release/node
 
 ## URL Parts Explanations
 > https://github.com/github-username/github-repo-name/raw/github-branch-name/path-to-file-with-extension
-  `.trim()
+  `
+    ).trim() + '\n'
   );
 }
 
